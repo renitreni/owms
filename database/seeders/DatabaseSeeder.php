@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'role'              => 1,
             'email_verified_at' => now(),
             'agency_code'       => Str::random(5),
-            'password'          => 'tabangpass', // password
+            'password'          => bcrypt('tabangpass'), // password
             'remember_token'    => Str::random(10),
         ]);
 
