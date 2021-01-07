@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\AgentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
     Route::post('/candidates/update', [CandidateController::class, 'update'])->name('candidate.update');
     Route::get('/candidates/applicant', [CandidateController::class, 'index'])->name('candidate.applicant');
+
+    Route::get('/agents', [AgentController::class, 'index'])->name('agents');
+    Route::post('/agents/table', [AgentController::class, 'table'])->name('agents.table');
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');

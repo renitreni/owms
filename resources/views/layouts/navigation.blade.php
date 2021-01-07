@@ -24,6 +24,12 @@
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('agents')"
+                                    :active="request()->routeIs('agents')">
+                            {{ __('Agents') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('employers')"
                                     :active="request()->routeIs('employers') || request()->routeIs('employers.create') || request()->routeIs('employers.show')">
                             {{ __('Employers') }}
