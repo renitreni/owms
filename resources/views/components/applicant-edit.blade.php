@@ -11,7 +11,8 @@
                 <div class="mt-10 sm:mt-0">
                     <div class="md:grid md:grid-cols-1">
                         <div class="mt-5 md:mt-0 md:col-span-1">
-                            <form action="{{ route('candidate.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('candidate.update', ['id' => $results->id]) }}" method="POST"
+                                  enctype="multipart/form-data">
                                 @csrf
                                 <input class="hidden" name="agency_id" value="{{ auth()->id() }}">
                                 <div class="shadow overflow-hidden sm:rounded-md">
@@ -105,10 +106,21 @@
                                                     Status</label>
                                                 <select name="civil_status"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                                    <option value="single" @if($results->civil_status == 'male') selected @endif>Single</option>
-                                                    <option value="married" @if($results->civil_status == 'married') selected @endif>Married</option>
-                                                    <option value="widowed" @if($results->civil_status == 'widowed') selected @endif>Widowed</option>
-                                                    <option value="separated" @if($results->civil_status == 'separated') selected @endif>Separated</option>
+                                                    <option value="single"
+                                                            @if($results->civil_status == 'male') selected @endif>Single
+                                                    </option>
+                                                    <option value="married"
+                                                            @if($results->civil_status == 'married') selected @endif>
+                                                        Married
+                                                    </option>
+                                                    <option value="widowed"
+                                                            @if($results->civil_status == 'widowed') selected @endif>
+                                                        Widowed
+                                                    </option>
+                                                    <option value="separated"
+                                                            @if($results->civil_status == 'separated') selected @endif>
+                                                        Separated
+                                                    </option>
                                                 </select>
                                             </div>
                                             <div class="col-span-6 sm:col-span-2">
@@ -157,13 +169,15 @@
                                             <div class="col-span-6 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">Mother's Maiden
                                                     Name</label>
-                                                <input type="text" name="mother_name" value="{{ $results->mother_name }}"
+                                                <input type="text" name="mother_name"
+                                                       value="{{ $results->mother_name }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="col-span-6 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">Father's
                                                     Name</label>
-                                                <input type="text" name="father_name" value="{{ $results->father_name }}"
+                                                <input type="text" name="father_name"
+                                                       value="{{ $results->father_name }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="col-span-6 bg-blue-50 p-1">
@@ -199,11 +213,17 @@
                                             </div>
                                             <div class="col-span-6 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">
-                                                    Upload Resume/CV(docs,pdf) @if(isset($doc[0]))<a target="_blank" href="/{{ $doc[0]->path }}"> View Doc</a>  @endif</label>
+                                                    Upload Resume/CV(docs,pdf)
+                                                    @if(isset($doc[0]))
+                                                        <a target="_blank" href="/{{ $doc[0]->path }}"
+                                                           class="p-2 w-1/2 text-blue-600 hover:underline mt-1 rounded-md h-25">
+                                                            View Doc</a>
+                                                    @endif
+                                                </label>
                                                 <label class="block text-sm font-medium text-gray-700"><i>Path:</i>
                                                     <strong>@{{ file_path }}</strong></label>
                                                 <div
-                                                    class="p-2 w-1/2 bg-red-200 mt-1 focus:ring-indigo-500 rounded-md h-25">
+                                                    class="p-2 w-1/2 bg-red-300 mt-1 rounded-md h-25">
                                                     <label class="block text-sm font-medium text-gray-700 text-center">
                                                         Choose a File
                                                         <input type="file" name="cv" v-on:change="fileUpload"

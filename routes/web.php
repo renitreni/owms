@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/candidates/applicant/table', [CandidateController::class, 'tableApplicants'])
          ->name('candidate.applicant.table');
     Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
+    Route::post('/candidates/update', [CandidateController::class, 'update'])->name('candidate.update');
     Route::get('/candidates/applicant', [CandidateController::class, 'index'])->name('candidate.applicant');
 });
 

@@ -107,4 +107,49 @@ class CandidateController extends Controller
 
         return view('components.applicant-edit', compact('results', 'doc'));
     }
+
+    public function update(Request $request)
+    {
+        $candidate               = Candidate::find($request->id);
+        $candidate->agency_id    = $request->agency_id;
+        $candidate->passport     = $request->passport;
+        $candidate->position_1   = $request->position_1;
+        $candidate->position_2   = $request->position_2;
+        $candidate->position_3   = $request->position_3;
+        $candidate->first_name   = $request->first_name;
+        $candidate->middle_name  = $request->middle_name;
+        $candidate->last_name    = $request->last_name;
+        $candidate->language     = $request->language;
+        $candidate->birth_date   = $request->birth_date;
+        $candidate->gender       = $request->gender;
+        $candidate->civil_status = $request->civil_status;
+        $candidate->spouse       = $request->spouse;
+        $candidate->blood_type   = $request->blood_type;
+        $candidate->height       = $request->height;
+        $candidate->weight       = $request->weight;
+        $candidate->religion     = $request->religion;
+        $candidate->mother_name  = $request->mother_name;
+        $candidate->father_name  = $request->father_name;
+        $candidate->contact_1    = $request->contact_1;
+        $candidate->contact_2    = $request->contact_2;
+        $candidate->email        = $request->email;
+        $candidate->address      = $request->address;
+        $candidate->save();
+
+        if($request->has('cv')) {
+            Document::destroyByCandidate($request->id);
+
+            $path = $request->file('cv')->store('cv');
+
+            $doc               = new Document();
+            $doc->candidate_id = $candidate->id;
+            $doc->path         = $path;
+            $doc->type         = 'CV';
+            $doc->save();
+        }
+
+        return redirect()
+            ->route('candidate.applicant')
+            ->with('success', "Applicant has been updated.");
+    }
 }
