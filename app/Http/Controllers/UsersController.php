@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Information;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use DB;
@@ -17,13 +18,9 @@ class UsersController extends Controller
         return view('components.users');
     }
 
-    public function table()
+    public function table(User $user)
     {
-        $user = DB::table('users')->whereNull('deleted_at');
-
-        if (auth()->user()->role != 1) {
-            $user->where('agency_code', auth()->user()->agency_code);
-        }
+        $user = $user->newQuery()->with('information');
 
         return DataTables::of($user)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
@@ -39,37 +36,44 @@ class UsersController extends Controller
 
     public function store(UsersStoreRequest $request)
     {
-        $user              = new User();
-        $user->name        = $request->name;
-        $user->email       = $request->email;
-        $user->password    = bcrypt($request->password);
-        $user->role        = $request->role;
-        $user->agency_code = auth()->user()->agency_code;
+        $user           = new User();
+        $user->email    = $request->email;
+        $user->password = bcrypt('tabangpass');
+        $user->role     = $request->role;
         $user->save();
+
+        $information                 = new Information();
+        $information->user_id        = $user->id;
+        $information->national_id    = $request->national_id;
+        $information->name           = $request->name;
+        $information->tin            = $request->tin;
+        $information->address_line_1 = $request->address_line_1;
+        $information->address_line_2 = $request->address_line_2;
+        $information->city           = $request->city;
+        $information->zip_code       = $request->zip_code;
+        $information->contact_name   = $request->contact_name;
+        $information->phone          = $request->phone;
+        $information->fax            = $request->fax;
+        $information->email          = $request->email;
+        $information->status         = $request->status;
+        $information->type           = $request->type;
+        $information->created_by     = auth()->id();
+        $information->save();
 
         return redirect()->route('users')->with('success', 'New user has been added!');
     }
 
-    public function show($id)
+    public function show($id, User $user)
     {
-        $user = User::query()->where('id', $id);
+        $user = $user->newQuery()->where('id', $id)->with('information')->get()[0];
 
-        if (auth()->user()->role != 1) {
-            $user->where('agency_code', auth()->user()->agency_code);
-        }
-        if (isset($user->get()[0])) {
-            $result = $user->get()[0];
-        } else {
-            return redirect()->route('users')->with('warning', 'Illegal action has detected!');
-        }
-
-        return view('components.users-edit', ['user' => $result]);
+        return view('components.users-edit', ['user' => $user]);
     }
 
     public function resetPassword($id)
     {
         $user           = User::find($id);
-        $user->password = bcrypt('password');
+        $user->password = bcrypt('tabangpass');
         $user->save();
 
         return redirect()->route('users')->with('success', 'Password has been reset!');
@@ -77,11 +81,27 @@ class UsersController extends Controller
 
     public function update(UpdateUserRequest $request, $id)
     {
-        $user        = User::find($id);
-        $user->name  = $request->name;
-        $user->email = $request->email;
-        $user->role  = $request->role;
+        $user           = User::find($id);
+        $user->email    = $request->email;
+        $user->role     = $request->role;
         $user->save();
+
+        $information                 = Information::find($id);
+        $information->national_id    = $request->national_id;
+        $information->name           = $request->name;
+        $information->tin            = $request->tin;
+        $information->address_line_1 = $request->address_line_1;
+        $information->address_line_2 = $request->address_line_2;
+        $information->city           = $request->city;
+        $information->zip_code       = $request->zip_code;
+        $information->contact_name   = $request->contact_name;
+        $information->phone          = $request->phone;
+        $information->fax            = $request->fax;
+        $information->email          = $request->email;
+        $information->status         = $request->status;
+        $information->type           = $request->type;
+        $information->created_by     = auth()->id();
+        $information->save();
 
         return redirect()->route('users')->with('success', 'User has been updated!');
     }

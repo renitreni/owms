@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Candidate;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use App\Models\Information;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,18 +17,51 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::factory(200)->create();
+
         User::query()->insert([
-            'name'              => 'Administrator',
             'email'             => 'admin@tabang.com',
             'role'              => 1,
             'email_verified_at' => now(),
-            'agency_code'       => Str::random(5),
             'password'          => bcrypt('tabangpass'), // password
             'remember_token'    => Str::random(10),
         ]);
 
-        \App\Models\User::factory(10)->create();
-        \App\Models\Employer::factory(100)->create();
-        \App\Models\Employee::factory(1000)->create();
+        User::query()->insert([
+            'email'             => 'agency@tabang.com',
+            'role'              => 2,
+            'email_verified_at' => now(),
+            'password'          => bcrypt('tabangpass'), // password
+            'remember_token'    => Str::random(10),
+        ]);
+        User::query()->insert([
+            'email'             => 'employer@tabang.com',
+            'role'              => 3,
+            'email_verified_at' => now(),
+            'password'          => bcrypt('tabangpass'), // password
+            'remember_token'    => Str::random(10),
+        ]);
+
+        User::query()->insert([
+            'email'             => 'gov@tabang.com',
+            'role'              => 4,
+            'email_verified_at' => now(),
+            'password'          => bcrypt('tabangpass'), // password
+            'remember_token'    => Str::random(10),
+        ]);
+
+        $hold = User::noInfoIds();
+        foreach ($hold as $id) {
+            Information::factory()->state(['user_id' => $id])->create();
+        }
+
+        Candidate::factory(200)->state(['agency_id' => 202])->create();
+
+        $employers = User::getEmployersIds();
+        foreach ($employers as $key => $id) {
+            $user = User::find($id);
+            $user->agency_id = 202;
+            $user->save();
+        }
     }
 }

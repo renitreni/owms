@@ -1,20 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Employees') }}
+            {{ __('Applicants') }}
         </h2>
     </x-slot>
 
     <div id="app" class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-2 mt-5">
-                    <a href="{{route('users.create')}}" class="text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow">
-                        <i class="fas fa-user-plus"></i> New Employee
-                    </a>
-                </div>
                 <div class="p-5">
-                    <table id="employees-table" class="stripe hover" style="width:100%;"></table>
+                    <table id="tbl-applicants" class="stripe hover" style="width:100%;"></table>
                 </div>
             </div>
         </div>
@@ -26,27 +21,29 @@
                 el: '#app',
                 mounted() {
                     var $this = this;
-                    $this.dt = $('#employees-table').DataTable({
+                    $this.dt = $('#tbl-applicants').DataTable({
                         responsive: true,
                         serverSide: true,
                         scrollX: true,
                         order: [[0, "desc"]],
                         ajax: {
-                            url: '{{ route('employees.table') }}',
+                            url: '{{ route('candidate.applicant.table') }}',
                             type: 'POST'
                         },
                         columns: [
                             {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
-                                    return '<a href="/employee/show/' + value.id + '" ' +
+                                    return '<a href="/candidates/' + value.id + '/show" ' +
                                         'class="hover:underline hover:text-indigo-400">' +
                                         '' + value.last_name + ', '+ value.first_name +'</a>';
                                 }, name: 'last_name', title: 'Full Name'
                             },
                             {data: 'passport', name: 'passport', title: 'Passport'},
-                            {data: 'sex', name: 'sex', title: 'Gender'},
-                            {data: 'created_at_display', name: 'created_at', title: 'Date Created'},
+                            {data: 'gender', name: 'gender', title: 'Gender'},
+                            {data: 'contact_1', name: 'contact_1', title: 'Primary Contact'},
+                            {data: 'contact_2', name: 'contact_2', title: 'Secondary Contact'},
+                            {data: 'created_at_display', name: 'created_at', title: 'Date Applied'},
                         ],
                         drawCallback() {
 

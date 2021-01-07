@@ -43,17 +43,42 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function newAgencyCode()
+    public static function noInfoIds()
     {
-        $check = true;
-        do {
-            $agency_code = Str::random(5);
-            $model       = (new static())->newQuery()->where('agency_code', $agency_code)->get();
-            if (count($model) == 0) {
-                $check = false;
-            }
-        } while ($check);
+        return (new static())->newQuery()
+                             ->selectRaw('users.id')
+                             ->leftJoin('information as inf', 'inf.user_id', '=', 'users.id')
+                             ->whereNull('inf.user_id')
+                             ->pluck('id');
+    }
 
-        return $agency_code;
+    public function getEmployers()
+    {
+        return $this->newQuery()->with(['information']);
+    }
+
+    public function getByAgency()
+    {
+        return $this->newQuery()->where('agency_id', auth()->id())->with(['information']);
+    }
+
+    public static function getEmployersIds()
+    {
+        return (new static())->newQuery()->where('role', 3)->pluck('id');
+    }
+
+    public static function getAgentIds()
+    {
+        return (new static())->newQuery()->where('role', 2)->pluck('id');
+    }
+
+    public static function isAgency($id)
+    {
+        return (new static())->newQuery()->where('role', 2)->where('id', $id)->count();
+    }
+
+    public function information()
+    {
+        return $this->hasOne(Information::class, 'user_id', 'id');
     }
 }
