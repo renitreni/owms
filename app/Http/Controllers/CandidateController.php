@@ -100,8 +100,11 @@ class CandidateController extends Controller
             );
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('components.applicant-edit');
+        $results = Candidate::find($id);
+        $doc     = Document::query()->where('candidate_id', $id)->get();
+
+        return view('components.applicant-edit', compact('results', 'doc'));
     }
 }

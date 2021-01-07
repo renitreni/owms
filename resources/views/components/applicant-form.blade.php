@@ -18,7 +18,7 @@
                                 @csrf
                                 <input class="hidden" name="agency_id" value="{{ $agency_id }}">
                                 <div class="shadow overflow-hidden sm:rounded-md">
-                                    <div class="px-4 py-5 bg-white sm:p-6">
+                                    <div class="px-4 py-5 bg-white sm:p-6 mb-2">
                                         <div class="col-span-6">
                                             @if ($errors->any())
                                                 <div class="bg-red-100 p-2 rounded">
@@ -181,7 +181,7 @@
                                             </div>
                                             <div class="col-span-6 sm:col-span-3">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-4">
+                                            <div class="col-span-6 sm:col-span-6">
                                                 <label class="block text-sm font-medium text-gray-700">Address</label>
                                                 <textarea type="text" name="address" rows="6"
                                                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">

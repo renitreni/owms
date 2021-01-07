@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="bg-gray-100">
-    <div class="font-sans text-gray-900 antialiased text-center pt-14">
+    <div class="font-sans text-gray-900 antialiased text-center">
         {{ $header }}
     </div>
     <div class="font-sans text-gray-900 antialiased">
