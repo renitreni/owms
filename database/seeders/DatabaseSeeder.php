@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Agent;
 use App\Models\Candidate;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -26,7 +27,6 @@ class DatabaseSeeder extends Seeder
             'password'          => bcrypt('tabangpass'), // password
             'remember_token'    => Str::random(10),
         ]);
-
         User::query()->insert([
             'email'             => 'agency@tabang.com',
             'role'              => 2,
@@ -41,7 +41,6 @@ class DatabaseSeeder extends Seeder
             'password'          => bcrypt('tabangpass'), // password
             'remember_token'    => Str::random(10),
         ]);
-
         User::query()->insert([
             'email'             => 'gov@tabang.com',
             'role'              => 4,
@@ -56,6 +55,7 @@ class DatabaseSeeder extends Seeder
         }
 
         Candidate::factory(800)->create();
+        Agent::factory(800)->create();
 
         $employers = User::getEmployersIds();
         foreach ($employers as $key => $id) {

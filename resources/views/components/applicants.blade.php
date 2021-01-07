@@ -36,11 +36,12 @@
                                 data: function (value) {
                                     return '<a href="/candidates/' + value.id + '/show" ' +
                                         'class="hover:underline hover:text-indigo-400">' +
-                                        '' + value.last_name + ', '+ value.first_name +'</a>';
+                                        '' + value.last_name + ', ' + value.first_name + '</a>';
                                 }, name: 'last_name', title: 'Full Name'
                             },
                             {data: 'passport', name: 'passport', title: 'Passport'},
                             {data: 'gender', name: 'gender', title: 'Gender'},
+                            {data: 'age', name: 'birth_date', title: 'Age'},
                             {data: 'contact_1', name: 'contact_1', title: 'Primary Contact'},
                             {data: 'contact_2', name: 'contact_2', title: 'Secondary Contact'},
                             {data: 'created_at_display', name: 'created_at', title: 'Date Applied'},
