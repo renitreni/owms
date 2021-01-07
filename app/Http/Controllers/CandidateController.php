@@ -23,7 +23,7 @@ class CandidateController extends Controller
 
     public function tableApplicants(Candidate $candidate)
     {
-        $candidate = $candidate->newQuery()->with(['agency', 'employer', 'agent']);
+        $candidate = $candidate->newQuery()->where('agency_id', auth()->id())->with(['agency', 'employer', 'agent']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
@@ -102,6 +102,10 @@ class CandidateController extends Controller
 
     public function show($id)
     {
+        if (!Candidate::belongsToAgency($id, auth()->id())) {
+            abort(403);
+        }
+
         $results = Candidate::find($id);
         $doc     = Document::query()->where('candidate_id', $id)->get();
 
@@ -136,7 +140,7 @@ class CandidateController extends Controller
         $candidate->address      = $request->address;
         $candidate->save();
 
-        if($request->has('cv')) {
+        if ($request->has('cv')) {
             Document::destroyByCandidate($request->id);
 
             $path = $request->file('cv')->store('cv');
