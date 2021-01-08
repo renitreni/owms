@@ -39,27 +39,11 @@
                             {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
-                                    if (value.role === 1) {
-                                        return '<div class="bg-yellow-200 text-center rounded shadow">Admin</div>'
-                                    }
-                                    if (value.role === 2) {
-                                        return '<div class="bg-green-200 text-center rounded shadow">Agency</div>'
-                                    }
-                                    if (value.role === 3) {
-                                        return '<div class="bg-blue-200 text-center rounded shadow">Employer</div>'
-                                    }
-                                    if (value.role === 4) {
-                                        return '<div class="bg-purple-200 text-center rounded shadow">Government</div>'
-                                    }
-                                }, name: 'role', title: 'Role'
-                            },
-                            {
-                                data: function (value) {
                                     return '<a href="/employers/show/' + value.id + '" ' +
                                         'class="hover:underline hover:text-indigo-400">' + value.information.name + '</a>';
                                 }, name: 'information.name', title: 'Company Name'
                             },
-                            {data: 'information.status', name: 'information.status', title: 'Status'},
+                            {data: 'information.phone', name: 'information.phone', title: 'Phone'},
                             {data: 'email', name: 'email', title: 'E-mail'},
                             {data: 'created_at_display', name: 'created_at', title: 'Date Created'},
                         ],

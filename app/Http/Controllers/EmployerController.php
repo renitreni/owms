@@ -18,7 +18,7 @@ class EmployerController extends Controller
 
     public function table(User $user)
     {
-        $employers = $user->getByAgency();
+        $employers = $user->getAgenycById(auth()->id());
 
         return DataTables::of($employers)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');

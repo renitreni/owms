@@ -57,9 +57,9 @@ class User extends Authenticatable
         return $this->newQuery()->with(['information']);
     }
 
-    public function getByAgency()
+    public function getAgenycById($id)
     {
-        return $this->newQuery()->where('agency_id', auth()->id())->with(['information']);
+        return $this->newQuery()->where('agency_id', $id)->with(['information']);
     }
 
     public static function getEmployersIds()

@@ -23,11 +23,14 @@ class CandidateController extends Controller
 
     public function tableApplicants(Candidate $candidate)
     {
-        $candidate = $candidate->newQuery()->where('agency_id', auth()->id())->with(['agency', 'employer', 'agent']);
+        $candidate = $candidate->newQuery()
+                               ->where('agency_id', auth()->id())
+                               ->where('status', 'applicant')
+                               ->with(['agency', 'employer', 'agent']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
-            $value->age = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
+            $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
 
             return collect($value)->toArray();
         })->make(true);
@@ -103,7 +106,7 @@ class CandidateController extends Controller
 
     public function show($id)
     {
-        if (!Candidate::belongsToAgency($id, auth()->id())) {
+        if (! Candidate::belongsToAgency($id, auth()->id())) {
             abort(403);
         }
 
