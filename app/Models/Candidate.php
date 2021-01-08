@@ -16,12 +16,12 @@ class Candidate extends Model
 
     public function employer()
     {
-        return $this->hasOne(User::class, 'id', 'employer_id');
+        return $this->hasOne(Information::class, 'user_id', 'employer_id');
     }
 
     public function agent()
     {
-        return $this->hasOne(User::class, 'id', 'agent_id');
+        return $this->hasOne(Agent::class, 'id', 'agent_id');
     }
 
     public static function belongsToAgency($id, $agency_id)

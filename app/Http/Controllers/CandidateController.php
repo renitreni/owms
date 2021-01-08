@@ -34,6 +34,7 @@ class CandidateController extends Controller
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
+            $value->date_hired         = Carbon::parse($value->date_hired)->format('M j, Y');
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
 
             return collect($value)->toArray();
@@ -163,5 +164,50 @@ class CandidateController extends Controller
         return redirect()
             ->route('candidate.applicant')
             ->with('success', "Applicant has been updated.");
+    }
+
+    public function assignAnEmployer(Request $request)
+    {
+        $candidate              = Candidate::find($request->id);
+        $candidate->employer_id = $request->employer_id;
+        $candidate->status      = $request->employer_id ? "employed" : '';
+        $candidate->date_hired  = $request->employer_id ? Carbon::now() : '';
+        $candidate->save();
+
+        return redirect()->back()
+                         ->with('success', "Applicant has been updated.");
+    }
+
+    public function assignAnAgent(Request $request)
+    {
+        $candidate           = Candidate::find($request->id);
+        $candidate->agent_id = $request->agent_id;
+        $candidate->save();
+
+        return redirect()->back()
+                         ->with('success', "Applicant has been updated.");
+    }
+
+    public function employed(User $user, Agent $agent)
+    {
+        $employers = $user->getEmployersByAgency(auth()->id())->get();
+        $agents    = $agent->getAgentsByAgency(auth()->id());
+
+        return view('components.employed', compact('employers', 'agents'));
+    }
+
+    public function tableEmployed(Candidate $candidate)
+    {
+        $candidate = $candidate->newQuery()
+                               ->where('agency_id', auth()->id())
+                               ->where('status', 'employed')
+                               ->with(['agency', 'employer', 'agent']);
+
+        return DataTables::of($candidate)->setTransformer(function ($value) {
+            $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
+            $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
+
+            return collect($value)->toArray();
+        })->make(true);
     }
 }

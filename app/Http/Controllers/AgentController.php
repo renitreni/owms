@@ -18,11 +18,12 @@ class AgentController extends Controller
 
     public function table(Agent $agent)
     {
-        $agent = $agent->newQuery()->where('agency_id', auth()->id());
+        $agent = $agent->newQuery()->where('agency_id', auth()->id())->with(['candidate']);
 
         return DataTables::of($agent)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
-            $value->referred_count = Candidate::query()->where('agent_id', $value->id)->count();
+            $value->referred_count     = Candidate::query()->where('agent_id', $value->id)->count();
+
             return collect($value)->toArray();
         })->make(true);
     }

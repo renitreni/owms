@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function getEmployersByAgency($id)
     {
-        return $this->newQuery()->where('agency_id', $id)->with(['information']);
+        return $this->newQuery()->where('agency_id', $id)->with(['information', 'employee']);
     }
 
     public static function getEmployersIds()
@@ -75,5 +75,10 @@ class User extends Authenticatable
     public function information()
     {
         return $this->hasOne(Information::class, 'user_id', 'id');
+    }
+
+    public function employee()
+    {
+        return $this->hasMany(Candidate::class, 'employer_id', 'id');
     }
 }

@@ -18,4 +18,9 @@ class Agent extends Model
     {
         return $this->newQuery()->where('agency_id', $id)->select(['id', 'name'])->get();
     }
+
+    public function candidate()
+    {
+        return $this->hasMany(Candidate::class, 'agent_id', 'id');
+    }
 }

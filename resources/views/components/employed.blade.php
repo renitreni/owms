@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Applicants') }}
+            {{ __('Employed') }}
         </h2>
     </x-slot>
 
@@ -42,13 +42,12 @@
                                     </h3>
                                     <div class="mt-6">
                                         <p class="text-sm text-gray-500">
-                                            <select name="employer_id"
+                                            <select name="employer_id" v-model="overview.employer.id"
                                                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
                                                 <option value="">not assigned</option>
                                                 @foreach($employers as $item)
-                                                    <option value="{{ $item->information->user_id }}">
-                                                        {{ $item->information->name }}
-                                                    </option>
+                                                    <option
+                                                        value="{{ $item->id }}">{{ $item->information->name }}</option>
                                                 @endforeach
                                             </select>
                                         </p>
@@ -93,13 +92,13 @@
                                     <i class="fas fa-user-tie"></i>
                                 </div>
                                 <div class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left" v-if="overview">
-                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline" v-if="overview.agent">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                                         Assign an Agent for
                                         <span class="underline">@{{ overview.last_name }}, @{{ overview.first_name }} @{{ overview.middle_name }}</span>
                                         <input class="hidden" name="id" v-bind:value="overview.id">
                                     </h3>
                                     <div class="mt-6">
-                                        <p class="text-sm text-gray-500" v-if="overview.agent">
+                                        <p class="text-sm text-gray-500">
                                             <select name="agent_id" v-model="overview.agent.id"
                                                     class="w-full border-0 bg-gray-100 rounded text-black">
                                                 <option value="">not assigned</option>
@@ -147,7 +146,7 @@
                         scrollX: true,
                         order: [[0, "desc"]],
                         ajax: {
-                            url: '{{ route('candidate.applicant.table') }}',
+                            url: '{{ route('candidate.employed.table') }}',
                             type: 'POST'
                         },
                         columns: [
@@ -172,13 +171,13 @@
                                 }, name: 'gender', title: 'Gender'
                             },
                             {data: 'age', name: 'birth_date', title: 'Age'},
-                            {data: 'contact_1', name: 'contact_1', title: 'Primary Contact'},
+                            {data: 'contact_1', name: 'contact_1', title: 'Contact'},
                             {data: 'email', name: 'email', title: 'E-mail'},
-                            {data: 'created_at_display', name: 'created_at', title: 'Date Applied'},
+                            {data: 'date_hired', name: 'date_hired', title: 'Hired'},
                             {
                                 data: function (value) {
-                                    return value.agent ? value.agent.name : 'Not Assigned';
-                                }, name: 'id', title: 'Agent', bSortable: false
+                                    return value.employer ? value.employer.name : 'Not Assigned';
+                                }, name: 'id', title: 'Employer', bSortable: false
                             },
                             {
                                 data:
@@ -203,6 +202,9 @@
 
                             $('.btn-employer').click(function () {
                                 $this.employer_mdl = true;
+                                if ($this.overview.employer === null) {
+                                    $this.overview.employer = {'id': ''}
+                                }
                             });
 
                             $('.btn-agent').click(function () {

@@ -20,7 +20,13 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('candidate.applicant')"
                                     :active="request()->routeIs('candidate.applicant') || request()->routeIs('candidate.edit')">
-                            {{ __('New Applications') }}
+                            {{ __('Applicants') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('candidate.employed')"
+                                    :active="request()->routeIs('candidate.employed')">
+                            {{ __('Employed') }}
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -106,7 +112,11 @@
             @canany(['agency'])
                 <x-responsive-nav-link :href="route('candidate.applicant')"
                                        :active="request()->routeIs('candidate.applicant') || request()->routeIs('candidate.edit')">
-                    {{ __('New Applications') }}
+                    {{ __('Applications') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('candidate.employed')"
+                                       :active="request()->routeIs('candidate.employed')">
+                    {{ __('Employed') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('agents')"
                                        :active="request()->routeIs('agents') || request()->routeIs('agents.create') || request()->routeIs('agents.show')">

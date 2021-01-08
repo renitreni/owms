@@ -51,7 +51,14 @@ Route::group(['middleware' => ['auth']], function () {
          ->name('candidate.applicant.table');
     Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
     Route::post('/candidates/update', [CandidateController::class, 'update'])->name('candidate.update');
+    Route::post('/candidates/assign/employer', [CandidateController::class, 'assignAnEmployer'])
+         ->name('candidate.assign.employer');
+    Route::post('/candidates/assign/agent', [CandidateController::class, 'assignAnAgent'])
+         ->name('candidate.assign.agent');
     Route::get('/candidates/applicant', [CandidateController::class, 'index'])->name('candidate.applicant');
+    Route::get('/candidates/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
+    Route::post('/candidates/employed/table', [CandidateController::class, 'tableEmployed'])
+         ->name('candidate.employed.table');
 
     Route::post('/agents/table', [AgentController::class, 'table'])->name('agents.table');
     Route::get('/agents/create', [AgentController::class, 'create'])->name('agents.create');
