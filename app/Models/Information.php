@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Information extends Model
 {
     use HasFactory;
+
+    public static function getNameById($id)
+    {
+        return (new static())->newQuery()->where('user_id',$id)->pluck('name')[0];
+    }
 }
