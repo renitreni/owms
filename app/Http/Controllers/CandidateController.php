@@ -29,7 +29,7 @@ class CandidateController extends Controller
                                ->with(['agency', 'employer', 'agent']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
-            $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
+            $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
 
             return collect($value)->toArray();
