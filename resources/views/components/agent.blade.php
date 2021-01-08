@@ -40,10 +40,11 @@
                             {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
-                                    return '<a href="/users/show/' + value.id + '" ' +
+                                    return '<a href="/agents/show/' + value.id + '" ' +
                                         'class="hover:underline hover:text-indigo-400">' + value.name + '</a>';
                                 }, name: 'name', title: 'Name'
                             },
+                            {data: 'phone', name: 'phone', title: 'Phone'},
                             {data: 'email', name: 'email', title: 'E-mail'},
                             {data: 'created_at_display', name: 'created_at', title: 'Date Created'},
                         ],

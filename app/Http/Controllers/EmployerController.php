@@ -7,7 +7,6 @@ use App\Models\Employer;
 use App\Models\Information;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use DB;
 use App\Models\User;
 
 class EmployerController extends Controller
@@ -65,6 +64,10 @@ class EmployerController extends Controller
 
     public function show($id, User $user)
     {
+        if (!Employer::belongsToAgency($id, auth()->id())) {
+            abort(403);
+        }
+
         $user = $user->newQuery()->where('id', $id)->with('information')->get()[0];
 
         return view('components.employer-edit', compact('user'));

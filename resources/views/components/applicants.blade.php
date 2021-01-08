@@ -40,7 +40,16 @@
                                 }, name: 'last_name', title: 'Full Name'
                             },
                             {data: 'passport', name: 'passport', title: 'Passport'},
-                            {data: 'gender', name: 'gender', title: 'Gender'},
+                            {data: function (value) {
+                                    if(value.gender == 'male') {
+                                        return '<span class="text-blue-600 text-2xl block text-center">' +
+                                            '<i class="fas fa-male"></i>' +
+                                            '</span>';
+                                    }
+                                    return '<span class="text-pink-400 text-2xl block text-center">' +
+                                        '<i class="fas fa-female"></i>' +
+                                        '</span>';
+                                }, name: 'gender', title: 'Gender'},
                             {data: 'age', name: 'birth_date', title: 'Age'},
                             {data: 'contact_1', name: 'contact_1', title: 'Primary Contact'},
                             {data: 'contact_2', name: 'contact_2', title: 'Secondary Contact'},

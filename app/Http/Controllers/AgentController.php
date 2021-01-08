@@ -44,4 +44,28 @@ class AgentController extends Controller
 
         return redirect()->route('agents')->with('success', 'New Agent has been added!');
     }
+
+    public function show($id)
+    {
+        if (! Agent::belongsToAgency($id, auth()->id())) {
+            abort(403);
+        }
+        $result = Agent::query()->where('id', $id)->get()[0];
+
+        return view('components.agent-edit', compact('result'));
+    }
+
+    public function update(AgentStoreRequest $request)
+    {
+        $agent            = Agent::find($request->input('id'));
+        $agent->agency_id = auth()->id();
+        $agent->name      = $request->name;
+        $agent->email     = $request->email;
+        $agent->phone     = $request->phone;
+        $agent->address   = $request->address;
+        $agent->status    = 'active';
+        $agent->save();
+
+        return redirect()->route('agents')->with('success', 'Agent has been updated!');
+    }
 }

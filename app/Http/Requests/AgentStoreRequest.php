@@ -25,7 +25,7 @@ class AgentStoreRequest extends FormRequest
     {
         return [
             "name"    => 'required',
-            "email"   => 'required|unique:agents',
+            "email"   => 'required|unique:agents,email,' . $this->request->get('id'),
             "phone"   => 'required',
             "address" => 'required',
         ];
