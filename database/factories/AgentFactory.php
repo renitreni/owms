@@ -27,7 +27,7 @@ class AgentFactory extends Factory
         return [
             'agency_id'  => $agentIds,
             'name'       => $this->faker->name,
-            'contact_no' => $this->faker->phoneNumber,
+            'phone' => $this->faker->phoneNumber,
             'email'      => $this->faker->safeEmail,
             'address'    => $this->faker->address,
             'status'     => 'active',

@@ -17,7 +17,7 @@ class CreateAgentsTable extends Migration
             $table->id();
             $table->string('agency_id');
             $table->string('name')->nullable();
-            $table->string('contact_no')->nullable();
+            $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->text('address')->nullable();
             $table->string('status');

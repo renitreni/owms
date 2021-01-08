@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-2 mt-5">
-                    <a href="{{route('users.create')}}"
+                    <a href="{{route('agents.create')}}"
                        class="text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow">
                         <i class="fas fa-user-plus"></i> New Agent
                     </a>
