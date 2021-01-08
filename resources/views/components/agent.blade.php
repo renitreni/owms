@@ -40,6 +40,15 @@
                             {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
+                                    return '<div class="block text-center">' +
+                                        '<button class="bg-purple-400 shadow px-1 w-full text-white hover:bg-purple-500">' +
+                                        '<i class="fas fa-eye"></i> ' + value.referred_count + '' +
+                                        '</button>' +
+                                        '</div>'
+                                }, name: 'referred_count', title: 'Refferals', bSortable: false
+                            },
+                            {
+                                data: function (value) {
                                     return '<a href="/agents/show/' + value.id + '" ' +
                                         'class="hover:underline hover:text-indigo-400">' + value.name + '</a>';
                                 }, name: 'name', title: 'Name'

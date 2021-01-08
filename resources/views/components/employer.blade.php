@@ -9,7 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-2 mt-5">
-                    <a href="{{route('employers.create')}}" class="text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow">
+                    <a href="{{route('employers.create')}}"
+                       class="text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow">
                         <i class="fas fa-user-plus"></i> New Employer
                     </a>
                 </div>
@@ -37,6 +38,15 @@
                         },
                         columns: [
                             {data: 'id', name: 'id', title: 'ID'},
+                            {
+                                data: function (value) {
+                                    return '<div class="block text-center">' +
+                                        '<button class="bg-purple-400 shadow px-1 w-full text-white hover:bg-purple-500">' +
+                                        '<i class="fas fa-eye"></i> ' + value.applicant_count + '' +
+                                        '</button>' +
+                                        '</div>'
+                                }, name: 'applicant_count', title: 'Applicants', bSortable: false
+                            },
                             {
                                 data: function (value) {
                                     return '<a href="/employers/show/' + value.id + '" ' +

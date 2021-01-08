@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Employer;
+use App\Models\Candidate;
 use App\Models\Information;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -22,7 +23,7 @@ class EmployerController extends Controller
 
         return DataTables::of($employers)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
-
+            $value->applicant_count = Candidate::query()->where('employer_id', $value->id)->count();
             return collect($value)->toArray();
         })->make(true);
     }

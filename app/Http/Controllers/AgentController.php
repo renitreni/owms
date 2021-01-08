@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Agent;
+use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\AgentStoreRequest;
@@ -21,7 +22,7 @@ class AgentController extends Controller
 
         return DataTables::of($agent)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
-
+            $value->referred_count = Candidate::query()->where('agent_id', $value->id)->count();
             return collect($value)->toArray();
         })->make(true);
     }
