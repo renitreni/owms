@@ -12,10 +12,10 @@ class Document extends Model
 
     public static function destroyByCandidate($id)
     {
-        $model = (new static())->newQuery()->where('candidate_id', $id);
+        $model = (new static())->newQuery()->where('candidate_id', $id)->get();
 
-        if ($model) {
-            Storage::delete($model->get()[0]->path);
+        if (isset($model[0])) {
+            Storage::delete($model[0]->path);
             $model->delete();
         }
     }
