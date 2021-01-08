@@ -19,7 +19,7 @@ class EmployerController extends Controller
 
     public function table(User $user)
     {
-        $employers = $user->getAgenycById(auth()->id());
+        $employers = $user->getEmployersByAgency(auth()->id());
 
         return DataTables::of($employers)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
@@ -65,10 +65,6 @@ class EmployerController extends Controller
 
     public function show($id, User $user)
     {
-        if (!Employer::belongsToAgency($id, auth()->id())) {
-            abort(403);
-        }
-
         $user = $user->newQuery()->where('id', $id)->with('information')->get()[0];
 
         return view('components.employer-edit', compact('user'));

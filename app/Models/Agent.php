@@ -13,4 +13,9 @@ class Agent extends Model
     {
         return (new static())->where('id', $id)->where('agency_id', $agency_id)->count() > 0;
     }
+
+    public function getAgentsByAgency($id)
+    {
+        return $this->newQuery()->where('agency_id', $id)->select(['id', 'name'])->get();
+    }
 }

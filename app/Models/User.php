@@ -52,12 +52,7 @@ class User extends Authenticatable
                              ->pluck('id');
     }
 
-    public function getEmployers()
-    {
-        return $this->newQuery()->with(['information']);
-    }
-
-    public function getAgenycById($id)
+    public function getEmployersByAgency($id)
     {
         return $this->newQuery()->where('agency_id', $id)->with(['information']);
     }

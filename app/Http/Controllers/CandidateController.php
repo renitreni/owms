@@ -5,20 +5,24 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Faker\Factory;
 use App\Models\User;
+use App\Models\Agent;
 use App\Models\Document;
+use App\Models\Employer;
 use App\Models\Candidate;
 use App\Models\Information;
 use Illuminate\Http\Request;
-use App\Rules\ValidAgencyRule;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\CandidateStoreRequest;
 
 class CandidateController extends Controller
 {
-    public function index()
+    public function index(User $user, Agent $agent)
     {
-        return view('components.applicants');
+        $employers = $user->getEmployersByAgency(auth()->id())->get();
+        $agents    = $agent->getAgentsByAgency(auth()->id());
+
+        return view('components.applicants', compact('employers', 'agents'));
     }
 
     public function tableApplicants(Candidate $candidate)
