@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/agents/store', [AgentController::class, 'store'])->name('agents.store');
     Route::get('/agents/show/{id}', [AgentController::class, 'show'])->name('agents.show');
     Route::post('/agents/update', [AgentController::class, 'update'])->name('agents.update');
-    Route::get('/agents', [AgentController::class, 'index'])->name('agents');
+    Route::get('/agents', [AgentController::class, 'index'])->name('agents')->middleware('can:agency');
 
     Route::get('/report/employer/form/{id}', [ReportController::class, 'formEmployer'])->name('report.employer');
     Route::post('/report/submit', [ReportController::class, 'submit'])->name('report.submit');
