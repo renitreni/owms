@@ -28,6 +28,9 @@ Route::group(['middleware' => ['auth']], function () {
         return view('dashboard');
     })->name('dashboard');
 
+    Route::get('/change/pass', [UsersController::class, 'indexChangePass'])->name('change.pass');
+    Route::post('/change/password/update', [UsersController::class, 'changePass'])->name('change.pass.update');
+
     Route::post('/users/table', [UsersController::class, 'table'])->name('users.table');
     Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
     Route::post('/users/store', [UsersController::class, 'store'])->name('users.store');

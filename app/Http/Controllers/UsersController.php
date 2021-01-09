@@ -8,8 +8,10 @@ use App\Models\Information;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use DB;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UsersStoreRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\ChangePasswordRequest;
 
 class UsersController extends Controller
 {
@@ -81,9 +83,9 @@ class UsersController extends Controller
 
     public function update(UpdateUserRequest $request, $id)
     {
-        $user           = User::find($id);
-        $user->email    = $request->email;
-        $user->role     = $request->role;
+        $user        = User::find($id);
+        $user->email = $request->email;
+        $user->role  = $request->role;
         $user->save();
 
         $information                 = Information::find($id);
@@ -111,5 +113,19 @@ class UsersController extends Controller
         User::destroy($id);
 
         return redirect()->route('users')->with('success', 'User has been deleted!');
+    }
+
+    public function indexChangePass()
+    {
+        return view('components.changepass');
+    }
+
+    public function changePass(ChangePasswordRequest $request)
+    {
+        $user           = User::find(auth()->id());
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'User has been deleted!');
     }
 }
