@@ -15,11 +15,11 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->string('agency_code', 200);
-            $table->string('employer_id', 200);
-            $table->string('user_id', 200);
-            $table->text('remarks');
-            $table->string('status', 200);
+            $table->string('employer_id', 200)->nullable();
+            $table->string('candidate_id', 200)->nullable();
+            $table->string('created_by', 200)->nullable();
+            $table->text('concerns')->nullable();
+            $table->string('status', 200)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

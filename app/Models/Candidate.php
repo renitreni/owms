@@ -28,4 +28,9 @@ class Candidate extends Model
     {
         return (new static())->where('id', $id)->where('agency_id', $agency_id)->count() > 0;
     }
+
+    public static function belongsToEmployer($id, $agency_id)
+    {
+        return (new static())->where('id', $id)->where('employer_id', $agency_id)->count() > 0;
+    }
 }

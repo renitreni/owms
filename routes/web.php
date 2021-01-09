@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EmployerController;
-use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\MyEmployeeController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,8 +63,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/candidates/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
     Route::post('/candidates/employed/table', [CandidateController::class, 'tableEmployed'])
          ->name('candidate.employed.table');
-    Route::get('/candidates/employee', [CandidateController::class, 'indexEmployees'])->name('candidate.employees');
-    Route::post('/candidates/employee/table', [CandidateController::class, 'employeesTable'])->name('candidate.employees.table');
+
+    Route::get('/employee', [MyEmployeeController::class, 'index'])->name('candidate.employees');
+    Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
 
     Route::post('/agents/table', [AgentController::class, 'table'])->name('agents.table');
     Route::get('/agents/create', [AgentController::class, 'create'])->name('agents.create');
@@ -71,6 +73,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/agents/show/{id}', [AgentController::class, 'show'])->name('agents.show');
     Route::post('/agents/update', [AgentController::class, 'update'])->name('agents.update');
     Route::get('/agents', [AgentController::class, 'index'])->name('agents');
+
+    Route::get('/report/employer/form/{id}', [ReportController::class, 'formEmployer'])->name('report.employer');
+    Route::post('/report/submit', [ReportController::class, 'submit'])->name('report.submit');
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');

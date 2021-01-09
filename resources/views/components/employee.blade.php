@@ -68,11 +68,17 @@
                             {
                                 data:
                                     function (value) {
-                                        return '<div class="inline-grid grid-cols-1 gap-x-0 w-full text-sm shadow">\n' +
+                                        return '<div class="inline-grid grid-cols-2 gap-x-0 w-full text-sm shadow">\n' +
                                             '<div class="col-span-1">\n' +
-                                            '<button class="btn-employer bg-purple-500 p-1 text-white w-full">' +
-                                            '<i class="fas fa-file-alt"></i>' +
-                                            '</button>\n' +
+                                            '<a href="/report/employer/form/' + value.id + '" ' +
+                                            'class="btn-employer bg-yellow-500 p-1 text-white text-center block focus:outline-none hover:bg-yellow-600">' +
+                                            '<i class="fas fa-flag-checkered"></i>' +
+                                            '</a>\n' +
+                                            '</div>\n' +
+                                            '<div class="col-span-1">\n' +
+                                            '<a class="btn-employer bg-purple-500 p-1 text-white text-center block focus:outline-none hover:bg-purple-600">' +
+                                            '<i class="fas fa-file-alt"></i> ' + value.reports +
+                                            '</a>\n' +
                                             '</div>\n' +
                                             '</div>'
                                     }, name: 'id', title: 'Reports', bSortable: false
