@@ -7,10 +7,8 @@
 
     <div id="app" class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-5">
-                    <table id="tbl-applicants" class="stripe hover" style="width:100%;"></table>
-                </div>
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
+                <table id="tbl-applicants" class="stripe hover" style="width:100%;" ></table>
             </div>
         </div>
 
@@ -93,7 +91,8 @@
                                     <i class="fas fa-user-tie"></i>
                                 </div>
                                 <div class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left" v-if="overview">
-                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline" v-if="overview.agent">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline"
+                                        v-if="overview.agent">
                                         Assign an Agent for
                                         <span class="underline">@{{ overview.last_name }}, @{{ overview.first_name }} @{{ overview.middle_name }}</span>
                                         <input class="hidden" name="id" v-bind:value="overview.id">

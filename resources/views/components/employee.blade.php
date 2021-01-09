@@ -59,12 +59,6 @@
                             {data: 'age', name: 'birth_date', title: 'Age'},
                             {data: 'contact_1', name: 'contact_1', title: 'Primary Contact'},
                             {data: 'email', name: 'email', title: 'E-mail'},
-                            {data: 'created_at_display', name: 'created_at', title: 'Date Applied'},
-                            {
-                                data: function (value) {
-                                    return value.agent ? value.agent.name : 'Not Assigned';
-                                }, name: 'id', title: 'Agent', bSortable: false
-                            },
                             {
                                 data:
                                     function (value) {
