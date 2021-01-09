@@ -211,4 +211,25 @@ class CandidateController extends Controller
             return collect($value)->toArray();
         })->make(true);
     }
+
+    public function indexEmployees()
+    {
+        return view('components.employee');
+    }
+
+    public function employeesTable(Candidate $candidate)
+    {
+        $candidate = $candidate->newQuery()
+                               ->where('employer_id', auth()->id())
+                               ->where('status', 'employed')
+                               ->with(['agency', 'employer', 'agent']);
+
+        return DataTables::of($candidate)->setTransformer(function ($value) {
+            $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
+            $value->date_hired         = Carbon::parse($value->date_hired)->format('M j, Y');
+            $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
+
+            return collect($value)->toArray();
+        })->make(true);
+    }
 }

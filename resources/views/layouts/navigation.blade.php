@@ -42,6 +42,14 @@
                         </x-nav-link>
                     </div>
                 @endcan
+                @canany(['employer'])
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('candidate.employees')"
+                                    :active="request()->routeIs('candidate.employees')">
+                            {{ __('My Employees') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
                 @canany(['admin','gov'])
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
@@ -126,6 +134,11 @@
                 <x-responsive-nav-link :href="route('employers')"
                                        :active="request()->routeIs('employers') || request()->routeIs('employers.create') || request()->routeIs('employers.show')">
                     {{ __('Employers') }}
+                </x-responsive-nav-link>
+            @endcan
+            @canany(['employer'])
+                <x-responsive-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                    {{ __('Employees') }}
                 </x-responsive-nav-link>
             @endcan
             @canany(['admin','gov'])
