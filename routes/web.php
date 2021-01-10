@@ -75,7 +75,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/agents', [AgentController::class, 'index'])->name('agents')->middleware('can:agency');
 
     Route::get('/report/employer/form/{id}', [ReportController::class, 'formEmployer'])->name('report.employer');
+    Route::get('/report/from/employer/{id}', [ReportController::class, 'fromEmployer'])->name('report.from.employer');
     Route::post('/report/submit', [ReportController::class, 'submit'])->name('report.submit');
+    Route::post('/report/employee/table', [ReportController::class, 'employeeTable'])->name('report.employee.table');
+    Route::get('/report/view/{id}/employee', [ReportController::class, 'formEmployerView'])->name('report.employer.view');
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');

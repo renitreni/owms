@@ -10,8 +10,6 @@ use Yajra\DataTables\DataTables;
 
 class MyEmployeeController extends Controller
 {
-
-
     public function index()
     {
         return view('components.employee');

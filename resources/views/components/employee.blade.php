@@ -70,7 +70,8 @@
                                             '</a>\n' +
                                             '</div>\n' +
                                             '<div class="col-span-1">\n' +
-                                            '<a class="btn-employer bg-purple-500 p-1 text-white text-center block focus:outline-none hover:bg-purple-600">' +
+                                            '<a  href="/report/from/employer/' + value.id + '" ' +
+                                            'class="btn-employer bg-purple-500 p-1 text-white text-center block focus:outline-none hover:bg-purple-600">' +
                                             '<i class="fas fa-file-alt"></i> ' + value.reports +
                                             '</a>\n' +
                                             '</div>\n' +
