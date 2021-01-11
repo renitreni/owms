@@ -13,7 +13,7 @@ class AgentController extends Controller
 {
     public function index()
     {
-        return view('components.agent');
+        return view('components.agency.agent');
     }
 
     public function table(Agent $agent)
@@ -30,7 +30,7 @@ class AgentController extends Controller
 
     public function create()
     {
-        return view('components.agent-form');
+        return view('components.agency.agent-form');
     }
 
     public function store(AgentStoreRequest $request)
@@ -54,7 +54,7 @@ class AgentController extends Controller
         }
         $result = Agent::query()->where('id', $id)->get()[0];
 
-        return view('components.agent-edit', compact('result'));
+        return view('components.agency.agent-edit', compact('result'));
     }
 
     public function update(AgentStoreRequest $request)

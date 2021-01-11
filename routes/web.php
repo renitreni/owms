@@ -31,7 +31,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/change/pass', [UsersController::class, 'indexChangePass'])->name('change.pass');
     Route::post('/change/password/update', [UsersController::class, 'changePass'])->name('change.pass.update');
-
     Route::post('/users/table', [UsersController::class, 'table'])->name('users.table');
     Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
     Route::post('/users/store', [UsersController::class, 'store'])->name('users.store');
@@ -50,22 +49,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/employers/d/{id}', [EmployerController::class, 'destroy'])->name('employers.delete');
     Route::get('/employers', [EmployerController::class, 'index'])->name('employers')->middleware('can:agency');
 
-    Route::get('/candidates/{id}/show', [CandidateController::class, 'show'])->name('candidate.edit');
-    Route::post('/candidates/applicant/table', [CandidateController::class, 'tableApplicants'])
-         ->name('candidate.applicant.table');
-    Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
+    Route::post('/candidates/a/t', [CandidateController::class, 'tableApplicants'])->name('candidate.applicant.table');
     Route::post('/candidates/update', [CandidateController::class, 'update'])->name('candidate.update');
-    Route::post('/candidates/assign/employer', [CandidateController::class, 'assignAnEmployer'])
-         ->name('candidate.assign.employer');
-    Route::post('/candidates/assign/agent', [CandidateController::class, 'assignAnAgent'])
-         ->name('candidate.assign.agent');
+    Route::post('/candidates/a/e', [CandidateController::class, 'assignAnEmployer'])->name('candidate.assign.employer');
+    Route::post('/candidates/a/ag', [CandidateController::class, 'assignAnAgent'])->name('candidate.assign.agent');
+    Route::post('/candidates/e/t', [CandidateController::class, 'tableEmployed'])->name('candidate.employed.table');
+    Route::get('/candidates/{id}/show', [CandidateController::class, 'show'])->name('candidate.edit');
     Route::get('/candidates/applicant', [CandidateController::class, 'index'])->name('candidate.applicant');
     Route::get('/candidates/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
-    Route::post('/candidates/employed/table', [CandidateController::class, 'tableEmployed'])
-         ->name('candidate.employed.table');
-
-    Route::get('/employee', [MyEmployeeController::class, 'index'])->name('candidate.employees');
-    Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
 
     Route::post('/agents/table', [AgentController::class, 'table'])->name('agents.table');
     Route::get('/agents/create', [AgentController::class, 'create'])->name('agents.create');
@@ -73,6 +64,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/agents/show/{id}', [AgentController::class, 'show'])->name('agents.show');
     Route::post('/agents/update', [AgentController::class, 'update'])->name('agents.update');
     Route::get('/agents', [AgentController::class, 'index'])->name('agents')->middleware('can:agency');
+
+    Route::get('/employee', [MyEmployeeController::class, 'index'])->name('candidate.employees')->middleware('can:employer');
+    Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
 
     Route::get('/report/employer/form/{id}', [ReportController::class, 'formEmployer'])->name('report.employer');
     Route::get('/report/from/employer/{id}', [ReportController::class, 'fromEmployer'])->name('report.from.employer');
@@ -82,5 +76,8 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');
+Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
+Route::get('/report/form/employee', [ReportController::class, 'formEmployee'])->name('report.from.employee');
+Route::post('/secretcode/validate', [ReportController::class, 'validateSecretCode'])->name('report.validate');
 
 require __DIR__ . '/auth.php';

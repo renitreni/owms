@@ -23,7 +23,7 @@ class CandidateController extends Controller
         $employers = $user->getEmployersByAgency(auth()->id())->get();
         $agents    = $agent->getAgentsByAgency(auth()->id());
 
-        return view('components.applicants', compact('employers', 'agents'));
+        return view('components.agency.applicants', compact('employers', 'agents'));
     }
 
     public function tableApplicants(Candidate $candidate)
@@ -60,7 +60,7 @@ class CandidateController extends Controller
         $agency_name = $information->newQuery()->where('user_id', $id)->pluck('name')[0];
         $agency_id   = $information->newQuery()->where('user_id', $id)->pluck('id')[0];
 
-        return view('components.applicant-form', compact('agency_name', 'agency_id'));
+        return view('components.agency.applicant-form', compact('agency_name', 'agency_id'));
     }
 
     public function store(CandidateStoreRequest $request)
@@ -119,7 +119,7 @@ class CandidateController extends Controller
         $results = Candidate::find($id);
         $doc     = Document::query()->where('candidate_id', $id)->get();
 
-        return view('components.applicant-edit', compact('results', 'doc'));
+        return view('components.agency.applicant-edit', compact('results', 'doc'));
     }
 
     public function update(Request $request)
@@ -194,7 +194,7 @@ class CandidateController extends Controller
         $employers = $user->getEmployersByAgency(auth()->id())->get();
         $agents    = $agent->getAgentsByAgency(auth()->id());
 
-        return view('components.employed', compact('employers', 'agents'));
+        return view('components.agency.employed', compact('employers', 'agents'));
     }
 
     public function tableEmployed(Candidate $candidate)

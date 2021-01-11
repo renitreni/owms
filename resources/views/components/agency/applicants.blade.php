@@ -1,14 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
             {{ __('Applicants') }}
+        </h2>
+        <h2 class="font-semibold text-gray-800 leading-tight">
+            link of Application Form:
+            <a href="{{ route('candidate.new', ['id' => auth()->id()]) }}"
+            class="hover:underline" target="_blank">
+                {{ route('candidate.new', ['id' => auth()->id()]) }}</a>
         </h2>
     </x-slot>
 
     <div id="app" class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
-                <table id="tbl-applicants" class="stripe hover" style="width:100%;" ></table>
+                <table id="tbl-applicants" class="stripe hover display" style="width:100% !important;"></table>
             </div>
         </div>
 
@@ -142,6 +148,7 @@
                     var $this = this;
                     $this.dt = $('#tbl-applicants').DataTable({
                         responsive: true,
+                        width: '100px',
                         serverSide: true,
                         scrollX: true,
                         order: [[0, "desc"]],
@@ -173,11 +180,11 @@
                             {data: 'age', name: 'birth_date', title: 'Age'},
                             {data: 'contact_1', name: 'contact_1', title: 'Primary Contact'},
                             {data: 'email', name: 'email', title: 'E-mail'},
-                            {data: 'created_at_display', name: 'created_at', title: 'Date Applied'},
+                            {data: 'created_at_display', name: 'created_at', title: 'Date Applied', width: '130px'},
                             {
                                 data: function (value) {
                                     return value.agent ? value.agent.name : 'Not Assigned';
-                                }, name: 'id', title: 'Agent', bSortable: false
+                                }, name: 'id', title: 'Agent', bSortable: false, width: '180px'
                             },
                             {
                                 data:

@@ -12,7 +12,7 @@ class MyEmployeeController extends Controller
 {
     public function index()
     {
-        return view('components.employee');
+        return view('components.employer.employee');
     }
 
     public function table(Candidate $candidate)
@@ -26,7 +26,10 @@ class MyEmployeeController extends Controller
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
             $value->date_hired         = Carbon::parse($value->date_hired)->format('M j, Y');
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
-            $value->reports            = Report::query()->where('candidate_id', $value->id)->count();
+            $value->reports            = Report::query()
+                                               ->where('candidate_id', $value->id)
+                                               ->where('created_by', 'employer')
+                                               ->count();
 
             return collect($value)->toArray();
         })->make(true);

@@ -17,7 +17,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        return view('components.users');
+        return view('components.admin.users');
     }
 
     public function table(User $user)
@@ -33,7 +33,7 @@ class UsersController extends Controller
 
     public function create()
     {
-        return view('components.user-form');
+        return view('components.admin.user-form');
     }
 
     public function store(UsersStoreRequest $request)

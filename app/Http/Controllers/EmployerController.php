@@ -14,7 +14,7 @@ class EmployerController extends Controller
 {
     public function index()
     {
-        return view('components.employer');
+        return view('components.agency.employer');
     }
 
     public function table(User $user)
@@ -30,7 +30,7 @@ class EmployerController extends Controller
 
     public function create()
     {
-        return view('components.employer-form');
+        return view('components.agency.employer-form');
     }
 
     public function store(Request $request)
@@ -67,7 +67,7 @@ class EmployerController extends Controller
     {
         $user = $user->newQuery()->where('id', $id)->with('information')->get()[0];
 
-        return view('components.employer-edit', compact('user'));
+        return view('components.agency.employer-edit', compact('user'));
     }
 
     public function update(Request $request, $id)

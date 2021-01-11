@@ -18,7 +18,7 @@ class ReportController extends Controller
         }
         $candidate = Candidate::query()->where('id', $id)->get()[0];
 
-        return view('components.report-employer-form', compact('candidate'));
+        return view('components.employer.report-employer-form', compact('candidate'));
     }
 
     public function submit(ReportSubmitRequest $request)
@@ -40,12 +40,12 @@ class ReportController extends Controller
         }
         $candidate = Candidate::query()->where('id', $id)->get()[0];
 
-        return view('components.reports-employee', compact('candidate'));
+        return view('components.employer.reports-employee', compact('candidate'));
     }
 
     public function employeeTable(Request $request, Report $report)
     {
-        $reports = $report->newQuery()->where('candidate_id', $request->id);
+        $reports = $report->newQuery()->where('candidate_id', $request->id)->where('created_by', 'employer');
 
         return DataTables::of($reports)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
@@ -63,6 +63,19 @@ class ReportController extends Controller
             abort(403);
         }
 
-        return view('components.report-employer-view', compact('candidate', 'report'));
+        return view('components.employer.report-employer-view', compact('candidate', 'report'));
+    }
+
+    public function formEmployee()
+    {
+        return view('components.agency.report-employee-form');
+    }
+
+    public function validateSecretCode(Request $request)
+    {
+        return Candidate::query()
+                        ->where('code', $request->secret_code)
+                        ->where('passport', $request->passport)->with(['employer'])
+                        ->get();
     }
 }
