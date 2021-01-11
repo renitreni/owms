@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="col-span-2 pt-5">
                                                 <button type="button" @click="validateDetails"
-                                                        class="bg-green-300 hover:bg-green-400 p-2 rounded text-white w-full">
+                                                        class="bg-green-500 hover:bg-green-600 p-2 rounded text-white w-full">
                                                     Validate
                                                 </button>
                                             </div>

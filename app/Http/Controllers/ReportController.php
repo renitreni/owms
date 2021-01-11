@@ -68,7 +68,7 @@ class ReportController extends Controller
 
     public function formEmployee()
     {
-        return view('components.agency.report-employee-form');
+        return view('components.report-employee-form');
     }
 
     public function validateSecretCode(Request $request)
