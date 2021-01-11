@@ -69,7 +69,7 @@ class UsersController extends Controller
     {
         $user = $user->newQuery()->where('id', $id)->with('information')->get()[0];
 
-        return view('components.users-edit', ['user' => $user]);
+        return view('components.admin.users-edit', ['user' => $user]);
     }
 
     public function resetPassword($id)
