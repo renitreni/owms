@@ -40,16 +40,16 @@
                             {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
-                                    if (value.role === 1) {
+                                    if (value.role == '1') {
                                         return '<div class="bg-yellow-200 text-center rounded shadow">Admin</div>'
                                     }
-                                    if (value.role === 2) {
+                                    if (value.role == '2') {
                                         return '<div class="bg-green-200 text-center rounded shadow">Agency</div>'
                                     }
-                                    if (value.role === 3) {
+                                    if (value.role == '3') {
                                         return '<div class="bg-blue-200 text-center rounded shadow">Employer</div>'
                                     }
-                                    if (value.role === 4) {
+                                    if (value.role == '4') {
                                         return '<div class="bg-purple-200 text-center rounded shadow">Government</div>'
                                     }
                                 }, name: 'role', title: 'Role'
