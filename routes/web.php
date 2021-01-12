@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
          ->middleware('can:employer');
     Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
 
-    Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports')->middleware('can:admin_agency_gov');
     Route::post('/reports/table', [ReportController::class, 'table'])->name('reports.table');
     Route::get('/report/employer/form/{id}', [ReportController::class, 'formEmployer'])->name('report.employer');
     Route::get('/report/from/employer/{id}', [ReportController::class, 'fromEmployer'])->name('report.from.employer');
