@@ -7,10 +7,8 @@
 
     <div id="app" class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-5">
-                    <table id="tbl-applicants" class="stripe hover" style="width:100%;"></table>
-                </div>
+            <div class="bg-white overflow-x-auto shadow-sm sm:rounded-lg p-5 pt-8">
+                <table id="tbl-applicants" class="stripe hover table-auto" style="width:100%;"></table>
             </div>
         </div>
 
@@ -153,6 +151,12 @@
                             {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
+                                    var employer = value.employer ? value.employer.name : 'Not Assigned';
+                                    return '<span class="text-sm">' + employer + '</span>';
+                                }, name: 'employer.name', title: 'Employer'
+                            },
+                            {
+                                data: function (value) {
                                     return '<a href="/candidates/' + value.id + '/show" ' +
                                         'class="hover:underline hover:text-indigo-400">' +
                                         '' + value.last_name + ', ' + value.first_name + '</a>';
@@ -174,11 +178,6 @@
                             {data: 'contact_1', name: 'contact_1', title: 'Contact'},
                             {data: 'email', name: 'email', title: 'E-mail'},
                             {data: 'date_hired', name: 'date_hired', title: 'Hired'},
-                            {
-                                data: function (value) {
-                                    return value.employer ? value.employer.name : 'Not Assigned';
-                                }, name: 'id', title: 'Employer', bSortable: false
-                            },
                             {
                                 data:
                                     function (value) {
@@ -214,7 +213,7 @@
                                 }
                             });
                         }
-                    });
+                    }).columns.adjust().responsive.recalc();
                 }
             })
         </script>

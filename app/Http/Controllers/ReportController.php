@@ -11,6 +11,22 @@ use App\Http\Requests\ReportSubmitRequest;
 
 class ReportController extends Controller
 {
+    public function index()
+    {
+        return view('components.reports');
+    }
+
+    public function table(Request $request, Report $report)
+    {
+        $reports = $report::query()->with(['employee', 'employer']);
+
+        return DataTables::of($reports)->setTransformer(function ($value) {
+            $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
+
+            return collect($value)->toArray();
+        })->make(true);
+    }
+
     public function formEmployer($id)
     {
         if (! Candidate::belongsToEmployer($id, auth()->id())) {

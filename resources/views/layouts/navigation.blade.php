@@ -41,6 +41,12 @@
                             {{ __('Employers') }}
                         </x-nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('reports')"
+                                    :active="request()->routeIs('reports')">
+                            {{ __('Reports') }} {{ Gate::inspect('name') }}
+                        </x-nav-link>
+                    </div>
                 @endcan
                 @canany(['employer'])
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -56,6 +62,12 @@
                             {{ __('Users') }}
                         </x-nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('reports')"
+                                    :active="request()->routeIs('reports')">
+                            {{ __('Reports') }}
+                        </x-nav-link>
+                    </div>
                 @endcan
             </div>
 
@@ -67,7 +79,8 @@
                             class="flex items-center text-sm font-medium text-gray-700 hover:underline hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                             <div>
                                 <span class="text-green-300"><i class="fa fa-circle"></i> </span>
-                                {{ \App\Models\Information::getNameById(Auth::id()) }}
+                                @can('admin') Admin @elsecan('agency') Agency @elsecan('gov') Gov @elsecan('employer') Employer @endcan
+                                <strong>{{ \App\Models\Information::getNameById(Auth::id()) }}</strong>
                             </div>
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -135,6 +148,9 @@
                                        :active="request()->routeIs('employers') || request()->routeIs('employers.create') || request()->routeIs('employers.show')">
                     {{ __('Employers') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
+                    {{ __('Reports') }}
+                </x-responsive-nav-link>
             @endcan
             @canany(['employer'])
                 <x-responsive-nav-link :href="route('users')" :active="request()->routeIs('users')">
@@ -144,6 +160,9 @@
             @canany(['admin','gov'])
                 <x-responsive-nav-link :href="route('users')" :active="request()->routeIs('users')">
                     {{ __('Users') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
+                    {{ __('Reports') }}
                 </x-responsive-nav-link>
             @endcan
         </div>

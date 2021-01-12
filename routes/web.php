@@ -65,14 +65,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/agents/update', [AgentController::class, 'update'])->name('agents.update');
     Route::get('/agents', [AgentController::class, 'index'])->name('agents')->middleware('can:agency');
 
-    Route::get('/employee', [MyEmployeeController::class, 'index'])->name('candidate.employees')->middleware('can:employer');
+    Route::get('/employee', [MyEmployeeController::class, 'index'])
+         ->name('candidate.employees')
+         ->middleware('can:employer');
     Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
 
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+    Route::post('/reports/table', [ReportController::class, 'table'])->name('reports.table');
     Route::get('/report/employer/form/{id}', [ReportController::class, 'formEmployer'])->name('report.employer');
     Route::get('/report/from/employer/{id}', [ReportController::class, 'fromEmployer'])->name('report.from.employer');
     Route::post('/report/submit', [ReportController::class, 'submit'])->name('report.submit');
     Route::post('/report/employee/table', [ReportController::class, 'employeeTable'])->name('report.employee.table');
-    Route::get('/report/view/{id}/employee', [ReportController::class, 'formEmployerView'])->name('report.employer.view');
+    Route::get('/report/view/{id}/employee', [ReportController::class, 'formEmployerView'])
+         ->name('report.employer.view');
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');
