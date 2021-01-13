@@ -176,7 +176,7 @@ class CandidateController extends Controller
         $candidate->save();
 
         return redirect()->back()
-                         ->with('success', "Applicant has been updated.");
+                         ->with('success', "Employer has been assigned.");
     }
 
     public function assignAnAgent(Request $request)
@@ -186,7 +186,7 @@ class CandidateController extends Controller
         $candidate->save();
 
         return redirect()->back()
-                         ->with('success', "Applicant has been updated.");
+                         ->with('success', "Agent has been assigned.");
     }
 
     public function employed(User $user, Agent $agent)
@@ -211,5 +211,15 @@ class CandidateController extends Controller
 
             return collect($value)->toArray();
         })->make(true);
+    }
+
+    public function deploy(Request $request)
+    {
+        $candidate           = Candidate::find($request->id);
+        $candidate->deployed = $request->deployed;
+        $candidate->save();
+
+        return redirect()->back()
+                         ->with('success', "Employee has been deployed.");
     }
 }

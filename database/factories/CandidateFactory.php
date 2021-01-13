@@ -53,7 +53,7 @@ class CandidateFactory extends Factory
             'mother_name'  => $faker->name('female'),
             'father_name'  => $faker->name('male'),
             'status'       => 'applicant',
-            'deployed'     => 'No',
+            'deployed'     => 'no',
         ];
     }
 }

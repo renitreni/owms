@@ -68,13 +68,12 @@
             </div>
         </form>
 
-        <form action="{{ route('candidate.assign.agent') }}" method="POST">
+        <form action="{{ route('candidate.assign.deploy') }}" method="POST">
         @csrf
         <!-- Agent Assign -->
             <div class="fixed inset-0 overflow-y-auto"
                  v-bind:class="[agent_mdl ? '' : 'hidden']">
                 <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-
                     <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
@@ -85,24 +84,22 @@
                         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                             <div class="sm:flex sm:items-start">
                                 <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full
-                            bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600">
+                            bg-pink-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600">
                                     <!-- Heroicon name -->
-                                    <i class="fas fa-user-tie"></i>
+                                    <i class="fas fa-plane-departure"></i>
                                 </div>
                                 <div class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left" v-if="overview">
                                     <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                        Assign an Agent for
+                                        Set deploy status for
                                         <span class="underline">@{{ overview.last_name }}, @{{ overview.first_name }} @{{ overview.middle_name }}</span>
                                         <input class="hidden" name="id" v-bind:value="overview.id">
                                     </h3>
                                     <div class="mt-6">
                                         <p class="text-sm text-gray-500">
-                                            <select name="agent_id" v-model="overview.agent.id"
+                                            <select name="deployed" v-model="overview.deployed"
                                                     class="w-full border-0 bg-gray-100 rounded text-black">
-                                                <option value="">not assigned</option>
-                                                @foreach($agents as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endforeach
+                                                <option value="no">No</option>
+                                                <option value="yes">Yes</option>
                                             </select>
                                         </p>
                                     </div>
@@ -175,7 +172,15 @@
                                 }, name: 'gender', title: 'Gender'
                             },
                             {data: 'age', name: 'birth_date', title: 'Age'},
-                            {data: 'deployed', name: 'deployed', title: 'Deployed'},
+                            {
+                                data: function (value) {
+                                    if (value.deployed == 'yes') {
+                                        return '<span class="text-green-500 block text-center"><i class="fas fa-check"></i></span>'
+                                    } else {
+                                        return '<span class="text-red-500 block text-center"><i class="fas fa-ban"></i></span>'
+                                    }
+                                }, name: 'deployed', title: 'Deployed'
+                            },
                             {data: 'date_hired', name: 'date_hired', title: 'Hired'},
                             {
                                 data:
@@ -185,7 +190,7 @@
                                             '<button class="btn-employer bg-blue-700 p-1 text-white w-full"><i class="fas fa-building"></i></button>\n' +
                                             '</div>\n' +
                                             '<div class="col-span-2">\n' +
-                                            '<button class="btn-agent bg-yellow-500 p-1 text-white w-full"><i class="fas fa-user-tie"></i></button>\n' +
+                                            '<button class="btn-agent bg-pink-800 p-1 text-white w-full"><i class="fas fa-plane-departure"></i></button>\n' +
                                             '</div>\n' +
                                             '</div>'
                                     }, name: 'id', title: 'Actions', bSortable: false
@@ -195,24 +200,19 @@
                             $('table button').click(function (e) {
                                 let data = $(this).parent().parent().parent();
                                 let hold = $this.dt.row(data).data();
+                                console.log(hold);
                                 $this.overview = hold;
                             });
 
                             $('.btn-employer').click(function () {
                                 $this.employer_mdl = true;
-                                if ($this.overview.employer === null) {
-                                    $this.overview.employer = {'id': ''}
-                                }
                             });
 
                             $('.btn-agent').click(function () {
                                 $this.agent_mdl = true;
-                                if ($this.overview.agent === null) {
-                                    $this.overview.agent = {'id': ''}
-                                }
                             });
                         }
-                    }).columns.adjust().responsive.recalc();
+                    });
                 }
             })
         </script>
