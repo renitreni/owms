@@ -175,8 +175,7 @@
                                 }, name: 'gender', title: 'Gender'
                             },
                             {data: 'age', name: 'birth_date', title: 'Age'},
-                            {data: 'contact_1', name: 'contact_1', title: 'Contact'},
-                            {data: 'email', name: 'email', title: 'E-mail'},
+                            {data: 'deployed', name: 'deployed', title: 'Deployed'},
                             {data: 'date_hired', name: 'date_hired', title: 'Hired'},
                             {
                                 data:

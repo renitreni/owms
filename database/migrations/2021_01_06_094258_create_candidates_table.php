@@ -44,6 +44,7 @@ class CreateCandidatesTable extends Migration
             $table->string('mother_name', 200)->nullable();
             $table->string('father_name', 200)->nullable();
             $table->string('status', 200)->nullable();
+            $table->string('deployed', 200)->nullable();
             $table->date('date_hired')->nullable();
             $table->softDeletes();
             $table->timestamps();

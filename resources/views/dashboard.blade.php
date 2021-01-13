@@ -11,7 +11,7 @@
                 @canany(['admin', 'agency'])
                     <div class="grid grid-cols-3 gap-4 p-5">
                         <div class="col-span-3 shadow-lg">
-                            <div class="animate-pulse text-2xl text-center p-4 bg-yellow-300 border-b border-gray-200">
+                            <div class="animate-pulse text-2xl border-2 text-center p-4 bg-yellow-300 border-b border-gray-200">
                                 <i class="fas fa-exclamation-triangle text-red-600"></i> 22 Overdue of Reports Detected
                             </div>
                         </div>

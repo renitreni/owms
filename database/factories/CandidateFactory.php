@@ -22,7 +22,7 @@ class CandidateFactory extends Factory
      */
     public function definition()
     {
-        $faker = \Faker\Factory::create();
+        $faker    = \Faker\Factory::create();
         $agentIds = User::getAgentIds()->random();
 
         return [
@@ -53,6 +53,7 @@ class CandidateFactory extends Factory
             'mother_name'  => $faker->name('female'),
             'father_name'  => $faker->name('male'),
             'status'       => 'applicant',
+            'deployed'     => 'No',
         ];
     }
 }
