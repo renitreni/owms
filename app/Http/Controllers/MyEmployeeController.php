@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Report;
+use App\Models\Document;
 use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -20,6 +21,7 @@ class MyEmployeeController extends Controller
         $candidate = $candidate->newQuery()
                                ->where('employer_id', auth()->id())
                                ->where('status', 'employed')
+                               ->where('deployed', 'yes')
                                ->with(['agency', 'employer', 'agent']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
@@ -33,5 +35,17 @@ class MyEmployeeController extends Controller
 
             return collect($value)->toArray();
         })->make(true);
+    }
+
+    public function show($id)
+    {
+        if (! Candidate::belongsToEmployer($id, auth()->id())) {
+            abort(403);
+        }
+
+        $results = Candidate::find($id);
+        $doc     = Document::query()->where('candidate_id', $id)->get();
+
+        return view('components.agency.applicant-edit', compact('results', 'doc'));
     }
 }

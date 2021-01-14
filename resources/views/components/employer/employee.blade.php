@@ -39,7 +39,7 @@
                             {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
-                                    return '<a href="/candidates/' + value.id + '/show" ' +
+                                    return '<a href="/employee/' + value.id + '/show" ' +
                                         'class="hover:underline hover:text-indigo-400">' +
                                         '' + value.last_name + ', ' + value.first_name + '</a>';
                                 }, name: 'last_name', title: 'Full Name'

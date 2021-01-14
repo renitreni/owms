@@ -14,7 +14,7 @@
                             <form action="{{ route('report.submit') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input class="hidden" name="agency_id" value="">
-                                <div class="shadow overflow-hidden sm:rounded-md">
+                                <div class="shadow overflow-hidden sm:rounded-top-md h-screen">
                                     <div class="px-4 py-5 bg-white sm:p-6 mb-2">
                                         <div class="col-span-6">
                                             @if ($errors->any())
@@ -52,29 +52,36 @@
                                                 </button>
                                             </div>
                                             <div class="col-span-6 grid grid-cols-6 gap-4" v-if="overview">
-                                                <div class="col-span-6 bg-blue-50 p-1">
-                                                    <span class="text-3xl">Hi, @{{ overview.last_name }}, @{{ overview.first_name }} @{{ overview.middle_name }} </span>
+                                                <div class="col-span-6 p-1 grid grid-cols-6 gap-4" v-if="overview.employer">
+                                                    <div class="col-span-6 bg-blue-50 p-1">
+                                                        <span class="text-3xl">Hi, @{{ overview.last_name }}, @{{ overview.first_name }} @{{ overview.middle_name }} </span>
+                                                    </div>
+                                                    <input name="candidate_id" v-model="overview.id" class="hidden">
+                                                    <input name="employer_id" v-model="overview.employer.id" class="hidden">
+                                                    <input name="created_by" value="employee" class="hidden">
+                                                    <div class="col-span-6 p-1">
+                                                        <label class="block text-sm font-medium text-gray-700">Concerns</label>
+                                                        <textarea type="text" name="concerns" autocomplete="concerns" rows="10"
+                                                                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                        ></textarea>
+                                                    </div>
                                                 </div>
-                                                <input name="candidate_id" v-model="overview.id" class="hidden">
-                                                <input name="employer_id" v-model="overview.employer.user_id" class="hidden">
-                                                <input name="created_by" value="employee" class="hidden">
-                                                <div class="col-span-6 p-1">
-                                                    <label class="block text-sm font-medium text-gray-700">Concerns</label>
-                                                    <textarea type="text" name="concerns" autocomplete="concerns" rows="10"
-                                                           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                    ></textarea>
+                                                <div class="col-span-6 bg-red-50 p-1 grid grid-cols-6 gap-4" v-else>
+                                                    <div class="col-span-6 p-1">
+                                                        <span class="text-3xl">Only employed worker are able to report. </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                        <button type="submit" class="inline-flex justify-center py-2 px-4 border
+                                </div>
+                                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                    <button type="submit" class="inline-flex justify-center py-2 px-4 border
                                         border-transparent shadow-sm text-sm font-medium rounded-md text-white
                                         bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
                                         focus:ring-offset-2 focus:ring-indigo-500">
-                                            Save
-                                        </button>
-                                    </div>
+                                        Save
+                                    </button>
                                 </div>
                             </form>
                         </div>

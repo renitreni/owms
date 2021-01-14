@@ -8,7 +8,7 @@ use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\MyEmployeeController;
 use App\Http\Controllers\ReportController;
-
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,9 +25,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/change/pass', [UsersController::class, 'indexChangePass'])->name('change.pass');
     Route::post('/change/password/update', [UsersController::class, 'changePass'])->name('change.pass.update');
@@ -70,6 +68,7 @@ Route::group(['middleware' => ['auth']], function () {
          ->name('candidate.employees')
          ->middleware('can:employer');
     Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
+    Route::get('/employee/{id}/show', [MyEmployeeController::class, 'show'])->name('candidate.employees.edit');
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports')->middleware('can:admin_agency_gov');
     Route::post('/reports/table', [ReportController::class, 'table'])->name('reports.table');
@@ -83,7 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');
 Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
-Route::get('/report/form/employee', [ReportController::class, 'formEmployee'])->name('report.from.employee');
+Route::get('/reporting', [ReportController::class, 'formEmployee'])->name('report.from.employee');
 Route::post('/secretcode/validate', [ReportController::class, 'validateSecretCode'])->name('report.validate');
 
 require __DIR__ . '/auth.php';
