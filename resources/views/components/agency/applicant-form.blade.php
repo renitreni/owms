@@ -8,7 +8,7 @@
         </h4>
     </x-slot>
 
-    <div id="app" class="py-12">
+    <div id="app" class="pb-12 pt-8">
         <div class="w-full sm:w-11/12 mx-auto sm:px-2 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="mt-10 sm:mt-0">
