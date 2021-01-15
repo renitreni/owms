@@ -9,6 +9,17 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        if(\Gate::has('admin') && \Gate::has('gov'))
+        {
+            return $this->adminView();
+        } else {
+            return view('dashboard');
+        }
+    }
+
+    public function adminView()
+    {
+
         $employerLateRp = DB::select(DB::raw(/** @lang mysql */ "select *
             from (
                  Select
