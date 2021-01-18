@@ -16,12 +16,17 @@ class CreateCandidatesTable extends Migration
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
             $table->string('agency_id', 200)->nullable();
-            $table->string('agent_id', 200)->nullable();
+
             $table->string('employer_id', 200)->nullable();
             $table->string('status', 200)->nullable();
+            $table->string('salary', 200)->nullable();
+            $table->string('position_selected', 200)->nullable();
             $table->date('date_hired')->nullable();
+
+            $table->string('agency_abroad_id', 200)->nullable();
             $table->string('deployed', 200)->nullable();
             $table->date('date_deployed')->nullable();
+
             $table->string('applied_using', 200)->nullable();
             $table->string('code', 200)->nullable();
             $table->string('iqama', 200)->nullable();

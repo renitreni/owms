@@ -10,7 +10,6 @@
                 {{ route('candidate.new', ['id' => auth()->id()]) }}</a>
         </h2>
     </x-slot>
-
     <div id="app" class="pb-12 pt-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
@@ -20,9 +19,9 @@
 
         <form action="{{ route('candidate.assign.employer') }}" method="POST">
         @csrf
+                <transition name="slide-fade">
         <!-- Employee Assign -->
-            <div class="fixed inset-0 overflow-y-auto"
-                 v-bind:class="[employer_mdl ? '' : 'hidden']">
+            <div class="fixed inset-0 overflow-y-auto" v-if="employer_mdl">
                 <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                     <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -56,6 +55,28 @@
                                                 @endforeach
                                             </select>
                                         </p>
+                                        <div class="flex">
+                                            <div class="mt-2">
+                                                <label>Position Selected</label>
+                                                <select name="position_selected"
+                                                        class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                    <option v-bind:value="overview.position_1" selected>
+                                                        @{{ overview.position_1 }}
+                                                    </option>
+                                                    <option v-bind:value="overview.position_2">
+                                                        @{{ overview.position_2 }}
+                                                    </option>
+                                                    <option v-bind:value="overview.position_3">
+                                                        @{{ overview.position_3 }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="mt-2  ml-3">
+                                                <label>Salary</label>
+                                                <input type="number" name="salary"
+                                                       class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -73,6 +94,7 @@
                     </div>
                 </div>
             </div>
+            </transition>
         </form>
     </div>
 
@@ -124,11 +146,6 @@
                             {data: 'contact_1', name: 'contact_1', title: 'Primary Contact'},
                             {data: 'email', name: 'email', title: 'E-mail'},
                             {data: 'created_at_display', name: 'created_at', title: 'Date Applied', width: '130px'},
-                            {
-                                data: function (value) {
-                                    return value.agent ? value.agent.name : 'Not Assigned';
-                                }, name: 'id', title: 'Agent', bSortable: false, width: '180px'
-                            },
                             {
                                 data:
                                     function (value) {

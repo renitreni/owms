@@ -13,6 +13,7 @@ use App\Models\Candidate;
 use App\Models\Information;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\EmployRequest;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\CandidateStoreRequest;
 
@@ -192,34 +193,11 @@ class CandidateController extends Controller
             ->with('success', "Applicant has been updated.");
     }
 
-    public function assignAnEmployer(Request $request)
-    {
-        $candidate              = Candidate::find($request->id);
-        $candidate->employer_id = $request->employer_id;
-        $candidate->status      = $request->employer_id ? "employed" : '';
-        $candidate->date_hired  = $request->employer_id ? Carbon::now() : '';
-        $candidate->save();
-
-        return redirect()->back()
-                         ->with('success', "Employer has been assigned.");
-    }
-
-    public function assignAnAgent(Request $request)
-    {
-        $candidate           = Candidate::find($request->id);
-        $candidate->agent_id = $request->agent_id;
-        $candidate->save();
-
-        return redirect()->back()
-                         ->with('success', "Agent has been assigned.");
-    }
-
-    public function employed(User $user, Agent $agent)
+    public function employed(User $user)
     {
         $employers = $user->getEmployersByAgency(auth()->id())->get();
-        $agents    = $agent->getAgentsByAgency(auth()->id());
 
-        return view('components.agency.employed', compact('employers', 'agents'));
+        return view('components.agency.employed', compact('employers'));
     }
 
     public function tableEmployed(Candidate $candidate)
@@ -248,5 +226,19 @@ class CandidateController extends Controller
 
         return redirect()->back()
                          ->with('success', "Employee has been deployed.");
+    }
+
+    public function employ(EmployRequest $request)
+    {
+        $candidate                    = Candidate::find($request->id);
+        $candidate->employer_id       = $request->employer_id;
+        $candidate->status            = "employed";
+        $candidate->salary            = $request->salary;
+        $candidate->position_selected = $request->position_selected;
+        $candidate->date_hired        = Carbon::now();
+        $candidate->save();
+
+        return redirect()->back()
+                         ->with('success', "Employer has been assigned.");
     }
 }

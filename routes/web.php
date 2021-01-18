@@ -51,9 +51,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/candidates/c/c', [CandidateController::class, 'candidatesTable'])->name('candidate.table');
     Route::post('/candidates/a/t', [CandidateController::class, 'tableApplicants'])->name('candidate.applicant.table');
     Route::post('/candidates/update', [CandidateController::class, 'update'])->name('candidate.update');
-    Route::post('/candidates/a/e', [CandidateController::class, 'assignAnEmployer'])->name('candidate.assign.employer');
     Route::post('/candidates/a/ag', [CandidateController::class, 'assignAnAgent'])->name('candidate.assign.agent');
     Route::post('/candidates/deploy', [CandidateController::class, 'deploy'])->name('candidate.assign.deploy');
+    Route::post('/candidates/a/e', [CandidateController::class, 'employ'])->name('candidate.assign.employer');
     Route::post('/candidates/e/t', [CandidateController::class, 'tableEmployed'])->name('candidate.employed.table');
     Route::get('/candidates/{id}/show', [CandidateController::class, 'show'])->name('candidate.edit');
     Route::get('/candidates/applicant', [CandidateController::class, 'applicants'])->name('candidate.applicant');
