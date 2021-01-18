@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left" v-if="overview">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                            Agent <span class="underline">@{{ overview.information.name }}</span>
+                                            Employee <span class="underline">@{{ overview.information.name }}</span>
                                         </h3>
                                         <div class="mt-6 grid grid-cols-1">
                                             <div class="col-span-1 mb-2" v-for="item in overview.employee"
