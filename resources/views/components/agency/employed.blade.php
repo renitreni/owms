@@ -175,7 +175,7 @@
                             {
                                 data: function (value) {
                                     if (value.deployed == 'yes') {
-                                        return '<span class="text-green-500 block text-center"><i class="fas fa-check"></i></span>'
+                                        return value.date_deployed
                                     } else {
                                         return '<span class="text-red-500 block text-center"><i class="fas fa-ban"></i></span>'
                                     }
