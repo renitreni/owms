@@ -18,7 +18,16 @@ use App\Http\Requests\CandidateStoreRequest;
 
 class CandidateController extends Controller
 {
-    public function index(User $user, Agent $agent)
+    public function index()
+    {
+        if(!\Gate::any(['admin', 'gov'])) {
+            abort('403');
+        }
+
+        return view('components.admin.candidates');
+    }
+
+    public function applicants(User $user, Agent $agent)
     {
         $employers = $user->getEmployersByAgency(auth()->id())->get();
         $agents    = $agent->getAgentsByAgency(auth()->id());
@@ -30,6 +39,21 @@ class CandidateController extends Controller
     {
         $candidate = $candidate->newQuery()
                                ->where('agency_id', auth()->id())
+                               ->where('status', 'applicant')
+                               ->with(['agency', 'employer', 'agent']);
+
+        return DataTables::of($candidate)->setTransformer(function ($value) {
+            $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
+            $value->date_hired         = Carbon::parse($value->date_hired)->format('M j, Y');
+            $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
+
+            return collect($value)->toArray();
+        })->make(true);
+    }
+
+    public function candidatesTable(Candidate $candidate)
+    {
+        $candidate = $candidate->newQuery()
                                ->where('status', 'applicant')
                                ->with(['agency', 'employer', 'agent']);
 
@@ -112,7 +136,7 @@ class CandidateController extends Controller
 
     public function show($id)
     {
-        if (! Candidate::belongsToAgency($id, auth()->id())) {
+        if (! Candidate::belongsToAgency($id, auth()->id()) && ! \Gate::any(['admin', 'gov'])) {
             abort(403);
         }
 
@@ -215,8 +239,9 @@ class CandidateController extends Controller
 
     public function deploy(Request $request)
     {
-        $candidate           = Candidate::find($request->id);
-        $candidate->deployed = $request->deployed;
+        $candidate                = Candidate::find($request->id);
+        $candidate->deployed      = $request->deployed;
+        $candidate->date_deployed = Carbon::now()->format('Y-m-d');
         $candidate->save();
 
         return redirect()->back()

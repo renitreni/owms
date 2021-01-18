@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -27,12 +27,6 @@
                         <x-nav-link :href="route('candidate.employed')"
                                     :active="request()->routeIs('candidate.employed')">
                             {{ __('Employed') }}
-                        </x-nav-link>
-                    </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('agents')"
-                                    :active="request()->routeIs('agents') || request()->routeIs('agents.create') || request()->routeIs('agents.show')">
-                            {{ __('Agents') }}
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -66,6 +60,12 @@
                         <x-nav-link :href="route('reports')"
                                     :active="request()->routeIs('reports')">
                             {{ __('Reports') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('candidates')"
+                                    :active="request()->routeIs('candidates')">
+                            {{ __('Candidates') }}
                         </x-nav-link>
                     </div>
                 @endcan
@@ -139,10 +139,6 @@
                 <x-responsive-nav-link :href="route('candidate.employed')"
                                        :active="request()->routeIs('candidate.employed')">
                     {{ __('Employed') }}
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('agents')"
-                                       :active="request()->routeIs('agents') || request()->routeIs('agents.create') || request()->routeIs('agents.show')">
-                    {{ __('Agents') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('employers')"
                                        :active="request()->routeIs('employers') || request()->routeIs('employers.create') || request()->routeIs('employers.show')">

@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/employers/d/{id}', [EmployerController::class, 'destroy'])->name('employers.delete');
     Route::get('/employers', [EmployerController::class, 'index'])->name('employers')->middleware('can:agency');
 
+    Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates');
+    Route::post('/candidates/c/c', [CandidateController::class, 'candidatesTable'])->name('candidate.table');
     Route::post('/candidates/a/t', [CandidateController::class, 'tableApplicants'])->name('candidate.applicant.table');
     Route::post('/candidates/update', [CandidateController::class, 'update'])->name('candidate.update');
     Route::post('/candidates/a/e', [CandidateController::class, 'assignAnEmployer'])->name('candidate.assign.employer');
@@ -54,19 +56,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/candidates/deploy', [CandidateController::class, 'deploy'])->name('candidate.assign.deploy');
     Route::post('/candidates/e/t', [CandidateController::class, 'tableEmployed'])->name('candidate.employed.table');
     Route::get('/candidates/{id}/show', [CandidateController::class, 'show'])->name('candidate.edit');
-    Route::get('/candidates/applicant', [CandidateController::class, 'index'])->name('candidate.applicant');
+    Route::get('/candidates/applicant', [CandidateController::class, 'applicants'])->name('candidate.applicant');
     Route::get('/candidates/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
 
-    Route::post('/agents/table', [AgentController::class, 'table'])->name('agents.table');
-    Route::get('/agents/create', [AgentController::class, 'create'])->name('agents.create');
-    Route::post('/agents/store', [AgentController::class, 'store'])->name('agents.store');
-    Route::get('/agents/show/{id}', [AgentController::class, 'show'])->name('agents.show');
-    Route::post('/agents/update', [AgentController::class, 'update'])->name('agents.update');
-    Route::get('/agents', [AgentController::class, 'index'])->name('agents')->middleware('can:agency');
-
-    Route::get('/employee', [MyEmployeeController::class, 'index'])
-         ->name('candidate.employees')
-         ->middleware('can:employer');
+    Route::get('/employee', [MyEmployeeController::class, 'index'])->name('candidate.employees')->middleware('can:employer');
     Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
     Route::get('/employee/{id}/show', [MyEmployeeController::class, 'show'])->name('candidate.employees.edit');
 
