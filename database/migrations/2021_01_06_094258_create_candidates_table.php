@@ -18,7 +18,13 @@ class CreateCandidatesTable extends Migration
             $table->string('agency_id', 200)->nullable();
             $table->string('agent_id', 200)->nullable();
             $table->string('employer_id', 200)->nullable();
+            $table->string('status', 200)->nullable();
+            $table->date('date_hired')->nullable();
+            $table->string('deployed', 200)->nullable();
+            $table->date('date_deployed')->nullable();
+            $table->string('applied_using', 200)->nullable();
             $table->string('code', 200)->nullable();
+            $table->string('iqama', 200)->nullable();
             $table->string('photo_url', 200)->nullable();
             $table->string('first_name', 200)->nullable();
             $table->string('last_name', 200)->nullable();
@@ -43,10 +49,7 @@ class CreateCandidatesTable extends Migration
             $table->string('spouse', 200)->nullable();
             $table->string('mother_name', 200)->nullable();
             $table->string('father_name', 200)->nullable();
-            $table->string('status', 200)->nullable();
-            $table->string('deployed', 200)->nullable();
-            $table->date('date_hired')->nullable();
-            $table->date('date_deployed')->nullable();
+            $table->string('agreed', 200)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

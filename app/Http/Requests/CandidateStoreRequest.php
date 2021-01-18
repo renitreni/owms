@@ -47,6 +47,7 @@ class CandidateStoreRequest extends FormRequest
             "email"        => "max:255",
             "address"      => "required",
             "cv"           => "required|mimes:doc,pdf,docx",
+            "agreed"       => "required",
         ];
     }
 }

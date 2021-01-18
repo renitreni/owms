@@ -80,7 +80,10 @@
                                                 <input type="text" name="passport" value="{{ $results->passport }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-3">
+                                            <div class="col-span-6 sm:col-span-3">
+                                                <label class="block text-sm font-medium text-gray-700">IQAMA</label>
+                                                <input type="text" name="iqama" value="{{ $results->iqama }}"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="col-span-6 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Birth
@@ -184,6 +187,11 @@
                                                 <span class="text-3xl">Contact Information</span>
                                             </div>
                                             <div class="col-span-6 sm:col-span-2">
+                                                <label class="block text-sm font-medium text-gray-700">E-mail</label>
+                                                <input type="text" name="email" value="{{ $results->email }}"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="col-span-6 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">Contact 1</label>
                                                 <input type="text" name="contact_1" value="{{ $results->contact_1 }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
@@ -193,12 +201,14 @@
                                                 <input type="text" name="contact_2" value="{{ $results->contact_2 }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-2">
-                                            </div>
-                                            <div class="col-span-6 sm:col-span-2">
-                                                <label class="block text-sm font-medium text-gray-700">E-mail</label>
-                                                <input type="text" name="email" value="{{ $results->email }}"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            <div class="col-span-6 sm:col-span-1">
+                                                <label class="block text-sm font-medium text-gray-700">Applied From</label>
+                                                <select name="applied_using"
+                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    <option value="online"  @if($results->applied_using == 'online')selected @endif>Online</option>
+                                                    <option value="walk-in" @if($results->applied_using == 'walk-in')selected @endif>Walk-in</option>
+                                                    <option value="agent"   @if($results->applied_using == 'agent')selected @endif>Agent</option>
+                                                </select>
                                             </div>
                                             <div class="col-span-6 sm:col-span-3">
                                             </div>

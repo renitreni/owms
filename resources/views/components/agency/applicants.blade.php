@@ -132,8 +132,8 @@
                             {
                                 data:
                                     function (value) {
-                                        return '<div class="inline-grid grid-cols-4 gap-x-0 w-full text-sm shadow">\n' +
-                                            '<div class="col-span-2">\n' +
+                                        return '<div class="inline-grid grid-cols-1 gap-x-0 w-full text-sm shadow">\n' +
+                                            '<div class="col-span-1">\n' +
                                             '<button class="btn-employer bg-blue-700 p-1 text-white w-full"><i class="fas fa-building"></i></button>\n' +
                                             '</div>\n' +
                                             '</div>'

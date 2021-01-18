@@ -20,7 +20,7 @@ class CandidateController extends Controller
 {
     public function index()
     {
-        if(!\Gate::any(['admin', 'gov'])) {
+        if (! \Gate::any(['admin', 'gov'])) {
             abort('403');
         }
 
@@ -117,6 +117,7 @@ class CandidateController extends Controller
         $candidate->contact_2    = $request->contact_2;
         $candidate->email        = $request->email;
         $candidate->address      = $request->address;
+        $candidate->agreed       = $request->agreed;
         $candidate->save();
 
         $path = $request->file('cv')->store('cv');
