@@ -60,6 +60,7 @@ class CandidateController extends Controller
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
             $value->date_hired         = $value->date_hired ? Carbon::parse($value->date_hired)->format('M j, Y') : '';
+            $value->date_deployed         = $value->date_deployed ? Carbon::parse($value->date_deployed)->format('M j, Y') : '';
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
 
             return collect($value)->toArray();

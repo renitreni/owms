@@ -22,7 +22,7 @@ class MyEmployeeController extends Controller
                                ->where('employer_id', auth()->id())
                                ->where('status', 'employed')
                                ->where('deployed', 'yes')
-                               ->with(['agency', 'employer', 'agent']);
+                               ->with(['agency', 'employer']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');

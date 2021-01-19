@@ -24,7 +24,12 @@ class ReportSubmitRequest extends FormRequest
     public function rules()
     {
         return [
-            "concerns" => "required"
+            "comments"        => "required",
+            "salary_received" => "required",
+            "salary_date"     => "required",
+            "attachment_1"    => "required",
+            "attachment_2"    => "required",
+            "attachment_3"    => "required",
         ];
     }
 }

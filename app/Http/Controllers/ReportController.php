@@ -27,29 +27,39 @@ class ReportController extends Controller
         })->make(true);
     }
 
-    public function formEmployer($id)
-    {
-        if (! Candidate::belongsToEmployer($id, auth()->id())) {
-            abort(403);
-        }
-        $candidate = Candidate::query()->where('id', $id)->get()[0];
-
-        return view('components.employer.report-employer-form', compact('candidate'));
-    }
-
     public function submit(ReportSubmitRequest $request)
     {
-        $report               = new Report();
-        $report->candidate_id = $request->candidate_id;
-        $report->employer_id  = $request->employer_id;
-        $report->created_by   = $request->created_by;
-        $report->concerns     = $request->concerns;
+        $attachment_1 = '';
+        $attachment_2 = '';
+        $attachment_3 = '';
+
+        if ($request->has('attachment_1')) {
+            $attachment_1 = $request->file('attachment_1')->store('report_docs');
+        }
+        if ($request->has('attachment_2')) {
+
+            $attachment_2 = $request->file('attachment_2')->store('report_docs');
+        }
+        if ($request->has('attachment_3')) {
+            $attachment_3 = $request->file('attachment_3')->store('report_docs');
+        }
+
+        $report                  = new Report();
+        $report->candidate_id    = $request->candidate_id;
+        $report->employer_id     = $request->employer_id;
+        $report->created_by      = $request->created_by;
+        $report->comments        = $request->comments;
+        $report->salary_received = $request->salary_received;
+        $report->salary_date     = $request->salary_date;
+        $report->attachment_1    = $attachment_1;
+        $report->attachment_2    = $attachment_2;
+        $report->attachment_3    = $attachment_3;
         $report->save();
 
         return redirect()->route('candidate.employees')->with('success', "Status report has been submitted.");
     }
 
-    public function fromEmployer($id)
+    public function employerReportView($id)
     {
         if (! Candidate::belongsToEmployer($id, auth()->id())) {
             abort(403);
@@ -61,7 +71,10 @@ class ReportController extends Controller
 
     public function employeeTable(Request $request, Report $report)
     {
-        $reports = $report->newQuery()->where('candidate_id', $request->id)->where('created_by', 'employer');
+        $reports = $report->newQuery()
+                          ->where('candidate_id', $request->id)
+                          ->where('created_by', 'employer')
+                          ->with(['employee']);
 
         return DataTables::of($reports)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
@@ -80,11 +93,6 @@ class ReportController extends Controller
         }
 
         return view('components.employer.report-employer-view', compact('candidate', 'report'));
-    }
-
-    public function formEmployee()
-    {
-        return view('components.report-employee-form');
     }
 
     public function validateSecretCode(Request $request)

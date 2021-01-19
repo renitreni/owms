@@ -59,6 +59,7 @@
                                 }, name: 'gender', title: 'Gender'
                             },
                             {data: 'iqama', name: 'iqama', title: 'IQAMA'},
+                            {data: 'passport', name: 'passport', title: 'Passport'},
                             {data: 'date_deployed', name: 'date_deployed', title: 'Date Deployed'},
                             {data: 'date_hired', name: 'date_hired', title: 'Date Hired'},
                             {data: 'created_at_display', name: 'created_at', title: 'Date Applied', width: '130px'},

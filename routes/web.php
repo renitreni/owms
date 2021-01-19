@@ -65,8 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/reports', [ReportController::class, 'index'])->name('reports')->middleware('can:admin_agency_gov');
     Route::post('/reports/table', [ReportController::class, 'table'])->name('reports.table');
-    Route::get('/report/employer/form/{id}', [ReportController::class, 'formEmployer'])->name('report.employer');
-    Route::get('/report/from/employer/{id}', [ReportController::class, 'fromEmployer'])->name('report.from.employer');
+    Route::get('/report/employer/view/{id}', [ReportController::class, 'employerReportView'])->name('report.employer.view');
     Route::post('/report/submit', [ReportController::class, 'submit'])->name('report.submit');
     Route::post('/report/employee/table', [ReportController::class, 'employeeTable'])->name('report.employee.table');
     Route::get('/report/view/{id}/employee', [ReportController::class, 'formEmployerView'])
