@@ -52,15 +52,14 @@ class CandidateController extends Controller
         })->make(true);
     }
 
-    public function candidatesTable(Candidate $candidate)
+    public function tableCandidates(Candidate $candidate)
     {
         $candidate = $candidate->newQuery()
-                               ->where('status', 'applicant')
                                ->with(['agency', 'employer', 'agent']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
-            $value->date_hired         = Carbon::parse($value->date_hired)->format('M j, Y');
+            $value->date_hired         = $value->date_hired ? Carbon::parse($value->date_hired)->format('M j, Y') : '';
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
 
             return collect($value)->toArray();
@@ -235,7 +234,7 @@ class CandidateController extends Controller
         $candidate->status            = "employed";
         $candidate->salary            = $request->salary;
         $candidate->position_selected = $request->position_selected;
-        $candidate->date_hired        = Carbon::now();
+        $candidate->date_hired        = Carbon::now()->format('Y-m-d');
         $candidate->save();
 
         return redirect()->back()

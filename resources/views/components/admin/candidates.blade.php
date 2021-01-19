@@ -45,6 +45,7 @@
                                         '' + value.last_name + ', ' + value.first_name + '</a>';
                                 }, name: 'last_name', title: 'Full Name'
                             },
+                            {data: 'position_selected', name: 'position_selected', title: 'Position'},
                             {
                                 data: function (value) {
                                     if (value.gender == 'male') {
