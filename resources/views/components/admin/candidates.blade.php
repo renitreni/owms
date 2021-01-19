@@ -57,20 +57,10 @@
                                         '</span>';
                                 }, name: 'gender', title: 'Gender'
                             },
-                            {data: 'age', name: 'birth_date', title: 'Age'},
-                            {data: 'contact_1', name: 'contact_1', title: 'Primary Contact'},
-                            {data: 'email', name: 'email', title: 'E-mail'},
+                            {data: 'iqama', name: 'iqama', title: 'IQAMA'},
+                            {data: 'date_deployed', name: 'date_deployed', title: 'Date Deployed'},
+                            {data: 'date_hired', name: 'date_hired', title: 'Date Hired'},
                             {data: 'created_at_display', name: 'created_at', title: 'Date Applied', width: '130px'},
-                            // {
-                            //     data:
-                            //         function (value) {
-                            //             return '<div class="inline-grid grid-cols-4 gap-x-0 w-full text-sm shadow">\n' +
-                            //                 '<div class="col-span-2">\n' +
-                            //                 '<button class="btn-employer bg-blue-700 p-1 text-white w-full"><i class="fas fa-building"></i></button>\n' +
-                            //                 '</div>\n' + +
-                            //                 '</div>'
-                            //         }, name: 'id', title: 'Actions', bSortable: false
-                            // },
                         ],
                         drawCallback() {
                             $('table button').click(function (e) {
