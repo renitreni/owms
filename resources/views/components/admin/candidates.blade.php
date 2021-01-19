@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-            {{ __('Candidates') }}
+            {{ __('OFWs') }}
         </h2>
     </x-slot>
 
