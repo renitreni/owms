@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\CandidateController;
-use App\Http\Controllers\AgentController;
+use App\Http\Controllers\AffiliateController;
 use App\Http\Controllers\MyEmployeeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DashboardController;
@@ -56,8 +56,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/candidates/a/e', [CandidateController::class, 'employ'])->name('candidate.assign.employer');
     Route::post('/candidates/e/t', [CandidateController::class, 'tableEmployed'])->name('candidate.employed.table');
     Route::get('/candidates/{id}/show', [CandidateController::class, 'show'])->name('candidate.edit');
-    Route::get('/candidates/applicant', [CandidateController::class, 'applicants'])->name('candidate.applicant');
-    Route::get('/candidates/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
+    Route::get('/applicant', [CandidateController::class, 'applicants'])->name('candidate.applicant');
+    Route::get('/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
 
     Route::get('/employee', [MyEmployeeController::class, 'index'])->name('candidate.employees')->middleware('can:employer');
     Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
@@ -70,6 +70,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/report/employee/table', [ReportController::class, 'employeeTable'])->name('report.employee.table');
     Route::get('/report/view/{id}/employee', [ReportController::class, 'formEmployerView'])
          ->name('report.employer.view');
+
+    Route::get('/affiliates', [AffiliateController::class, 'index'])->name('affiliates')->middleware('can:agency');
+    Route::post('/affiliates/table', [AffiliateController::class, 'table'])->name('affiliates.table');
+    Route::get('/affiliates/create', [AffiliateController::class, 'create'])->name('affiliates.create')->middleware('can:agency');
+    Route::post('/affiliates/store', [AffiliateController::class, 'store'])->name('affiliates.store');
+    Route::get('/affiliate/show/{id}', [AffiliateController::class, 'show'])->name('affiliates.show');
+    Route::post('/affiliate/update/{id}', [AffiliateController::class, 'update'])->name('affiliates.update');
+    Route::get('/affiliate/rp/{id}', [AffiliateController::class, 'resetPassword'])->name('affiliates.resetpass');
+    Route::get('/affiliate/d/{id}', [AffiliateController::class, 'destroy'])->name('affiliates.delete');
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Agents') }}
+            {{ __('Affiliates') }}
         </h2>
     </x-slot>
 
@@ -9,9 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-2 mt-5">
-                    <a href="{{route('agents.create')}}"
+                    <a href="{{route('affiliates.create')}}"
                        class="text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow">
-                        <i class="fas fa-user-plus"></i> New Agent
+                        <i class="fas fa-user-plus"></i> New Affiliates
                     </a>
                 </div>
                 <div class="p-5">
@@ -85,27 +85,18 @@
                         scrollX: true,
                         order: [[0, "desc"]],
                         ajax: {
-                            url: '{{ route('agents.table') }}',
+                            url: '{{ route('affiliates.table') }}',
                             type: 'POST'
                         },
                         columns: [
                             {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
-                                    return '<div class="block text-center">' +
-                                        '<button class="btn-referrals bg-purple-400 shadow px-1 w-full text-white hover:bg-purple-500">' +
-                                        '<i class="fas fa-eye"></i> ' + value.referred_count + '' +
-                                        '</button>' +
-                                        '</div>'
-                                }, name: 'referred_count', title: 'Referral(s)', bSortable: false
-                            },
-                            {
-                                data: function (value) {
-                                    return '<a href="/agents/show/' + value.id + '" ' +
-                                        'class="hover:underline hover:text-indigo-400">' + value.name + '</a>';
+                                    return '<a href="/affiliate/show/' + value.id + '" ' +
+                                        'class="hover:underline hover:text-indigo-400">' + value.information.name + '</a>';
                                 }, name: 'name', title: 'Name'
                             },
-                            {data: 'phone', name: 'phone', title: 'Phone'},
+                            {data: 'information.phone', name: 'information.phone', title: 'Phone'},
                             {data: 'email', name: 'email', title: 'E-mail'},
                             {data: 'created_at_display', name: 'created_at', title: 'Date Created'},
                         ],

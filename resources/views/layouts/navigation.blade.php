@@ -36,6 +36,12 @@
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('affiliates')"
+                                    :active="request()->routeIs('affiliates') || request()->routeIs('affiliates.show')|| request()->routeIs('affiliates.create')">
+                            {{ __('Affiliates') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('reports')"
                                     :active="request()->routeIs('reports')">
                             {{ __('Reports') }} {{ Gate::inspect('name') }}
@@ -134,7 +140,7 @@
             @canany(['agency'])
                 <x-responsive-nav-link :href="route('candidate.applicant')"
                                        :active="request()->routeIs('candidate.applicant') || request()->routeIs('candidate.edit')">
-                    {{ __('Applications') }}
+                    {{ __('Applicants') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('candidate.employed')"
                                        :active="request()->routeIs('candidate.employed')">
@@ -143,6 +149,10 @@
                 <x-responsive-nav-link :href="route('employers')"
                                        :active="request()->routeIs('employers') || request()->routeIs('employers.create') || request()->routeIs('employers.show')">
                     {{ __('Employers') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('affiliates')"
+                                       :active="request()->routeIs('affiliates') || request()->routeIs('affiliates')">
+                    {{ __('Affiliates') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                     {{ __('Reports') }}

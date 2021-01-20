@@ -22,10 +22,26 @@ class CandidateController extends Controller
     public function index()
     {
         if (! \Gate::any(['admin', 'gov'])) {
-            abort('403');
+            return redirect()->back();
         }
 
         return view('components.admin.candidates');
+    }
+
+    public function tableCandidates(Candidate $candidate)
+    {
+        $candidate = $candidate->newQuery()
+                               ->with(['agency', 'employer', 'agent']);
+
+        return DataTables::of($candidate)->setTransformer(function ($value) {
+            $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
+            $value->date_hired         = $value->date_hired ? Carbon::parse($value->date_hired)->format('M j, Y') : '';
+            $value->date_deployed      = $value->date_deployed ? Carbon::parse($value->date_deployed)
+                                                                       ->format('M j, Y') : '';
+            $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
+
+            return collect($value)->toArray();
+        })->make(true);
     }
 
     public function applicants(User $user, Agent $agent)
@@ -52,21 +68,6 @@ class CandidateController extends Controller
         })->make(true);
     }
 
-    public function tableCandidates(Candidate $candidate)
-    {
-        $candidate = $candidate->newQuery()
-                               ->with(['agency', 'employer', 'agent']);
-
-        return DataTables::of($candidate)->setTransformer(function ($value) {
-            $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
-            $value->date_hired         = $value->date_hired ? Carbon::parse($value->date_hired)->format('M j, Y') : '';
-            $value->date_deployed         = $value->date_deployed ? Carbon::parse($value->date_deployed)->format('M j, Y') : '';
-            $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
-
-            return collect($value)->toArray();
-        })->make(true);
-    }
-
     public function create($id, Information $information)
     {
         $validator = Validator::make(['id' => $id], [
@@ -82,8 +83,10 @@ class CandidateController extends Controller
         if ($validator->errors()->messages()) {
             return abort(403);
         }
-        $agency_name = $information->newQuery()->where('user_id', $id)->pluck('name')[0];
-        $agency_id   = $information->newQuery()->where('user_id', $id)->pluck('id')[0];
+
+        $hold        = $information->newQuery()->select(['name', 'user_id'])->where('user_id', $id)->get()[0];
+        $agency_name = $hold['name'];
+        $agency_id   = $hold['user_id'];
 
         return view('components.agency.applicant-form', compact('agency_name', 'agency_id'));
     }
@@ -195,9 +198,10 @@ class CandidateController extends Controller
 
     public function employed(User $user)
     {
-        $employers = $user->getEmployersByAgency(auth()->id())->get();
+        $employers  = $user->getEmployersByAgency(auth()->id())->get();
+        $affiliates = $user->getAffiliatesByAgency(auth()->id())->get();
 
-        return view('components.agency.employed', compact('employers'));
+        return view('components.agency.employed', compact('employers', 'affiliates'));
     }
 
     public function tableEmployed(Candidate $candidate)
@@ -205,7 +209,7 @@ class CandidateController extends Controller
         $candidate = $candidate->newQuery()
                                ->where('agency_id', auth()->id())
                                ->where('status', 'employed')
-                               ->with(['agency', 'employer', 'agent']);
+                               ->with(['agency', 'employer', 'affiliates']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
@@ -219,9 +223,10 @@ class CandidateController extends Controller
 
     public function deploy(Request $request)
     {
-        $candidate                = Candidate::find($request->id);
-        $candidate->deployed      = $request->deployed;
-        $candidate->date_deployed = Carbon::now()->format('Y-m-d');
+        $candidate                   = Candidate::find($request->id);
+        $candidate->deployed         = 'yes';
+        $candidate->agency_abroad_id = $request->agency_abroad_id;
+        $candidate->date_deployed    = Carbon::now()->format('Y-m-d');
         $candidate->save();
 
         return redirect()->back()

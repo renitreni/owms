@@ -120,10 +120,14 @@
                                     </h3>
                                     <div class="mt-6">
                                         <p class="text-sm text-gray-500">
-                                            <select name="deployed" v-model="overview.deployed"
-                                                    class="w-full border-0 bg-gray-100 rounded text-black">
-                                                <option value="no">No</option>
-                                                <option value="yes">Yes</option>
+                                            <select name="agency_abroad_id" v-model="overview.agency_abroad_id"
+                                                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                <option value="null">not assigned</option>
+                                                @foreach($affiliates as $item)
+                                                    <option value="{{ $item->information->user_id }}">
+                                                        {{ $item->information->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </p>
                                     </div>

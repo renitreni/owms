@@ -7,7 +7,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -54,7 +53,12 @@ class User extends Authenticatable
 
     public function getEmployersByAgency($id)
     {
-        return $this->newQuery()->where('agency_id', $id)->with(['information', 'employee']);
+        return $this->newQuery()->where('agency_id', $id)->where('role', 3)->with(['information', 'employee']);
+    }
+
+    public function getAffiliatesByAgency($id)
+    {
+        return $this->newQuery()->where('agency_id', $id)->where('role', 5)->with(['information']);
     }
 
     public static function getEmployersIds()

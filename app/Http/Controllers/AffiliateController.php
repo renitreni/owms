@@ -3,43 +3,31 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\Employer;
+use App\Models\User;
 use App\Models\Candidate;
 use App\Models\Information;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
-use App\Models\User;
-use App\Http\Requests\EmployerStoreRequest;
+use App\Http\Requests\AffiliateStoreRequest;
 
-class EmployerController extends Controller
+class AffiliateController extends Controller
 {
     public function index()
     {
-        return view('components.agency.employer');
-    }
-
-    public function table(User $user)
-    {
-        $employers = $user->getEmployersByAgency(auth()->id());
-
-        return DataTables::of($employers)->setTransformer(function ($value) {
-            $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
-            $value->applicant_count = Candidate::query()->where('employer_id', $value->id)->count();
-            return collect($value)->toArray();
-        })->make(true);
+        return view('components.agency.affiliates');
     }
 
     public function create()
     {
-        return view('components.agency.employer-form');
+        return view('components.agency.affiliate-form');
     }
 
-    public function store(EmployerStoreRequest $request)
+    public function store(AffiliateStoreRequest $request)
     {
         $user            = new User();
         $user->email     = $request->email;
         $user->password  = bcrypt('tabangpass');
-        $user->role      = 3;
+        $user->role      = 5;
         $user->agency_id = auth()->id();
         $user->save();
 
@@ -61,14 +49,26 @@ class EmployerController extends Controller
         $information->created_by     = auth()->id();
         $information->save();
 
-        return redirect()->route('employers')->with(['success' => 'New Employer has been added']);
+        return redirect()->route('affiliates')->with(['success' => 'New Employer has been added']);
     }
 
-    public function show($id, User $user)
-    {
-        $user = $user->newQuery()->where('id', $id)->with('information')->get()[0];
 
-        return view('components.agency.employer-edit', compact('user'));
+    public function table(User $user)
+    {
+        $employers = $user->getAffiliatesByAgency(auth()->id());
+
+        return DataTables::of($employers)->setTransformer(function ($value) {
+            $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
+            $value->applicant_count = Candidate::query()->where('employer_id', $value->id)->count();
+            return collect($value)->toArray();
+        })->make(true);
+    }
+
+    public function show($id)
+    {
+        $user = User::query()->where('id', $id)->with(['information'])->get()[0];
+
+        return view('components.agency.affiliate-edit', compact('user'));
     }
 
     public function update(Request $request, $id)
@@ -93,14 +93,14 @@ class EmployerController extends Controller
         $information->created_by     = auth()->id();
         $information->save();
 
-        return redirect()->route('employers')->with(['success' => 'New Employer has been updated!']);
+        return redirect()->route('affiliates')->with(['success' => 'New Employer has been updated!']);
     }
 
     public function destroy($id)
     {
         User::destroy($id);
 
-        return redirect()->route('employers')->with(['success' => 'Employer has been deleted!']);
+        return redirect()->route('affiliates')->with(['success' => 'Employer has been deleted!']);
     }
 
     public function resetPassword($id)
@@ -109,6 +109,6 @@ class EmployerController extends Controller
         $user->password = bcrypt('tabangpass');
         $user->save();
 
-        return redirect()->route('employers')->with('success', 'Password has been reset!');
+        return redirect()->route('affiliates')->with('success', 'Password has been reset!');
     }
 }
