@@ -56,7 +56,7 @@ class ReportController extends Controller
         $report->attachment_3    = $attachment_3;
         $report->save();
 
-        return redirect()->route('candidate.employees')->with('success', "Status report has been submitted.");
+        return redirect()->back()->with('success', "Status report has been submitted.");
     }
 
     public function employerReportView($id)
@@ -101,5 +101,10 @@ class ReportController extends Controller
                         ->where('code', $request->secret_code)
                         ->where('passport', $request->passport)->with(['employer'])
                         ->get();
+    }
+
+    public function formEmployee()
+    {
+        return view('components.report-employee-form');
     }
 }

@@ -14,7 +14,7 @@
                             <form action="{{ route('report.submit') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input class="hidden" name="agency_id" value="">
-                                <div class="shadow overflow-hidden sm:rounded-top-md h-screen">
+                                <div class="shadow overflow-hidden sm:rounded-top-md">
                                     <div class="px-4 py-5 bg-white sm:p-6 mb-2">
                                         <div class="col-span-6">
                                             @if ($errors->any())
@@ -27,8 +27,8 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <div class="grid grid-cols-6 gap-4">
-                                            <div class="col-span-6 bg-blue-50 p-1">
+                                        <div v-if="!overview" class="grid grid-cols-6 gap-4 mt-2">
+                                            <div class="col-span-6 bg-blue-50 p-1 text-center font-bold">
                                                 <span class="text-3xl">Validate Details</span>
                                             </div>
                                             <div class="col-span-2">
@@ -51,25 +51,70 @@
                                                     Validate
                                                 </button>
                                             </div>
-                                            <div class="col-span-6 grid grid-cols-6 gap-4" v-if="overview">
-                                                <div class="col-span-6 p-1 grid grid-cols-6 gap-4" v-if="overview.employer">
-                                                    <div class="col-span-6 bg-blue-50 p-1">
-                                                        <span class="text-3xl">Hi, @{{ overview.last_name }}, @{{ overview.first_name }} @{{ overview.middle_name }} </span>
+                                        </div>
+                                        <div v-if="overview">
+                                            <div class="mt-2">
+                                                <div class="bg-blue-50 p-1 text-center font-bold">
+                                                    <span class="text-3xl">Hi, <span class="underline">@{{ overview.last_name }}, @{{ overview.first_name }} @{{ overview.middle_name }}</span>  </span>
+                                                </div>
+                                                <input type="text" name="candidate_id" v-model="overview.id"
+                                                       class="hidden">
+                                                <input type="text" name="employer_id" v-model="overview.employer_id"
+                                                       class="hidden">
+                                                <input type="text" name="created_by" value="employee"
+                                                       class="hidden">
+                                                <div class="md:flex flex-none">
+                                                    <div class="mt-2 mr-2">
+                                                        <label>Salary Received?</label>
+                                                        <select name="salary_received"
+                                                                class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                            <option value="yes">Yes</option>
+                                                            <option value="yes">No</option>
+                                                        </select>
                                                     </div>
-                                                    <input name="candidate_id" v-model="overview.id" class="hidden">
-                                                    <input name="employer_id" v-model="overview.employer.id" class="hidden">
-                                                    <input name="created_by" value="employee" class="hidden">
-                                                    <div class="col-span-6 p-1">
-                                                        <label class="block text-sm font-medium text-gray-700">Concerns</label>
-                                                        <textarea type="text" name="concerns" autocomplete="concerns" rows="10"
-                                                                  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                        ></textarea>
+                                                    <div class="mt-2">
+                                                        <label>Salary Date</label>
+                                                        <input type="date" name="salary_date"
+                                                               class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
                                                     </div>
                                                 </div>
-                                                <div class="col-span-6 bg-red-50 p-1 grid grid-cols-6 gap-4" v-else>
-                                                    <div class="col-span-6 p-1">
-                                                        <span class="text-3xl">Only employed worker are able to report. </span>
-                                                    </div>
+                                                <div class="mt-2">
+                                                    <label>Comments</label>
+                                                    <textarea name="comments" rows="6"
+                                                              class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                                                    ></textarea>
+                                                </div>
+                                                <div class="flex mt-2">
+                                                    <label
+                                                        class="font-bold block p-2 text-sm font-medium text-gray-700 text-center bg-indigo-200 mt-1 focus:ring-indigo-500 rounded-md">
+                                                        <i class="fas fa-upload"></i>
+                                                        <input type="file" name="attachment_1"
+                                                               v-on:change="attach1Upload"
+                                                               class="hidden"/>
+                                                    </label>
+                                                    <label class="mt-3 ml-4">@{{ attach_1 }}</label>
+                                                </div>
+
+                                                <div class="flex mt-2">
+                                                    <label
+                                                        class="font-bold block p-2 text-sm font-medium text-gray-700 text-center bg-indigo-200 mt-1 focus:ring-indigo-500 rounded-md">
+                                                        <i class="fas fa-upload"></i>
+                                                        <input type="file" name="attachment_2"
+                                                               v-on:change="attach2Upload"
+                                                               class="hidden"/>
+                                                    </label>
+                                                    <label class="mt-3 ml-4">@{{ attach_2 }}</label>
+                                                </div>
+
+                                                <div class="flex mt-2">
+                                                    <label
+                                                        class="font-bold block p-2 text-sm font-medium text-gray-700 text-center bg-indigo-200 mt-1 focus:ring-indigo-500 rounded-md">
+                                                        <i class="fas fa-upload"></i>
+                                                        <input type="file" name="attachment_3"
+                                                               v-on:change="attach3Upload"
+                                                               class="hidden"/>
+                                                    </label>
+                                                    <label class="mt-3 ml-4">@{{ attach_3 }}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +125,7 @@
                                         border-transparent shadow-sm text-sm font-medium rounded-md text-white
                                         bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
                                         focus:ring-offset-2 focus:ring-indigo-500">
-                                        Save
+                                        Submit
                                     </button>
                                 </div>
                             </form>
@@ -97,13 +142,27 @@
                 el: '#app',
                 data() {
                     return {
-                        file_path: '',
+                        attach_1: 'Attachment 1',
+                        attach_2: 'Attachment 2',
+                        attach_3: 'Attachment 3',
                         secret_code: '',
                         passport: '',
                         overview: null,
                     }
                 },
                 methods: {
+                    attach1Upload(e) {
+                        console.log(e.target.files[0].name);
+                        this.attach_1 = e.target.files[0].name
+                    },
+                    attach2Upload(e) {
+                        console.log(e.target.files[0].name);
+                        this.attach_2 = e.target.files[0].name
+                    },
+                    attach3Upload(e) {
+                        console.log(e.target.files[0].name);
+                        this.attach_3 = e.target.files[0].name
+                    },
                     validateDetails() {
                         var $this = this;
                         $.ajax({
@@ -116,7 +175,7 @@
                             },
                             success: function (value) {
                                 if (value.length === 0) {
-                                    swal("Warning!", 'Not Valid Details', "warning");
+                                    swal("Warning!", 'Not Valid, Please try again!', "warning");
                                     $this.overview = null
                                 } else {
                                     swal("Success!", 'Details Are Valid', "success");
