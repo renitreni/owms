@@ -9,6 +9,7 @@ use App\Http\Controllers\AffiliateController;
 use App\Http\Controllers\MyEmployeeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OtherDetailsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,6 +80,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/affiliate/update/{id}', [AffiliateController::class, 'update'])->name('affiliates.update');
     Route::get('/affiliate/rp/{id}', [AffiliateController::class, 'resetPassword'])->name('affiliates.resetpass');
     Route::get('/affiliate/d/{id}', [AffiliateController::class, 'destroy'])->name('affiliates.delete');
+
+
+    Route::get('/details/{id}', [OtherDetailsController::class, 'show'])->name('details')->middleware('can:agency');
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');

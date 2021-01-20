@@ -214,12 +214,15 @@
                             {
                                 data:
                                     function (value) {
-                                        return '<div class="inline-grid grid-cols-4 gap-x-0 w-full text-sm shadow">\n' +
+                                        return '<div class="inline-grid grid-cols-6 gap-x-0 w-full text-sm shadow">\n' +
                                             '<div class="col-span-2">\n' +
-                                            '<button class="btn-employer bg-blue-700 p-1 text-white w-full"><i class="fas fa-building"></i></button>\n' +
+                                            '<button class="btn-employer bg-blue-700 hover:bg-blue-900 p-1 text-white w-full"><i class="fas fa-building"></i></button>\n' +
                                             '</div>\n' +
                                             '<div class="col-span-2">\n' +
-                                            '<button class="btn-deploy bg-pink-800 p-1 text-white w-full"><i class="fas fa-plane-departure"></i></button>\n' +
+                                            '<button class="btn-deploy bg-pink-800 hover:bg-pink-900 p-1 text-white w-full"><i class="fas fa-plane-departure"></i></button>\n' +
+                                            '</div>\n' +
+                                            '<div class="col-span-2">\n' +
+                                            '<button class="btn-details bg-blue-400 hover:bg-blue-500 p-1 text-white w-full"><i class="fas fa-info-circle"></i></button>\n' +
                                             '</div>\n' +
                                             '</div>'
                                     }, name: 'id', title: 'Actions', bSortable: false
@@ -239,6 +242,10 @@
 
                             $('.btn-deploy').click(function () {
                                 $this.deploy_mdl = true;
+                            });
+
+                            $('.btn-details').click(function () {
+                                window.location = '/details/' + $this.overview.id
                             });
                         }
                     });
