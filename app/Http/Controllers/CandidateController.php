@@ -130,6 +130,7 @@ class CandidateController extends Controller
         $doc->candidate_id = $candidate->id;
         $doc->path         = $path;
         $doc->type         = 'CV';
+        $doc->created_by   = auth()->id();
         $doc->save();
 
         return redirect()
@@ -141,7 +142,7 @@ class CandidateController extends Controller
 
     public function show($id)
     {
-        if (! Candidate::belongsToAgency($id, auth()->id()) && ! \Gate::any(['admin', 'gov'])) {
+        if (! Candidate::belongsToAgency($id, auth()->id())) {
             abort(403);
         }
 
@@ -149,6 +150,14 @@ class CandidateController extends Controller
         $doc     = Document::query()->where('candidate_id', $id)->get();
 
         return view('components.agency.applicant-edit', compact('results', 'doc'));
+    }
+
+    public function overview($id)
+    {
+        $results = Candidate::find($id);
+        $doc     = Document::query()->where('candidate_id', $id)->get();
+
+        return view('components.candidate-overview', compact('results', 'doc'));
     }
 
     public function update(Request $request)
@@ -180,14 +189,19 @@ class CandidateController extends Controller
         $candidate->save();
 
         if ($request->has('cv')) {
-            Document::destroyByCandidate($request->id);
-
+            $doc = Document::query()->where('type', 'CV')->where('candidate_id', $candidate->id);
+            if($doc->count() > 0) {
+                \Storage::delete($doc->get()[0]->path);
+            }
             $path = $request->file('cv')->store('cv');
+
+            Document::query()->where('type', 'CV')->where('candidate_id', $candidate->id)->delete();
 
             $doc               = new Document();
             $doc->candidate_id = $candidate->id;
             $doc->path         = $path;
             $doc->type         = 'CV';
+            $doc->created_by   = auth()->id();
             $doc->save();
         }
 
@@ -213,8 +227,9 @@ class CandidateController extends Controller
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
-            $value->date_hired         = !$value->date_hired ?: Carbon::parse($value->date_hired)->format('M j, Y');
-            $value->date_deployed      = !$value->date_deployed ?: Carbon::parse($value->date_deployed)->format('M j, Y');
+            $value->date_hired         = ! $value->date_hired ?: Carbon::parse($value->date_hired)->format('M j, Y');
+            $value->date_deployed      = ! $value->date_deployed ?: Carbon::parse($value->date_deployed)
+                                                                          ->format('M j, Y');
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
 
             return collect($value)->toArray();
