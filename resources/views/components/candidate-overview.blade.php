@@ -13,27 +13,41 @@
                         <input class="hidden" name="agency_id" value="{{ auth()->id() }}">
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="flex flex-col px-4 py-5 bg-white sm:p-6 mb-1">
-                                <div class="flex flex-col md:flex-row">
-                                    <div class="flex flex-grow flex-col pr-2 border-l-2">
-                                        <label class="font-bold">Applicant Name</label>
-                                        <label>{{ $candidate->last_name }}
-                                            , {{ $candidate->first_name }} {{ $candidate->middle_name }}</label>
+                                <div class="flex flex-col md:flex-row border border-gray-100 rounded shadow-md">
+                                    <div class="flex flex-grow flex-col p-2 border-l">
+                                        <label class="text-gray-500">
+                                            <i class="fas fa-circle text-xs text-green-300"></i> Applicant Name</label>
+                                        <label class="text-xl font-bold">
+                                            {{ $candidate->last_name }}, {{ $candidate->first_name }} {{ $candidate->middle_name }}
+                                        </label>
                                     </div>
-                                    <div class="flex flex-grow flex-col pr-2 border-l-2">
-                                        <label class="font-bold">Position Selected</label>
-                                        <label>{{ $candidate->position_selected }}</label>
+                                    <div class="flex flex-grow flex-col p-2 border-l">
+                                        <label class="text-gray-500">
+                                            <i class="fas fa-circle text-xs text-green-300"></i> Position Selected</label>
+                                        <label class="text-xl font-bold">
+                                            {{ $candidate->position_selected }}
+                                        </label>
                                     </div>
-                                    <div class="flex flex-grow flex-col pr-2 border-l-2">
-                                        <label class="font-bold">Agency</label>
-                                        <label>{{ $candidate->agency->name }}</label>
+                                    <div class="flex flex-grow flex-col p-2 border-l">
+                                        <label class="text-gray-500">
+                                            <i class="fas fa-circle text-xs text-green-300"></i> Agency</label>
+                                        <label class="text-xl font-bold">
+                                            {{ $candidate->agency->name }}
+                                        </label>
                                     </div>
-                                    <div class="flex flex-grow flex-col pr-2 border-l-2">
-                                        <label class="font-bold">Agency Abroad</label>
-                                        <label>{{ $candidate->affiliates->name }}</label>
+                                    <div class="flex flex-grow flex-col p-2 border-l">
+                                        <label class="text-gray-500">
+                                            <i class="fas fa-circle text-xs text-green-300"></i> Agency Abroad</label>
+                                        <label class="text-xl font-bold">
+                                            {{ $candidate->affiliates->name }}
+                                        </label>
                                     </div>
-                                    <div class="flex flex-grow flex-col pr-2 border-l-2">
-                                        <label class="font-bold">Employer</label>
-                                        <label>{{ $candidate->employer->name }}</label>
+                                    <div class="flex flex-grow flex-col p-2 border-l">
+                                        <label class="text-gray-500">
+                                            <i class="fas fa-circle text-xs text-green-300"></i> Employer</label>
+                                        <label class="text-xl font-bold">
+                                            {{ $candidate->employer->name }}
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="flex flex-col mt-5 overflow-scroll">
@@ -58,9 +72,14 @@
                                         </li>
                                     </ul>
                                     <div class="flex flex-row border-l border-r border-b p-3">
-                                        <div class="flex flex-grow flex-col pr-2 border-l-2">
-                                            <label class="font-bold">Preferred Position 1</label>
-                                            <label>{{ $candidate->position_1 }}</label>
+                                        <div class="flex flex-grow flex-col p-2 border-l">
+                                            <label class="text-gray-500 text-xs">
+                                                <i class="fas fa-info-circle text-blue-300"></i>
+                                                Preferred Position 1
+                                            </label>
+                                            <label class="text-l font-bold">
+                                                {{ $candidate->position_1 }}
+                                            </label>
                                         </div>
                                         <div class="flex flex-grow flex-col pr-2 border-l-2">
                                             <label class="font-bold">Preferred Position 2</label>
