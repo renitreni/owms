@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class Flight extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function doc()
+    public function agencyAbroad()
     {
-        return $this->hasOne(OptionList::class, 'id', 'type');
+        return $this->hasOne(Information::class, 'user_id', 'abroad_agency');
     }
 }

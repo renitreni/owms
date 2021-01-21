@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Flight;
 use App\Models\Document;
 use App\Models\OptionList;
 use Illuminate\Http\Request;
@@ -12,11 +14,12 @@ use App\Http\Requests\DocumentStoreRequest;
 
 class OtherDetailsController extends Controller
 {
-    public function show($id)
+    public function show($id, User $user)
     {
-        $options = OptionList::query()->where('type', 'docs')->get();
+        $affiliates = $user->getAffiliatesByAgency(auth()->id())->get();
+        $options    = OptionList::query()->where('type', 'docs')->get();
 
-        return view('components.agency.employee-details', compact('options', 'id'));
+        return view('components.agency.employee-details', compact('options', 'id', 'affiliates'));
     }
 
     public function storeDocument(DocumentStoreRequest $request)
@@ -34,7 +37,7 @@ class OtherDetailsController extends Controller
 
     public function tableDocuments()
     {
-        $results = Document::query()->where('created_by', auth()->id());
+        $results = Document::query()->where('created_by', auth()->id())->with('doc');
 
         return DataTables::of($results)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
@@ -49,5 +52,31 @@ class OtherDetailsController extends Controller
         Document::destroy($request->id);
 
         return ['success' => true];
+    }
+
+    public function storeFlight(FlightStoreRequest $request)
+    {
+        $flight                  = new Flight();
+        $flight->candidate_id    = $request->candidate_id;
+        $flight->details         = $request->details;
+        $flight->abroad_agency   = $request->abroad_agency;
+        $flight->contact_person  = $request->contact_person;
+        $flight->contact_number  = $request->contact_number;
+        $flight->contact_address = $request->contact_address;
+        $flight->created_by      = auth()->id();
+        $flight->save();
+
+        return redirect()->back()->with('success', 'New Flight has been inserted');
+    }
+
+    public function tableFlights()
+    {
+        $results = Flight::query()->where('created_by', auth()->id())->with(['agencyAbroad']);
+
+        return DataTables::of($results)->setTransformer(function ($value) {
+            $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
+
+            return collect($value)->toArray();
+        })->make(true);
     }
 }
