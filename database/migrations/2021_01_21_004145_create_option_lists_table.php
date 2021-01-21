@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocumentsTable extends Migration
+class CreateOptionListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('option_lists', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->nullable();
-            $table->string('candidate_id')->nullable();
-            $table->string('path');
             $table->string('type');
-            $table->softDeletes();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('option_lists');
     }
 }

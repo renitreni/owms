@@ -8,6 +8,7 @@ use App\Models\Candidate;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use App\Models\Information;
+use App\Models\OptionList;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,8 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(200)->create();
-
         User::query()->insert([
             'email'             => 'admin@tabang.com',
             'role'              => 1,
@@ -49,6 +48,24 @@ class DatabaseSeeder extends Seeder
             'remember_token'    => Str::random(10),
         ]);
 
+        User::factory(200)->create();
+
+        OptionList::query()->insert([
+            ['type' => 'docs', 'name' => 'Passport'],
+            ['type' => 'docs', 'name' => 'Biometrics'],
+            ['type' => 'docs', 'name' => 'NBI Clearance'],
+            ['type' => 'docs', 'name' => 'TESDA NC II'],
+            ['type' => 'docs', 'name' => 'Medical'],
+            ['type' => 'docs', 'name' => 'Enjaz'],
+            ['type' => 'docs', 'name' => 'POEA'],
+            ['type' => 'docs', 'name' => 'Diploma'],
+            ['type' => 'docs', 'name' => 'Ticket for Travel'],
+            ['type' => 'docs', 'name' => 'OEC'],
+            ['type' => 'docs', 'name' => 'OWWA'],
+            ['type' => 'docs', 'name' => 'PDOS'],
+            ['type' => 'docs', 'name' => 'Visa Stamping'],
+        ]);
+
         $hold = User::noInfoIds();
         foreach ($hold as $id) {
             Information::factory()->state(['user_id' => $id])->create();
@@ -59,8 +76,8 @@ class DatabaseSeeder extends Seeder
 
         $employers = User::getEmployersIds();
         foreach ($employers as $key => $id) {
-            $user = User::find($id);
-            $user->agency_id = 202;
+            $user            = User::find($id);
+            $user->agency_id = 2;
             $user->save();
         }
     }

@@ -81,8 +81,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/affiliate/rp/{id}', [AffiliateController::class, 'resetPassword'])->name('affiliates.resetpass');
     Route::get('/affiliate/d/{id}', [AffiliateController::class, 'destroy'])->name('affiliates.delete');
 
-
     Route::get('/details/{id}', [OtherDetailsController::class, 'show'])->name('details')->middleware('can:agency');
+    Route::post('/details/document/store', [OtherDetailsController::class, 'storeDocument'])->name('details.document.store');
+    Route::post('/details/document/table', [OtherDetailsController::class, 'tableDocuments'])->name('details.document.table');
+    Route::post('/details/document/delete', [OtherDetailsController::class, 'deleteDocuments'])->name('details.document.delete');
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');
