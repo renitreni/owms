@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/cv
+/public/docs
 /public/report_docs
 /public/storage
 /storage/*.key
