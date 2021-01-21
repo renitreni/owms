@@ -35,9 +35,12 @@ class OtherDetailsController extends Controller
         return redirect()->back()->with('success', 'New Document has been inserted');
     }
 
-    public function tableDocuments()
+    public function tableDocuments(Request $request)
     {
-        $results = Document::query()->where('created_by', auth()->id())->with('doc');
+        $results = Document::query()
+                           ->where('candidate_id', $request->candidate_id)
+                           ->where('created_by', auth()->id())
+                           ->with('doc');
 
         return DataTables::of($results)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
@@ -69,9 +72,12 @@ class OtherDetailsController extends Controller
         return redirect()->back()->with('success', 'New Flight has been inserted');
     }
 
-    public function tableFlights()
+    public function tableFlights(Request $request)
     {
-        $results = Flight::query()->where('created_by', auth()->id())->with(['agencyAbroad', 'author']);
+        $results = Flight::query()
+                         ->where('candidate_id', $request->candidate_id)
+                         ->where('created_by', auth()->id())
+                         ->with(['agencyAbroad', 'author']);
 
         return DataTables::of($results)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');

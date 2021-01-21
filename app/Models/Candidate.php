@@ -11,7 +11,7 @@ class Candidate extends Model
 
     public function agency()
     {
-        return $this->hasOne(User::class, 'id', 'agency_id');
+        return $this->hasOne(Information::class, 'user_id', 'agency_id');
     }
 
     public function employer()
@@ -19,14 +19,9 @@ class Candidate extends Model
         return $this->hasOne(Information::class, 'user_id', 'employer_id');
     }
 
-    public function agent()
-    {
-        return $this->hasOne(Agent::class, 'id', 'agent_id');
-    }
-
     public function affiliates()
     {
-        return $this->hasOne(User::class, 'id', 'agency_abroad_id');
+        return $this->hasOne(Information::class, 'user_id', 'agency_abroad_id');
     }
 
     public static function belongsToAgency($id, $agency_id)

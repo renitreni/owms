@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Faker\Factory;
 use App\Models\User;
-use App\Models\Agent;
 use App\Models\Report;
 use App\Models\Document;
 use App\Models\Employer;
@@ -31,7 +30,7 @@ class CandidateController extends Controller
     public function tableCandidates(Candidate $candidate)
     {
         $candidate = $candidate->newQuery()
-                               ->with(['agency', 'employer', 'agent']);
+                               ->with(['agency', 'employer']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
@@ -44,12 +43,11 @@ class CandidateController extends Controller
         })->make(true);
     }
 
-    public function applicants(User $user, Agent $agent)
+    public function applicants(User $user)
     {
         $employers = $user->getEmployersByAgency(auth()->id())->get();
-        $agents    = $agent->getAgentsByAgency(auth()->id());
 
-        return view('components.agency.applicants', compact('employers', 'agents'));
+        return view('components.agency.applicants', compact('employers'));
     }
 
     public function tableApplicants(Candidate $candidate)
@@ -57,7 +55,7 @@ class CandidateController extends Controller
         $candidate = $candidate->newQuery()
                                ->where('agency_id', auth()->id())
                                ->where('status', 'applicant')
-                               ->with(['agency', 'employer', 'agent']);
+                               ->with(['agency', 'employer']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
@@ -152,14 +150,6 @@ class CandidateController extends Controller
         return view('components.agency.applicant-edit', compact('results', 'doc'));
     }
 
-    public function overview($id)
-    {
-        $results = Candidate::find($id);
-        $doc     = Document::query()->where('candidate_id', $id)->get();
-
-        return view('components.candidate-overview', compact('results', 'doc'));
-    }
-
     public function update(Request $request)
     {
         $candidate               = Candidate::find($request->id);
@@ -190,7 +180,7 @@ class CandidateController extends Controller
 
         if ($request->has('cv')) {
             $doc = Document::query()->where('type', 'CV')->where('candidate_id', $candidate->id);
-            if($doc->count() > 0) {
+            if ($doc->count() > 0) {
                 \Storage::delete($doc->get()[0]->path);
             }
             $path = $request->file('cv')->store('cv');
@@ -260,5 +250,13 @@ class CandidateController extends Controller
 
         return redirect()->back()
                          ->with('success', "Employer has been assigned.");
+    }
+
+    public function overview($id)
+    {
+        $candidate = Candidate::query()->where('id', $id)->with(['employer', 'agency', 'affiliates'])->get()[0];
+        $doc       = Document::query()->where('candidate_id', $id)->get();
+
+        return view('components.candidate-overview', compact('candidate', 'doc'));
     }
 }

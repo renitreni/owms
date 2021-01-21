@@ -124,7 +124,8 @@
                         order: [[0, "desc"]],
                         ajax: {
                             url: '{{ route('details.document.table') }}',
-                            type: 'POST'
+                            type: 'POST',
+                            data: {candidate_id: '{{$id}}'}
                         },
                         columns: [
                             {data: 'id', name: 'id', title: 'ID'},
@@ -180,7 +181,8 @@
                         order: [[0, "desc"]],
                         ajax: {
                             url: '{{ route('details.flight.table') }}',
-                            type: 'POST'
+                            type: 'POST',
+                            data: {candidate_id: '{{$id}}'}
                         },
                         columns: [
                             {data: 'id', name: 'id', title: 'ID'},

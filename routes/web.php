@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/candidates/{id}/show', [CandidateController::class, 'show'])->name('candidate.edit');
     Route::get('/applicant', [CandidateController::class, 'applicants'])->name('candidate.applicant');
     Route::get('/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
+    Route::get('/candidates/overview/{id}', [CandidateController::class, 'overview'])->name('candidate.overview');
 
     Route::get('/employee', [MyEmployeeController::class, 'index'])->name('candidate.employees')->middleware('can:employer');
     Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
