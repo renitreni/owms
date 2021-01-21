@@ -71,7 +71,7 @@ class OtherDetailsController extends Controller
 
     public function tableFlights()
     {
-        $results = Flight::query()->where('created_by', auth()->id())->with(['agencyAbroad']);
+        $results = Flight::query()->where('created_by', auth()->id())->with(['agencyAbroad', 'author']);
 
         return DataTables::of($results)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');

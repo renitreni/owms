@@ -30,6 +30,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <x-slot name="scripts">
@@ -43,6 +44,7 @@
                         tab: 1,
                         dt_docs: null,
                         dt_flights: null,
+                        flight_overview: false
                     }
                 },
                 watch: {
@@ -58,11 +60,38 @@
                         console.log(e.target.files[0].name);
                         this.attach = e.target.files[0].name
                     },
+                    deleteFlight() {
+                        var $this = this;
+                        swal({
+                            title: "Are you sure?",
+                            text: "You will not be able to recover this data file!",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    $.ajax({
+                                        url: '{{ route('details.document.delete') }}',
+                                        data: $this.overview,
+                                        method: 'POST',
+                                        success: function (value) {
+                                            swal("Success! Your file has been deleted!", {
+                                                icon: "success",
+                                            });
+                                            $this.dt_docs.draw();
+                                        }
+                                    });
+                                } else {
+                                    swal("Your file is safe!");
+                                }
+                            });
+                    },
                     deleteDoc() {
                         var $this = this;
                         swal({
                             title: "Are you sure?",
-                            text: "Once deleted, you will not be able to recover this imaginary file!",
+                            text: "Once deleted, you will not be able to recover this data file!",
                             icon: "warning",
                             buttons: true,
                             dangerMode: true,
@@ -160,10 +189,16 @@
                             {
                                 data: function (value) {
                                     return '<div class="inline-grid grid-cols-2 gap-x-0 w-full text-sm shadow">\n' +
-                                        '<div class="col-span-2 w-full">\n' +
+                                        '<div class="col-span-1 w-full">\n' +
                                         '<button ' +
                                         'class="w-full btn-delete-flight bg-red-500 p-1 text-white text-center block focus:outline-none hover:bg-red-600">' +
                                         '<i class="fas fa-trash"></i>' +
+                                        '</button>\n' +
+                                        '</div>\n' +
+                                        '<div class="col-span-1 w-full">\n' +
+                                        '<button ' +
+                                        'class="w-full btn-view-flight bg-indigo-400 p-1 text-white text-center block focus:outline-none hover:bg-indigo-500">' +
+                                        '<i class="fas fa-eye"></i>' +
                                         '</button>\n' +
                                         '</div>\n' +
                                         '</div>'
@@ -177,8 +212,12 @@
                                 $this.overview = hold;
                             });
 
-                            $('.btn-delete').click(function () {
-                                $this.deleteDoc();
+                            $('.btn-delete-flight').click(function () {
+                                $this.deleteFlight();
+                            });
+
+                            $('.btn-view-flight').click(function () {
+                                $this.flight_overview = true
                             });
                         }
                     });

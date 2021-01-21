@@ -14,4 +14,9 @@ class Flight extends Model
     {
         return $this->hasOne(Information::class, 'user_id', 'abroad_agency');
     }
+
+    public function author()
+    {
+        return $this->hasOne(Information::class, 'user_id', 'created_by');
+    }
 }
