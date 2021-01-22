@@ -72,7 +72,6 @@ class DatabaseSeeder extends Seeder
         }
 
         Candidate::factory(800)->create();
-        Agent::factory(800)->create();
 
         $employers = User::getEmployersIds();
         foreach ($employers as $key => $id) {
