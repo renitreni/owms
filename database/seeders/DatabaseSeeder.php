@@ -48,8 +48,6 @@ class DatabaseSeeder extends Seeder
             'remember_token'    => Str::random(10),
         ]);
 
-        User::factory(200)->create();
-
         OptionList::query()->insert([
             ['type' => 'docs', 'name' => 'Passport'],
             ['type' => 'docs', 'name' => 'Biometrics'],
@@ -66,6 +64,8 @@ class DatabaseSeeder extends Seeder
             ['type' => 'docs', 'name' => 'Visa Stamping'],
         ]);
 
+        User::factory(200)->create();
+
         $hold = User::noInfoIds();
         foreach ($hold as $id) {
             Information::factory()->state(['user_id' => $id])->create();
@@ -76,6 +76,13 @@ class DatabaseSeeder extends Seeder
 
         $employers = User::getEmployersIds();
         foreach ($employers as $key => $id) {
+            $user            = User::find($id);
+            $user->agency_id = 2;
+            $user->save();
+        }
+
+        $affiliate = User::getAffiliatetIds();
+        foreach ($affiliate as $key => $id) {
             $user            = User::find($id);
             $user->agency_id = 2;
             $user->save();
