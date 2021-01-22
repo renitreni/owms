@@ -66,7 +66,12 @@ class User extends Authenticatable
         return (new static())->newQuery()->where('role', 3)->pluck('id');
     }
 
-    public static function getAffiliatetIds()
+    public static function getAgencyIds()
+    {
+        return (new static())->newQuery()->where('role', 2)->pluck('id');
+    }
+
+    public static function getAffiliateIds()
     {
         return (new static())->newQuery()->where('role', 5)->pluck('id');
     }

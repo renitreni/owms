@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
             $user->save();
         }
 
-        $affiliate = User::getAffiliatetIds();
+        $affiliate = User::getAffiliateIds();
         foreach ($affiliate as $key => $id) {
             $user            = User::find($id);
             $user->agency_id = 2;

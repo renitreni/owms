@@ -23,7 +23,7 @@ class CandidateFactory extends Factory
     public function definition()
     {
         $faker    = \Faker\Factory::create();
-        $agentIds = User::getAgentIds()->random();
+        $agentIds = User::getAgencyIds()->random();
 
         return [
             'photo_url'     => 'https://i.pravatar.cc/300',
