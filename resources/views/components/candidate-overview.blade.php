@@ -18,12 +18,14 @@
                                         <label class="text-gray-500">
                                             <i class="fas fa-circle text-xs text-green-300"></i> Applicant Name</label>
                                         <label class="text-xl font-bold">
-                                            {{ $candidate->last_name }}, {{ $candidate->first_name }} {{ $candidate->middle_name }}
+                                            {{ $candidate->last_name }}
+                                            , {{ $candidate->first_name }} {{ $candidate->middle_name }}
                                         </label>
                                     </div>
                                     <div class="flex flex-grow flex-col p-2 border-l">
                                         <label class="text-gray-500">
-                                            <i class="fas fa-circle text-xs text-green-300"></i> Position Selected</label>
+                                            <i class="fas fa-circle text-xs text-green-300"></i> Position
+                                            Selected</label>
                                         <label class="text-xl font-bold">
                                             {{ $candidate->position_selected }}
                                         </label>
@@ -71,25 +73,160 @@
                                             </span>
                                         </li>
                                     </ul>
-                                    <div class="flex flex-row border-l border-r border-b p-3">
-                                        <div class="flex flex-grow flex-col p-2 border-l">
-                                            <label class="text-gray-500 text-xs">
-                                                <i class="fas fa-info-circle text-blue-300"></i>
-                                                Preferred Position 1
-                                            </label>
-                                            <label class="text-l font-bold">
-                                                {{ $candidate->position_1 }}
-                                            </label>
+                                    <div class="border-l border-r border-b p-3" v-show="tab==1">
+                                        <div class="grid grid-flow-row grid-cols-1 grid-rows-3 gap-1 md:grid-cols-4 md:grid-rows-1 md:gap-4">
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Primary Contact
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->contact_1 }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Secondary Contact
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->contact_2 }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    E-mail
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->email }}
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="flex flex-grow flex-col pr-2 border-l-2">
-                                            <label class="font-bold">Preferred Position 2</label>
-                                            <label>{{ $candidate->position_2 }}</label>
+                                        <div class="grid grid-flow-row grid-cols-1 grid-rows-2 gap-1 md:grid-cols-4 md:grid-rows-1 md:gap-4 border-t-2">
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Passport No.
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->passport }}
+                                                </label>
+                                            </div>
+                                            <div class="col-span-3 p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Place Issue.
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->place_issue }}
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="flex flex-grow flex-col pr-2 border-l-2">
-                                            <label class="font-bold">Preferred Position 3</label>
-                                            <label>{{ $candidate->position_3 }}</label>
+                                        <div class="grid grid-flow-row grid-cols-1 grid-rows-2 md:grid-cols-4 md:grid-rows-1 gap-4 border-t-2">
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Gender
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->gender }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Date Of Birth
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ \Carbon\Carbon::parse($candidate->birth_date)->format('F j, Y') }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col col-span-1 md:col-span-2 hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Place Of Birth
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->birth_place }}
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="grid grid-flow-row grid-cols-4 grid-rows-1 gap-4 border-t-2">                                            <div class="p-2 flex flex-col">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Civil Status
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->civil_status }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Height
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->height }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Weight
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->weight }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Blood Type
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->blood_type }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-flow-row grid-cols-4 grid-rows-1 gap-4 border-t-2">
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Language Spoken
+                                                </label>
+                                                <label class="text-l font-bold">
+                                                    {{ $candidate->language }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Religion
+                                                </label>
+                                                <label class="text-l font-bold">
+                                                    {{ $candidate->religion }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Father's Name
+                                                </label>
+                                                <label class="text-l font-bold">
+                                                    {{ $candidate->father_name }}
+                                                </label>
+                                            </div>
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    {{ __("Mother's Name") }}
+                                                </label>
+                                                <label class="text-l font-bold">
+                                                    {{ $candidate->mother_name }}
+                                                </label>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">

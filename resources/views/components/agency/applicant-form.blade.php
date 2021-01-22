@@ -72,12 +72,17 @@
                                                 <input type="text" name="last_name"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-3">
+                                            <div class="col-span-6 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">Passport</label>
                                                 <input type="text" name="passport"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-3">
+                                            <div class="col-span-6 sm:col-span-2">
+                                                <label class="block text-sm font-medium text-gray-700">Place Issued</label>
+                                                <input type="text" name="place_issue"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="col-span-6 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">IQAMA</label>
                                                 <input type="text" name="iqama"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
@@ -89,12 +94,20 @@
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="col-span-6 sm:col-span-1">
+                                                <label class="block text-sm font-medium text-gray-700">Birth
+                                                    Place</label>
+                                                <input type="text" name="birth_place"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="col-span-6 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Gender</label>
                                                 <select name="gender"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                                     <option value="male" selected>Male</option>
                                                     <option value="female">Female</option>
                                                 </select>
+                                            </div>
+                                            <div class="col-span-3">
                                             </div>
                                             <div class="col-span-6 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Civil
@@ -113,7 +126,7 @@
                                                 <input type="text" name="spouse"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-1">
+                                            <div class="col-span-6 sm:col-span-3">
                                             </div>
                                             <div class="col-span-3 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Blood
@@ -214,8 +227,8 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="col-span-6 sm:col-span-6 content-center">
-                                                <div class="flex px-56">
+                                            <div class="col-span-6 content-center">
+                                                <div class="flex px-0 lg:px-56">
                                                     <div class="pr-3">
                                                         <input type="checkbox" name="agreed" value="yes">
                                                     </div>

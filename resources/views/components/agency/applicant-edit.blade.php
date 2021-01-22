@@ -75,12 +75,17 @@
                                                 <input type="text" name="last_name" value="{{ $results->last_name }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-3">
+                                            <div class="col-span-3 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">Passport</label>
                                                 <input type="text" name="passport" value="{{ $results->passport }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-3">
+                                            <div class="col-span-3 sm:col-span-2">
+                                                <label class="block text-sm font-medium text-gray-700">Place Issued</label>
+                                                <input type="text" name="place_issue" value="{{ $results->place_issue }}"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="col-span-6 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">IQAMA</label>
                                                 <input type="text" name="iqama" value="{{ $results->iqama }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
@@ -91,6 +96,13 @@
                                                 <input type="date" name="birth_date"
                                                        value="{{ \Carbon\Carbon::parse($results->birth_date)->format('Y-m-d') }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="col-span-6 sm:col-span-2">
+                                                <label class="block text-sm font-medium text-gray-700">Birth Place</label>
+                                                <input type="text" name="birth_place" value="{{ $results->birth_place }}"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="col-span-6 sm:col-span-3">
                                             </div>
                                             <div class="col-span-6 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Gender</label>
@@ -132,7 +144,7 @@
                                                 <input type="text" name="spouse" value="{{ $results->spouse }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-1">
+                                            <div class="col-span-6 md:col-span-2">
                                             </div>
                                             <div class="col-span-3 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Blood

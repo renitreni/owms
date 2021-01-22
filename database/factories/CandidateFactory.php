@@ -39,6 +39,7 @@ class CandidateFactory extends Factory
             'contact_2'     => $faker->phoneNumber,
             'address'       => $faker->address,
             'birth_date'    => $faker->date(),
+            'birth_place'   => $faker->address,
             'civil_status'  => $faker->randomElement(['single', 'married', 'widow']),
             'gender'        => $faker->randomElement(['male', 'female']),
             'position_1'    => $faker->jobTitle,
@@ -50,13 +51,14 @@ class CandidateFactory extends Factory
             'religion'      => 'Jewish',
             'language'      => $faker->randomElement(['english', 'tagalog']),
             'passport'      => $faker->bankAccountNumber,
+            'place_issue'   => $faker->address,
             'education'     => 'college',
             'spouse'        => $faker->name,
             'mother_name'   => $faker->name('female'),
             'father_name'   => $faker->name('male'),
             'status'        => 'applicant',
             'deployed'      => 'no',
-            'agreed'        => 'yes'
+            'agreed'        => 'yes',
         ];
     }
 }

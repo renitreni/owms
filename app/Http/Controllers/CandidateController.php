@@ -120,6 +120,8 @@ class CandidateController extends Controller
         $candidate->email        = $request->email;
         $candidate->address      = $request->address;
         $candidate->agreed       = $request->agreed;
+        $candidate->place_issue  = $request->place_issue;
+        $candidate->birth_place  = $request->birth_place;
         $candidate->save();
 
         $path = $request->file('cv')->store('cv');
@@ -176,6 +178,8 @@ class CandidateController extends Controller
         $candidate->contact_2    = $request->contact_2;
         $candidate->email        = $request->email;
         $candidate->address      = $request->address;
+        $candidate->place_issue  = $request->place_issue;
+        $candidate->birth_place  = $request->birth_place;
         $candidate->save();
 
         if ($request->has('cv')) {
