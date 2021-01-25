@@ -54,7 +54,6 @@ class CandidateController extends Controller
     {
         $candidate = $candidate->newQuery()
                                ->where('agency_id', auth()->id())
-                               ->where('status', 'applicant')
                                ->with(['agency', 'employer']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
