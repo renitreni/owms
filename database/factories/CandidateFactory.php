@@ -59,6 +59,7 @@ class CandidateFactory extends Factory
             'status'        => 'applicant',
             'deployed'      => 'no',
             'agreed'        => 'yes',
+            'travel_status' => $faker->randomElement(['ex-abroad', '1st time abroad']),
         ];
     }
 }

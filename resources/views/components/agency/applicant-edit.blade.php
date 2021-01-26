@@ -86,9 +86,21 @@
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="col-span-6 sm:col-span-2">
+                                            </div>
+                                            <div class="col-span-3 sm:col-span-2">
+                                                <label class="block text-sm font-medium text-gray-700">Travel Status</label>
+                                                <select name="travel_status"
+                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    <option value="1st time abroad" selected>1st Time Abroad</option>
+                                                    <option value="ex-abroad">Ex-Abroad</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-span-3 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">IQAMA</label>
                                                 <input type="text" name="iqama" value="{{ $results->iqama }}"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="col-span-6 sm:col-span-2">
                                             </div>
                                             <div class="col-span-6 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Birth

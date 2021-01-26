@@ -57,6 +57,7 @@ class CreateCandidatesTable extends Migration
             $table->string('mother_name', 200)->nullable();
             $table->string('father_name', 200)->nullable();
             $table->string('agreed', 200)->nullable();
+            $table->string('travel_status', 200)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

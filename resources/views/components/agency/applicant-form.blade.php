@@ -72,34 +72,46 @@
                                                 <input type="text" name="last_name"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-2">
+                                            <div class="col-span-3 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">Passport</label>
                                                 <input type="text" name="passport"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-2">
+                                            <div class="col-span-3 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">Place Issued</label>
                                                 <input type="text" name="place_issue"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="col-span-6 sm:col-span-2">
+                                            </div>
+                                            <div class="col-span-3 sm:col-span-2">
+                                                <label class="block text-sm font-medium text-gray-700">Travel Status</label>
+                                                <select name="travel_status"
+                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                    <option value="1st time abroad" selected>1st Time Abroad</option>
+                                                    <option value="ex-abroad">Ex-Abroad</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-span-3 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">IQAMA</label>
                                                 <input type="text" name="iqama"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-1">
+                                            <div class="col-span-6 sm:col-span-2">
+                                            </div>
+                                            <div class="col-span-3 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Birth
                                                     Date</label>
                                                 <input type="date" name="birth_date"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-1">
+                                            <div class="col-span-3 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Birth
                                                     Place</label>
                                                 <input type="text" name="birth_place"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-1">
+                                            <div class="col-span-3 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Gender</label>
                                                 <select name="gender"
                                                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
@@ -107,9 +119,9 @@
                                                     <option value="female">Female</option>
                                                 </select>
                                             </div>
-                                            <div class="col-span-3">
+                                            <div class="col-span-6">
                                             </div>
-                                            <div class="col-span-6 sm:col-span-1">
+                                            <div class="col-span-3 sm:col-span-1">
                                                 <label class="block text-sm font-medium text-gray-700">Civil
                                                     Status</label>
                                                 <select name="civil_status"
@@ -120,7 +132,7 @@
                                                     <option value="separated">Separated</option>
                                                 </select>
                                             </div>
-                                            <div class="col-span-6 sm:col-span-2">
+                                            <div class="col-span-3 sm:col-span-2">
                                                 <label class="block text-sm font-medium text-gray-700">Spouse Name(If
                                                     Married)</label>
                                                 <input type="text" name="spouse"
