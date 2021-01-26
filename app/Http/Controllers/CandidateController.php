@@ -11,8 +11,10 @@ use App\Models\Employer;
 use App\Models\Candidate;
 use App\Models\Information;
 use Illuminate\Http\Request;
+use App\Mail\SecretCodeMail;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\EmployRequest;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\CandidateStoreRequest;
 
@@ -66,6 +68,33 @@ class CandidateController extends Controller
         })->make(true);
     }
 
+    public function new($id, Information $information)
+    {
+        $hold        = $information->newQuery()->select(['name', 'user_id'])->where('user_id', $id)->get()[0];
+        $agency_name = $hold['name'];
+        $agency_id   = $hold['user_id'];
+
+        return view('components.agency.applicant-create', compact('agency_name', 'agency_id'));
+    }
+
+    public function insert(CandidateStoreRequest $request, Candidate $candidate)
+    {
+        $model = $candidate->store($request);
+
+        $path = $request->file('cv')->store('cv');
+
+        $doc               = new Document();
+        $doc->candidate_id = $model->id;
+        $doc->path         = $path;
+        $doc->type         = 'CV';
+        $doc->created_by   = auth()->id();
+        $doc->save();
+
+        return redirect()
+            ->route('candidate.applicant')
+            ->with('success', "Your Application has been submitted!");
+    }
+
     public function create($id, Information $information)
     {
         $validator = Validator::make(['id' => $id], [
@@ -89,51 +118,14 @@ class CandidateController extends Controller
         return view('components.agency.applicant-form', compact('agency_name', 'agency_id'));
     }
 
-    public function store(CandidateStoreRequest $request)
+    public function store(CandidateStoreRequest $request, Candidate $candidate)
     {
-        $faker = Factory::create();
-        $code  = $faker->hexColor;
-
-        $candidate                = new Candidate();
-        $candidate->code          = $code;
-        $candidate->agency_id     = $request->agency_id;
-        $candidate->passport      = $request->passport;
-        $candidate->position_1    = $request->position_1;
-        $candidate->position_2    = $request->position_2;
-        $candidate->position_3    = $request->position_3;
-        $candidate->first_name    = $request->first_name;
-        $candidate->middle_name   = $request->middle_name;
-        $candidate->last_name     = $request->last_name;
-        $candidate->language      = $request->language;
-        $candidate->birth_date    = $request->birth_date;
-        $candidate->gender        = $request->gender;
-        $candidate->civil_status  = $request->civil_status;
-        $candidate->spouse        = $request->spouse;
-        $candidate->blood_type    = $request->blood_type;
-        $candidate->height        = $request->height;
-        $candidate->weight        = $request->weight;
-        $candidate->religion      = $request->religion;
-        $candidate->mother_name   = $request->mother_name;
-        $candidate->father_name   = $request->father_name;
-        $candidate->contact_1     = $request->contact_1;
-        $candidate->contact_2     = $request->contact_2;
-        $candidate->email         = $request->email;
-        $candidate->address       = $request->address;
-        $candidate->agreed        = $request->agreed;
-        $candidate->status        = 'applicant';
-        $candidate->place_issue   = $request->place_issue;
-        $candidate->birth_place   = $request->birth_place;
-        $candidate->travel_status = $request->travel_status;
-        $candidate->iqama         = $request->iqama;
-        $candidate->education     = $request->education;
-        $candidate->applied_using = $request->applied_using;
-        $candidate->deployed      = 'no';
-        $candidate->save();
+        $model = $candidate->store($request);
 
         $path = $request->file('cv')->store('cv');
 
         $doc               = new Document();
-        $doc->candidate_id = $candidate->id;
+        $doc->candidate_id = $model->id;
         $doc->path         = $path;
         $doc->type         = 'CV';
         $doc->created_by   = auth()->id();
@@ -141,9 +133,7 @@ class CandidateController extends Controller
 
         return redirect()
             ->route('candidate.new', ['id' => $request->agency_id])
-            ->with('success',
-                "Please remember this SECRET CODE: $code"
-            );
+            ->with('success', "Your Application has been submitted!");
     }
 
     public function show($id)
@@ -272,5 +262,12 @@ class CandidateController extends Controller
         $doc       = Document::query()->where('candidate_id', $id)->get();
 
         return view('components.candidate-overview', compact('candidate', 'doc'));
+    }
+
+    public function sendCode(Request $request)
+    {
+        Mail::to($request->email)->send(new SecretCodeMail($request));
+
+        return ['success' => true];
     }
 }

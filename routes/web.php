@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/employers', [EmployerController::class, 'index'])->name('employers')->middleware('can:agency');
 
     Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates');
+    Route::get('/candidates/create/{id}', [CandidateController::class, 'new'])->name('candidate.create');
+    Route::post('/candidates/insert', [CandidateController::class, 'insert'])->name('candidate.insert');
     Route::post('/candidates/c/c', [CandidateController::class, 'tableCandidates'])->name('candidate.table');
     Route::post('/candidates/a/t', [CandidateController::class, 'tableApplicants'])->name('candidate.applicant.table');
     Route::post('/candidates/update', [CandidateController::class, 'update'])->name('candidate.update');
@@ -60,6 +62,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/applicant', [CandidateController::class, 'applicants'])->name('candidate.applicant');
     Route::get('/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
     Route::get('/candidates/overview/{id}', [CandidateController::class, 'overview'])->name('candidate.overview');
+    Route::post('/send/code', [CandidateController::class, 'sendCode'])->name('send.code');
 
     Route::get('/employee', [MyEmployeeController::class, 'index'])->name('candidate.employees')->middleware('can:employer');
     Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
