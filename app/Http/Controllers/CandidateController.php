@@ -54,6 +54,7 @@ class CandidateController extends Controller
     {
         $candidate = $candidate->newQuery()
                                ->where('agency_id', auth()->id())
+                               ->whereIn('status', [null, 'applicant'])
                                ->with(['agency', 'employer']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
@@ -119,6 +120,7 @@ class CandidateController extends Controller
         $candidate->email        = $request->email;
         $candidate->address      = $request->address;
         $candidate->agreed       = $request->agreed;
+        $candidate->status       = 'applicant';
         $candidate->place_issue  = $request->place_issue;
         $candidate->birth_place  = $request->birth_place;
         $candidate->save();
