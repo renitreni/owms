@@ -3,22 +3,22 @@
         <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
             {{ __('Applicants') }}
         </h2>
-        <h2 class="font-semibold text-gray-800 leading-tight">
-            link of Application Form:
+        <h2 class="font-semibold text-gray-800 leading-tight mt-2">
+            Application Form:
             <a href="{{ route('candidate.new', ['id' => auth()->id()]) }}"
-            class="hover:underline" target="_blank">
+            class="hover:underline bg-red-200 hover p-1" target="_blank">
                 {{ route('candidate.new', ['id' => auth()->id()]) }}</a>
         </h2>
     </x-slot>
     <div id="app" class="pb-12 pt-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
-                <div class="p-2 mt-2 mb-2">
-                    <a href="{{route('candidate.create',['id' => auth()->id()])}}"
-                       class="text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow">
-                        <i class="fas fa-user-plus"></i> New Applicant
-                    </a>
-                </div>
+        <div class="flex flex-col bg-white max-w-7xl mx-auto sm:px-6 lg:px-8 shadow-sm sm:rounded-lg p-5">
+            <div class="mb-5 mt-5">
+                <a href="{{route('candidate.create',['id' => auth()->id()])}}"
+                   class="text-white bg-green-400 hover:bg-green-500 p-2 rounded shadow">
+                    <i class="fas fa-user-plus"></i> New Applicant
+                </a>
+            </div>
+            <div class="overflow-hidden">
                 <table id="tbl-applicants" class="stripe hover display" style="width:100% !important;"></table>
             </div>
         </div>
