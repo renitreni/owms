@@ -40,8 +40,9 @@
                             {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
-                                    return '<a href="/candidates/' + value.id + '/show" ' +
-                                        'class="hover:underline hover:text-indigo-400">' +
+                                    return '<a href="/candidates/overview/' + value.id_e + '" ' +
+                                        'class="hover:underline hover:text-indigo-400"' +
+                                        ' target="_blank">' +
                                         '' + value.last_name + ', ' + value.first_name + '</a>';
                                 }, name: 'last_name', title: 'Full Name'
                             },

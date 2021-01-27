@@ -43,7 +43,6 @@ class OtherDetailsController extends Controller
 
         return DataTables::of($results)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
-
             return collect($value)->toArray();
         })->make(true);
     }

@@ -15,6 +15,7 @@ use App\Mail\SecretCodeMail;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\EmployRequest;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\CandidateStoreRequest;
 
@@ -40,6 +41,7 @@ class CandidateController extends Controller
             $value->date_deployed      = $value->date_deployed ? Carbon::parse($value->date_deployed)
                                                                        ->format('M j, Y') : '';
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
+            $value->id_e               = Crypt::encrypt($value->id);
 
             return collect($value)->toArray();
         })->make(true);
@@ -63,6 +65,7 @@ class CandidateController extends Controller
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
             $value->date_hired         = Carbon::parse($value->date_hired)->format('M j, Y');
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
+            $value->id_e               = Crypt::encrypt($value->id);
 
             return collect($value)->toArray();
         })->make(true);
@@ -70,6 +73,7 @@ class CandidateController extends Controller
 
     public function new($id, Information $information)
     {
+        $id          = Crypt::decrypt($id);
         $hold        = $information->newQuery()->select(['name', 'user_id'])->where('user_id', $id)->get()[0];
         $agency_name = $hold['name'];
         $agency_id   = $hold['user_id'];
@@ -97,6 +101,7 @@ class CandidateController extends Controller
 
     public function create($id, Information $information)
     {
+        $id        = Crypt::decrypt($id);
         $validator = Validator::make(['id' => $id], [
             'id' => [
                 function ($attribute, $value, $fail) {
@@ -138,10 +143,7 @@ class CandidateController extends Controller
 
     public function show($id)
     {
-        if (! Candidate::belongsToAgency($id, auth()->id())) {
-            abort(403);
-        }
-
+        $id = Crypt::decrypt($id);
         $results = Candidate::find($id);
         $doc     = Document::query()->where('candidate_id', $id)->get();
 
@@ -216,15 +218,15 @@ class CandidateController extends Controller
     {
         $candidate = $candidate->newQuery()
                                ->where('agency_id', auth()->id())
-                               ->where('status', 'employed')
+                               ->where('candidates.status', 'employed')
                                ->with(['agency', 'employer', 'affiliates']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
             $value->date_hired         = ! $value->date_hired ?: Carbon::parse($value->date_hired)->format('M j, Y');
-            $value->date_deployed      = ! $value->date_deployed ?: Carbon::parse($value->date_deployed)
-                                                                          ->format('M j, Y');
+            $value->date_deployed      = ! $value->date_deployed ?: Carbon::parse($value->date_deployed)->format('M j, Y');
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
+            $value->id_e               = Crypt::encrypt($value->id);
 
             return collect($value)->toArray();
         })->make(true);
@@ -258,6 +260,7 @@ class CandidateController extends Controller
 
     public function overview($id)
     {
+        $id        = Crypt::decrypt($id);
         $candidate = Candidate::query()->where('id', $id)->with(['employer', 'agency', 'affiliates'])->get()[0];
         $doc       = Document::query()->where('candidate_id', $id)->get();
 

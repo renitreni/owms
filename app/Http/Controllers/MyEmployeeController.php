@@ -8,6 +8,7 @@ use App\Models\Document;
 use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Crypt;
 
 class MyEmployeeController extends Controller
 {
@@ -32,6 +33,7 @@ class MyEmployeeController extends Controller
                                                ->where('candidate_id', $value->id)
                                                ->where('created_by', 'employer')
                                                ->count();
+            $value->id_e               = Crypt::encrypt($value->id);
 
             return collect($value)->toArray();
         })->make(true);

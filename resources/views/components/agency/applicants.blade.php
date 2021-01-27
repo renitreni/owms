@@ -4,16 +4,16 @@
             {{ __('Applicants') }}
         </h2>
         <h2 class="font-semibold text-gray-800 leading-tight mt-2">
-            Application Form:
-            <a href="{{ route('candidate.new', ['id' => auth()->id()]) }}"
-            class="hover:underline bg-red-200 hover p-1" target="_blank">
-                {{ route('candidate.new', ['id' => auth()->id()]) }}</a>
+            <a href="{{ route('candidate.new', ['id' => \Illuminate\Support\Facades\Crypt::encrypt(auth()->id())]) }}"
+            class="hover:bg-red-300 bg-red-200 hover p-2 rounded" target="_blank">
+                Application Form Link
+            </a>
         </h2>
     </x-slot>
     <div id="app" class="pb-12 pt-8">
         <div class="flex flex-col bg-white max-w-7xl mx-auto sm:px-6 lg:px-8 shadow-sm sm:rounded-lg p-5">
             <div class="mb-5 mt-5">
-                <a href="{{route('candidate.create',['id' => auth()->id()])}}"
+                <a href="{{route('candidate.create',['id' => \Illuminate\Support\Facades\Crypt::encrypt(auth()->id())])}}"
                    class="text-white bg-green-400 hover:bg-green-500 p-2 rounded shadow">
                     <i class="fas fa-user-plus"></i> New Applicant
                 </a>
@@ -128,10 +128,9 @@
                             type: 'POST'
                         },
                         columns: [
-                            {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
-                                    return '<a href="/candidates/' + value.id + '/show" ' +
+                                    return '<a href="/candidates/' + value.id_e + '/show" ' +
                                         'class="hover:underline hover:text-indigo-400">' +
                                         '' + value.last_name + ', ' + value.first_name + '</a>';
                                 }, name: 'last_name', title: 'Full Name'

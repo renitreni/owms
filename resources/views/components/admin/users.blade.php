@@ -52,6 +52,9 @@
                                     if (value.role == '4') {
                                         return '<div class="bg-purple-200 text-center rounded shadow">Government</div>'
                                     }
+                                    if (value.role == '5') {
+                                        return '<div class="bg-indigo-200 text-center rounded shadow">Abroad Agency</div>'
+                                    }
                                 }, name: 'role', title: 'Role'
                             },
                             {

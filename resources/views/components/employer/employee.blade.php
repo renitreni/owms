@@ -152,10 +152,9 @@
                             type: 'POST'
                         },
                         columns: [
-                            {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
-                                    return '<a href="/candidates/overview/' + value.id + '" ' +
+                                    return '<a href="/candidates/overview/' + value.id_e + '" ' +
                                         'class="hover:underline hover:text-indigo-400">' +
                                         '' + value.last_name + ', ' + value.first_name + '</a>';
                                 }, name: 'last_name', title: 'Full Name'

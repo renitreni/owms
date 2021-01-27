@@ -27,7 +27,7 @@
                                             <i class="fas fa-circle text-xs text-green-300"></i> Position
                                             Selected</label>
                                         <label class="text-xl font-bold">
-                                            {{ $candidate->position_selected }}
+                                            {{ $candidate->employer ? $candidate->position_selected : 'Not Yet Employed' }}
                                         </label>
                                     </div>
                                     <div class="flex flex-grow flex-col p-2 border-l">
@@ -41,14 +41,14 @@
                                         <label class="text-gray-500">
                                             <i class="fas fa-circle text-xs text-green-300"></i> Agency Abroad</label>
                                         <label class="text-xl font-bold">
-                                            {{ $candidate->affiliates->name }}
+                                            {{ $candidate->affiliates ? $candidate->affiliates->name : 'Not Yet Deployed' }}
                                         </label>
                                     </div>
                                     <div class="flex flex-grow flex-col p-2 border-l">
                                         <label class="text-gray-500">
                                             <i class="fas fa-circle text-xs text-green-300"></i> Employer</label>
                                         <label class="text-xl font-bold">
-                                            {{ $candidate->employer->name }}
+                                            {{ $candidate->employer ? $candidate->employer->name : 'Not Yet Employed' }}
                                         </label>
                                     </div>
                                 </div>
@@ -258,7 +258,8 @@
                                         <table id="tbl-documents" class="stripe hover" style="width:100%;"></table>
                                     </div>
                                     <div class="border-l border-r border-b p-3" v-show="tab==3">
-                                        <table id="tbl-flights" class="stripe hover" style="width:100% !important;"></table>
+                                        <table id="tbl-flights" class="stripe hover"
+                                               style="width:100% !important;"></table>
                                     </div>
                                 </div>
                                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
