@@ -1,41 +1,37 @@
-@if($employerLateRpCnt != 0 )
-@endif
 <div class="grid grid-cols-4 gap-4 p-5">
     <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-yellow-300">
         <div class="font-merriweather mb-1 text-center md:text-5xl">
                 <span class="bg-gray-200 text-center rounded-full p-5">
-                    {{ \App\Models\User::query()->where('role','2')->count() }}
+                    {{ \App\Models\Candidate::query()->where('agency_id',auth()->id())->where('status', 'applicant')->count() }}
                 </span>
         </div>
-        <div class="md:text-2xl font-semibold mt-6">Agencies</div>
+        <div class="md:text-2xl font-semibold mt-6">My Applicants</div>
     </div>
     <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-green-300">
         <div class="font-merriweather mb-1 text-center md:text-5xl">
                 <span class="bg-gray-200 text-center rounded-full p-5">
-                {{ \App\Models\User::query()->where('role','3')->count() }}
+                {{ \App\Models\User::query()->where('role','3')->where('agency_id',auth()->id())->count() }}
                 </span>
         </div>
-        <div class="md:text-2xl font-semibold mt-6">Employer</div>
+        <div class="md:text-2xl font-semibold mt-6">My Employers</div>
     </div>
     <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-pink-300">
         <div class="font-merriweather mb-1 text-center md:text-5xl">
                 <span class="bg-gray-200 text-center rounded-full p-5">
-                {{ \App\Models\Candidate::query()->count() }}
+                {{ \App\Models\User::query()->where('role','5')->where('agency_id',auth()->id())->count() }}
                 </span>
         </div>
-        <div class="md:text-2xl font-semibold mt-6">OFW</div>
+        <div class="md:text-2xl font-semibold mt-6">My Affiliates</div>
     </div>
     <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-purple-300">
         <div class="font-merriweather mb-1 text-center md:text-5xl">
                 <span class="bg-gray-200 text-center rounded-full p-5">
-                {{ \App\Models\Candidate::query()->where('deployed', 'yes')->count() }}
+                {{ \App\Models\Candidate::query()->where('agency_id',auth()->id())->where('deployed', 'yes')->where('status', 'employed')->count() }}
                 </span>
         </div>
-        <div class="md:text-2xl font-semibold mt-6">Deployed</div>
+        <div class="md:text-xl font-semibold mt-6">Deployed and Employed</div>
     </div>
 </div>
-
-
 
 <transition name="slide-fade">
     <div class="fixed inset-0 overflow-y-auto" v-if="agency_mdl">
