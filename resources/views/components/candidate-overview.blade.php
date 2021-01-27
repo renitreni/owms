@@ -123,6 +123,26 @@
                                                 </label>
                                             </div>
                                         </div>
+                                        <div class="grid grid-flow-row grid-cols-1 grid-rows-2 gap-1 md:grid-cols-4 md:grid-rows-1 md:gap-4 border-t-2">
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    IQAMA
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->iqama }}
+                                                </label>
+                                            </div>
+                                            <div class="col-span-3 p-2 flex flex-col hover:bg-yellow-100">
+                                                <label class="text-gray-500 text-xs">
+                                                    <i class="fas fa-info-circle text-blue-300"></i>
+                                                    Address
+                                                </label>
+                                                <label class="text-l font-bold capitalize">
+                                                    {{ $candidate->address }}
+                                                </label>
+                                            </div>
+                                        </div>
                                         <div class="grid grid-flow-row grid-cols-1 grid-rows-2 md:grid-cols-4 md:grid-rows-1 gap-4 border-t-2">
                                             <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                 <label class="text-gray-500 text-xs">
@@ -152,7 +172,8 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="grid grid-flow-row grid-cols-4 grid-rows-1 gap-4 border-t-2">                                            <div class="p-2 flex flex-col">
+                                        <div class="grid grid-flow-row grid-cols-1 grid-rows-2 md:grid-cols-4 md:grid-rows-1 gap-4 border-t-2">
+                                            <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                 <label class="text-gray-500 text-xs">
                                                     <i class="fas fa-info-circle text-blue-300"></i>
                                                     Civil Status
