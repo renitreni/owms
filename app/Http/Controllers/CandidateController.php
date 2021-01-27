@@ -261,7 +261,7 @@ class CandidateController extends Controller
         $candidate = Candidate::query()->where('id', $id)->with(['employer', 'agency', 'affiliates'])->get()[0];
         $doc       = Document::query()->where('candidate_id', $id)->get();
 
-        return view('components.candidate-overview', compact('candidate', 'doc'));
+        return view('components.candidate-overview', compact('candidate', 'doc', 'id'));
     }
 
     public function sendCode(Request $request)

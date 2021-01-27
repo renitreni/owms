@@ -39,7 +39,6 @@ class OtherDetailsController extends Controller
     {
         $results = Document::query()
                            ->where('candidate_id', $request->candidate_id)
-                           ->where('created_by', auth()->id())
                            ->with('doc');
 
         return DataTables::of($results)->setTransformer(function ($value) {
@@ -76,7 +75,6 @@ class OtherDetailsController extends Controller
     {
         $results = Flight::query()
                          ->where('candidate_id', $request->candidate_id)
-                         ->where('created_by', auth()->id())
                          ->with(['agencyAbroad', 'author']);
 
         return DataTables::of($results)->setTransformer(function ($value) {
