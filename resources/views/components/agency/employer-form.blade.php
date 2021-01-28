@@ -17,79 +17,78 @@
                                     <div class="grid grid-cols-12 gap-2 p-4">
                                         {{--                                        Name--}}
                                         <div class="md:col-span-4 col-span-12">
-                                            <label class="block text-sm font-medium text-gray-700">Name</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __("Name") }}</label>
                                             <input type="text" name="name" id="name" autocomplete="name"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        E-mail--}}
                                         <div class="md:col-span-4 col-span-12">
-                                            <label class="block text-sm font-medium text-gray-700">E-mail</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('E-mail') }}</label>
                                             <input type="email" name="email" autocomplete="e-mail"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        National ID--}}
                                         <div class="md:col-span-4 col-span-12">
-                                            <label class="block text-sm font-medium text-gray-700">National ID</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('National ID') }}</label>
                                             <input type="text" name="national_id" autocomplete="national_id"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Tin--}}
                                         <div class="col-span-6 md:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Tin</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('Tin') }}</label>
                                             <input type="text" name="tin" id="tin" autocomplete="tin"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Contact Person--}}
                                         <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Contact
-                                                Person</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('Contact Person') }}</label>
                                             <input type="text" name="contact_name" id="contact_name"
                                                    autocomplete="contact_name"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Phone--}}
                                         <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Phone</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('Phone') }}</label>
                                             <input type="text" name="phone" id="phone" autocomplete="phone"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Fax--}}
                                         <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Fax</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('Fax') }}</label>
                                             <input type="text" name="fax" id="fax" autocomplete="fax"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         <div class="col-span-1 md:col-span-12"></div>
                                         {{--                                        City--}}
                                         <div class="col-span-12 md:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">City</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('City') }}</label>
                                             <input type="text" name="city" id="city" autocomplete="city"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Zip Code--}}
                                         <div class="col-span-12 md:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Zip Code</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('Zip Code') }}</label>
                                             <input type="text" name="zip_code" id="zip_code" autocomplete="zip_code"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Address 1--}}
                                         <div class="col-span-12">
                                             <label for="email_address"
-                                                   class="block text-sm font-medium text-gray-700">Address 1</label>
+                                                   class="block text-sm font-medium text-gray-700">{{ __('Address 1') }}</label>
                                             <input type="text" name="address_line_1" id="address_line_1"
                                                    autocomplete="address_line_1"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Address 2--}}
                                         <div class="col-span-12">
-                                            <label class="block text-sm font-medium text-gray-700">Address 2</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('Address 2') }}</label>
                                             <input type="text" name="address_line_2" id="address_line_2"
                                                    autocomplete="address_line_2"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Status--}}
                                         <div class="col-span-6 md:col-span-2">
-                                            <label class="block text-sm font-medium text-gray-700">Status</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('Status') }}</label>
                                             <select id="status" name="status" autocomplete="status"
                                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                                 <option value="active">Active</option>
@@ -98,7 +97,7 @@
                                         </div>
                                         {{--                                        Business Type--}}
                                         <div class="col-span-6 md:col-span-2">
-                                            <label class="block text-sm font-medium text-gray-700">Business Type</label>
+                                            <label class="block text-sm font-medium text-gray-700">{{ __('Business Type') }}</label>
                                             <input type="text" name="type" id="type" autocomplete="type"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>

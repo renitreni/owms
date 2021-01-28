@@ -10,6 +10,7 @@ use App\Http\Controllers\MyEmployeeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OtherDetailsController;
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,5 +99,15 @@ Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name(
 Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
 Route::get('/reporting', [ReportController::class, 'formEmployee'])->name('report.from.employee');
 Route::post('/secretcode/validate', [ReportController::class, 'validateSecretCode'])->name('report.validate');
+
+Route::get('/set/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'arb'])) {
+        abort(400);
+    }
+
+    session()->put('locale', $locale);
+
+    return redirect()->back();
+})->name('set.locale');
 
 require __DIR__ . '/auth.php';

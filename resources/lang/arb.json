@@ -1,0 +1,15 @@
+{
+    "Name" : "Name  الإسم",
+    "E-mail" : "E-mail  الإيميل",
+    "National ID" : "National ID  الرقم الهوية",
+    "Tin" : "TIN  الرقم ضريبي",
+    "Contact Person" : "Contact Person  الجهة اللإتصال",
+    "Phone": "Phone  التلفون",
+    "Fax" : "Fax  الفاكس",
+    "City" : "City  المدينة",
+    "Zip Code" : "Zip Code  الرمز البريدي",
+    "Address 1": "Address 1  العنوان 1",
+    "Address 2": "Address 2  العنوان 2",
+    "Status" : "Status  الحالة المركز",
+    "Business Type" : "Business Type  النوع التجارة"
+}
