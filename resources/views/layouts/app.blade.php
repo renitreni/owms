@@ -41,7 +41,7 @@
                         English (US)
                     </a>
                     <a @if(\Illuminate\Support\Facades\App::isLocale('arb')) class="mr-2 text-gray-400" href="#" @else class="mr-2 hover:underline" href="{{ route('set.locale',['locale'=> 'arb']) }}" @endif>
-                        Arabic
+                        Arabic (ARB)
                     </a>
                 </div>
             </footer>
