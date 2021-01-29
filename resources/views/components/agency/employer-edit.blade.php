@@ -27,19 +27,12 @@
                                             <input type="email" name="email" autocomplete="e-mail" value="{{ $user->email }}"
                                                    disabled="disabled" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md  bg-gray-200">
                                         </div>
-                                        {{--                                        National ID--}}
-                                        <div class="md:col-span-4 col-span-12">
-                                            <label class="block text-sm font-medium text-gray-700">National ID</label>
-                                            <input type="text" name="national_id" autocomplete="national_id" value="{{ $user->information->national_id }}"
-                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        </div>
                                         {{--                                        Tin--}}
                                         <div class="col-span-12 md:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700">Tin</label>
                                             <input type="text" name="tin" id="tin" autocomplete="tin" value="{{ $user->information->tin }}"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
-                                        <div class="col-span-12 md:col-span-8"></div>
                                         {{--                                        Contact Person--}}
                                         <div class="col-span-6 sm:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700">Contact
@@ -54,23 +47,11 @@
                                             <input type="text" name="phone" id="phone" autocomplete="phone" value="{{ $user->information->phone }}"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
-                                        {{--                                        Fax--}}
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Fax</label>
-                                            <input type="text" name="fax" id="fax" autocomplete="fax" value="{{ $user->information->fax }}"
-                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        </div>
                                         <div class="col-span-1 md:col-span-12"></div>
                                         {{--                                        City--}}
                                         <div class="col-span-12 md:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700">City</label>
                                             <input type="text" name="city" id="city" autocomplete="city" value="{{ $user->information->city }}"
-                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        </div>
-                                        {{--                                        Zip Code--}}
-                                        <div class="col-span-12 md:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Zip Code</label>
-                                            <input type="text" name="zip_code" id="zip_code" autocomplete="zip_code" value="{{ $user->information->zip_code }}"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Address 1--}}

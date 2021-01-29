@@ -33,12 +33,6 @@
                                             <input type="text" name="national_id" autocomplete="national_id"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
-                                        {{--                                        Tin--}}
-                                        <div class="col-span-6 md:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">{{ __('Tin') }}</label>
-                                            <input type="text" name="tin" id="tin" autocomplete="tin"
-                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        </div>
                                         {{--                                        Contact Person--}}
                                         <div class="col-span-6 sm:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700">{{ __('Contact Person') }}</label>
@@ -52,23 +46,11 @@
                                             <input type="text" name="phone" id="phone" autocomplete="phone"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
-                                        {{--                                        Fax--}}
-                                        <div class="col-span-6 sm:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">{{ __('Fax') }}</label>
-                                            <input type="text" name="fax" id="fax" autocomplete="fax"
-                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        </div>
                                         <div class="col-span-1 md:col-span-12"></div>
                                         {{--                                        City--}}
                                         <div class="col-span-12 md:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700">{{ __('City') }}</label>
                                             <input type="text" name="city" id="city" autocomplete="city"
-                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        </div>
-                                        {{--                                        Zip Code--}}
-                                        <div class="col-span-12 md:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">{{ __('Zip Code') }}</label>
-                                            <input type="text" name="zip_code" id="zip_code" autocomplete="zip_code"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        Address 1--}}

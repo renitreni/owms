@@ -26,7 +26,6 @@ class EmployerStoreRequest extends FormRequest
         return [
             'name'  => 'required',
             'email' => 'required|email|unique:users',
-            'tin'   => 'required',
         ];
     }
 }
