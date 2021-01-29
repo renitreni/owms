@@ -2,11 +2,9 @@
     <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
             {{ __('Applicants') }}
-        </h2>
-        <h2 class="font-semibold text-gray-800 leading-tight mt-2">
             <a href="{{ route('candidate.new', ['id' => \Illuminate\Support\Facades\Crypt::encrypt(auth()->id())]) }}"
-            class="hover:bg-red-300 bg-red-200 hover p-2 rounded" target="_blank">
-                Application Form Link
+               class="hover:bg-red-300 bg-red-200 hover p-2 rounded text-xs" target="_blank">
+                {{ __('Application Form') }}
             </a>
         </h2>
     </x-slot>
@@ -15,7 +13,7 @@
             <div class="mb-5 mt-5">
                 <a href="{{route('candidate.create',['id' => \Illuminate\Support\Facades\Crypt::encrypt(auth()->id())])}}"
                    class="text-white bg-green-400 hover:bg-green-500 p-2 rounded shadow">
-                    <i class="fas fa-user-plus"></i> New Applicant
+                    <i class="fas fa-user-plus"></i> {{ __('New Applicant') }}
                 </a>
             </div>
             <div class="overflow-hidden">
@@ -133,7 +131,7 @@
                                     return '<a href="/candidates/' + value.id_e + '/show" ' +
                                         'class="hover:underline hover:text-indigo-400">' +
                                         '' + value.last_name + ', ' + value.first_name + '</a>';
-                                }, name: 'last_name', title: 'Full Name'
+                                }, name: 'last_name', title: '{{ __('Full Name') }}'
                             },
                             {
                                 data: function (value) {
@@ -145,12 +143,12 @@
                                     return '<span class="text-pink-400 text-2xl block text-center">' +
                                         '<i class="fas fa-female"></i>' +
                                         '</span>';
-                                }, name: 'gender', title: 'Gender'
+                                }, name: 'gender', title: '{{ __("Gender") }}'
                             },
-                            {data: 'age', name: 'birth_date', title: 'Age'},
-                            {data: 'contact_1', name: 'contact_1', title: 'Primary Contact'},
-                            {data: 'email', name: 'email', title: 'E-mail'},
-                            {data: 'created_at_display', name: 'created_at', title: 'Date Applied', width: '130px'},
+                            {data: 'age', name: 'birth_date', title: '{{ __("Age") }}'},
+                            {data: 'contact_1', name: 'contact_1', title: '{{ __("Primary Contact") }}'},
+                            {data: 'email', name: 'email', title: '{{ __("E-mail") }}'},
+                            {data: 'created_at_display', name: 'created_at', title: '{{ __("Date Applied") }}', width: '130px'},
                             {
                                 data:
                                     function (value) {
@@ -159,7 +157,7 @@
                                             '<button class="btn-employer bg-blue-700 p-1 text-white w-full"><i class="fas fa-building"></i></button>\n' +
                                             '</div>\n' +
                                             '</div>'
-                                    }, name: 'id', title: 'Actions', bSortable: false
+                                    }, name: 'id', title: '{{ __("Actions") }}', bSortable: false
                             },
                         ],
                         drawCallback() {

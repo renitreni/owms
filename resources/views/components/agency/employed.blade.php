@@ -195,13 +195,13 @@
                                     return '<a href="/candidates/' + value.id_e + '/show" ' +
                                         'target="_blank" class="hover:underline hover:text-indigo-400">' +
                                         '' + value.last_name + ', ' + value.first_name + '</a>';
-                                }, name: 'last_name', title: 'Full Name'
+                                }, name: 'last_name', title: '{{ __("Full Name") }}'
                             },
                             {
                                 data: function (value) {
                                     var employer = value.employer ? value.employer.name : 'Not Assigned';
                                     return '<span class="text-sm">' + employer + '</span>';
-                                }, name: 'employer.name', title: 'Employer'
+                                }, name: 'employer.name', title: '{{ __("Employer") }}'
                             },
                             {
                                 data: function (value) {
@@ -213,9 +213,9 @@
                                     return '<span class="text-pink-400 text-2xl block text-center">' +
                                         '<i class="fas fa-female"></i>' +
                                         '</span>';
-                                }, name: 'gender', title: 'Gender'
+                                }, name: 'gender', title: '{{ __("Gender") }}'
                             },
-                            {data: 'age', name: 'birth_date', title: 'Age'},
+                            {data: 'age', name: 'birth_date', title: '{{ __("Age") }}'},
                             {
                                 data: function (value) {
                                     if (value.deployed == 'yes') {
@@ -223,9 +223,9 @@
                                     } else {
                                         return '<span class="text-red-500 block text-center"><i class="fas fa-ban"></i></span>'
                                     }
-                                }, name: 'deployed', title: 'Deployed'
+                                }, name: 'deployed', title: '{{ __("Deployed") }}'
                             },
-                            {data: 'date_hired', name: 'date_hired', title: 'Hired'},
+                            {data: 'date_hired', name: 'date_hired', title: '{{ __("Hired") }}'},
                             {
                                 data:
                                     function (value) {
@@ -243,7 +243,7 @@
                                             '<button class="btn-details bg-blue-400 hover:bg-blue-500 p-1 text-white w-full"><i class="fas fa-info-circle"></i></button>\n' +
                                             '</div>\n' +
                                             '</div>'
-                                    }, name: 'id', title: 'Actions', bSortable: false
+                                    }, name: 'id', title: '{{ __("Actions") }}', bSortable: false
                             },
                         ],
                         drawCallback() {

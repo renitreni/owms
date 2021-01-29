@@ -35,5 +35,18 @@
     "My Applicants": "المتقدمون لي",
     "My Employers": "أصحاب العمل",
     "My Affiliates": "الشركات التابعة لي",
-    "Deployed and Employed": "المنتشرون والموظفون"
+    "Deployed and Employed": "المنتشرون والموظفون",
+    "Application Form": "استمارة الطلب",
+    "New Applicant": "متقدم جديد",
+    "Full Name" : "الاسم الكامل",
+    "Gender": "جنس",
+    "Age": "عمر",
+    "Primary Contact": "اتصال رئيسي",
+    "E-mail": "البريد الإلكتروني",
+    "Date Applied": "تاريخ تطبيقها",
+    "Actions": "أجراءات",
+    "Deployed": "نشر",
+    "Hired": "استأجرت",
+    "English": "الإنجليزية",
+    "Arabic": "عربى"
 }

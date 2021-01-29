@@ -39,11 +39,11 @@
             </div>
             <a @if(\Illuminate\Support\Facades\App::isLocale('en')) class="mr-2 text-gray-400" href="#"
                @else class="mr-2 hover:underline" href="{{ route('set.locale',['locale'=> 'en']) }}" @endif>
-                English (US)
+                {{ __('English') }} (US)
             </a>
             <a @if(\Illuminate\Support\Facades\App::isLocale('arb')) class="mr-2 text-gray-400" href="#"
                @else class="mr-2 hover:underline" href="{{ route('set.locale',['locale'=> 'arb']) }}" @endif>
-                Arabic (ARB)
+                {{ __('Arabic') }} (ARB)
             </a>
         </div>
     </footer>
