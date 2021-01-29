@@ -21,5 +21,19 @@
     "Edit an employer" : "تحرير صاحب العمل",
     "Reset Pass" : "إعادة تعيين ممر",
     "Delete" : "حذف",
-    "Update" : "تحديث"
+    "Update" : "تحديث",
+    "Dashboard": "لوحة القيادة",
+    "Applicants": "المتقدمون",
+    "Employed": "يعمل",
+    "Employers": "أرباب العمل",
+    "Affiliates": "الشركات التابعة",
+    "Reports": "التقارير",
+    "Admin" : "مشرف",
+    "Agency" : "وكالة",
+    "Government" : "حكومة",
+    "Employer" : "صاحب العمل",
+    "My Applicants": "المتقدمون لي",
+    "My Employers": "أصحاب العمل",
+    "My Affiliates": "الشركات التابعة لي",
+    "Deployed and Employed": "المنتشرون والموظفون"
 }

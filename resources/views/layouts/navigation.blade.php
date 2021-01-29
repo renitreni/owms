@@ -44,7 +44,7 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('reports')"
                                     :active="request()->routeIs('reports')">
-                            {{ __('Reports') }} {{ Gate::inspect('name') }}
+                            {{ __('Reports') }}
                         </x-nav-link>
                     </div>
                 @endcan
@@ -85,7 +85,7 @@
                             class="flex items-center text-sm font-medium text-gray-700 hover:underline hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                             <div>
                                 <span class="text-green-300"><i class="fa fa-circle"></i> </span>
-                                @can('admin') Admin @elsecan('agency') Agency @elsecan('gov') Gov @elsecan('employer') Employer @endcan
+                                @can('admin') {{ __('Admin') }} @elsecan('agency') {{ __('Agency') }}  @elsecan('gov') {{ __('Government') }} @elsecan('employer') {{ __('Employer') }} @endcan
                                 <strong>{{ \App\Models\Information::getNameById(Auth::id()) }}</strong>
                             </div>
                             <div class="ml-1">

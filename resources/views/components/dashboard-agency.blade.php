@@ -5,7 +5,7 @@
                     {{ \App\Models\Candidate::query()->where('agency_id',auth()->id())->where('status', 'applicant')->count() }}
                 </span>
         </div>
-        <div class="md:text-2xl font-semibold mt-6">My Applicants</div>
+        <div class="md:text-2xl font-semibold mt-6">{{ __('My Applicants') }}</div>
     </div>
     <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-green-300">
         <div class="font-merriweather mb-1 text-center md:text-5xl">
@@ -13,7 +13,7 @@
                 {{ \App\Models\User::query()->where('role','3')->where('agency_id',auth()->id())->count() }}
                 </span>
         </div>
-        <div class="md:text-2xl font-semibold mt-6">My Employers</div>
+        <div class="md:text-2xl font-semibold mt-6">{{ __('My Employers') }}</div>
     </div>
     <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-pink-300">
         <div class="font-merriweather mb-1 text-center md:text-5xl">
@@ -21,7 +21,7 @@
                 {{ \App\Models\User::query()->where('role','5')->where('agency_id',auth()->id())->count() }}
                 </span>
         </div>
-        <div class="md:text-2xl font-semibold mt-6">My Affiliates</div>
+        <div class="md:text-2xl font-semibold mt-6">{{ __('My Affiliates') }}</div>
     </div>
     <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-purple-300">
         <div class="font-merriweather mb-1 text-center md:text-5xl">
@@ -29,7 +29,7 @@
                 {{ \App\Models\Candidate::query()->where('agency_id',auth()->id())->where('deployed', 'yes')->where('status', 'employed')->count() }}
                 </span>
         </div>
-        <div class="md:text-xl font-semibold mt-6">Deployed and Employed</div>
+        <div class="md:text-xl font-semibold mt-6">{{ __('Deployed and Employed') }}</div>
     </div>
 </div>
 
