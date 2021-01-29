@@ -35,7 +35,7 @@
             <footer class="bg-white h-20 pt-5 pl-5 pb-5">
                 <div class="inset-y-10 flex flex-row">
                     <div class="mr-2">
-                        Languages:
+                        {{ __('Languages') }}:
                     </div>
                     <a @if(\Illuminate\Support\Facades\App::isLocale('en')) class="mr-2 text-gray-400" href="#" @else class="mr-2 hover:underline" href="{{ route('set.locale',['locale'=> 'en']) }}" @endif>
                         English (US)
