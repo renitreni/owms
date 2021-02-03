@@ -39,11 +39,11 @@
             </div>
             <a @if(app()->getLocale() === 'en')) class="mr-2 text-gray-400" href="#"
                @else class="mr-2 hover:underline" href="{{ route('set.locale',['locale'=> 'en']) }}" @endif>
-                {{ __('English') }} (US)
+                {{ __('English (US)') }}
             </a>
             <a @if(app()->getLocale() === 'arb') class="mr-2 text-gray-400" href="#"
                @else class="mr-2 hover:underline" href="{{ route('set.locale',['locale'=> 'arb']) }}" @endif>
-                {{ __('Arabic') }} (ARB)
+                {{ __('Arabic (ARB)') }}
             </a>
         </div>
     </footer>
