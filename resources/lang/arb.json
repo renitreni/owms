@@ -47,5 +47,16 @@
     "Deployed": "نشر",
     "Hired": "استأجرت",
     "English (US)": "الإنجليزية  (US)",
-    "Arabic (ARB)": "العربية  (ARB)"
+    "Arabic (ARB)": "العربية  (ARB)",
+    "Company Name" : "اسم الشركة",
+    "Employee(s)": "الموظفين",
+    "New Employer": "صاحب عمل جديد",
+    "Search": "بحث",
+    "Date Created": "تاريخ الإنشاء",
+    "Show _MENU_ entries": "إظهار إدخالات _MENU_",
+    "Showing from _START_ to _END_ of _TOTAL_ records": "عرض من _START_ حتى _END_ من إجمالي _TOTAL_ سجل",
+    "Previous": "السابق",
+    "Next": "تالي",
+    "No records available": "لا توجد سجلات متاحة",
+    "No matching records found": "لا توجد سجلات مطابقة"
 }

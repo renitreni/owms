@@ -11,7 +11,7 @@
                 <div class="p-2 mt-5">
                     <a href="{{route('employers.create')}}"
                        class="text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow">
-                        <i class="fas fa-user-plus"></i> New Employer
+                        <i class="fas fa-user-plus"></i> {{ __('New Employer') }}
                     </a>
                 </div>
                 <div class="p-5">
@@ -80,16 +80,33 @@
                 mounted() {
                     var $this = this;
                     $this.dt = $('#employers-table').DataTable({
+                        language :{
+                            "search": '{{ __('Search') }}',
+                            "lengthMenu": '{{ __("Show _MENU_ entries") }}',
+                            "info": "{{ __('Showing from _START_ to _END_ of _TOTAL_ records') }}",
+                            "infoEmpty": "{{ __('No records available') }}",
+                            "infoFiltered": "",
+                            "zeroRecords": "{{ __('No matching records found') }}",
+                            "paginate": {
+                                "previous": '{{ __("Previous") }}',
+                                "next": '{{ __("Next") }}'
+                            }
+                        },
                         responsive: true,
                         serverSide: true,
                         scrollX: true,
-                        order: [[0, "desc"]],
+                        order: [[4, "desc"]],
                         ajax: {
                             url: '{{ route('employers.table') }}',
                             type: 'POST'
                         },
                         columns: [
-                            {data: 'id', name: 'id', title: 'ID'},
+                            {
+                                data: function (value) {
+                                    return '<a href="/employers/show/' + value.id + '" ' +
+                                        'class="hover:underline hover:text-indigo-400">' + value.information.name + '</a>';
+                                }, name: 'information.name', title: '{{ __("Company Name") }}'
+                            },
                             {
                                 data: function (value) {
                                     return '<div class="block text-center">' +
@@ -97,17 +114,11 @@
                                         '<i class="fas fa-eye"></i> ' + value.applicant_count + '' +
                                         '</button>' +
                                         '</div>'
-                                }, name: 'applicant_count', title: 'Employee(s)', bSortable: false
+                                }, name: 'id', title: '{{ __("Employee(s)") }}', bSortable: false
                             },
-                            {
-                                data: function (value) {
-                                    return '<a href="/employers/show/' + value.id + '" ' +
-                                        'class="hover:underline hover:text-indigo-400">' + value.information.name + '</a>';
-                                }, name: 'information.name', title: 'Company Name'
-                            },
-                            {data: 'information.phone', name: 'information.phone', title: 'Phone'},
-                            {data: 'email', name: 'email', title: 'E-mail'},
-                            {data: 'created_at_display', name: 'created_at', title: 'Date Created'},
+                            {data: 'information.phone', name: 'information.phone', title: '{{ __("Phone") }}'},
+                            {data: 'email', name: 'email', title: '{{ __("E-mail") }}'},
+                            {data: 'created_at_display', name: 'created_at', title: '{{ __("Date Created") }}'},
                         ],
                         drawCallback() {
                             $('table button').click(function (e) {
