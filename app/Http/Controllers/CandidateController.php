@@ -235,7 +235,7 @@ class CandidateController extends Controller
 
     public function deploy(Request $request)
     {
-        if ($request->agency_abroad_id) {
+        if ($request->agency_abroad_id != '') {
             $candidate                   = Candidate::find($request->id);
             $candidate->deployed         = 'yes';
             $candidate->agency_abroad_id = $request->agency_abroad_id;
