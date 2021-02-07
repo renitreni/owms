@@ -69,7 +69,14 @@ class OtherDetailsController extends Controller
         $flight->created_by      = auth()->id();
         $flight->save();
 
-        return redirect()->back()->with('success', 'New Flight has been inserted');
+        return redirect()->back()->with('success', 'New Flight has been inserted.');
+    }
+
+    public function deleteFlight(Request $request)
+    {
+        Flight::destroy($request->id);
+
+        return redirect()->back()->with('success', 'Flight has been deleted.');
     }
 
     public function tableFlights(Request $request)

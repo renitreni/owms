@@ -72,7 +72,7 @@
                             .then((willDelete) => {
                                 if (willDelete) {
                                     $.ajax({
-                                        url: '{{ route('details.document.delete') }}',
+                                        url: '{{ route('details.flight.delete') }}',
                                         data: $this.overview,
                                         method: 'POST',
                                         success: function (value) {
