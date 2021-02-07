@@ -45,7 +45,7 @@
                                         <div class="mt-6 grid grid-cols-1">
                                             <div class="col-span-1 mb-2" v-for="item in overview.employee"
                                                  :key="item.id">
-                                                <a v-bind:href="'/candidates/' +item.id+ '/show'" target="_blank"
+                                                <a v-bind:href="'/candidates/' +item.id_e+ '/show'" target="_blank"
                                                    class="text-blue-400 hover:underline hover:text-blue-500">
                                                     <i class="fas fa-link"></i> @{{ item.last_name }}, @{{ item.first_name
                                                     }} @{{ item.middle_name }}

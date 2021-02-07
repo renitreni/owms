@@ -9,6 +9,7 @@ use App\Models\Information;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\EmployerStoreRequest;
 
 class EmployerController extends Controller
@@ -25,6 +26,10 @@ class EmployerController extends Controller
         return DataTables::of($employers)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
             $value->applicant_count = Candidate::query()->where('employer_id', $value->id)->count();
+            foreach ($value->employee as $key => $idx)
+            {
+                $value->employee[$key]->id_e = Crypt::encrypt($idx->id);
+            }
             return collect($value)->toArray();
         })->make(true);
     }
