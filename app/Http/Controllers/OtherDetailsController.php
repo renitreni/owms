@@ -76,7 +76,7 @@ class OtherDetailsController extends Controller
     {
         Flight::destroy($request->id);
 
-        return redirect()->back()->with('success', 'Flight has been deleted.');
+        return ['success' => true];
     }
 
     public function tableFlights(Request $request)

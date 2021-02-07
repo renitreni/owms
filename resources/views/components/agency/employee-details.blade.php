@@ -79,7 +79,7 @@
                                             swal("Success! Your file has been deleted!", {
                                                 icon: "success",
                                             });
-                                            $this.dt_docs.draw();
+                                            $this.dt_flights.draw();
                                         }
                                     });
                                 } else {
