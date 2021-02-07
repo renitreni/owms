@@ -39,10 +39,12 @@ class OtherDetailsController extends Controller
     {
         $results = Document::query()
                            ->where('candidate_id', $request->candidate_id)
+                           ->whereNull('deleted_at')
                            ->with('doc');
 
         return DataTables::of($results)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
+
             return collect($value)->toArray();
         })->make(true);
     }
