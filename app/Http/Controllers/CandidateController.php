@@ -143,7 +143,7 @@ class CandidateController extends Controller
 
     public function show($id)
     {
-        $id = Crypt::decrypt($id);
+        $id      = Crypt::decrypt($id);
         $results = Candidate::find($id);
         $doc     = Document::query()->where('candidate_id', $id)->get();
 
@@ -224,7 +224,8 @@ class CandidateController extends Controller
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
             $value->date_hired         = ! $value->date_hired ?: Carbon::parse($value->date_hired)->format('M j, Y');
-            $value->date_deployed      = ! $value->date_deployed ?: Carbon::parse($value->date_deployed)->format('M j, Y');
+            $value->date_deployed      = ! $value->date_deployed ?: Carbon::parse($value->date_deployed)
+                                                                          ->format('M j, Y');
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
             $value->id_e               = Crypt::encrypt($value->id);
 
@@ -234,11 +235,19 @@ class CandidateController extends Controller
 
     public function deploy(Request $request)
     {
-        $candidate                   = Candidate::find($request->id);
-        $candidate->deployed         = 'yes';
-        $candidate->agency_abroad_id = $request->agency_abroad_id;
-        $candidate->date_deployed    = Carbon::now()->format('Y-m-d');
-        $candidate->save();
+        if ($request->agency_abroad_id) {
+            $candidate                   = Candidate::find($request->id);
+            $candidate->deployed         = 'yes';
+            $candidate->agency_abroad_id = $request->agency_abroad_id;
+            $candidate->date_deployed    = Carbon::now()->format('Y-m-d');
+            $candidate->save();
+        } else {
+            $candidate                   = Candidate::find($request->id);
+            $candidate->deployed         = 'no';
+            $candidate->agency_abroad_id = '';
+            $candidate->date_deployed    = null;
+            $candidate->save();
+        }
 
         return redirect()->back()
                          ->with('success', "Employee has been deployed.");
