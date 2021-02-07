@@ -145,8 +145,8 @@ class CandidateController extends Controller
     {
         $id      = Crypt::decrypt($id);
         $results = Candidate::find($id);
-        $doc     = Document::query()->where('candidate_id', $id)->get();
-        dump($id);
+        $doc     = DB::table('documents')->where('candidate_id', $id)->where('type', 'CV')->get();
+
         return view('components.agency.applicant-edit', compact('results', 'doc'));
     }
 
