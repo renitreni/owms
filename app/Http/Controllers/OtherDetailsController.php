@@ -52,7 +52,7 @@ class OtherDetailsController extends Controller
     public function deleteDocuments(Request $request)
     {
         \Storage::delete($request->path);
-        Document::query()->where('id', $request->id)->delete();
+        Document::destroy($request->id);
 
         return ['success' => true];
     }
