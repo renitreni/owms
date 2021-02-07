@@ -235,7 +235,7 @@ class CandidateController extends Controller
 
     public function deploy(Request $request)
     {
-        if ($request->agency_abroad_id != '') {
+        if ($request->agency_abroad_id != "null") {
             $candidate                   = Candidate::find($request->id);
             $candidate->deployed         = 'yes';
             $candidate->agency_abroad_id = $request->agency_abroad_id;
@@ -244,7 +244,7 @@ class CandidateController extends Controller
         } else {
             $candidate                   = Candidate::find($request->id);
             $candidate->deployed         = 'no';
-            $candidate->agency_abroad_id = '';
+            $candidate->agency_abroad_id = null;
             $candidate->date_deployed    = null;
             $candidate->save();
         }
