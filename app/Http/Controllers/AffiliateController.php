@@ -49,7 +49,7 @@ class AffiliateController extends Controller
         $information->created_by     = auth()->id();
         $information->save();
 
-        return redirect()->route('affiliates')->with(['success' => 'New Employer has been added']);
+        return redirect()->route('affiliates')->with(['success' => 'New Co-Host has been added']);
     }
 
 
@@ -93,14 +93,14 @@ class AffiliateController extends Controller
         $information->created_by     = auth()->id();
         $information->save();
 
-        return redirect()->route('affiliates')->with(['success' => 'New Employer has been updated!']);
+        return redirect()->route('affiliates')->with(['success' => 'Co-Host has been updated!']);
     }
 
     public function destroy($id)
     {
         User::destroy($id);
 
-        return redirect()->route('affiliates')->with(['success' => 'Employer has been deleted!']);
+        return redirect()->route('affiliates')->with(['success' => 'Co-Host has been deleted!']);
     }
 
     public function resetPassword($id)

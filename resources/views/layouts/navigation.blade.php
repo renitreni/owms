@@ -38,7 +38,7 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('affiliates')"
                                     :active="request()->routeIs('affiliates') || request()->routeIs('affiliates.show')|| request()->routeIs('affiliates.create')">
-                            {{ __('Affiliates') }}
+                            {{ __('Co-Hosts') }}
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">

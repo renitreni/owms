@@ -11,7 +11,7 @@
                 <div class="p-2 mt-5">
                     <a href="{{route('affiliates.create')}}"
                        class="text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow">
-                        <i class="fas fa-user-plus"></i> New Affiliates
+                        <i class="fas fa-user-plus"></i> {{ __('New Co-Host') }}
                     </a>
                 </div>
                 <div class="p-5">
@@ -80,25 +80,36 @@
                 mounted() {
                     var $this = this;
                     $this.dt = $('#agents-table').DataTable({
+                        language :{
+                            "search": '{{ __('Search') }}',
+                            "lengthMenu": '{{ __("Show _MENU_ entries") }}',
+                            "info": "{{ __('Showing from _START_ to _END_ of _TOTAL_ records') }}",
+                            "infoEmpty": "{{ __('No records available') }}",
+                            "infoFiltered": "",
+                            "zeroRecords": "{{ __('No matching records found') }}",
+                            "paginate": {
+                                "previous": '{{ __("Previous") }}',
+                                "next": '{{ __("Next") }}'
+                            }
+                        },
                         responsive: true,
                         serverSide: true,
                         scrollX: true,
-                        order: [[0, "desc"]],
+                        order: [[3, "desc"]],
                         ajax: {
                             url: '{{ route('affiliates.table') }}',
                             type: 'POST'
                         },
                         columns: [
-                            {data: 'id', name: 'id', title: 'ID'},
                             {
                                 data: function (value) {
                                     return '<a href="/affiliate/show/' + value.id + '" ' +
                                         'class="hover:underline hover:text-indigo-400">' + value.information.name + '</a>';
-                                }, name: 'name', title: 'Name'
+                                }, name: 'name', title: '{{ __("Name") }}'
                             },
-                            {data: 'information.phone', name: 'information.phone', title: 'Phone'},
-                            {data: 'email', name: 'email', title: 'E-mail'},
-                            {data: 'created_at_display', name: 'created_at', title: 'Date Created'},
+                            {data: 'information.phone', name: 'information.phone', title: '{{ __("Phone") }}'},
+                            {data: 'email', name: 'email', title: '{{ __("E-mail") }}'},
+                            {data: 'created_at_display', name: 'created_at', title: '{{ __("Date Created") }}'},
                         ],
                         drawCallback() {
                             $('table button').click(function (e) {

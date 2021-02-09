@@ -48,22 +48,6 @@ class DatabaseSeeder extends Seeder
             'remember_token'    => Str::random(10),
         ]);
 
-        OptionList::query()->insert([
-            ['type' => 'docs', 'name' => 'Passport'],
-            ['type' => 'docs', 'name' => 'Biometrics'],
-            ['type' => 'docs', 'name' => 'NBI Clearance'],
-            ['type' => 'docs', 'name' => 'TESDA NC II'],
-            ['type' => 'docs', 'name' => 'Medical'],
-            ['type' => 'docs', 'name' => 'Enjaz'],
-            ['type' => 'docs', 'name' => 'POEA'],
-            ['type' => 'docs', 'name' => 'Diploma'],
-            ['type' => 'docs', 'name' => 'Ticket for Travel'],
-            ['type' => 'docs', 'name' => 'OEC'],
-            ['type' => 'docs', 'name' => 'OWWA'],
-            ['type' => 'docs', 'name' => 'PDOS'],
-            ['type' => 'docs', 'name' => 'Visa Stamping'],
-        ]);
-
         $hold = User::noInfoIds();
         foreach ($hold as $id) {
             Information::factory()->state(['user_id' => $id])->create();

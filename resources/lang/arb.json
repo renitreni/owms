@@ -14,7 +14,7 @@
     "Business Type" : "النوع التجارة",
     "Active" : "الحساب نشط",
     "Not Active" : "الحساب غير نشط",
-    "Languages" : "اللغات",
+    "Languages" : "اللغات / Languages",
     "Save" : "حفظ",
     "Cancel" : "إلغاء",
     "Add a new employer" : "إضافة صاحب عمل جديد",
@@ -47,7 +47,7 @@
     "Deployed": "نشر",
     "Hired": "استأجرت",
     "English (US)": "الإنجليزية  (US)",
-    "Arabic (ARB)": "العربية  (ARB)",
+    "Arabic (ARB)": " (العربية)",
     "Company Name" : "اسم الشركة",
     "Employee(s)": "الموظفين",
     "New Employer": "صاحب عمل جديد",
@@ -58,5 +58,8 @@
     "Previous": "السابق",
     "Next": "تالي",
     "No records available": "لا توجد سجلات متاحة",
-    "No matching records found": "لا توجد سجلات مطابقة"
+    "No matching records found": "لا توجد سجلات مطابقة",
+    "Co-Hosts": "المضيفين المشتركين",
+    "New Co-Host": "مضيف مشارك جديد",
+    "Add New Host": "أضف مضيفًا جديدًا"
 }

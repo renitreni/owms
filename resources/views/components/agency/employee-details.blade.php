@@ -44,7 +44,8 @@
                         tab: 1,
                         dt_docs: null,
                         dt_flights: null,
-                        flight_overview: false
+                        flight_overview: false,
+                        option_list : {!! $options !!}
                     }
                 },
                 watch: {

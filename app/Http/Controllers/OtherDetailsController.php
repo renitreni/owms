@@ -17,7 +17,7 @@ class OtherDetailsController extends Controller
     public function show($id, User $user)
     {
         $affiliates = $user->getAffiliatesByAgency(auth()->id())->get();
-        $options    = OptionList::query()->where('type', 'docs')->get();
+        $options    = OptionList::query()->select(['id', 'name'])->where('type', 'docs')->get();
 
         return view('components.agency.employee-details', compact('options', 'id', 'affiliates'));
     }
