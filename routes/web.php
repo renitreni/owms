@@ -94,6 +94,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/details/flight/store', [OtherDetailsController::class, 'storeFlight'])->name('details.flight.store');
     Route::post('/details/flight/table', [OtherDetailsController::class, 'tableFlights'])->name('details.flight.table');
+
+    Route::post('/details/add/checklist', [OtherDetailsController::class, 'insertCheckList'])->name('details.insert.checklist');
+    Route::get('/details/approve/item/{id}', [OtherDetailsController::class, 'approveItem'])->name('details.approve.item');
+    Route::get('/details/pending/item/{id}', [OtherDetailsController::class, 'pendingItem'])->name('details.pending.item');
+    Route::get('/details/delete/item/{id}', [OtherDetailsController::class, 'deleteItem'])->name('details.delete.item');
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');

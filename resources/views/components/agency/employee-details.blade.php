@@ -7,28 +7,96 @@
 
     <div id="app" class="pb-12 pt-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-x-auto shadow-sm sm:rounded-lg p-5 pt-8">
-                <ul class="list-reset flex border-b">
-                    <li class="mr-1" v-bind:class="{'-mb-px': (tab == 1)}">
-                        <span @click="tab = 1" class="cursor-pointer bg-white inline-block"
-                              v-bind:class="{'border-l border-t border-r rounded-t py-2 px-4 text-blue-dark font-bold': (tab == 1), 'py-2 px-4 hover:text-blue-400 hover:bg-gray-100': (tab != 1)}">
-                            Documents
-                        </span>
-                    </li>
-                    <li class="mr-1" v-bind:class="{'-mb-px': (tab == 2)}">
-                        <span @click="tab = 2" class="cursor-pointer bg-white inline-block"
-                              v-bind:class="{'border-l border-t border-r rounded-t py-2 px-4 text-blue-dark font-bold': (tab == 2), 'py-2 px-4 hover:text-blue-400 hover:bg-gray-100': (tab != 2)}">
-                            Flights
-                        </span>
-                    </li>
-                </ul>
-                <div v-show="tab == 1" class="border-l border-r border-b p-2">
-                    @include('components.agency.partials.tab-documents')
+                <div class="bg-white overflow-x-auto shadow-sm sm:rounded-lg p-5 pt-8">
+                    <div class="flex flex-row">
+                        <div class="flex-grow">
+                            <ul class="list-reset flex border-b">
+                                <li class="mr-1" v-bind:class="{'-mb-px': (tab == 1)}">
+                            <span @click="tab = 1" class="cursor-pointer bg-white inline-block"
+                                  v-bind:class="{'border-l border-t border-r rounded-t py-2 px-4 text-blue-dark font-bold': (tab == 1), 'py-2 px-4 hover:text-blue-400 hover:bg-gray-100': (tab != 1)}">
+                                Documents
+                            </span>
+                                </li>
+                                <li class="mr-1" v-bind:class="{'-mb-px': (tab == 2)}">
+                            <span @click="tab = 2" class="cursor-pointer bg-white inline-block"
+                                  v-bind:class="{'border-l border-t border-r rounded-t py-2 px-4 text-blue-dark font-bold': (tab == 2), 'py-2 px-4 hover:text-blue-400 hover:bg-gray-100': (tab != 2)}">
+                                Flights
+                            </span>
+                                </li>
+                            </ul>
+                            <div v-show="tab == 1" class="border-l border-r border-b p-2">
+                                @include('components.agency.partials.tab-documents')
+                            </div>
+                            <div v-show="tab == 2" class="border-l border-r border-b p-2">
+                                @include('components.agency.partials.tab-flights')
+                            </div>
+                        </div>
+                        <div class="pl-6">
+                            <form class="flex flex-row" method="POST" action="{{ route('details.insert.checklist') }}">
+                                @csrf
+                                <input name="candidate_id" value="{{ $id }}" class="hidden">
+                                <div class="flex flex-col flex-grow">
+                                    <div class="flex flex-row">
+                                        <label>
+                                            {{ __('Add to Check List') }}
+                                        </label>
+                                        <div class="p-1 text-sm text-indigo-600 text-white pr-1 pl-1 rounded">
+                                            <span class="fas fa-circle"></span>
+                                        </div>
+                                        {{ __('pending') }}
+                                        <div class="p-1 text-sm text-green-400 text-white pr-1 pl-1 rounded">
+                                            <span class="fas fa-circle"></span>
+                                        </div>
+                                        {{ __('done') }}
+                                    </div>
+                                    <input name="name"
+                                           class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0 p-2">
+                                </div>
+                                <div class="flex flex-col ml-1 mt-5 pt-2">
+                                    <button type="submit"
+                                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="mt-3">
+                                @foreach($checklist as $item)
+                                    <div class="flex flex-row pb-1 justify-between">
+                                        @if($item->status == 'pending')
+                                            <div class="text-sm text-indigo-600 text-white pr-1 pl-1 rounded">
+                                                <span class="fas fa-circle"></span>
+                                            </div>
+                                        @else
+                                            <div class="text-sm text-green-400 text-white pr-1 pl-1 rounded">
+                                                <span class="fas fa-circle"></span>
+                                            </div>
+                                        @endif
+                                        <div class="text-sm pl-1">
+                                            {{ $item->name }}
+                                        </div>
+                                        <div class="order-last text-sm pl-1 p-1">
+                                            @if($item->status == 'pending')
+                                                <a href="{{ route('details.approve.item', ['id'=> $item->id]) }}"
+                                                   class="bg-green-400 hover:bg-green-500 text-white p-1 rounded">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('details.pending.item', ['id'=> $item->id]) }}"
+                                                   class="bg-indigo-600 hover:bg-indigo-700 text-white p-1.5 rounded">
+                                                    <i class="fas fa-stopwatch"></i>
+                                                </a>
+                                            @endif
+                                            <a href="{{ route('details.delete.item', ['id'=> $item->id]) }}"
+                                                    class="bg-red-600 hover:bg-red-700 text-white p-1 rounded">
+                                                <i class="fas fa-trash text-xs"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div v-show="tab == 2" class="border-l border-r border-b p-2">
-                    @include('components.agency.partials.tab-flights')
-                </div>
-            </div>
         </div>
 
     </div>

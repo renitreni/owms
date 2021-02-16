@@ -3,12 +3,12 @@
     <input name="candidate_id" value="{{ $id }}" class="hidden">
     <div class="flex flex-col md:flex-row mt-3">
         <div class="flex flex-col flex-grow">
-            <label>Flight Details</label>
+            <label>{{ __('Flight Details') }}</label>
             <input name="details"
                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0 p-2">
         </div>
         <div class="flex flex-col flex-grow ml-0 md:ml-3">
-            <label>Abroad Agency (Affiliates)</label>
+            <label>{{ __('Abroad Agency') }} ({{ __('Co-Hosts') }})</label>
             <select name="abroad_agency"
                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0 p-2">
                 @foreach($affiliates as $item)
@@ -17,19 +17,19 @@
             </select>
         </div>
         <div class="flex flex-col flex-grow ml-0 md:ml-3">
-            <label>Contact Person</label>
+            <label>{{ __('Contact Person') }}</label>
             <input name="contact_person"
                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0 p-2">
         </div>
     </div>
     <div class="flex flex-col md:flex-row">
         <div class="flex flex-col">
-            <label>Contact Number</label>
+            <label>{{ __('Contact Number') }}</label>
             <input name="contact_number"
                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0 p-2">
         </div>
         <div class="flex flex-col flex-grow ml-0 md:ml-3">
-            <label>Contact Address</label>
+            <label>{{ __('Contact Address') }}</label>
             <input name="contact_address"
                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0 p-2">
         </div>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left" v-if="overview">
                             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                Flight Status Overview
+                                {{ __('Flight Status Overview') }}
                             </h3>
                             <div class="flex flex-col mt-4" v-if="overview.details">
                                 <div class="flex flex-row">
@@ -101,7 +101,7 @@
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button type="button" v-on:click="flight_overview = false"
                             class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Cancel
+                        {{ __('Cancel') }}
                     </button>
                 </div>
             </div>

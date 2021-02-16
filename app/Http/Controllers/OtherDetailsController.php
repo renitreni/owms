@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Flight;
 use App\Models\Document;
+use App\Models\CheckList;
 use App\Models\OptionList;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -18,8 +19,9 @@ class OtherDetailsController extends Controller
     {
         $affiliates = $user->getAffiliatesByAgency(auth()->id())->get();
         $options    = OptionList::query()->select(['id', 'name'])->where('type', 'docs')->get();
+        $checklist  = CheckList::query()->where('candidate_id', $id)->get();
 
-        return view('components.agency.employee-details', compact('options', 'id', 'affiliates'));
+        return view('components.agency.employee-details', compact('options', 'id', 'affiliates', 'checklist'));
     }
 
     public function storeDocument(DocumentStoreRequest $request)
@@ -90,5 +92,42 @@ class OtherDetailsController extends Controller
 
             return collect($value)->toArray();
         })->make(true);
+    }
+
+    public function insertCheckList(Request $request)
+    {
+        $checkList               = new CheckList();
+        $checkList->name         = $request->name;
+        $checkList->candidate_id = $request->candidate_id;
+        $checkList->status       = 'pending';
+        $checkList->save();
+
+        return redirect()->back()->with('success', 'checklist inserted.');
+    }
+
+    public function approveItem($id)
+    {
+        CheckList::query()->where('id', $id)->update([
+            'status' => 'approved'
+        ]);
+
+        return redirect()->back();
+    }
+
+
+    public function pendingItem($id)
+    {
+        CheckList::query()->where('id', $id)->update([
+            'status' => 'pending'
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function deleteItem($id)
+    {
+        CheckList::query()->where('id', $id)->delete();
+
+        return redirect()->back();
     }
 }

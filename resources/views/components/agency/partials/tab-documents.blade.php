@@ -3,7 +3,7 @@
     <input name="candidate_id" value="{{ $id }}" class="hidden">
     <div class="flex flex-col md:flex-row">
         <div class="flex flex-col flex-grow">
-            <label>Document Name</label>
+            <label>{{ __('Document Name') }}</label>
             <select name="document"
                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
                 @foreach($options as $item)
@@ -12,7 +12,7 @@
             </select>
         </div>
         <div class="flex flex-col flex-grow ml-0 md:ml-3">
-            <label>File</label>
+            <label>{{ __('File') }}</label>
             <div class="flex">
                 <label
                     class="font-bold block p-2 text-sm font-medium text-gray-700 text-center bg-indigo-200 mt-1 focus:ring-indigo-500 rounded-md">
