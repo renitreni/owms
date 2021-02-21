@@ -187,6 +187,18 @@
                 mounted() {
                     var $this = this;
                     $this.dt_docs = $('#tbl-documents').DataTable({
+                        language :{
+                            "search": '{{ __('Search') }}',
+                            "lengthMenu": '{{ __("Show _MENU_ entries") }}',
+                            "info": "{{ __('Showing from _START_ to _END_ of _TOTAL_ records') }}",
+                            "infoEmpty": "{{ __('No records available') }}",
+                            "infoFiltered": "",
+                            "zeroRecords": "{{ __('No matching records found') }}",
+                            "paginate": {
+                                "previous": '{{ __("Previous") }}',
+                                "next": '{{ __("Next") }}'
+                            }
+                        },
                         responsive: true,
                         serverSide: true,
                         scrollX: true,

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
-            New Applicant Form
+            {{ __('New Applicant Form') }}
         </h2>
     </x-slot>
 
@@ -37,13 +37,13 @@
                                         border-transparent shadow-sm text-sm font-medium rounded-md text-white
                                         bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2
                                         focus:ring-offset-2 focus:ring-indigo-500">
-                                            Save
+                                            {{ __('Save') }}
                                         </button>
                                         <a href="{{ route('candidate.applicant') }}" class="inline-flex justify-center py-2 px-4 border
                                         border-transparent shadow-sm text-sm font-medium rounded-md text-white
                                         bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2
                                         focus:ring-offset-2 focus:ring-indigo-500">
-                                            Cancel
+                                            {{ __('Cancel') }}
                                         </a>
                                     </div>
                                 </div>
