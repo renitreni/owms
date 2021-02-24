@@ -27,6 +27,17 @@ class ReportController extends Controller
         })->make(true);
     }
 
+    public function tableByCandidateId(Request $request, Report $report)
+    {
+        $reports = $report::query()->with(['employee', 'employer'])->where('candidate_id', $request->candidate_id);
+
+        return DataTables::of($reports)->setTransformer(function ($value) {
+            $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
+
+            return collect($value)->toArray();
+        })->make(true);
+    }
+
     public function submit(ReportSubmitRequest $request)
     {
         $attachment_1 = '';

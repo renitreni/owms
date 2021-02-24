@@ -28,6 +28,7 @@ class OtherDetailsController extends Controller
     {
         $path                   = $request->file('attachment')->store('docs');
         $document               = new Document();
+        $document->filename     = $request->file('attachment')->getClientOriginalName();
         $document->candidate_id = $request->candidate_id;
         $document->type         = $request->document;
         $document->path         = $path;
@@ -40,7 +41,10 @@ class OtherDetailsController extends Controller
     public function tableDocuments(Request $request)
     {
         $results = Document::query()
+                           ->selectRaw('documents.*, ol.name')
+                           ->join('option_lists as ol', 'ol.id', '=', 'documents.type')
                            ->where('candidate_id', $request->candidate_id)
+                           ->where('ol.type', 'docs')
                            ->whereNull('deleted_at')
                            ->with('doc');
 
@@ -108,17 +112,16 @@ class OtherDetailsController extends Controller
     public function approveItem($id)
     {
         CheckList::query()->where('id', $id)->update([
-            'status' => 'approved'
+            'status' => 'approved',
         ]);
 
         return redirect()->back();
     }
 
-
     public function pendingItem($id)
     {
         CheckList::query()->where('id', $id)->update([
-            'status' => 'pending'
+            'status' => 'pending',
         ]);
 
         return redirect()->back();
