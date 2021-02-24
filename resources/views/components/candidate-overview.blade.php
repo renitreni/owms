@@ -79,12 +79,14 @@
                                                 Flights
                                             </span>
                                         </li>
+                                        @canany(['admin', 'gov'])
                                         <li class="mr-1" v-bind:class="{'-mb-px': (tab == 4)}">
                                             <span @click="tab = 4" class="cursor-pointer bg-white inline-block"
                                                   v-bind:class="{'border-l border-t border-r rounded-t py-2 px-4 text-blue-dark font-bold': (tab == 4), 'py-2 px-4 hover:text-blue-400 hover:bg-gray-100': (tab != 4)}">
                                                 History Reports
                                             </span>
                                         </li>
+                                        @endcanany
                                     </ul>
                                     <div class="border-l border-r border-b p-3" v-show="tab==1">
                                         <div>
@@ -277,10 +279,12 @@
                                         <table id="tbl-flights" class="stripe hover"
                                                style="width:100% !important;"></table>
                                     </div>
+                                    @canany(['admin', 'gov'])
                                     <div class="border-l border-r border-b p-3" v-show="tab==4">
                                         <table id="tbl-reports" class="stripe hover"
                                                style="width:100% !important;"></table>
                                     </div>
+                                    @endcanany
                                 </div>
                             </div>
 
