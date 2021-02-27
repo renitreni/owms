@@ -64,26 +64,26 @@
                                         <li class="mr-1" v-bind:class="{'-mb-px': (tab == 1)}">
                                             <span @click="tab = 1" class="cursor-pointer bg-white inline-block"
                                                   v-bind:class="{'border-l border-t border-r rounded-t py-2 px-4 text-blue-dark font-bold': (tab == 1), 'py-2 px-4 hover:text-blue-400 hover:bg-gray-100': (tab != 1)}">
-                                                General
+                                                {{ __('Info') }}
                                             </span>
                                         </li>
                                         <li class="mr-1" v-bind:class="{'-mb-px': (tab == 2)}">
                                             <span @click="tab = 2" class="cursor-pointer bg-white inline-block"
                                                   v-bind:class="{'border-l border-t border-r rounded-t py-2 px-4 text-blue-dark font-bold': (tab == 2), 'py-2 px-4 hover:text-blue-400 hover:bg-gray-100': (tab != 2)}">
-                                                Documents
+                                                {{ __('Documents') }}
                                             </span>
                                         </li>
                                         <li class="mr-1" v-bind:class="{'-mb-px': (tab == 3)}">
                                             <span @click="tab = 3" class="cursor-pointer bg-white inline-block"
                                                   v-bind:class="{'border-l border-t border-r rounded-t py-2 px-4 text-blue-dark font-bold': (tab == 3), 'py-2 px-4 hover:text-blue-400 hover:bg-gray-100': (tab != 3)}">
-                                                Flights
+                                                {{ __('Flights') }}
                                             </span>
                                         </li>
                                         @canany(['admin', 'gov'])
                                         <li class="mr-1" v-bind:class="{'-mb-px': (tab == 4)}">
                                             <span @click="tab = 4" class="cursor-pointer bg-white inline-block"
                                                   v-bind:class="{'border-l border-t border-r rounded-t py-2 px-4 text-blue-dark font-bold': (tab == 4), 'py-2 px-4 hover:text-blue-400 hover:bg-gray-100': (tab != 4)}">
-                                                History Reports
+                                                {{ __('History Reports') }}
                                             </span>
                                         </li>
                                         @endcanany
@@ -95,7 +95,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Primary Contact
+                                                        {{ __('Primary Contact') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->contact_1 }}
@@ -104,7 +104,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Secondary Contact
+                                                        {{ __('Secondary Contact') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->contact_2 }}
@@ -113,7 +113,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        E-mail
+                                                        {{ __('E-mail') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->email }}
@@ -125,7 +125,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Passport No.
+                                                        {{ __('Passport No.') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->passport }}
@@ -134,7 +134,7 @@
                                                 <div class="col-span-3 p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Place Issue.
+                                                        {{ __('Place of Issue') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->place_issue }}
@@ -146,7 +146,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        IQAMA
+                                                        {{ __('IQAMA') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->iqama }}
@@ -155,7 +155,7 @@
                                                 <div class="col-span-3 p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Address
+                                                        {{ __('Address') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->address }}
@@ -167,16 +167,16 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Gender
+                                                        {{ __('Gender') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
-                                                        {{ $candidate->gender }}
+                                                        {{ __($candidate->gender) }}
                                                     </label>
                                                 </div>
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Date Of Birth
+                                                        {{ __('Date Of Birth') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ \Carbon\Carbon::parse($candidate->birth_date)->format('F j, Y') }}
@@ -186,7 +186,7 @@
                                                     class="p-2 flex flex-col col-span-1 md:col-span-2 hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Place Of Birth
+                                                        {{ __('Place Of Birth') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->birth_place }}
@@ -198,7 +198,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Civil Status
+                                                        {{ __('Civil Status') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->civil_status }}
@@ -207,7 +207,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Height
+                                                        {{ __('Height') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->height }}
@@ -216,7 +216,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Weight
+                                                        {{ __('Weight') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->weight }}
@@ -225,7 +225,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Blood Type
+                                                        {{ __('Blood Type') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->blood_type }}
@@ -236,7 +236,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Language Spoken
+                                                        {{ __('Language Spoken') }}
                                                     </label>
                                                     <label class="text-l font-bold">
                                                         {{ $candidate->language }}
@@ -245,7 +245,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Religion
+                                                        {{ __('Religion') }}
                                                     </label>
                                                     <label class="text-l font-bold">
                                                         {{ $candidate->religion }}
@@ -254,7 +254,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        Father's Name
+                                                        {{ __('Father\'s Name') }}
                                                     </label>
                                                     <label class="text-l font-bold">
                                                         {{ $candidate->father_name }}
@@ -263,7 +263,7 @@
                                                 <div class="p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        {{ __("Mother's Name") }}
+                                                        {{ __('Mother\'s Name') }}
                                                     </label>
                                                     <label class="text-l font-bold">
                                                         {{ $candidate->mother_name }}
@@ -321,33 +321,33 @@
                                     </div>
                                     <div class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left" v-if="overview">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                            Flight Status Overview
+                                            {{ __('Flight Status Overview') }}
                                         </h3>
                                         <div class="flex flex-col mt-4" v-if="overview.details">
                                             <div class="flex flex-row">
                                                 <div class="mr-3">
-                                                    <div class="font-bold">Abroad Agency</div>
+                                                    <div class="font-bold">{{ __('Abroad Agency') }}</div>
                                                     <div>@{{ overview.agency_abroad.name }}</div>
                                                 </div>
                                                 <div class="mr-3">
-                                                    <div class="font-bold">Contact Person</div>
+                                                    <div class="font-bold">{{ __('Contact Person') }}</div>
                                                     <div>@{{ overview.contact_person }}</div>
                                                 </div>
                                                 <div class="mr-3">
-                                                    <div class="font-bold">Contact Number</div>
+                                                    <div class="font-bold">{{ __('Contact Number') }}</div>
                                                     <div>@{{ overview.contact_number }}</div>
                                                 </div>
                                                 <div class="mr-3">
-                                                    <div class="font-bold">Created By</div>
+                                                    <div class="font-bold">{{ __('Created By') }}</div>
                                                     <div>@{{ overview.author.name }}</div>
                                                 </div>
                                             </div>
                                             <div>
-                                                <div class="font-bold">Details</div>
+                                                <div class="font-bold">{{ __('Details') }}</div>
                                                 <div>@{{ overview.details }}</div>
                                             </div>
                                             <div>
-                                                <div class="font-bold">Contact Address</div>
+                                                <div class="font-bold">{{ __('Contact Address') }}</div>
                                                 <div>@{{ overview.contact_address }}</div>
                                             </div>
                                         </div>
@@ -357,7 +357,7 @@
                             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                 <button type="button" v-on:click="flight_overview = false"
                                         class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                    Cancel
+                                    {{ __('Cancel') }}
                                 </button>
                             </div>
                         </div>
@@ -386,33 +386,33 @@
                                     </div>
                                     <div class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left" v-if="overview">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                            Overview for
+                                            {{ __('Overview for') }}
                                             <span class="underline">@{{ overview.employee.last_name }}, @{{ overview.employee.first_name }} @{{ overview.employee.middle_name }}</span>
                                             <input class="hidden" name="id" v-bind:value="overview.id">
                                         </h3>
                                         <div class="mt-4">
                                             <div class="md:flex flex-none">
                                                 <div class="mt-2 mr-2">
-                                                    <label>Salary Received?</label>
+                                                    <label>{{ __('Salary Received?') }}</label>
                                                     <select name="salary_received" v-model="overview.salary_received"
                                                             class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
-                                                        <option value="yes">Yes</option>
-                                                        <option value="yes">No</option>
+                                                        <option value="yes">{{ __('Yes') }}</option>
+                                                        <option value="yes">{{ __('No') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="mt-2">
-                                                    <label>Salary Date</label>
+                                                    <label>{{ __('Salary Date') }}</label>
                                                     <input type="date" name="salary_date" v-model="overview.salary_date"
                                                            class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
                                                 </div>
                                             </div>
                                             <div class="mt-2">
-                                                <label>Comments</label>
+                                                <label>{{ __('Comments') }}</label>
                                                 <textarea name="comments" rows="6" v-model="overview.comments"
                                                           class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
                                                 ></textarea>
                                             </div>
-                                            <label class="text-xl mt-2">Attachments</label>
+                                            <label class="text-xl mt-2">{{ __('Attachments') }}</label>
                                             <div class="flex mt-1">
                                                 <a v-bind:href="'/' + overview.attachment_1" target="_blank"
                                                    class="pr-6 text-indigo-300 hover:underline hover:text-indigo-400">
@@ -477,6 +477,18 @@
                     mounted() {
                         var $this = this;
                         $this.dt_docs = $('#tbl-documents').DataTable({
+                            language :{
+                                "search": '{{ __('Search') }}',
+                                "lengthMenu": '{{ __("Show _MENU_ entries") }}',
+                                "info": "{{ __('Showing from _START_ to _END_ of _TOTAL_ records') }}",
+                                "infoEmpty": "{{ __('No records available') }}",
+                                "infoFiltered": "",
+                                "zeroRecords": "{{ __('No matching records found') }}",
+                                "paginate": {
+                                    "previous": '{{ __("Previous") }}',
+                                    "next": '{{ __("Next") }}'
+                                }
+                            },
                             responsive: true,
                             serverSide: true,
                             scrollX: true,
@@ -528,6 +540,18 @@
                         });
 
                         $this.dt_flights = $('#tbl-flights').DataTable({
+                            language :{
+                                "search": '{{ __('Search') }}',
+                                "lengthMenu": '{{ __("Show _MENU_ entries") }}',
+                                "info": "{{ __('Showing from _START_ to _END_ of _TOTAL_ records') }}",
+                                "infoEmpty": "{{ __('No records available') }}",
+                                "infoFiltered": "",
+                                "zeroRecords": "{{ __('No matching records found') }}",
+                                "paginate": {
+                                    "previous": '{{ __("Previous") }}',
+                                    "next": '{{ __("Next") }}'
+                                }
+                            },
                             responsive: true,
                             serverSide: true,
                             scrollX: true,
@@ -573,6 +597,18 @@
                         });
 
                         $this.dt_reports = $('#tbl-reports').DataTable({
+                            language :{
+                                "search": '{{ __('Search') }}',
+                                "lengthMenu": '{{ __("Show _MENU_ entries") }}',
+                                "info": "{{ __('Showing from _START_ to _END_ of _TOTAL_ records') }}",
+                                "infoEmpty": "{{ __('No records available') }}",
+                                "infoFiltered": "",
+                                "zeroRecords": "{{ __('No matching records found') }}",
+                                "paginate": {
+                                    "previous": '{{ __("Previous") }}',
+                                    "next": '{{ __("Next") }}'
+                                }
+                            },
                             responsive: true,
                             serverSide: true,
                             scrollX: true,
