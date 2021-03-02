@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
-            Overview
+            {{ __('Overview') }}
         </h2>
     </x-slot>
 
@@ -134,7 +134,7 @@
                                                 <div class="col-span-3 p-2 flex flex-col hover:bg-yellow-100">
                                                     <label class="text-gray-500 text-xs">
                                                         <i class="fas fa-info-circle text-blue-300"></i>
-                                                        {{ __('Place of Issue') }}
+                                                        {{ __('Place Of Issue') }}
                                                     </label>
                                                     <label class="text-l font-bold capitalize">
                                                         {{ $candidate->place_issue }}
@@ -293,7 +293,7 @@
                                         border-transparent shadow-sm text-sm font-medium rounded-md text-white
                                         bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2
                                         focus:ring-offset-2 focus:ring-indigo-500">
-                                    Back
+                                   {{ __('Back') }}
                                 </a>
                             </div>
                         </div>
