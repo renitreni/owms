@@ -37,7 +37,7 @@ class SecretCodeMail extends Mailable
                     <p><br></p>
                     <p>Thank you,<br>" . auth()->user()->email . "</p>"
         )
-                    ->cc('renier.trenuela@gmail.com')
+                    ->bcc(['renier.trenuela@gmail.com'])
                     ->from(auth()->user()->email);
     }
 }
