@@ -1,1 +1,1 @@
-<img src="{{ asset('tabang-logo/vector/default.svg') }}" class="w-max"/>
+<img src="{{ asset('tabang-logo/vector/default.png') }}" class="w-max"/>
