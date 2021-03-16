@@ -75,6 +75,14 @@
                         </x-nav-link>
                     </div>
                 @endcan
+                @canany(['admin'])
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('settings')"
+                                    :active="request()->routeIs('settings')">
+                            {{ __('Settings') }}
+                        </x-nav-link>
+                    </div>
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->

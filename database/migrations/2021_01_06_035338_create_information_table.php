@@ -18,7 +18,7 @@ class CreateInformationTable extends Migration
             $table->string('user_id', 200)->nullable();
             $table->string('national_id', 200)->nullable();
             $table->string('name', 200);
-            $table->string('tin', 200)->nullable();;
+            $table->string('tin', 200)->nullable();
             $table->text('address_line_1')->nullable();
             $table->text('address_line_2')->nullable();
             $table->string('city', 200)->nullable();

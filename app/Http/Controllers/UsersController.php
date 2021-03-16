@@ -67,9 +67,12 @@ class UsersController extends Controller
 
     public function show($id, User $user)
     {
-        $user = $user->newQuery()->where('id', $id)->with('information')->get()[0];
+        $user = $user->newQuery()
+                     ->where('users.id', $id)
+                     ->join('information as i', 'i.user_id', '=', 'users.id')
+                     ->get()[0];
 
-        return view('components.admin.users-edit', ['user' => $user]);
+        return view('components.admin.user-form', ['user' => $user]);
     }
 
     public function resetPassword($id)
@@ -81,14 +84,14 @@ class UsersController extends Controller
         return redirect()->route('users')->with('success', 'Password has been reset!');
     }
 
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateUserRequest $request)
     {
-        $user        = User::find($id);
+        $user        = User::find($request->user_id);
         $user->email = $request->email;
         $user->role  = $request->role;
         $user->save();
 
-        $information                 = Information::find($id);
+        $information                 = Information::find($request->id);
         $information->national_id    = $request->national_id;
         $information->name           = $request->name;
         $information->tin            = $request->tin;
@@ -127,5 +130,17 @@ class UsersController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'User has been deleted!');
+    }
+
+    public function indexSettings()
+    {
+        return view('components.settings');
+    }
+
+    public function settingsSave(Request $request)
+    {
+        $request->file('image')->storeAs('tabang-logo/vector/', 'default.png');
+
+        return ['success' => true];
     }
 }

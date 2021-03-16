@@ -30,6 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/change/pass', [UsersController::class, 'indexChangePass'])->name('change.pass');
+    Route::get('/settings', [UsersController::class, 'indexSettings'])->name('settings');
+    Route::post('/settings/submit', [UsersController::class, 'settingsSave'])->name('settings.submit');
     Route::post('/change/password/update', [UsersController::class, 'changePass'])->name('change.pass.update');
     Route::post('/users/table', [UsersController::class, 'table'])->name('users.table');
     Route::get('/users/create', [UsersController::class, 'create'])->name('users.create');
@@ -37,7 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/users/show/{id}', [UsersController::class, 'show'])->name('users.show');
     Route::get('/users/rp/{id}', [UsersController::class, 'resetPassword'])->name('users.resetpass');
     Route::get('/users/d/{id}', [UsersController::class, 'destroy'])->name('users.delete');
-    Route::post('/users/update/{id}', [UsersController::class, 'update'])->name('users.update');
+    Route::post('/users/update', [UsersController::class, 'update'])->name('users.update');
     Route::get('/users', [UsersController::class, 'index'])->name('users')->middleware('can:admin');
 
     Route::post('/employers/table', [EmployerController::class, 'table'])->name('employers.table');
