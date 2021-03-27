@@ -22,6 +22,7 @@ class Complains extends Model
         "location_ksa",
         "employer_name",
         "employer_contact",
+        "employer_national_id",
         "saudi_agency",
         "agency",
         "complain",

@@ -130,6 +130,10 @@
                                 <p class="fs-3"><u>Employer Information</u></p>
                             </div>
                             <div class="col-md-6">
+                                <label class="form-label">Employer's National ID</label>
+                                <input type="text" class="form-control" name="employer_national_id">
+                            </div>
+                            <div class="col-md-6">
                                 <label class="form-label">Employer Name</label>
                                 <input type="text" class="form-control" name="employer_name">
                             </div>

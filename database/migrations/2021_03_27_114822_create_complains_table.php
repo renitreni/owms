@@ -27,6 +27,7 @@ class CreateComplainsTable extends Migration
             $table->string('contact_number', 200)->nullable();// "contact_number"   => $request->contact_number,
             $table->string('contact_number2', 200)->nullable();// "contact_number2"  => $request->contact_number2,
             $table->string('location_ksa', 200)->nullable();// "location_ksa"     => $request->location_ksa,
+            $table->string('employer_national_id', 200)->nullable();// "employer_name"    => $request->employer_name,
             $table->string('employer_name', 200)->nullable();// "employer_name"    => $request->employer_name,
             $table->string('employer_contact', 200)->nullable();// "employer_contact" => $request->employer_contact,
             $table->string('saudi_agency', 200)->nullable();// "saudi_agency"     => $request->saudi_agency,
