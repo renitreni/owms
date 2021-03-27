@@ -15,22 +15,22 @@ class CreateComplainsTable extends Migration
     {
         Schema::create('complains', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name', 200)->nullable();// "first_name"       => $request->first_name,
-            $table->string('middle_name', 200)->nullable();// "middle_name"      => $request->middle_name,
-            $table->string('last_name', 200)->nullable();// "last_name"        => $request->last_name,
-            $table->string('gender', 200)->nullable();// "gender"           => $request->gender,
-            $table->string('iqama', 200)->nullable();// "gender"           => $request->gender,
-            $table->string('national_id', 200)->nullable();// "gender"           => $request->gender,
-            $table->string('occupation', 200)->nullable();// "occupation"       => $request->occupation,
-            $table->string('passport', 200)->nullable();// "passport"         => $request->passport,
-            $table->string('email_address', 200)->nullable();// "email_address"    => $request->email_address,
-            $table->string('contact_number', 200)->nullable();// "contact_number"   => $request->contact_number,
-            $table->string('contact_number2', 200)->nullable();// "contact_number2"  => $request->contact_number2,
-            $table->string('location_ksa', 200)->nullable();// "location_ksa"     => $request->location_ksa,
+            $table->string('contact_person', 200)->nullable();
+            $table->string('first_name', 200)->nullable();
+            $table->string('middle_name', 200)->nullable();
+            $table->string('last_name', 200)->nullable();
+            $table->string('gender', 200)->nullable();
+            $table->string('national_id', 200)->nullable();
+            $table->string('occupation', 200)->nullable();
+            $table->string('passport', 200)->nullable();
+            $table->string('email_address', 200)->nullable();
+            $table->string('contact_number', 200)->nullable();
+            $table->string('contact_number2', 200)->nullable();
+            $table->string('location_ksa', 200)->nullable();
             $table->string('employer_national_id', 200)->nullable();// "employer_name"    => $request->employer_name,
             $table->string('employer_name', 200)->nullable();// "employer_name"    => $request->employer_name,
             $table->string('employer_contact', 200)->nullable();// "employer_contact" => $request->employer_contact,
-            $table->string('saudi_agency', 200)->nullable();// "saudi_agency"     => $request->saudi_agency,
+            $table->string('host_agency', 200)->nullable();// "saudi_agency"     => $request->saudi_agency,
             $table->string('agency', 200)->nullable();// "agency"           => $request->agency,
             $table->string('complain', 200)->nullable();// "complain"         => $request->complain,
             $table->string('actual_langitude', 200)->nullable();// "actual_langitude" => $request->actual_langitude,

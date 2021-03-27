@@ -50,16 +50,12 @@
                                     <option>Female</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Passport</label>
+                            <div class="col-md-5">
+                                <label class="form-label">Passport Number</label>
                                 <input type="text" class="form-control" name="passport">
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">IQAMA</label>
-                                <input type="text" class="form-control" name="iqama">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">National ID</label>
+                            <div class="col-md-4">
+                                <label class="form-label">IQAMA / National ID</label>
                                 <input type="text" class="form-control" name="national_id">
                             </div>
                             <div class="col-12">
@@ -80,6 +76,10 @@
                             <div class="col-md-6">
                                 <label class="form-label">Contact #2</label>
                                 <input type="text" class="form-control" name="contact_number2">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Person in case of emergency contact</label>
+                                <input type="text" class="form-control" name="contact_person">
                             </div>
                             <div class="col-12">
                                 <p class="fs-3"><u>Job Information</u></p>
@@ -130,7 +130,15 @@
                                 <p class="fs-3"><u>Employer Information</u></p>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Employer's National ID</label>
+                                <label class="form-label">Local Agency</label>
+                                <input type="text" class="form-control" name="agency">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Abroad Agency</label>
+                                <input type="text" class="form-control" name="host_agency">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Employer's IQAMA / National ID</label>
                                 <input type="text" class="form-control" name="employer_national_id">
                             </div>
                             <div class="col-md-6">
@@ -141,12 +149,8 @@
                                 <label class="form-label">Employer Contact</label>
                                 <input type="text" class="form-control" name="employer_contact">
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Agency</label>
-                                <input type="text" class="form-control" name="agency">
-                            </div>
                             <div class="col-12">
-                                <p class="fs-3"><u>Complain Section</u></p>
+                                <p class="fs-3"><u>Complain Section / <i>Reklamo</i></u></p>
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label">Please fill up below</label>
