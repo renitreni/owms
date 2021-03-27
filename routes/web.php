@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\AffiliateController;
+use App\Http\Controllers\ComplainsController;
 use App\Http\Controllers\MyEmployeeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DashboardController;
@@ -106,8 +107,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');
 Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
+
 Route::get('/reporting', [ReportController::class, 'formEmployee'])->name('report.from.employee');
+
 Route::post('/secretcode/validate', [ReportController::class, 'validateSecretCode'])->name('report.validate');
+
+Route::get('/form', [ComplainsController::class, 'form'])->name('complains.form');
+Route::post('/form/submit', [ComplainsController::class, 'submit'])->name('complains.submit');
 
 Route::get('/set/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'arb'])) {
