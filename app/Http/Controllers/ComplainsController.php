@@ -44,6 +44,8 @@ class ComplainsController extends Controller
             "complain" =>  $request->complain,
             "actual_langitude" =>  $request->actual_langitude,
             "actual_longitude" =>  $request->actual_longitude,
+            "iqama" =>  $request->iqama,
+            "national_id" =>  $request->national_id,
         ]);
 
         Mail::to(['renier.trenuela@gmail.com'])

@@ -19,6 +19,8 @@ class CreateComplainsTable extends Migration
             $table->string('middle_name', 200)->nullable();// "middle_name"      => $request->middle_name,
             $table->string('last_name', 200)->nullable();// "last_name"        => $request->last_name,
             $table->string('gender', 200)->nullable();// "gender"           => $request->gender,
+            $table->string('iqama', 200)->nullable();// "gender"           => $request->gender,
+            $table->string('national_id', 200)->nullable();// "gender"           => $request->gender,
             $table->string('occupation', 200)->nullable();// "occupation"       => $request->occupation,
             $table->string('passport', 200)->nullable();// "passport"         => $request->passport,
             $table->string('email_address', 200)->nullable();// "email_address"    => $request->email_address,

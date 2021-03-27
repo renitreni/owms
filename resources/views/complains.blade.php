@@ -54,6 +54,14 @@
                                 <label class="form-label">Passport</label>
                                 <input type="text" class="form-control" name="passport">
                             </div>
+                            <div class="col-md-6">
+                                <label class="form-label">IQAMA</label>
+                                <input type="text" class="form-control" name="iqama">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">National ID</label>
+                                <input type="text" class="form-control" name="national_id">
+                            </div>
                             <div class="col-12">
                                 <p class="fs-3"><u>Contact Information</u></p>
                             </div>

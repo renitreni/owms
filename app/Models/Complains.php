@@ -30,5 +30,7 @@ class Complains extends Model
         "image3",
         "actual_langitude",
         "actual_longitude",
+        "iqama",
+        "national_id",
     ];
 }
