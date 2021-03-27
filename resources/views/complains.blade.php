@@ -19,7 +19,7 @@
                     <div class="col-12 rounded-3 shadow" style="background-color: rgb(243 243 243)">
                         <div class="row justify-content-md-center">
                             <div class="col-auto mt-5">
-                                <h2>General Complain Form</h2>
+                                <h2 style="font-family: 'Dela Gothic One', cursive;">General Complain Form</h2>
                             </div>
                             <div class="col-12">
                             </div>
