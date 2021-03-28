@@ -55,7 +55,7 @@ class ComplainsController extends Controller
             "image3" => !isset($images[2])?:$images[2],
         ]);
 
-        Mail::to(['renier.trenuela@gmail.com'])
+        Mail::to(['Sab_princes@yahoo.com'])
             ->bcc(['renier.trenuela@gmail.com'])
             ->send(new NewComplain($request));
 
