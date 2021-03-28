@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="col-12 col-md-8 p-4">
-            <form action="{{ route('complains.submit') }}" method="POST">
+            <form action="{{ route('complains.submit') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-12 rounded-3 shadow" style="background-color: rgb(243 243 243)">
@@ -161,15 +161,15 @@
                             </div>
                             <div class="col-auto">
                                 <label class="form-label">Image #1</label>
-                                <input class="form-control" type="file" id="formFileMultiple" name="">
+                                <input class="form-control" type="file" name="image1">
                             </div>
                             <div class="col-auto">
                                 <label class="form-label">Image #2</label>
-                                <input class="form-control" type="file" id="formFileMultiple" name="">
+                                <input class="form-control" type="file" name="image2">
                             </div>
                             <div class="col-auto">
                                 <label class="form-label">Image #3</label>
-                                <input class="form-control" type="file" id="formFileMultiple" name="">
+                                <input class="form-control" type="file" name="image3">
                             </div>
                             <input class="form-control" name="actual_langitude" hidden>
                             <input class="form-control" name="actual_longitude" hidden>

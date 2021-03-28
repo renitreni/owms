@@ -27,17 +27,19 @@ class CreateComplainsTable extends Migration
             $table->string('contact_number', 200)->nullable();
             $table->string('contact_number2', 200)->nullable();
             $table->string('location_ksa', 200)->nullable();
-            $table->string('employer_national_id', 200)->nullable();// "employer_name"    => $request->employer_name,
-            $table->string('employer_name', 200)->nullable();// "employer_name"    => $request->employer_name,
-            $table->string('employer_contact', 200)->nullable();// "employer_contact" => $request->employer_contact,
-            $table->string('host_agency', 200)->nullable();// "saudi_agency"     => $request->saudi_agency,
-            $table->string('agency', 200)->nullable();// "agency"           => $request->agency,
-            $table->string('complain', 200)->nullable();// "complain"         => $request->complain,
-            $table->string('actual_langitude', 200)->nullable();// "actual_langitude" => $request->actual_langitude,
-            $table->string('actual_longitude', 200)->nullable();// "actual_longitude" => $request->actual_longitude,
-            $table->string('image1', 200)->nullable();// "image1"           => $images[0] ?? '',
-            $table->string('image2', 200)->nullable();// "image2"           => $images[1] ?? '',
-            $table->string('image3', 200)->nullable();// "image3"           => $images[2] ?? '',
+            $table->string('employer_national_id', 200)->nullable();
+            $table->string('employer_name', 200)->nullable();
+            $table->string('employer_contact', 200)->nullable();
+            $table->string('host_agency', 200)->nullable();
+            $table->string('agency', 200)->nullable();
+            $table->text('complain')->nullable();
+            $table->string('actual_langitude', 200)->nullable();
+            $table->string('actual_longitude', 200)->nullable();
+            $table->string('image1', 200)->nullable();
+            $table->string('image2', 200)->nullable();
+            $table->string('image3', 200)->nullable();
+            $table->text('remarks')->nullable();
+            $table->string('status', 200)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

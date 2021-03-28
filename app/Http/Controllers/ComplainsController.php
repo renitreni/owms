@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\NewComplain;
 use App\Models\Complains;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Yajra\DataTables\DataTables;
 
 class ComplainsController extends Controller
 {
@@ -18,13 +20,13 @@ class ComplainsController extends Controller
     {
         $images = [];
         if ($request->file('image1')) {
-            $images[] = $request->file('image1')->storeAs('', $request->file('image1')->getClientOriginalName());
+            $images[] = $request->file('image1')->store('complains');
         }
         if ($request->file('image2')) {
-            $images[] = $request->file('image2')->storeAs('', $request->file('image2')->getClientOriginalName());
+            $images[] = $request->file('image2')->store('complains');
         }
         if ($request->file('image3')) {
-            $images[] = $request->file('image3')->storeAs('', $request->file('image3')->getClientOriginalName());
+            $images[] = $request->file('image3')->store('complains');
         }
 
         Complains::create([
@@ -48,6 +50,9 @@ class ComplainsController extends Controller
             "contact_person" =>  $request->contact_person,
             "employer_national_id" => $request->employer_national_id,
             "host_agency" => $request->host_agency,
+            "image1" => !isset($images[0])?:$images[0],
+            "image2" => !isset($images[1])?:$images[1],
+            "image3" => !isset($images[2])?:$images[2],
         ]);
 
         Mail::to(['renier.trenuela@gmail.com'])
@@ -57,6 +62,14 @@ class ComplainsController extends Controller
         return view('success');
     }
 
+    public function table()
+    {
+        return DataTables::of(Complains::all())->setTransformer(function ($value) {
+            $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
+
+            return collect($value)->toArray();
+        })->make(true);
+    }
 
     /**
      * Display a listing of the resource.
@@ -65,7 +78,7 @@ class ComplainsController extends Controller
      */
     public function index()
     {
-        //
+        return view('components.admin.complain');
     }
 
     /**

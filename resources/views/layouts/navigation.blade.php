@@ -65,6 +65,11 @@
                 {{ __('OFWs') }}
             </x-nav-link>
         </div>
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            <x-nav-link :href="route('complains.index')" :active="request()->routeIs('complains.index')">
+                {{ __('Complains') }}
+            </x-nav-link>
+        </div>
     @endcan
     @canany(['admin'])
     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
