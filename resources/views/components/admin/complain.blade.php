@@ -58,8 +58,8 @@
                             {
                                 data: function(value) {
                                     if(value.remarks)
-                                        return '<i class="bg-green-500 p-1 rounded shadow text-white">Reviewed<i>';
-                                    return '<i class="bg-red-500 p-1 rounded shadow text-white">Pending<i>';
+                                        return '<a href="' + value.route_show + '" class="bg-green-500 hover:bg-green-600 p-1 rounded shadow text-white">Reviewed</a>';
+                                    return '<a href="' + value.route_show + '" class="bg-red-500 hover:bg-red-600 p-1 rounded shadow text-white">Pending</a>';
                                 },
                                 name: 'id',
                                 title: 'Status'

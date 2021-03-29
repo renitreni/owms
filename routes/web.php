@@ -104,7 +104,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/details/pending/item/{id}', [OtherDetailsController::class, 'pendingItem'])->name('details.pending.item');
     Route::get('/details/delete/item/{id}', [OtherDetailsController::class, 'deleteItem'])->name('details.delete.item');
 
-    Route::resource('complains', ComplainsController::class)->middleware('can:admin_agency_gov');
+    Route::resource('complains', ComplainsController::class)->parameters(['complains' => 'id'])->middleware('can:admin_agency_gov');
+    Route::post('complains/update/{id}', [ComplainsController::class, 'update'])->name('complains.updater');
     Route::post('complains/table', [ComplainsController::class, 'table'])->name('complains.table');
 });
 

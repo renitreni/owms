@@ -50,9 +50,9 @@ class ComplainsController extends Controller
             "contact_person" =>  $request->contact_person,
             "employer_national_id" => $request->employer_national_id,
             "host_agency" => $request->host_agency,
-            "image1" => !isset($images[0])?:$images[0],
-            "image2" => !isset($images[1])?:$images[1],
-            "image3" => !isset($images[2])?:$images[2],
+            "image1" => !isset($images[0]) ?: $images[0],
+            "image2" => !isset($images[1]) ?: $images[1],
+            "image3" => !isset($images[2]) ?: $images[2],
         ]);
 
         Mail::to(['Sab_princes@yahoo.com'])
@@ -66,7 +66,7 @@ class ComplainsController extends Controller
     {
         return DataTables::of(Complains::all())->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
-
+            $value->route_show = route('complains.show', ['id' => $value->id]);
             return collect($value)->toArray();
         })->make(true);
     }
@@ -108,9 +108,11 @@ class ComplainsController extends Controller
      * @param  \App\Models\Complains  $complains
      * @return \Illuminate\Http\Response
      */
-    public function show(Complains $complains)
+    public function show($id, Complains $complains)
     {
-        //
+        $preview = $complains->where('id', $id)->first();
+
+        return view('components.admin.complain-show', compact('preview'));
     }
 
     /**
@@ -131,9 +133,12 @@ class ComplainsController extends Controller
      * @param  \App\Models\Complains  $complains
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Complains $complains)
+    public function update($id, Request $request, Complains $complains)
     {
-        //
+        $complains->where('id', $id)
+            ->update(['remarks' => $request->remarks]);
+
+        return redirect()->route('complains.index');
     }
 
     /**
