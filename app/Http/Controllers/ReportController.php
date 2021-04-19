@@ -8,6 +8,7 @@ use App\Models\Candidate;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Requests\ReportSubmitRequest;
+use Illuminate\Support\Facades\Crypt;
 
 class ReportController extends Controller
 {
@@ -22,7 +23,7 @@ class ReportController extends Controller
 
         return DataTables::of($reports)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
-
+            $value->id_e               = Crypt::encrypt($value->employee->id);
             return collect($value)->toArray();
         })->make(true);
     }

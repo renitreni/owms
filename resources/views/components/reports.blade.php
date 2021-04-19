@@ -126,7 +126,7 @@
                             },
                             {
                                 data: function (value) {
-                                    return '<a href="/candidates/' + value.employee.id + '/show" ' +
+                                    return '<a href="/candidates/' + value.id_e + '/show" ' +
                                         'class="hover:underline hover:text-indigo-400">' +
                                         '' + value.employee.last_name + ', ' +
                                         '' + value.employee.first_name + ' ' +

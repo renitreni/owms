@@ -11,6 +11,7 @@ use App\Http\Controllers\MyEmployeeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OtherDetailsController;
+use App\Http\Controllers\VoucherController;
 use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/send/chat', [DashboardController::class, 'sendChat'])->name('send.chat');
 
     Route::get('/change/pass', [UsersController::class, 'indexChangePass'])->name('change.pass');
     Route::get('/settings', [UsersController::class, 'indexSettings'])->name('settings');
@@ -107,6 +109,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('complains', ComplainsController::class)->parameters(['complains' => 'id'])->middleware('can:admin_agency_gov');
     Route::post('complains/update/{id}', [ComplainsController::class, 'update'])->name('complains.updater');
     Route::post('complains/table', [ComplainsController::class, 'table'])->name('complains.table');
+
+    Route::post('voucher/table', [VoucherController::class, 'table'])->name('voucher.table');
+    Route::post('voucher/invalid', [VoucherController::class, 'invalid'])->name('voucher.invalid');
+    Route::get('voucher/cash/voucher/{id}', [VoucherController::class, 'cashVoucher'])->name('cash.voucher');
+    Route::get('voucher/export', [VoucherController::class, 'export'])->name('voucher.export');
+    Route::resource('voucher', VoucherController::class)->middleware('can:agency');
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');

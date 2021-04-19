@@ -45,10 +45,19 @@ class User extends Authenticatable
     public static function noInfoIds()
     {
         return (new static())->newQuery()
-                             ->selectRaw('users.id')
-                             ->leftJoin('information as inf', 'inf.user_id', '=', 'users.id')
-                             ->whereNull('inf.user_id')
-                             ->pluck('id');
+            ->selectRaw('users.id')
+            ->leftJoin('information as inf', 'inf.user_id', '=', 'users.id')
+            ->whereNull('inf.user_id')
+            ->pluck('id');
+    }
+
+    public function getParentAgency($id)
+    {
+        $hold = $this->newQuery()->where('id', $id)->first();
+        if ($hold->agency_id) {
+            return $hold->agency_id;
+        }
+        return $hold->id;
     }
 
     public function getEmployersByAgency($id)
