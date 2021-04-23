@@ -40,7 +40,7 @@
             <a class="navbar-brand" href="https://formofw.com/">
                 <div class="row">
                     <div class="col-auto">
-                        <img src="{{ asset('images/logo.png') }}" alt="" width="50" height="50"
+                        <img src="{{ asset('tabang-logo/vector/default.png') }}" alt="" width="50" height="50"
                             class="d-inline-block align-text-top img-fluid">
                     </div>
                     <div class="col-auto p-0">

@@ -3,7 +3,7 @@
     <tr>
         <td style="width: 11.778%;">
             <div style="text-align: center;"><span style="font-family: Tahoma,Geneva, sans-serif;">
-                    <img src="{{ asset('images/logo.png') }}" width="150px">
+                    <img src="{{ asset('tabang-logo/vector/default.png') }}" width="150px">
                 </span></div>
         </td>
         <td style="width: 88.1087%;">

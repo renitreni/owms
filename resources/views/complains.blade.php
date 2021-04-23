@@ -5,7 +5,7 @@
         <div class="col-md-4 d-none d-sm-block">
             <div class="row">
                 <div class="col-12">
-                    <img src="{{ asset('images/logo.png') }}" class="img-fluid">
+                    <img src="{{ asset('tabang-logo/vector/default.png') }}" class="img-fluid">
                 </div>
                 <div class="col-12">
                     <div id='map' style='width: 100%; height: 300px;'></div>
