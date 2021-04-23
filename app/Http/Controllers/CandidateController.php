@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Faker\Factory;
 use App\Models\User;
-use App\Models\Report;
 use App\Models\Document;
 use App\Models\Employer;
+use PDF;
 use App\Models\Candidate;
 use App\Models\Information;
 use Illuminate\Http\Request;
 use App\Mail\SecretCodeMail;
 use Yajra\DataTables\DataTables;
+use App\Models\EmploymentHistory;
 use App\Http\Requests\EmployRequest;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
@@ -90,14 +90,29 @@ class CandidateController extends Controller
 
         $doc               = new Document();
         $doc->candidate_id = $model->id;
+        $doc->filename     = $path;
         $doc->path         = $path;
         $doc->type         = 'CV';
         $doc->created_by   = auth()->id();
         $doc->save();
 
+        $employment = json_decode($request->employment);
+
+        EmploymentHistory::query()->where('candidate_id', $model->id)->delete();
+
+        foreach ($employment as $values) {
+            EmploymentHistory::create([
+                "candidate_id" => $model->id,
+                "country"      => $values->country,
+                "position"     => $values->position,
+                "year"         => $values->year,
+                "company"      => $values->company,
+            ]);
+        }
+
         return redirect()
             ->route('candidate.applicant')
-            ->with('success', "Your Application has been submitted!");
+            ->with('success', "Your Application has been submitted!")->withInput();
     }
 
     public function create($id, Information $information)
@@ -144,45 +159,67 @@ class CandidateController extends Controller
 
     public function show($id)
     {
-        $id      = Crypt::decrypt($id);
-        $results = Candidate::find($id);
-        $doc     = DB::table('documents')->where('candidate_id', $id)->where('type', 'CV')->get();
+        $id         = Crypt::decrypt($id);
+        $results    = Candidate::find($id);
+        $doc        = DB::table('documents')->where('candidate_id', $id)->where('type', 'CV')->get();
+        $employment = EmploymentHistory::query()->where('candidate_id', $id)->get();
 
-        return view('components.agency.applicant-edit', compact('results', 'doc'));
+        return view('components.agency.applicant-edit', compact('results', 'doc', 'employment'));
     }
 
     public function update(Request $request)
     {
-        $candidate                = Candidate::find($request->id);
-        $candidate->agency_id     = $request->agency_id;
-        $candidate->passport      = $request->passport;
-        $candidate->position_1    = $request->position_1;
-        $candidate->position_2    = $request->position_2;
-        $candidate->position_3    = $request->position_3;
-        $candidate->first_name    = $request->first_name;
-        $candidate->middle_name   = $request->middle_name;
-        $candidate->last_name     = $request->last_name;
-        $candidate->language      = $request->language;
-        $candidate->birth_date    = $request->birth_date;
-        $candidate->gender        = $request->gender;
-        $candidate->civil_status  = $request->civil_status;
-        $candidate->spouse        = $request->spouse;
-        $candidate->blood_type    = $request->blood_type;
-        $candidate->height        = $request->height;
-        $candidate->weight        = $request->weight;
-        $candidate->religion      = $request->religion;
-        $candidate->mother_name   = $request->mother_name;
-        $candidate->father_name   = $request->father_name;
-        $candidate->contact_1     = $request->contact_1;
-        $candidate->contact_2     = $request->contact_2;
-        $candidate->email         = $request->email;
-        $candidate->address       = $request->address;
-        $candidate->place_issue   = $request->place_issue;
-        $candidate->birth_place   = $request->birth_place;
-        $candidate->travel_status = $request->travel_status;
-        $candidate->iqama         = $request->iqama;
-        $candidate->education     = $request->education;
-        $candidate->applied_using = $request->applied_using;
+        $employment = json_decode($request->employment);
+
+        EmploymentHistory::query()->where('candidate_id', $request->id)->delete();
+        foreach ($employment as $values) {
+            EmploymentHistory::create([
+                "candidate_id" => $request->id,
+                "country"      => $values->country,
+                "position"     => $values->position,
+                "year"         => $values->year,
+                "company"      => $values->company,
+            ]);
+        }
+
+        $candidate                   = Candidate::find($request->id);
+        $candidate->agency_id        = $request->agency_id;
+        $candidate->passport         = $request->passport;
+        $candidate->position_1       = $request->position_1;
+        $candidate->position_2       = $request->position_2;
+        $candidate->position_3       = $request->position_3;
+        $candidate->first_name       = $request->first_name;
+        $candidate->middle_name      = $request->middle_name;
+        $candidate->last_name        = $request->last_name;
+        $candidate->language         = $request->language;
+        $candidate->birth_date       = $request->birth_date;
+        $candidate->gender           = $request->gender;
+        $candidate->civil_status     = $request->civil_status;
+        $candidate->spouse           = $request->spouse;
+        $candidate->blood_type       = $request->blood_type;
+        $candidate->height           = $request->height;
+        $candidate->weight           = $request->weight;
+        $candidate->religion         = $request->religion;
+        $candidate->mother_name      = $request->mother_name;
+        $candidate->father_name      = $request->father_name;
+        $candidate->contact_1        = $request->contact_1;
+        $candidate->contact_2        = $request->contact_2;
+        $candidate->email            = $request->email;
+        $candidate->address          = $request->address;
+        $candidate->place_issue      = $request->place_issue;
+        $candidate->birth_place      = $request->birth_place;
+        $candidate->travel_status    = $request->travel_status;
+        $candidate->iqama            = $request->iqama;
+        $candidate->education        = $request->education;
+        $candidate->applied_using    = $request->applied_using;
+        $candidate->doe              = $request->doe;
+        $candidate->dos              = $request->dos;
+        $candidate->remarks          = $request->remarks;
+        $candidate->skills           = $request->skills;
+        $candidate->kin              = $request->kin;
+        $candidate->kin_relationship = $request->kin_relationship;
+        $candidate->kin_contact      = $request->kin_contact;
+        $candidate->kin_address      = $request->kin_address;
         $candidate->save();
 
         if ($request->has('cv')) {
@@ -196,6 +233,7 @@ class CandidateController extends Controller
 
             $doc               = new Document();
             $doc->candidate_id = $candidate->id;
+            $doc->filename     = $path;
             $doc->path         = $path;
             $doc->type         = 'CV';
             $doc->created_by   = auth()->id();
@@ -282,5 +320,19 @@ class CandidateController extends Controller
         Mail::to($request->email)->send(new SecretCodeMail($request));
 
         return ['success' => true];
+    }
+
+    public function toPDF(Request $request)
+    {
+        Candidate::updateOrCreate(
+            ['id' => $request->id],
+            ['remarks' => $request->remarks]
+        );
+
+        $results = Candidate::query()->where('id', $request->id)->with(['agency', 'employment'])->first();
+        $pdf     = PDF::loadView("printables.resume", compact('results'));
+        $now     = Carbon::now();
+
+        return $pdf->setPaper('a4')->download("{$results->last_name}_{$results->first_name}_{$now}.pdf");
     }
 }

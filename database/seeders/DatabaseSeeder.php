@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // admin@tabang.com agency@tabang.com employer@tabang.com gov@tabang.com
         User::query()->insert([
             'email'             => 'admin@tabang.com',
             'role'              => 1,

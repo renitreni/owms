@@ -29,6 +29,7 @@ class CreateInformationTable extends Migration
             $table->string('email', 200)->nullable();
             $table->string('status', 200)->nullable();
             $table->string('type', 200)->nullable();
+            $table->string('poea', 200)->nullable();
             $table->string('created_by', 200)->nullable();
             $table->softDeletes();
             $table->timestamps();

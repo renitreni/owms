@@ -30,6 +30,13 @@
                                         </div>
                                         {{--                                        National ID--}}
                                         <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">POEA NO</label>
+                                            <input type="text" name="national_id" autocomplete="national_id"
+                                                   v-model="overview.poea"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        {{--                                        National ID--}}
+                                        <div class="md:col-span-4 col-span-12">
                                             <label class="block text-sm font-medium text-gray-700">National ID</label>
                                             <input type="text" name="national_id" autocomplete="national_id"
                                                    v-model="overview.national_id"

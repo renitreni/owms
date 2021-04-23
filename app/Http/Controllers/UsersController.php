@@ -59,6 +59,7 @@ class UsersController extends Controller
         $information->email          = $request->email;
         $information->status         = $request->status;
         $information->type           = $request->type;
+        $information->poea           = $request->poea;
         $information->created_by     = auth()->id();
         $information->save();
 
@@ -105,6 +106,7 @@ class UsersController extends Controller
         $information->email          = $request->email;
         $information->status         = $request->status;
         $information->type           = $request->type;
+        $information->poea           = $request->poea;
         $information->created_by     = auth()->id();
         $information->save();
 

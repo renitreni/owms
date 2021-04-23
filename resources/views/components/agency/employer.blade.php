@@ -109,10 +109,13 @@
                             },
                             {
                                 data: function (value) {
-                                    return '<div class="block text-center">' +
+                                    return '<div class="flex flex-row">' +
                                         '<button class="btn-employees bg-purple-400 shadow px-1 w-full text-white hover:bg-purple-500">' +
-                                        '<i class="fas fa-eye"></i> ' + value.applicant_count + '' +
+                                        '<i class="fas fa-eye"></i> ' + value.applicant_count +
                                         '</button>' +
+                                        // '<button class="bg-blue-400 shadow px-1 w-full text-white hover:bg-blue-500">' +
+                                        // '<i class="far fa-comments"></i> ' +
+                                        // '</button>' +
                                         '</div>'
                                 }, name: 'id', title: '{{ __("Employee(s)") }}', bSortable: false
                             },

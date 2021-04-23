@@ -1,44 +1,28 @@
 <template>
   <div
-    class="bg-white rounded shadow-2xl bottom-0 right-2"
-    v-bind:class="{ 'w-40': hide_panel, 'w-80': !hide_panel }"
+    class="bg-white bottom-0 right-2 w-full"
   >
     <nav
-      v-bind:class="{ 'w-40': hide_panel, 'w-80': !hide_panel }"
-      class="h-10 bg-blue-400 rounded-tr rounded-tl flex justify-between items-center"
+      class="w-full h-10 bg-blue-400 flex justify-between items-center"
     >
       <div class="flex justify-center items-center">
         <i class="mdi mdi-arrow-left font-normal text-gray-300 ml-1"></i>
         <!-- <img src="https://i.imgur.com/IAgGUYF.jpg" class="rounded-full ml-1" width="25" height="25"> -->
         <span class="text-base font-bold font-medium text-white ml-1"
-          >Alex cairo</span
+          >Alex cairo Chat Line: {{ props_data.line_id }}</span
         >
       </div>
       <div class="flex items-center">
-        <span v-bind:class="{ hidden: hide_panel }">
-          <i
-            @click="hide_panel = true"
-            class="fas fa-chevron-down text-white hover:text-gray-200 mr-4"
-          >
-          </i>
-        </span>
-        <span v-bind:class="{ hidden: !hide_panel }">
-          <i
-            @click="hide_panel = false"
-            class="fas fa-chevron-up text-white hover:text-gray-200 mr-4"
-          >
-          </i>
-        </span>
-        <i
+        <!-- <i
           class="fas fa-times text-white hover:text-gray-200 mr-4"
           @click="selfDestruct()"
-        ></i>
+        ></i> -->
       </div>
     </nav>
-    <div v-bind:class="{ hidden: hide_panel }">
+    <div>
       <div
         class="overflow-auto px-1 py-1"
-        style="height: 19rem"
+        style="height: 35rem"
         id="journal-scroll"
       >
         <div class="flex items-center pr-10">
@@ -64,14 +48,14 @@
         <div class="" id="chatmsg"></div>
       </div>
       <div class="flex justify-between items-center p-4">
-        <div>
+        <div class="flex flex-grow">
           <!-- <i class="mdi mdi-emoticon-excited-outline absolute top-1 left-1 text-gray-400" style="font-size: 17px !important;font-weight: bold;"></i> -->
           <input
             type="text"
             v-model="overview.message"
             v-on:keyup.enter="sendChat()"
-            class="border-0 rounded-md pl-6 pr-12 py-2 focus:outline-none h-auto placeholder-gray-400 bg-gray-200 focus:bg-gray-100"
-            style="font-size: 11px; width: 250px"
+            class="border-0 rounded-md pl-6 pr-12 mr-2 py-2 w-full focus:outline-none h-auto placeholder-gray-400 bg-gray-200 focus:bg-gray-100"
+            style="font-size: 11px;"
             placeholder="Type a message..."
             id="typemsg"
           />
@@ -94,10 +78,11 @@
 </template>
 <script>
 export default {
-  props: ["routesendchat", "lineid"],
+  props: ["data"],
   data() {
     return {
       hide_panel: true,
+      props_data: JSON.parse(this._props.data),
       overview: {
         message: "",
       },
@@ -112,13 +97,13 @@ export default {
       if ($this.overview.message === "") {
         return false;
       }
-      axios.post(this._props.routesendchat, this.overview).then(function () {
+      axios.post(this.props_data.send_link, this.overview).then(function () {
         $this.overview.message = "";
       });
     },
   },
   mounted() {
-    Echo.channel("form-ofw").listen("chat-line-" + this._props.lineid, (e) => {
+    Echo.channel("form-ofw").listen("chat-line-" + this.props_data.line_id, (e) => {
       console.log(e);
     });
   },

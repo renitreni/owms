@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\AffiliateController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ComplainsController;
 use App\Http\Controllers\MyEmployeeController;
 use App\Http\Controllers\ReportController;
@@ -69,6 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
     Route::get('/candidates/overview/{id}', [CandidateController::class, 'overview'])->name('candidate.overview');
     Route::post('/send/code', [CandidateController::class, 'sendCode'])->name('send.code');
+    Route::get('/candidates/pdf/', [CandidateController::class, 'toPDF'])->name('candidate.pdf');
 
     Route::get('/employee', [MyEmployeeController::class, 'index'])->name('candidate.employees')->middleware('can:employer');
     Route::post('/employee/table', [MyEmployeeController::class, 'table'])->name('candidate.employees.table');
@@ -115,6 +117,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('voucher/cash/voucher/{id}', [VoucherController::class, 'cashVoucher'])->name('cash.voucher');
     Route::get('voucher/export', [VoucherController::class, 'export'])->name('voucher.export');
     Route::resource('voucher', VoucherController::class)->middleware('can:agency');
+
+    Route::resource('chat', ChatController::class);
 });
 
 Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');

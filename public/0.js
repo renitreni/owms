@@ -87,27 +87,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["routesendchat", "lineid"],
+  props: ["data"],
   data: function data() {
     return {
       hide_panel: true,
+      props_data: JSON.parse(this._props.data),
       overview: {
         message: ""
       }
@@ -124,13 +109,13 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
 
-      axios.post(this._props.routesendchat, this.overview).then(function () {
+      axios.post(this.props_data.send_link, this.overview).then(function () {
         $this.overview.message = "";
       });
     }
   },
   mounted: function mounted() {
-    Echo.channel("form-ofw").listen("chat-line-" + this._props.lineid, function (e) {
+    Echo.channel("form-ofw").listen("chat-line-" + this.props_data.line_id, function (e) {
       console.log(e);
     });
   }
@@ -153,147 +138,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "bg-white rounded shadow-2xl bottom-0 right-2",
-      class: { "w-40": _vm.hide_panel, "w-80": !_vm.hide_panel }
-    },
-    [
-      _c(
-        "nav",
-        {
-          staticClass:
-            "h-10 bg-blue-400 rounded-tr rounded-tl flex justify-between items-center",
-          class: { "w-40": _vm.hide_panel, "w-80": !_vm.hide_panel }
-        },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex items-center" }, [
-            _c("span", { class: { hidden: _vm.hide_panel } }, [
-              _c("i", {
-                staticClass:
-                  "fas fa-chevron-down text-white hover:text-gray-200 mr-4",
-                on: {
-                  click: function($event) {
-                    _vm.hide_panel = true
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("span", { class: { hidden: !_vm.hide_panel } }, [
-              _c("i", {
-                staticClass:
-                  "fas fa-chevron-up text-white hover:text-gray-200 mr-4",
-                on: {
-                  click: function($event) {
-                    _vm.hide_panel = false
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("i", {
-              staticClass: "fas fa-times text-white hover:text-gray-200 mr-4",
-              on: {
-                click: function($event) {
-                  return _vm.selfDestruct()
-                }
-              }
-            })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { class: { hidden: _vm.hide_panel } }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex justify-between items-center p-4" }, [
-          _c("div", [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.overview.message,
-                  expression: "overview.message"
-                }
-              ],
-              staticClass:
-                "border-0 rounded-md pl-6 pr-12 py-2 focus:outline-none h-auto placeholder-gray-400 bg-gray-200 focus:bg-gray-100",
-              staticStyle: { "font-size": "11px", width: "250px" },
-              attrs: {
-                type: "text",
-                placeholder: "Type a message...",
-                id: "typemsg"
-              },
-              domProps: { value: _vm.overview.message },
-              on: {
-                keyup: function($event) {
-                  if (
-                    !$event.type.indexOf("key") &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                  ) {
-                    return null
-                  }
-                  return _vm.sendChat()
-                },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.overview, "message", $event.target.value)
-                }
-              }
-            })
-          ]),
+  return _c("div", { staticClass: "bg-white bottom-0 right-2 w-full" }, [
+    _c(
+      "nav",
+      {
+        staticClass: "w-full h-10 bg-blue-400 flex justify-between items-center"
+      },
+      [
+        _c("div", { staticClass: "flex justify-center items-center" }, [
+          _c("i", {
+            staticClass: "mdi mdi-arrow-left font-normal text-gray-300 ml-1"
+          }),
           _vm._v(" "),
           _c(
-            "div",
-            {
-              staticClass:
-                "w-7 h-7 rounded-full bg-blue-300 text-center items-center flex justify-center"
-            },
-            [
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "w-7 h-7 rounded-full text-center items-center flex justify-center outline-none hover:bg-gray-300 hover:text-white",
-                  on: {
-                    click: function($event) {
-                      return _vm.sendChat()
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-paper-plane" })]
-              )
-            ]
+            "span",
+            { staticClass: "text-base font-bold font-medium text-white ml-1" },
+            [_vm._v("Alex cairo Chat Line: " + _vm._s(_vm.props_data.line_id))]
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex items-center" })
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex justify-between items-center p-4" }, [
+        _c("div", { staticClass: "flex flex-grow" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.overview.message,
+                expression: "overview.message"
+              }
+            ],
+            staticClass:
+              "border-0 rounded-md pl-6 pr-12 mr-2 py-2 w-full focus:outline-none h-auto placeholder-gray-400 bg-gray-200 focus:bg-gray-100",
+            staticStyle: { "font-size": "11px" },
+            attrs: {
+              type: "text",
+              placeholder: "Type a message...",
+              id: "typemsg"
+            },
+            domProps: { value: _vm.overview.message },
+            on: {
+              keyup: function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.sendChat()
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.overview, "message", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-7 h-7 rounded-full bg-blue-300 text-center items-center flex justify-center"
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "w-7 h-7 rounded-full text-center items-center flex justify-center outline-none hover:bg-gray-300 hover:text-white",
+                on: {
+                  click: function($event) {
+                    return _vm.sendChat()
+                  }
+                }
+              },
+              [_c("i", { staticClass: "fas fa-paper-plane" })]
+            )
+          ]
+        )
       ])
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex justify-center items-center" }, [
-      _c("i", {
-        staticClass: "mdi mdi-arrow-left font-normal text-gray-300 ml-1"
-      }),
-      _vm._v(" "),
-      _c(
-        "span",
-        { staticClass: "text-base font-bold font-medium text-white ml-1" },
-        [_vm._v("Alex cairo")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -302,7 +239,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass: "overflow-auto px-1 py-1",
-        staticStyle: { height: "19rem" },
+        staticStyle: { height: "35rem" },
         attrs: { id: "journal-scroll" }
       },
       [

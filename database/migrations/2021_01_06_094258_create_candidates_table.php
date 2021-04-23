@@ -17,6 +17,11 @@ class CreateCandidatesTable extends Migration
             $table->id();
             $table->string('agency_id', 200)->nullable();
 
+            $table->string('position_1', 200)->nullable();
+            $table->string('position_2', 200)->nullable();
+            $table->string('position_3', 200)->nullable();
+            $table->text('skills')->nullable();
+
             $table->string('employer_id', 200)->nullable();
             $table->string('status', 200)->nullable();
             $table->string('salary', 200)->nullable();
@@ -27,23 +32,33 @@ class CreateCandidatesTable extends Migration
             $table->string('deployed', 200)->nullable();
             $table->date('date_deployed')->nullable();
 
-            $table->string('applied_using', 200)->nullable();
-            $table->string('code', 200)->nullable();
             $table->string('passport', 200)->nullable();
             $table->string('place_issue', 200)->nullable();
+            $table->string('dos', 200)->nullable();
+            $table->string('doe', 200)->nullable();
+
+            $table->string('remarks', 200)->nullable();
+
+            $table->string('kin', 200)->nullable();
+            $table->string('kin_relationship', 200)->nullable();
+            $table->string('kin_contact', 200)->nullable();
+            $table->text('kin_address')->nullable();
+
+            $table->string('applied_using', 200)->nullable();
+            $table->string('code', 200)->nullable();
             $table->string('iqama', 200)->nullable();
             $table->string('photo_url', 200)->nullable();
             $table->string('first_name', 200)->nullable();
             $table->string('last_name', 200)->nullable();
             $table->string('middle_name', 200)->nullable();
             $table->string('email', 200)->nullable();
-            $table->string('position_1', 200)->nullable();
-            $table->string('position_2', 200)->nullable();
-            $table->string('position_3', 200)->nullable();
+
             $table->string('contact_1', 200)->nullable();
             $table->string('contact_2', 200)->nullable();
+
             $table->text('address')->nullable();
             $table->date('birth_date')->nullable();
+
             $table->string('birth_place', 200)->nullable();
             $table->string('civil_status', 200)->nullable();
             $table->string('gender', 200)->nullable();
@@ -53,9 +68,11 @@ class CreateCandidatesTable extends Migration
             $table->string('religion', 200)->nullable();
             $table->string('language', 200)->nullable();
             $table->string('education', 200)->nullable();
+
             $table->string('spouse', 200)->nullable();
             $table->string('mother_name', 200)->nullable();
             $table->string('father_name', 200)->nullable();
+
             $table->string('agreed', 200)->nullable();
             $table->string('travel_status', 200)->nullable();
             $table->softDeletes();

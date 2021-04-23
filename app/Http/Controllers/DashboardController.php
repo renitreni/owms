@@ -59,9 +59,4 @@ class DashboardController extends Controller
 
         return view('dashboard', compact('employerLateRpCnt', 'employerLateRp', 'employeeLateRp', 'employeeLateRp'));
     }
-
-    public function sendChat(Request $request)
-    {
-        broadcast(new SendMessageEvent($request->input()))->toOthers();
-    }
 }

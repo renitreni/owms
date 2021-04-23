@@ -10,6 +10,15 @@ class Candidate extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'remarks',
+    ];
+
+    public function employment()
+    {
+        return $this->hasMany(EmploymentHistory::class, 'candidate_id', 'id');
+    }
+
     public function agency()
     {
         return $this->hasOne(Information::class, 'user_id', 'agency_id');
@@ -40,40 +49,49 @@ class Candidate extends Model
         $faker = Factory::create();
         $code  = $faker->hexColor;
 
-        $candidate                = new $this;
-        $candidate->code          = $code;
-        $candidate->agency_id     = $request->agency_id;
-        $candidate->passport      = $request->passport;
-        $candidate->position_1    = $request->position_1;
-        $candidate->position_2    = $request->position_2;
-        $candidate->position_3    = $request->position_3;
-        $candidate->first_name    = $request->first_name;
-        $candidate->middle_name   = $request->middle_name;
-        $candidate->last_name     = $request->last_name;
-        $candidate->language      = $request->language;
-        $candidate->birth_date    = $request->birth_date;
-        $candidate->gender        = $request->gender;
-        $candidate->civil_status  = $request->civil_status;
-        $candidate->spouse        = $request->spouse;
-        $candidate->blood_type    = $request->blood_type;
-        $candidate->height        = $request->height;
-        $candidate->weight        = $request->weight;
-        $candidate->religion      = $request->religion;
-        $candidate->mother_name   = $request->mother_name;
-        $candidate->father_name   = $request->father_name;
-        $candidate->contact_1     = $request->contact_1;
-        $candidate->contact_2     = $request->contact_2;
-        $candidate->email         = $request->email;
-        $candidate->address       = $request->address;
-        $candidate->agreed        = $request->agreed;
-        $candidate->status        = 'applicant';
-        $candidate->place_issue   = $request->place_issue;
-        $candidate->birth_place   = $request->birth_place;
-        $candidate->travel_status = $request->travel_status;
-        $candidate->iqama         = $request->iqama;
-        $candidate->education     = $request->education;
-        $candidate->applied_using = $request->applied_using;
-        $candidate->deployed      = 'no';
+        $candidate                   = new $this;
+        $candidate->code             = $code;
+        $candidate->agency_id        = $request->agency_id;
+        $candidate->passport         = $request->passport;
+        $candidate->position_1       = $request->position_1;
+        $candidate->position_2       = $request->position_2;
+        $candidate->position_3       = $request->position_3;
+        $candidate->first_name       = $request->first_name;
+        $candidate->middle_name      = $request->middle_name;
+        $candidate->last_name        = $request->last_name;
+        $candidate->language         = $request->language;
+        $candidate->birth_date       = $request->birth_date;
+        $candidate->gender           = $request->gender;
+        $candidate->civil_status     = $request->civil_status;
+        $candidate->spouse           = $request->spouse;
+        $candidate->blood_type       = $request->blood_type;
+        $candidate->height           = $request->height;
+        $candidate->weight           = $request->weight;
+        $candidate->religion         = $request->religion;
+        $candidate->mother_name      = $request->mother_name;
+        $candidate->father_name      = $request->father_name;
+        $candidate->contact_1        = $request->contact_1;
+        $candidate->contact_2        = $request->contact_2;
+        $candidate->email            = $request->email;
+        $candidate->address          = $request->address;
+        $candidate->agreed           = $request->agreed;
+        $candidate->status           = 'applicant';
+        $candidate->place_issue      = $request->place_issue;
+        $candidate->birth_place      = $request->birth_place;
+        $candidate->travel_status    = $request->travel_status;
+        $candidate->iqama            = $request->iqama;
+        $candidate->education        = $request->education;
+        $candidate->applied_using    = $request->applied_using;
+        $candidate->deployed         = 'no';
+        $candidate->applied_using    = $request->applied_using;
+        $candidate->doe              = $request->doe;
+        $candidate->dos              = $request->dos;
+        $candidate->remarks          = $request->remarks;
+        $candidate->skills           = $request->skills;
+        $candidate->kin              = $request->kin;
+        $candidate->kin_relationship = $request->kin_relationship;
+        $candidate->kin_contact      = $request->kin_contact;
+        $candidate->kin_address      = $request->kin_address;
         $candidate->save();
 
         return $candidate;
