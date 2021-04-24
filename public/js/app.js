@@ -50680,10 +50680,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
 Vue.component('chat-box', function () {
-  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./view/ChatBox.vue */ "./resources/js/view/ChatBox.vue"));
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./view/ChatBox.vue */ "./resources/js/view/ChatBox.vue"));
 });
 Vue.component('vouchers-page', function () {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./view/Vouchers.vue */ "./resources/js/view/Vouchers.vue"));
+  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./view/Vouchers.vue */ "./resources/js/view/Vouchers.vue"));
+});
+Vue.component('agency-page', function () {
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./view/Agency.vue */ "./resources/js/view/Agency.vue"));
 });
 Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/trans.js"));
 

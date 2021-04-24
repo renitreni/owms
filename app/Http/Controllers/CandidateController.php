@@ -23,10 +23,6 @@ class CandidateController extends Controller
 {
     public function index()
     {
-        if (! \Gate::any(['admin', 'gov'])) {
-            return redirect()->back();
-        }
-
         return view('components.admin.candidates');
     }
 

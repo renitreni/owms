@@ -48,5 +48,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin_agency_gov', function () {
             return auth()->user()->role == '4' || auth()->user()->role == '1' || auth()->user()->role == '2';
         });
+
+        Gate::define('admin_gov', function () {
+            return auth()->user()->role == '4' || auth()->user()->role == '1';
+        });
     }
 }

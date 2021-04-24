@@ -8,6 +8,9 @@ Vue.component('chat-box', () =>
 Vue.component('vouchers-page', () =>
     import ('./view/Vouchers.vue')
 );
+Vue.component('agency-page', () =>
+    import ('./view/Agency.vue')
+);
 
 Vue.mixin(require('./trans'));
 import Echo from 'laravel-echo';
