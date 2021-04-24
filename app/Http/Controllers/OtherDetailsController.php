@@ -17,7 +17,7 @@ class OtherDetailsController extends Controller
 {
     public function show($id, User $user)
     {
-        $affiliates = $user->getAffiliatesByAgency(auth()->id())->get();
+        $affiliates = $user->getAffiliatesByAgency(auth()->user()->agency_id)->get();
         $options    = OptionList::query()->select(['id', 'name'])->where('type', 'docs')->get();
         $checklist  = CheckList::query()->where('candidate_id', $id)->get();
 

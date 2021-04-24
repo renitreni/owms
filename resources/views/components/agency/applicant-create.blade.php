@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
-            {{ __('New Applicant Form') }}
+            {{ __('New Applicant Form') }} {{ $agency_name }}
         </h2>
     </x-slot>
 
@@ -13,7 +13,7 @@
                         <div class="mt-5 md:mt-0 md:col-span-1">
                             <form action="{{ route('candidate.insert') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <input class="hidden" name="agency_id" value="{{ auth()->id() }}">
+                                <input class="hidden" name="agency_id" value="{{ $agency_id }}">
                                 <div class="shadow overflow-hidden sm:rounded-md">
                                     <div class="px-4 py-5 bg-white sm:p-6 mb-1">
                                         <div class="col-span-6">

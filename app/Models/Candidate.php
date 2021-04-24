@@ -11,7 +11,60 @@ class Candidate extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
+        'agency_id',
+        'position_1',
+        'position_2',
+        'position_3',
+        'skills',
+        'employer_id',
+        'status',
+        'salary',
+        'position_selected',
+        'date_hired',
+        'agency_abroad_id',
+        'deployed',
+        'date_deployed',
+        'passport',
+        'place_issue',
+        'dos',
+        'doe',
         'remarks',
+        'kin',
+        'kin_relationship',
+        'kin_contact',
+        'kin_address',
+        'applied_using',
+        'agency_branch',
+        'code',
+        'iqama',
+        'photo_url',
+        'first_name',
+        'last_name',
+        'middle_name',
+        'email',
+        'fb_account',
+        'contact_1',
+        'contact_2',
+        'address',
+        'birth_date',
+        'birth_place',
+        'civil_status',
+        'gender',
+        'blood_type',
+        'height',
+        'weight',
+        'religion',
+        'language',
+        'education',
+        'spouse',
+        'mother_name',
+        'father_name',
+        'agreed',
+        'travel_status',
+        'deleted_at',
+        'created_at',
+        'updated_at',
     ];
 
     public function employment()
@@ -21,7 +74,7 @@ class Candidate extends Model
 
     public function agency()
     {
-        return $this->hasOne(Information::class, 'user_id', 'agency_id');
+        return $this->hasOne(Agency::class, 'id', 'agency_id');
     }
 
     public function employer()
@@ -92,8 +145,10 @@ class Candidate extends Model
         $candidate->kin_relationship = $request->kin_relationship;
         $candidate->kin_contact      = $request->kin_contact;
         $candidate->kin_address      = $request->kin_address;
+        $candidate->fb_account       = $request->fb_account;
         $candidate->save();
 
         return $candidate;
     }
+
 }

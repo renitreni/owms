@@ -11,22 +11,22 @@
                 <tr style="height: 18px;">
                     <td style="width: 28.4672%; height: 18px; text-align: right;"><em><strong>Amount</strong></em>&nbsp;
                     </td>
-                    <td style="width: 23.1751%; height: 18px; text-align: left;">&nbsp;{{ $results->amount }}</td>
+                    <td style="width: 23.1751%; height: 18px; text-align: left;">&nbsp;{{ $voucher->amount }}</td>
                     <td style="width: 12.2263%; height: 18px; text-align: right;"><strong><em>Paid to</em></strong></td>
-                    <td style="width: 36.1314%; text-align: left; height: 18px;">&nbsp;{{ $results->paid_to }}</td>
+                    <td style="width: 36.1314%; text-align: left; height: 18px;">&nbsp;{{ $voucher->paid_to }}</td>
                 </tr>
                 <tr style="height: 18px;">
                     <td style="width: 28.4672%; height: 18px; text-align: right;"><em><strong>Prepared
                                 by</strong></em>&nbsp;</td>
                     <td style="width: 23.1751%; height: 18px; text-align: left;">
-                        &nbsp;{{ $results->information->name }}</td>
+                        &nbsp;{{ $voucher->information->name }}</td>
                     <td style="width: 12.2263%; text-align: left; height: 18px;">&nbsp;</td>
                     <td style="width: 36.1314%; text-align: left; height: 18px;">&nbsp;</td>
                 </tr>
                 <tr style="height: 18px;">
                     <td style="width: 28.4672%; height: 18px; text-align: right;"><em><strong>Particulars
                                 by</strong></em>&nbsp;</td>
-                    <td style="width: 23.1751%; height: 18px; text-align: left;">&nbsp;{{ $results->particulars }}
+                    <td style="width: 23.1751%; height: 18px; text-align: left;">&nbsp;{{ $voucher->particulars }}
                     </td>
                     <td style="width: 12.2263%; text-align: left; height: 18px;">&nbsp;</td>
                     <td style="width: 36.1314%; text-align: left; height: 18px;">&nbsp;</td>

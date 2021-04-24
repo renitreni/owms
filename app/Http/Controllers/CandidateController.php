@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Agency;
 use App\Models\Document;
 use App\Models\Employer;
 use PDF;
 use App\Models\Candidate;
-use App\Models\Information;
 use Illuminate\Http\Request;
 use App\Mail\SecretCodeMail;
 use Yajra\DataTables\DataTables;
@@ -16,7 +16,6 @@ use App\Models\EmploymentHistory;
 use App\Http\Requests\EmployRequest;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\CandidateStoreRequest;
 use DB;
 
@@ -33,7 +32,7 @@ class CandidateController extends Controller
 
     public function tableCandidates(Candidate $candidate)
     {
-        $candidate = $candidate->newQuery()
+        $candidate = $candidate->newQuery()->where('agency_id', auth()->user()->agency_id)
                                ->with(['agency', 'employer']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
@@ -48,17 +47,10 @@ class CandidateController extends Controller
         })->make(true);
     }
 
-    public function applicants(User $user)
-    {
-        $employers = $user->getEmployersByAgency(auth()->id())->get();
-
-        return view('components.agency.applicants', compact('employers'));
-    }
-
     public function tableApplicants(Candidate $candidate)
     {
         $candidate = $candidate->newQuery()
-                               ->where('agency_id', auth()->id())
+                               ->where('agency_id', auth()->user()->agency_id)
                                ->whereIn('status', [null, 'applicant'])
                                ->with(['agency', 'employer']);
 
@@ -72,14 +64,64 @@ class CandidateController extends Controller
         })->make(true);
     }
 
-    public function new($id, Information $information)
+    public function applicants(User $user)
     {
-        $id          = Crypt::decrypt($id);
-        $hold        = $information->newQuery()->select(['name', 'user_id'])->where('user_id', $id)->get()[0];
-        $agency_name = $hold['name'];
-        $agency_id   = $hold['user_id'];
+        $employers        = $user->getEmployersByAgency(auth()->user()->agency_id)->get();
+        $candidate_new    = route('candidate.new', ['agency_id' => Crypt::encrypt(auth()->user()->agency_id)]);
+        $candidate_create = route('candidate.create', ['agency_id' => Crypt::encrypt(auth()->user()->agency_id)]);
+
+        return view('components.agency.applicants', compact('employers', 'candidate_new', 'candidate_create'));
+    }
+
+    public function create($agency_id, Agency $agency)
+    {
+        $agency_id   = Crypt::decrypt($agency_id);
+        $agency      = $agency->newQuery()->select(['name', 'id'])->where('id', $agency_id)->first();
+        $agency_name = $agency->name;
+
+        return view('components.agency.applicant-form', compact('agency_name', 'agency_id'));
+    }
+
+    public function new($agency_id, Agency $agency)
+    {
+        $agency_id   = Crypt::decrypt($agency_id);
+        $agency      = $agency->newQuery()->select(['name', 'id'])->where('id', $agency_id)->first();
+        $agency_name = $agency->name;
 
         return view('components.agency.applicant-create', compact('agency_name', 'agency_id'));
+    }
+
+    public function store(CandidateStoreRequest $request, Candidate $candidate)
+    {
+        $candidate = $candidate->store($request);
+
+        $employment = json_decode($request->employment);
+
+        $path = $request->file('cv')->store('cv');
+
+        $doc               = new Document();
+        $doc->candidate_id = $candidate->id;
+        $doc->filename     = $path;
+        $doc->path         = $path;
+        $doc->type         = 'CV';
+        $doc->created_by   = auth()->id();
+        $doc->save();
+
+        EmploymentHistory::query()->where('candidate_id', $candidate->id)->delete();
+
+        foreach ($employment as $values) {
+            EmploymentHistory::create([
+                "candidate_id" => $candidate->id,
+                "country"      => $values->country,
+                "position"     => $values->position,
+                "year"         => $values->year,
+                "company"      => $values->company,
+            ]);
+        }
+
+        return redirect()
+            ->route('candidate.new', ['agency_id' => Crypt::encrypt($request->agency_id)])
+            ->with('success', "Your Application has been submitted!");
     }
 
     public function insert(CandidateStoreRequest $request, Candidate $candidate)
@@ -115,59 +157,17 @@ class CandidateController extends Controller
             ->with('success', "Your Application has been submitted!")->withInput();
     }
 
-    public function create($id, Information $information)
-    {
-        $id        = Crypt::decrypt($id);
-        $validator = Validator::make(['id' => $id], [
-            'id' => [
-                function ($attribute, $value, $fail) {
-                    if (User::isAgency($value) == 0) {
-                        $fail('The ' . $attribute . ' is invalid.');
-                    }
-                },
-            ],
-        ]);
-
-        if ($validator->errors()->messages()) {
-            return abort(403);
-        }
-
-        $hold        = $information->newQuery()->select(['name', 'user_id'])->where('user_id', $id)->get()[0];
-        $agency_name = $hold['name'];
-        $agency_id   = $hold['user_id'];
-
-        return view('components.agency.applicant-form', compact('agency_name', 'agency_id'));
-    }
-
-    public function store(CandidateStoreRequest $request, Candidate $candidate)
-    {
-        $model = $candidate->store($request);
-
-        $path = $request->file('cv')->store('cv');
-
-        $doc               = new Document();
-        $doc->candidate_id = $model->id;
-        $doc->path         = $path;
-        $doc->type         = 'CV';
-        $doc->created_by   = auth()->id();
-        $doc->save();
-
-        return redirect()
-            ->route('candidate.new', ['id' => $request->agency_id])
-            ->with('success', "Your Application has been submitted!");
-    }
-
     public function show($id)
     {
         $id         = Crypt::decrypt($id);
-        $results    = Candidate::find($id);
+        $results    = Candidate::query()->where('id', $id)->first();
         $doc        = DB::table('documents')->where('candidate_id', $id)->where('type', 'CV')->get();
         $employment = EmploymentHistory::query()->where('candidate_id', $id)->get();
 
         return view('components.agency.applicant-edit', compact('results', 'doc', 'employment'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Candidate $candidate)
     {
         $employment = json_decode($request->employment);
 
@@ -181,46 +181,6 @@ class CandidateController extends Controller
                 "company"      => $values->company,
             ]);
         }
-
-        $candidate                   = Candidate::find($request->id);
-        $candidate->agency_id        = $request->agency_id;
-        $candidate->passport         = $request->passport;
-        $candidate->position_1       = $request->position_1;
-        $candidate->position_2       = $request->position_2;
-        $candidate->position_3       = $request->position_3;
-        $candidate->first_name       = $request->first_name;
-        $candidate->middle_name      = $request->middle_name;
-        $candidate->last_name        = $request->last_name;
-        $candidate->language         = $request->language;
-        $candidate->birth_date       = $request->birth_date;
-        $candidate->gender           = $request->gender;
-        $candidate->civil_status     = $request->civil_status;
-        $candidate->spouse           = $request->spouse;
-        $candidate->blood_type       = $request->blood_type;
-        $candidate->height           = $request->height;
-        $candidate->weight           = $request->weight;
-        $candidate->religion         = $request->religion;
-        $candidate->mother_name      = $request->mother_name;
-        $candidate->father_name      = $request->father_name;
-        $candidate->contact_1        = $request->contact_1;
-        $candidate->contact_2        = $request->contact_2;
-        $candidate->email            = $request->email;
-        $candidate->address          = $request->address;
-        $candidate->place_issue      = $request->place_issue;
-        $candidate->birth_place      = $request->birth_place;
-        $candidate->travel_status    = $request->travel_status;
-        $candidate->iqama            = $request->iqama;
-        $candidate->education        = $request->education;
-        $candidate->applied_using    = $request->applied_using;
-        $candidate->doe              = $request->doe;
-        $candidate->dos              = $request->dos;
-        $candidate->remarks          = $request->remarks;
-        $candidate->skills           = $request->skills;
-        $candidate->kin              = $request->kin;
-        $candidate->kin_relationship = $request->kin_relationship;
-        $candidate->kin_contact      = $request->kin_contact;
-        $candidate->kin_address      = $request->kin_address;
-        $candidate->save();
 
         if ($request->has('cv')) {
             $doc = Document::query()->where('type', 'CV')->where('candidate_id', $candidate->id);
@@ -240,6 +200,8 @@ class CandidateController extends Controller
             $doc->save();
         }
 
+        $candidate->newQuery()->where('id', $request->id)->update($request->except(['_token', 'employment']));
+
         return redirect()
             ->route('candidate.applicant')
             ->with('success', "Applicant has been updated.");
@@ -247,8 +209,8 @@ class CandidateController extends Controller
 
     public function employed(User $user)
     {
-        $employers  = $user->getEmployersByAgency(auth()->id())->get();
-        $affiliates = $user->getAffiliatesByAgency(auth()->id())->get();
+        $employers  = $user->getEmployersByAgency(auth()->user()->agency_id)->get();
+        $affiliates = $user->getAffiliatesByAgency(auth()->user()->agency_id)->get();
 
         return view('components.agency.employed', compact('employers', 'affiliates'));
     }
@@ -256,7 +218,7 @@ class CandidateController extends Controller
     public function tableEmployed(Candidate $candidate)
     {
         $candidate = $candidate->newQuery()
-                               ->where('agency_id', auth()->id())
+                               ->where('agency_id', auth()->user()->agency_id)
                                ->where('candidates.status', 'employed')
                                ->with(['agency', 'employer', 'affiliates']);
 

@@ -16,7 +16,8 @@ class Voucher extends Model
         "amount",
         "change",
         "status",
-        "created_by"
+        "created_by",
+        "agency_id",
     ];
 
     public function information()

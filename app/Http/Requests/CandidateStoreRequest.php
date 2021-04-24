@@ -24,15 +24,16 @@ class CandidateStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "passport"     => 'required|max:255',
             "position_1"   => "required|max:255",
+            "cv"           => "required|mimes:doc,pdf,docx",
+            "birth_date"   => "required|date|max:255",
+            "passport"     => "max:255",
             "position_2"   => "max:255",
             "position_3"   => "max:255",
             "first_name"   => "max:255",
             "middle_name"  => "max:255",
             "last_name"    => "max:255",
             "language"     => "max:255",
-            "birth_date"   => "required|date|max:255",
             "gender"       => "max:255",
             "civil_status" => "max:255",
             "spouse"       => "max:255",
@@ -46,7 +47,6 @@ class CandidateStoreRequest extends FormRequest
             "contact_2"    => "max:255",
             "email"        => "max:255",
             "address"      => "required",
-            "cv"           => "required|mimes:doc,pdf,docx",
             "agreed"       => "required",
         ];
     }

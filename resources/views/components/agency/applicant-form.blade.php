@@ -69,23 +69,4 @@
             </div>
         </div>
     </div>
-
-    <x-slot name="scripts">
-        <script>
-            const e = new Vue({
-                el: '#app',
-                data() {
-                    return {
-                        file_path: ''
-                    }
-                },
-                methods: {
-                    fileUpload(e) {
-                        console.log(e.target.files)
-                        this.file_path = e.target.files[0].name
-                    }
-                }
-            });
-        </script>
-    </x-slot>
 </x-guest-layout>

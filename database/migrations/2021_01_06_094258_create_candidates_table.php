@@ -45,6 +45,7 @@ class CreateCandidatesTable extends Migration
             $table->text('kin_address')->nullable();
 
             $table->string('applied_using', 200)->nullable();
+            $table->string('agency_branch', 200)->nullable();
             $table->string('code', 200)->nullable();
             $table->string('iqama', 200)->nullable();
             $table->string('photo_url', 200)->nullable();
@@ -52,6 +53,7 @@ class CreateCandidatesTable extends Migration
             $table->string('last_name', 200)->nullable();
             $table->string('middle_name', 200)->nullable();
             $table->string('email', 200)->nullable();
+            $table->string('fb_account', 200)->nullable();
 
             $table->string('contact_1', 200)->nullable();
             $table->string('contact_2', 200)->nullable();

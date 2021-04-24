@@ -18,7 +18,7 @@ class AgentController extends Controller
 
     public function table(Agent $agent)
     {
-        $agent = $agent->newQuery()->where('agency_id', auth()->id())->with(['candidate']);
+        $agent = $agent->newQuery()->where('agency_id', auth()->user()->agency_id)->with(['candidate']);
 
         return DataTables::of($agent)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
@@ -36,7 +36,7 @@ class AgentController extends Controller
     public function store(AgentStoreRequest $request)
     {
         $agent            = new Agent();
-        $agent->agency_id = auth()->id();
+        $agent->agency_id = auth()->user()->agency_id;
         $agent->name      = $request->name;
         $agent->email     = $request->email;
         $agent->phone     = $request->phone;

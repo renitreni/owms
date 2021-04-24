@@ -99,6 +99,12 @@
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
+                            style="color: rgb(255, 255, 255); font-family: Tahoma, Geneva, sans-serif;">FACEBOOK</span>
+                    </td>
+                    <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->fb_account }}</span></td>
+                </tr>
+                <tr>
+                    <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
                             style="font-family: Tahoma, Geneva, sans-serif; color: rgb(239, 239, 239);">ADDRESS&nbsp;</span>
                     </td>
                     <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;"><span

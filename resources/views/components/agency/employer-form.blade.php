@@ -24,7 +24,7 @@
                                         {{--                                        E-mail--}}
                                         <div class="md:col-span-4 col-span-12">
                                             <label class="block text-sm font-medium text-gray-700">{{ __('E-mail') }}</label>
-                                            <input type="email" name="email" autocomplete="e-mail"
+                                            <input type="email" name="email" autocomplete="email"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         {{--                                        National ID--}}

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -51,15 +50,6 @@ class User extends Authenticatable
             ->pluck('id');
     }
 
-    public function getParentAgency($id)
-    {
-        $hold = $this->newQuery()->where('id', $id)->first();
-        if ($hold->agency_id) {
-            return $hold->agency_id;
-        }
-        return $hold->id;
-    }
-
     public function getEmployersByAgency($id)
     {
         return $this->newQuery()->where('agency_id', $id)->where('role', 3)->with(['information', 'employee']);
@@ -75,19 +65,9 @@ class User extends Authenticatable
         return (new static())->newQuery()->where('role', 3)->pluck('id');
     }
 
-    public static function getAgencyIds()
-    {
-        return (new static())->newQuery()->where('role', 2)->pluck('id');
-    }
-
     public static function getAffiliateIds()
     {
         return (new static())->newQuery()->where('role', 5)->pluck('id');
-    }
-
-    public static function isAgency($id)
-    {
-        return (new static())->newQuery()->where('role', 2)->where('id', $id)->count();
     }
 
     public function information()

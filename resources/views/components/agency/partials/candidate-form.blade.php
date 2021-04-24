@@ -251,12 +251,18 @@
               class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
     >{{ $results->kin_address ?? null }}</textarea>
 </div>
+{{---------------------------- Contact Information'--}}
 <div class="col-span-6 bg-blue-50 p-1">
     <span class="text-3xl">{{ __('Contact Information') }}</span>
 </div>
 <div class="col-span-6 sm:col-span-2">
     <label class="block text-sm font-medium text-gray-700">{{ __('E-mail') }}</label>
     <input type="text" name="email" value="{{ $results->email ?? null }}"
+           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+</div>
+<div class="col-span-6 sm:col-span-2">
+    <label class="block text-sm font-medium text-gray-700">{{ __('Facebook Account') }}</label>
+    <input type="text" name="fb_account" value="{{ $results->fb_account ?? null }}"
            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
 </div>
 <div class="col-span-6 sm:col-span-2">
@@ -329,7 +335,7 @@
                         year: '',
                         company: '',
                     },
-                    employment: {!! $employment ?? null !!}
+                    employment: {!! $employment ?? '[]' !!}
                 }
             },
             methods: {

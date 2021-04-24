@@ -28,7 +28,7 @@ class AffiliateController extends Controller
         $user->email     = $request->email;
         $user->password  = bcrypt('tabangpass');
         $user->role      = 5;
-        $user->agency_id = auth()->id();
+        $user->agency_id = auth()->user()->agency_id;
         $user->save();
 
         $information                 = new Information();
@@ -55,7 +55,7 @@ class AffiliateController extends Controller
 
     public function table(User $user)
     {
-        $employers = $user->getAffiliatesByAgency(auth()->id());
+        $employers = $user->getAffiliatesByAgency(auth()->user()->agency_id);
 
         return DataTables::of($employers)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');

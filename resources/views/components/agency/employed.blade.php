@@ -217,6 +217,12 @@
                             },
                             {
                                 data: function (value) {
+                                    var passport = value.passport ? value.passport : 'Not Assigned';
+                                    return '<span class="text-sm">' + passport + '</span>';
+                                }, name: 'passport', title: '{{ __("Passport") }}'
+                            },
+                            {
+                                data: function (value) {
                                     if (value.gender == 'male') {
                                         return '<span class="text-blue-600 text-2xl block text-center">' +
                                             '<i class="fas fa-male"></i>' +
@@ -279,7 +285,7 @@
                             });
 
                             $('.btn-details').click(function () {
-                                window.location = '/details/' + $this.overview.id
+                                window.open('/details/' + $this.overview.id, '_blank')
                             });
                         }
                     });

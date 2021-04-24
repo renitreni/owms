@@ -14,7 +14,7 @@
                             <form action="{{ route('candidate.update', ['id' => $results->id]) }}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
-                                <input class="hidden" name="agency_id" value="{{ auth()->id() }}">
+                                <input class="hidden" name="agency_id" value="{{ $results->agency_id }}">
                                 <div class="shadow overflow-hidden sm:rounded-md">
                                     <div class="px-4 py-5 bg-white sm:p-6 mb-1">
                                         <div class="col-span-6">

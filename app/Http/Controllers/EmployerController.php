@@ -21,15 +21,15 @@ class EmployerController extends Controller
 
     public function table(User $user)
     {
-        $employers = $user->getEmployersByAgency(auth()->id());
+        $employers = $user->getEmployersByAgency(auth()->user()->agency_id);
 
         return DataTables::of($employers)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
-            $value->applicant_count = Candidate::query()->where('employer_id', $value->id)->count();
-            foreach ($value->employee as $key => $idx)
-            {
+            $value->applicant_count    = Candidate::query()->where('employer_id', $value->id)->count();
+            foreach ($value->employee as $key => $idx) {
                 $value->employee[$key]->id_e = Crypt::encrypt($idx->id);
             }
+
             return collect($value)->toArray();
         })->make(true);
     }
@@ -45,7 +45,7 @@ class EmployerController extends Controller
         $user->email     = $request->email;
         $user->password  = bcrypt('tabangpass');
         $user->role      = 3;
-        $user->agency_id = auth()->id();
+        $user->agency_id = auth()->user()->agency_id;
         $user->save();
 
         $information                 = new Information();
@@ -75,8 +75,8 @@ class EmployerController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user           = User::find($id);
-        $user->email    = $request->name;
+        $user        = User::find($id);
+        $user->email = $request->name;
         $user->save();
 
         $information                 = Information::where('user_id', $id)->first();

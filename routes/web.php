@@ -13,7 +13,6 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OtherDetailsController;
 use App\Http\Controllers\VoucherController;
-use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,7 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/employers', [EmployerController::class, 'index'])->name('employers')->middleware('can:agency');
 
     Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates');
-    Route::get('/candidates/create/{id}', [CandidateController::class, 'new'])->name('candidate.create');
+    Route::get('/candidates/create/{agency_id}', [CandidateController::class, 'new'])->name('candidate.create');
     Route::post('/candidates/insert', [CandidateController::class, 'insert'])->name('candidate.insert');
     Route::post('/candidates/c/c', [CandidateController::class, 'tableCandidates'])->name('candidate.table');
     Route::post('/candidates/a/t', [CandidateController::class, 'tableApplicants'])->name('candidate.applicant.table');
@@ -121,7 +120,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('chat', ChatController::class);
 });
 
-Route::get('/candidate/new/{id}', [CandidateController::class, 'create'])->name('candidate.new');
+Route::get('/candidate/new/{agency_id}', [CandidateController::class, 'create'])->name('candidate.new');
 Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
 
 Route::get('/reporting', [ReportController::class, 'formEmployee'])->name('report.from.employee');

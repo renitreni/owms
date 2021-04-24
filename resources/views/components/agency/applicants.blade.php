@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
             {{ __('Applicants') }}
-            <a href="{{ route('candidate.new', ['id' => \Illuminate\Support\Facades\Crypt::encrypt(auth()->id())]) }}"
+            <a href="{{ $candidate_new }}"
                class="hover:bg-red-300 bg-red-200 hover p-2 rounded text-xs" target="_blank">
                 {{ __('Application Form') }}
             </a>
@@ -11,7 +11,7 @@
     <div id="app" class="pb-12 pt-8">
         <div class="flex flex-col bg-white max-w-7xl mx-auto sm:px-6 lg:px-8 shadow-sm sm:rounded-lg p-5">
             <div class="mb-5 mt-5">
-                <a href="{{route('candidate.create',['id' => \Illuminate\Support\Facades\Crypt::encrypt(auth()->id())])}}"
+                <a href="{{ $candidate_create }}"
                    class="text-white bg-green-400 hover:bg-green-500 p-2 rounded shadow">
                     <i class="fas fa-user-plus"></i> {{ __('New Applicant') }}
                 </a>
@@ -147,7 +147,7 @@
                                         class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
                                     Convert
                                 </button>
-                                <button type="button" v-on:click="employer_mdl = false"
+                                <button type="button" v-on:click="employer_pdf_mdl = false"
                                         class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                     Cancel
                                 </button>
@@ -227,7 +227,7 @@
                             {
                                 data:
                                     function (value) {
-                                        return '<div class="inline-grid grid-cols-2 gap-x-0 w-full text-sm shadow">\n' +
+                                        return '<div class="inline-grid grid-cols-3 gap-x-0 w-full text-sm shadow">\n' +
                                             '<div class="col-span-1">\n' +
                                             '<button class="btn-employer bg-blue-700 p-1 text-white w-full">' +
                                             '<i class="fas fa-building"></i></button>\n' +
@@ -235,6 +235,9 @@
                                             '<div class="col-span-1">\n' +
                                             '<button class="btn-pdf bg-yellow-300 p-1 text-white w-full">' +
                                             '<i class="fas fa-file-pdf"></i></button>\n' +
+                                            '</div>\n' +
+                                            '<div class="col-span-1">\n' +
+                                            '<button class="btn-details bg-blue-400 hover:bg-blue-500 p-1 text-white w-full"><i class="fas fa-info-circle"></i></button>\n' +
                                             '</div>\n' +
                                             '</div>'
                                     }, name: 'id', title: '{{ __("Actions") }}', bSortable: false
@@ -260,6 +263,10 @@
                                 if ($this.overview.agent === null) {
                                     $this.overview.agent = {'id': ''}
                                 }
+                            });
+
+                            $('.btn-details').click(function () {
+                                window.open('/details/' + $this.overview.id, '_blank')
                             });
                         }
                     });
