@@ -14,7 +14,7 @@ class DashboardController extends Controller
         {
             return $this->adminView();
         } else {
-            return view('dashboard');
+            return view('complain');
         }
     }
 

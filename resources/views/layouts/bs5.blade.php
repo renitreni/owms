@@ -12,7 +12,8 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Playfair+Display&display=swap"
+          rel="stylesheet">
     <style>
         u {
             font-family: 'Playfair Display', serif;
@@ -35,31 +36,35 @@
 </head>
 
 <body style="background: #fef8f5;">
-    <nav class="navbar shadow-sm" style="background: #ffffff;">
-        <div class="container-fluid px-5">
-            <a class="navbar-brand" href="https://formofw.com/">
-                <div class="row">
-                    <div class="col-auto">
-                        <img src="{{ asset('tabang-logo/vector/default.png') }}" alt="" width="50" height="50"
-                            class="d-inline-block align-text-top img-fluid">
-                    </div>
-                    <div class="col-auto p-0">
-                        <p class="mt-3 mb-1 fs-6" style="color: #eb5d1e;">FILIPINO OVERSEAS RESCUE MISSION</p>
-                    </div>
-                </div>
-            </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="https://formofw.com/">
+            <img src="{{ asset('tabang-logo/vector/default.png') }}" alt="" width="50" height="50"
+                 class="d-inline-block align-text-top img-fluid">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
+                <li class="nav-item">
+                    <a class="nav-link btn-link" aria-current="page" href="{{ route('login') }}">Login</a>
+                </li>
+            </ul>
         </div>
-    </nav>
-    <div class="container">
-        @yield('content')
     </div>
-    <!-- Scripts -->
-    <script src="{{ asset('js/popper.min.js') }}">
-    </script>
-    <script src="{{ asset('js/bootstrap.min.js') }}">
-    </script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/vue.js') }}"></script>
-        @yield('scripts')
+</nav>
+<div class="container">
+    @yield('content')
+</div>
+<!-- Scripts -->
+<script src="{{ asset('js/popper.min.js') }}">
+</script>
+<script src="{{ asset('js/bootstrap.min.js') }}">
+</script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/vue.js') }}"></script>
+@yield('scripts')
 </body>
 </html>

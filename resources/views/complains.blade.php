@@ -2,10 +2,10 @@
 
 @section('content')
     <div id="app" class="row">
-        <div class="col-md-4 d-none d-sm-block">
+        <div class="col-md-4 d-none d-sm-block mt-4">
             <div class="row">
-                <div class="col-12">
-                    <img src="{{ asset('tabang-logo/vector/default.png') }}" class="img-fluid">
+                <div class="col-12 text-center">
+                    <img src="{{ asset('tabang-logo/vector/default.png') }}" width="250px" height="250px" class="img-fluid">
                 </div>
                 <div class="col-12">
                     <div id='map' style='width: 100%; height: 300px;'></div>
@@ -18,13 +18,14 @@
                 <div class="row">
                     <div class="col-12 rounded-3 shadow" style="background-color: rgb(243 243 243)">
                         <div class="row justify-content-md-center">
-                            <div class="col-auto mt-5">
-                                <h2 style="font-family: 'Dela Gothic One', cursive;">General Complain Form</h2>
+                            <div class="col-auto mt-3">
+                                <h2 style="font-family: 'Dela Gothic One', cursive;">General Complaint Form</h2>
                             </div>
                             <div class="col-12">
+
                             </div>
-                            <div class="col-auto text-primary">
-                                <p>Please fill up all required fields</p>
+                            <div class="col-6 text-center text-primary">
+                                <p>Kung isa kang OFW at kailangan mo ng tulong maari lamang lagdaan ang nararapat na impormasyon sa ibaba.</p>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -173,7 +174,7 @@
                             </div>
                             <input class="form-control" name="actual_langitude" hidden>
                             <input class="form-control" name="actual_longitude" hidden>
-                            <div class="col-12 mt-3">
+                            <div class="col-12 mt-5">
                                 <div class="d-grid gap-2">
                                     <button class="btn btn-success">Submit</button>
                                 </div>

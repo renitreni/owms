@@ -15,20 +15,19 @@ use App\Http\Controllers\OtherDetailsController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AgencyController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return redirect()->route('complains.form');
 });
+
+Route::get('/candidate/new/{agency_id}', [CandidateController::class, 'create'])->name('candidate.new');
+Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
+
+Route::get('/reporting', [ReportController::class, 'formEmployee'])->name('report.from.employee');
+
+Route::post('/secretcode/validate', [ReportController::class, 'validateSecretCode'])->name('report.validate');
+
+Route::get('/form', [ComplainsController::class, 'form'])->name('complains.form');
+Route::post('/form/submit', [ComplainsController::class, 'submit'])->name('complains.submit');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -152,16 +151,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('chat', ChatController::class);
 });
-
-Route::get('/candidate/new/{agency_id}', [CandidateController::class, 'create'])->name('candidate.new');
-Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
-
-Route::get('/reporting', [ReportController::class, 'formEmployee'])->name('report.from.employee');
-
-Route::post('/secretcode/validate', [ReportController::class, 'validateSecretCode'])->name('report.validate');
-
-Route::get('/form', [ComplainsController::class, 'form'])->name('complains.form');
-Route::post('/form/submit', [ComplainsController::class, 'submit'])->name('complains.submit');
 
 Route::get('/set/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'arb'])) {
