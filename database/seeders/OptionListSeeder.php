@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\OptionList;
 use Illuminate\Support\Str;
+use App\Models\Information;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,8 @@ class OptionListSeeder extends Seeder
             'password'          => bcrypt('tabangpass'), // password
             'remember_token'    => Str::random(10),
         ]);
+
+        Information::factory()->state(['user_id' => 1])->create();
 
         DB::table('option_lists')->truncate();
 
