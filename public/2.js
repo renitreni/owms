@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Agency.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/view/Agency.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Vouchers.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/view/Vouchers.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -140,18 +140,188 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
     return {
-      agency_mdl: false,
+      voucher_mdl: false,
+      voucher_update_mdl: false,
       props_data: JSON.parse(this._props.data),
       dt: null,
-      overview: {}
+      overview: {
+        date: null,
+        paid_to: null,
+        particulars: null,
+        amount: null
+      }
     };
   },
-  watch: {},
-  methods: {},
+  watch: {
+    voucher_update_mdl: function voucher_update_mdl(value) {
+      if (!value) {
+        this.overview = {
+          date: null,
+          paid_to: null,
+          particulars: null,
+          amount: null
+        };
+      }
+    },
+    voucher_mdl: function voucher_mdl(value) {
+      if (!value) {
+        this.overview = {
+          date: null,
+          paid_to: null,
+          particulars: null,
+          amount: null
+        };
+      }
+    }
+  },
+  methods: {
+    add: function add() {
+      var $this = this;
+      axios.post(this.props_data.store_link, this.overview).then(function (e) {
+        $this.voucher_mdl = false;
+        swal("Success!", "Operation Successful!", "success");
+        $this.dt.draw();
+      });
+    },
+    update: function update() {
+      var $this = this;
+      axios.put(this.overview.update_link, this.overview).then(function (e) {
+        $this.voucher_update_mdl = false;
+        swal("Success!", "Operation Successful!", "success");
+        $this.dt.draw();
+      });
+    },
+    invalid: function invalid() {
+      var $this = this;
+      axios.post(this.overview.invalid_link, this.overview).then(function (e) {
+        $this.voucher_update_mdl = false;
+        swal("Success!", "Operation Successful!", "success");
+        $this.dt.draw();
+      });
+    },
+    getCopy: function getCopy() {
+      window.open(this.overview.cash_voucherlink, '_blank');
+    }
+  },
   mounted: function mounted() {
     var $this = this;
     $this.dt = $("#vouchers-table").DataTable({
@@ -168,13 +338,23 @@ __webpack_require__.r(__webpack_exports__);
         name: "id",
         title: "ID"
       }, {
-        data: "name",
-        name: "name",
-        title: "Company Name"
+        data: "paid_to",
+        name: "paid_to",
+        title: "Paid To"
       }, {
-        data: "poea",
-        name: "poea",
-        title: "POEA No."
+        data: "amount",
+        name: "amount",
+        title: "Amount"
+      }, {
+        data: "change",
+        name: "change",
+        title: "Change"
+      }, {
+        data: function data(value) {
+          if (value.status == "cancelled") return '<span class="text-red-500 block text-center"><i class="fas fa-ban"></i></span>';else return '<span class="text-green-500 block text-center"><i class="fas fa-check"></i></span>';
+        },
+        name: "status",
+        title: "Status"
       }, {
         data: "created_at_display",
         name: "created_at",
@@ -186,7 +366,7 @@ __webpack_require__.r(__webpack_exports__);
           var hold = $this.dt.row(data).data();
           console.log(hold);
           $this.overview = hold;
-          $this.agency_mdl = true;
+          $this.voucher_update_mdl = true;
         });
       }
     });
@@ -195,10 +375,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Agency.vue?vue&type=template&id=9f15977e&":
-/*!***************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/view/Agency.vue?vue&type=template&id=9f15977e& ***!
-  \***************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e& ***!
+  \*****************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -228,14 +408,27 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
-                      _vm.agency_mdl = true
+                      _vm.voucher_mdl = true
                     }
                   }
                 },
                 [
-                  _c("i", { staticClass: "fas fa-building" }),
+                  _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
+                  _vm._v(" " + _vm._s(_vm.__("New Voucher")) + "\n\n        ")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "text-white bg-indigo-400 hover:bg-indigo-500 p-2 rounded m-2 shadow",
+                  attrs: { href: _vm.props_data.export_link, target: "_blank" }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-file-excel" }),
                   _vm._v(
-                    " " + _vm._s(_vm.__("New Agency")) + "\n\n                "
+                    " " + _vm._s(_vm.__("Export to Excel")) + "\n\n        "
                   )
                 ]
               )
@@ -247,7 +440,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("transition", { attrs: { name: "slide-fade" } }, [
-        _vm.agency_mdl
+        _vm.voucher_mdl
           ? _c("div", { staticClass: "fixed inset-0 overflow-y-auto" }, [
               _c(
                 "div",
@@ -304,7 +497,11 @@ var render = function() {
                                 staticClass:
                                   "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
                               },
-                              [_c("i", { staticClass: "fas fa-building" })]
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-file-invoice-dollar"
+                                })
+                              ]
                             ),
                             _vm._v(" "),
                             _c(
@@ -323,7 +520,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    New Voucher\n                                    "
+                                      "\n                  New Voucher\n                  "
                                     ),
                                     _c("span", { staticClass: "underline" }),
                                     _vm._v(" "),
@@ -504,11 +701,7 @@ var render = function() {
                                 }
                               }
                             },
-                            [
-                              _vm._v(
-                                "\n                            Add\n                        "
-                              )
-                            ]
+                            [_vm._v("\n              Add\n            ")]
                           ),
                           _vm._v(" "),
                           _c(
@@ -519,15 +712,257 @@ var render = function() {
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
-                                  _vm.agency_mdl = false
+                                  _vm.voucher_mdl = false
+                                }
+                              }
+                            },
+                            [_vm._v("\n              Cancel\n            ")]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "slide-fade" } }, [
+        _vm.voucher_update_mdl
+          ? _c("div", { staticClass: "fixed inset-0 overflow-y-auto" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "fixed inset-0 transition-opacity",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [
+                      _c("div", {
+                        staticClass: "absolute inset-0 bg-gray-500 opacity-75"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "hidden sm:inline-block sm:align-middle sm:h-screen",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [_vm._v("​")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                      attrs: {
+                        role: "dialog",
+                        "aria-modal": "true",
+                        "aria-labelledby": "modal-headline"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+                        },
+                        [
+                          _c("div", { staticClass: "sm:flex sm:items-start" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-file-invoice-dollar"
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                              },
+                              [
+                                _c(
+                                  "h3",
+                                  {
+                                    staticClass:
+                                      "text-lg leading-6 font-medium text-gray-900",
+                                    attrs: { id: "modal-headline" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                  New Voucher\n                  "
+                                    ),
+                                    _c("span", { staticClass: "underline" }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      staticClass: "hidden",
+                                      attrs: { name: "id" }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "mt-6" }, [
+                                  _c("div", { staticClass: "flex flex-col" }, [
+                                    _c("div", { staticClass: "mt-2" }, [
+                                      _c("label", [_vm._v("Date")]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "font-bold" }, [
+                                        _vm._v(_vm._s(_vm.overview.date))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mt-2" }, [
+                                      _c("label", [_vm._v("Amount")]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "font-bold" }, [
+                                        _vm._v(_vm._s(_vm.overview.amount))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mt-2" }, [
+                                      _c("label", [_vm._v("Paid To")]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "font-bold" }, [
+                                        _vm._v(_vm._s(_vm.overview.paid_to))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mt-2" }, [
+                                      _c("label", [_vm._v("Particulars")]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "font-bold" }, [
+                                        _vm._v(_vm._s(_vm.overview.particulars))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mt-2" }, [
+                                      _c("label", [_vm._v("Change")]),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.overview.change,
+                                            expression: "overview.change"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                        attrs: { type: "number" },
+                                        domProps: {
+                                          value: _vm.overview.change
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.overview,
+                                              "change",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      })
+                                    ])
+                                  ])
+                                ])
+                              ]
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.update()
+                                }
+                              }
+                            },
+                            [_vm._v("\n              Update\n            ")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.getCopy()
                                 }
                               }
                             },
                             [
                               _vm._v(
-                                "\n                            Cancel\n                        "
+                                "\n              Cash Voucher\n            "
                               )
                             ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.invalid()
+                                }
+                              }
+                            },
+                            [_vm._v("\n              Invalid\n            ")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.voucher_update_mdl = false
+                                }
+                              }
+                            },
+                            [_vm._v("\n              Cancel\n            ")]
                           )
                         ]
                       )
@@ -674,17 +1109,17 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/view/Agency.vue":
-/*!**************************************!*\
-  !*** ./resources/js/view/Agency.vue ***!
-  \**************************************/
+/***/ "./resources/js/view/Vouchers.vue":
+/*!****************************************!*\
+  !*** ./resources/js/view/Vouchers.vue ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Agency_vue_vue_type_template_id_9f15977e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Agency.vue?vue&type=template&id=9f15977e& */ "./resources/js/view/Agency.vue?vue&type=template&id=9f15977e&");
-/* harmony import */ var _Agency_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Agency.vue?vue&type=script&lang=js& */ "./resources/js/view/Agency.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Vouchers.vue?vue&type=template&id=20ffb27e& */ "./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e&");
+/* harmony import */ var _Vouchers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Vouchers.vue?vue&type=script&lang=js& */ "./resources/js/view/Vouchers.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -694,9 +1129,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Agency_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Agency_vue_vue_type_template_id_9f15977e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Agency_vue_vue_type_template_id_9f15977e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Vouchers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -706,38 +1141,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/view/Agency.vue"
+component.options.__file = "resources/js/view/Vouchers.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/view/Agency.vue?vue&type=script&lang=js&":
-/*!***************************************************************!*\
-  !*** ./resources/js/view/Agency.vue?vue&type=script&lang=js& ***!
-  \***************************************************************/
+/***/ "./resources/js/view/Vouchers.vue?vue&type=script&lang=js&":
+/*!*****************************************************************!*\
+  !*** ./resources/js/view/Vouchers.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Agency_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Agency.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Agency.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Agency_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Vouchers.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Vouchers.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/view/Agency.vue?vue&type=template&id=9f15977e&":
-/*!*********************************************************************!*\
-  !*** ./resources/js/view/Agency.vue?vue&type=template&id=9f15977e& ***!
-  \*********************************************************************/
+/***/ "./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e& ***!
+  \***********************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Agency_vue_vue_type_template_id_9f15977e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Agency.vue?vue&type=template&id=9f15977e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Agency.vue?vue&type=template&id=9f15977e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Agency_vue_vue_type_template_id_9f15977e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Vouchers.vue?vue&type=template&id=20ffb27e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Agency_vue_vue_type_template_id_9f15977e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

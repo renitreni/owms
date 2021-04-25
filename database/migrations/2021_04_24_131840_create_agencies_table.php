@@ -20,6 +20,7 @@ class CreateAgenciesTable extends Migration
             $table->string('logo_path', 200)->nullable();
             $table->string('poea', 200)->nullable();
             $table->string('status', 200)->nullable();
+            $table->softDeletes();
             $table->string('created_by', 200)->nullable();
             $table->timestamps();
         });

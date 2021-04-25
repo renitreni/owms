@@ -14,12 +14,25 @@
                             <form>
                                 <div class="shadow overflow-hidden sm:rounded-md">
                                     <div class="grid grid-cols-12 gap-2 p-4">
-                                        {{--                                        Name--}}
-                                        <div class="md:col-span-4 col-span-12">
-                                            <label class="block text-sm font-medium text-gray-700">Name</label>
-                                            <input type="text" name="name" id="name" autocomplete="name"
-                                                   v-model="overview.name"
-                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        {{--                                        Roles--}}
+                                        <div class="md:col-span-3 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Roles</label>
+                                            <select id="role" name="role" autocomplete="role" v-model="overview.role"
+                                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                <option value="1">Admin</option>
+                                                <option value="2">Agency</option>
+                                                <option value="4">Government</option>
+                                            </select>
+                                        </div>
+                                        {{--                                        Roles--}}
+                                        <div class="md:col-span-4 col-span-12" v-if="overview.role == 2">
+                                            <label class="block text-sm font-medium text-gray-700">Agency</label>
+                                            <select id="role" name="role" autocomplete="role" v-model="overview.agency_id"
+                                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                @foreach($agencies as $value)
+                                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         {{--                                        E-mail--}}
                                         <div class="md:col-span-4 col-span-12">
@@ -28,7 +41,14 @@
                                                    v-model="overview.email"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
-                                        {{--                                        National ID--}}
+                                        {{--                                        Name--}}
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Name</label>
+                                            <input type="text" name="name" id="name" autocomplete="name"
+                                                   v-model="overview.name"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        {{--                                        POEA NO--}}
                                         <div class="md:col-span-4 col-span-12">
                                             <label class="block text-sm font-medium text-gray-700">POEA NO</label>
                                             <input type="text" name="national_id" autocomplete="national_id"
@@ -42,25 +62,6 @@
                                                    v-model="overview.national_id"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
-                                        {{--                                        Roles--}}
-                                        <div class="md:col-span-3 col-span-12">
-                                            <label class="block text-sm font-medium text-gray-700">Roles</label>
-                                            <select id="role" name="role" autocomplete="role" v-model="overview.role"
-                                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                <option value="1">Admin</option>
-                                                <option value="2">Agency</option>
-                                                <option value="3">Employer</option>
-                                                <option value="4">Government</option>
-                                            </select>
-                                        </div>
-                                        {{--                                        Tin--}}
-                                        <div class="col-span-12 md:col-span-3">
-                                            <label class="block text-sm font-medium text-gray-700">Tin</label>
-                                            <input type="text" name="tin" id="tin" autocomplete="tin"
-                                                   v-model="overview.tin"
-                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        </div>
-                                        <div class="col-span-12 md:col-span-4"></div>
                                         {{--                                        Contact Person--}}
                                         <div class="col-span-6 sm:col-span-3">
                                             <label class="block text-sm font-medium text-gray-700">Contact

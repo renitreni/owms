@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Agency;
 use App\Models\Information;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -33,15 +34,18 @@ class UsersController extends Controller
 
     public function create()
     {
-        return view('components.admin.user-form');
+        $agencies = Agency::all();
+
+        return view('components.admin.user-form', compact('agencies'));
     }
 
     public function store(UsersStoreRequest $request)
     {
-        $user           = new User();
-        $user->email    = $request->email;
-        $user->password = bcrypt('tabangpass');
-        $user->role     = $request->role;
+        $user            = new User();
+        $user->email     = $request->email;
+        $user->agency_id = $request->agency_id;
+        $user->password  = bcrypt('tabangpass');
+        $user->role      = $request->role;
         $user->save();
 
         $information                 = new Information();
@@ -68,12 +72,13 @@ class UsersController extends Controller
 
     public function show($id, User $user)
     {
-        $user = $user->newQuery()
-                     ->where('users.id', $id)
-                     ->join('information as i', 'i.user_id', '=', 'users.id')
-                     ->get()[0];
+        $agencies = Agency::all();
+        $user     = $user->newQuery()
+                         ->where('users.id', $id)
+                         ->join('information as i', 'i.user_id', '=', 'users.id')
+                         ->get()[0];
 
-        return view('components.admin.user-form', ['user' => $user]);
+        return view('components.admin.user-form', compact('user', 'agencies'));
     }
 
     public function resetPassword($id)
@@ -87,9 +92,10 @@ class UsersController extends Controller
 
     public function update(UpdateUserRequest $request)
     {
-        $user        = User::find($request->user_id);
-        $user->email = $request->email;
-        $user->role  = $request->role;
+        $user            = User::find($request->user_id);
+        $user->email     = $request->email;
+        $user->role      = $request->role;
+        $user->agency_id = $request->agency_id;
         $user->save();
 
         $information                 = Information::find($request->id);

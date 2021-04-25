@@ -15,6 +15,17 @@
                                 @csrf
                                 <div class="shadow overflow-hidden sm:rounded-md">
                                     <div class="grid grid-cols-12 gap-2 p-4">
+                                        {{--                                        Roles--}}
+                                        <div class="md:col-span-3 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Roles</label>
+                                            <select id="role" name="role" autocomplete="role"
+                                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                <option value="1" @if($user->role == 1) selected @endif>Admin</option>
+                                                <option value="2" @if($user->role == 2) selected @endif>Agency</option>
+                                                <option value="3" @if($user->role == 3) selected @endif>Employer</option>
+                                                <option value="4" @if($user->role == 4) selected @endif>Government</option>
+                                            </select>
+                                        </div>
                                         {{--                                        Name--}}
                                         <div class="md:col-span-4 col-span-12">
                                             <label class="block text-sm font-medium text-gray-700">Name</label>
@@ -32,17 +43,6 @@
                                             <label class="block text-sm font-medium text-gray-700">National ID</label>
                                             <input type="text" name="national_id" autocomplete="national_id" value="{{ $user->information->national_id }}"
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                        </div>
-                                        {{--                                        Roles--}}
-                                        <div class="md:col-span-3 col-span-12">
-                                            <label class="block text-sm font-medium text-gray-700">Roles</label>
-                                            <select id="role" name="role" autocomplete="role"
-                                                    class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                <option value="1" @if($user->role == 1) selected @endif>Admin</option>
-                                                <option value="2" @if($user->role == 2) selected @endif>Agency</option>
-                                                <option value="3" @if($user->role == 3) selected @endif>Employer</option>
-                                                <option value="4" @if($user->role == 4) selected @endif>Government</option>
-                                            </select>
                                         </div>
                                         {{--                                        Tin--}}
                                         <div class="col-span-12 md:col-span-3">
