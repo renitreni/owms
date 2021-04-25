@@ -30,25 +30,25 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-12">
-                                <p class="fs-3"><u>General Information</u></p>
+                                <p class="fs-3"><u>General Information / Pangkalahatang Impormasyon</u></p>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">First Name</label>
+                                <label class="form-label">First Name / Pangalan</label>
                                 <input type="text" class="form-control" name="first_name">
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Middle Name</label>
+                                <label class="form-label">Middle Name / Gitnang Pangalan</label>
                                 <input type="text" class="form-control" name="middle_name">
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Last Name</label>
+                                <label class="form-label">Last Name / Huling Pangalan</label>
                                 <input type="text" class="form-control" name="last_name">
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Gender</label>
+                                <label class="form-label">Gender / Kasarian</label>
                                 <select class="form-control" name="gender">
-                                    <option>Male</option>
-                                    <option>Female</option>
+                                    <option>Male / Lalaki</option>
+                                    <option>Female / Babae</option>
                                 </select>
                             </div>
                             <div class="col-md-5">
@@ -60,10 +60,10 @@
                                 <input type="text" class="form-control" name="national_id">
                             </div>
                             <div class="col-12">
-                                <p class="fs-3"><u>Contact Information</u></p>
+                                <p class="fs-3"><u>Contact Information / Impormasyon sa Pakikipag-ugnay</u></p>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Location</label>
+                                <label class="form-label">Location / Lokasyon</label>
                                 <input type="text" class="form-control" name="location_ksa">
                             </div>
                             <div class="col-md-6">
@@ -79,11 +79,11 @@
                                 <input type="text" class="form-control" name="contact_number2">
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label">Person in case of emergency contact</label>
+                                <label class="form-label">Person in case of emergency contact / Tao kung sakaling magkaroon ng emergency contact</label>
                                 <input type="text" class="form-control" name="contact_person">
                             </div>
                             <div class="col-12">
-                                <p class="fs-3"><u>Job Information</u></p>
+                                <p class="fs-3"><u>Job Information / Impormasyon sa Trabaho</u></p>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-check mb-3">
@@ -128,7 +128,8 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                                <p class="fs-3"><u>Employer Information</u></p>
+                                <p class="fs-3"><u>Employer Information /
+                                        Impormasyon ng Amo</u></p>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Local Agency</label>
@@ -143,11 +144,11 @@
                                 <input type="text" class="form-control" name="employer_national_id">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Employer Name</label>
+                                <label class="form-label">Employer Name / Pangalan ng Amo</label>
                                 <input type="text" class="form-control" name="employer_name">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Employer Contact</label>
+                                <label class="form-label">Employer Contact / Numero ng Amo</label>
                                 <input type="text" class="form-control" name="employer_contact">
                             </div>
                             <div class="col-12">
@@ -158,25 +159,25 @@
                                 <textarea type="text" class="form-control" rows="8" name="complain"></textarea>
                             </div>
                             <div class="col-12">
-                                <p class="fs-3"><u>Evidences</u></p>
+                                <p class="fs-3"><u>Evidences / Ebidensya</u></p>
                             </div>
                             <div class="col-auto">
-                                <label class="form-label">Image #1</label>
+                                <label class="form-label">Image #1 / Unang Imahe</label>
                                 <input class="form-control" type="file" name="image1">
                             </div>
                             <div class="col-auto">
-                                <label class="form-label">Image #2</label>
+                                <label class="form-label">Image #2 / Pangalawang Imahe</label>
                                 <input class="form-control" type="file" name="image2">
                             </div>
                             <div class="col-auto">
-                                <label class="form-label">Image #3</label>
+                                <label class="form-label">Image #3 /  Pangatlong Imahe</label>
                                 <input class="form-control" type="file" name="image3">
                             </div>
                             <input class="form-control" name="actual_langitude" hidden>
                             <input class="form-control" name="actual_longitude" hidden>
                             <div class="col-12 mt-5">
                                 <div class="d-grid gap-2">
-                                    <button class="btn btn-success">Submit</button>
+                                    <button class="btn btn-success">Submit / Ipasa</button>
                                 </div>
                             </div>
                         </div>
