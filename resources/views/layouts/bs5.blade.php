@@ -49,7 +49,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
                 <li class="nav-item">
-                    <a class="nav-link btn-link" aria-current="page" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link btn-link" aria-current="page" href="{{ route('login') }}">LRA / برنامج</a>
                 </li>
             </ul>
         </div>
