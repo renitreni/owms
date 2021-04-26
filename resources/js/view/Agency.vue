@@ -298,7 +298,7 @@
                 formData.append('name', this.overview.name);
                 formData.append('address', this.overview.address);
                 formData.append('poea', this.overview.poea);
-                axios.get(this.props_data.store_link, formData).then(function () {
+                axios.post(this.props_data.store_link, formData).then(function () {
                     $this.dt.draw();
                     $this.agency_mdl = false
                 });
