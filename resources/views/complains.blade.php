@@ -185,6 +185,10 @@
                 </div>
             </form>
         </div>
+
+        <div class="col-md-4 d-sm-none d-block mt-4">
+            <div id='map2' style='width: 100%; height: 300px;'></div>
+        </div>
     </div>
 @endsection
 
@@ -219,9 +223,20 @@
                 style: 'mapbox://styles/mapbox/satellite-streets-v10'
             });
 
+            var map2 = new mapboxgl.Map({
+                container: 'map2',
+                center: [position.coords.longitude, position.coords.latitude],
+                zoom: 15,
+                style: 'mapbox://styles/mapbox/satellite-streets-v10'
+            });
+
             var marker = new mapboxgl.Marker()
                 .setLngLat([position.coords.longitude, position.coords.latitude])
                 .addTo(map);
+
+            var marker2 = new mapboxgl.Marker()
+                .setLngLat([position.coords.longitude, position.coords.latitude])
+                .addTo(map2);
         }
 
         function showError(error) {
