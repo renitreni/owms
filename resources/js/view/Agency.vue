@@ -247,7 +247,7 @@
                 overview: {
                     name: null,
                     address: null,
-                    logo: null,
+                    logo: '',
                     poea: null
                 },
             };
@@ -258,7 +258,7 @@
                 this.overview = {
                     name: null,
                     address: null,
-                    logo: null,
+                    logo: '',
                     poea: null
                 };
 

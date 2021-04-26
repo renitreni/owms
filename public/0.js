@@ -257,7 +257,7 @@ __webpack_require__.r(__webpack_exports__);
       overview: {
         name: null,
         address: null,
-        logo: null,
+        logo: '',
         poea: null
       }
     };
@@ -268,7 +268,7 @@ __webpack_require__.r(__webpack_exports__);
       this.overview = {
         name: null,
         address: null,
-        logo: null,
+        logo: '',
         poea: null
       };
       this.agency_mdl = true;
