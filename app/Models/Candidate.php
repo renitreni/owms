@@ -72,6 +72,26 @@ class Candidate extends Model
         return $this->hasMany(EmploymentHistory::class, 'candidate_id', 'id');
     }
 
+    public function document()
+    {
+        return $this->hasMany(Document::class, 'candidate_id', 'id');
+    }
+
+    public function documentCV()
+    {
+        return $this->hasMany(Document::class, 'candidate_id', 'id');
+    }
+
+    public function documentPic1x1()
+    {
+        return $this->hasOne(Document::class, 'candidate_id', 'id')->where('type', 'pic1x1');
+    }
+
+    public function documentPicFull()
+    {
+        return $this->hasOne(Document::class, 'candidate_id', 'id')->where('type', 'picfull');
+    }
+
     public function agency()
     {
         return $this->hasOne(Agency::class, 'id', 'agency_id');

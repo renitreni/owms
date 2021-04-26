@@ -100,8 +100,32 @@ class CandidateController extends Controller
         $doc->filename     = $path;
         $doc->path         = $path;
         $doc->type         = 'CV';
-        $doc->created_by   = auth()->id();
+        $doc->created_by   = 'Public Form';
         $doc->save();
+
+        if ($request->hasFile('picfull')) {
+            $path = $request->file('picfull')->store('picfull');
+
+            $doc               = new Document();
+            $doc->candidate_id = $candidate->id;
+            $doc->filename     = $path;
+            $doc->path         = $path;
+            $doc->type         = 'picfull';
+            $doc->created_by   = 'Public Form';
+            $doc->save();
+        }
+
+        if ($request->hasFile('pic1x1')) {
+            $path = $request->file('pic1x1')->store('pic1x1');
+
+            $doc               = new Document();
+            $doc->candidate_id = $candidate->id;
+            $doc->filename     = $path;
+            $doc->path         = $path;
+            $doc->type         = 'pic1x1';
+            $doc->created_by   = 'Public Form';
+            $doc->save();
+        }
 
         EmploymentHistory::query()->where('candidate_id', $candidate->id)->delete();
 
@@ -134,6 +158,31 @@ class CandidateController extends Controller
         $doc->created_by   = auth()->id();
         $doc->save();
 
+        if ($request->hasFile('picfull')) {
+            $path = $request->file('picfull')->store('picfull');
+
+            $doc               = new Document();
+            $doc->candidate_id = $model->id;
+            $doc->filename     = $path;
+            $doc->path         = $path;
+            $doc->type         = 'picfull';
+            $doc->created_by   = auth()->id();
+            $doc->save();
+        }
+
+        if ($request->hasFile('pic1x1')) {
+
+            $path = $request->file('pic1x1')->store('pic1x1');
+
+            $doc               = new Document();
+            $doc->candidate_id = $model->id;
+            $doc->filename     = $path;
+            $doc->path         = $path;
+            $doc->type         = 'pic1x1';
+            $doc->created_by   = auth()->id();
+            $doc->save();
+        }
+
         $employment = json_decode($request->employment);
 
         EmploymentHistory::query()->where('candidate_id', $model->id)->delete();
@@ -157,10 +206,12 @@ class CandidateController extends Controller
     {
         $id         = Crypt::decrypt($id);
         $results    = Candidate::query()->where('id', $id)->first();
-        $doc        = DB::table('documents')->where('candidate_id', $id)->where('type', 'CV')->get();
         $employment = EmploymentHistory::query()->where('candidate_id', $id)->get();
+        $doc        = DB::table('documents')->where('candidate_id', $id)->where('type', 'CV')->get();
+        $pic_1x1    = DB::table('documents')->where('candidate_id', $id)->where('type', 'pic1x1')->get();
+        $pic_full   = DB::table('documents')->where('candidate_id', $id)->where('type', 'picfull')->get();
 
-        return view('components.agency.applicant-edit', compact('results', 'doc', 'employment'));
+        return view('components.agency.applicant-edit', compact('results', 'doc', 'employment', 'pic_1x1', 'pic_full'));
     }
 
     public function update(Request $request, Candidate $candidate)
@@ -179,16 +230,16 @@ class CandidateController extends Controller
         }
 
         if ($request->has('cv')) {
-            $doc = Document::query()->where('type', 'CV')->where('candidate_id', $candidate->id);
+            $doc = Document::query()->where('type', 'CV')->where('candidate_id', $request->id);
             if ($doc->count() > 0) {
                 \Storage::delete($doc->get()[0]->path);
             }
             $path = $request->file('cv')->store('cv');
 
-            Document::query()->where('type', 'CV')->where('candidate_id', $candidate->id)->delete();
+            Document::query()->where('type', 'CV')->where('candidate_id', $request->id)->delete();
 
             $doc               = new Document();
-            $doc->candidate_id = $candidate->id;
+            $doc->candidate_id = $request->id;
             $doc->filename     = $path;
             $doc->path         = $path;
             $doc->type         = 'CV';
@@ -196,7 +247,48 @@ class CandidateController extends Controller
             $doc->save();
         }
 
-        $candidate->newQuery()->where('id', $request->id)->update($request->except(['_token', 'employment']));
+        if ($request->hasFile('pic_full')) {
+            $doc = Document::query()->where('type', 'pic_full')->where('candidate_id', $request->id);
+            if ($doc->count() > 0) {
+                \Storage::delete($doc->get()[0]->path);
+            }
+            $path = $request->file('pic_full')->store('pic_full');
+
+            Document::query()->where('type', 'pic_full')->where('candidate_id', $request->id)->delete();
+
+            $doc               = new Document();
+            $doc->candidate_id = $request->id;
+            $doc->filename     = $path;
+            $doc->path         = $path;
+            $doc->type         = 'picfull';
+            $doc->created_by   = auth()->id();
+            $doc->save();
+        }
+
+        if ($request->hasFile('pic1x1')) {
+            $doc = Document::query()->where('type', 'pic1x1')->where('candidate_id', $request->id);
+            if ($doc->count() > 0) {
+                \Storage::delete($doc->get()[0]->path);
+            }
+            $path = $request->file('pic1x1')->store('pic1x1');
+
+            Document::query()->where('type', 'pic1x1')->where('candidate_id', $request->id)->delete();
+
+            $doc               = new Document();
+            $doc->candidate_id = $request->id;
+            $doc->filename     = $path;
+            $doc->path         = $path;
+            $doc->type         = 'pic1x1';
+            $doc->created_by   = auth()->id();
+            $doc->save();
+        }
+
+        $candidate->newQuery()->where('id', $request->id)->update($request->except([
+            '_token',
+            'employment',
+            'pic1x1',
+            'pic_full',
+        ]));
 
         return redirect()
             ->route('candidate.applicant')
@@ -287,9 +379,10 @@ class CandidateController extends Controller
             ['remarks' => $request->remarks]
         );
 
-        $results = Candidate::query()->where('id', $request->id)->with(['agency', 'employment'])->first();
-        $pdf     = PDF::loadView("printables.resume", compact('results'));
-        $now     = Carbon::now();
+        $results = Candidate::query()->where('id', $request->id)->with(['agency', 'employment', 'documentPic1x1', 'documentPicFull'])->first();
+        return view("printables.resume", compact('results'));
+        $pdf = PDF::loadView("printables.resume", compact('results'));
+        $now = Carbon::now();
 
         return $pdf->setPaper('a4')->download("{$results->last_name}_{$results->first_name}_{$now}.pdf");
     }

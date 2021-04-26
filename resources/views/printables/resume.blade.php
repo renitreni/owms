@@ -19,8 +19,8 @@
     <tbody>
     <tr>
         <td style="width: 15.7418%;">
-            <div data-empty="true" style="text-align: center;"><span
-                    style="font-family: Tahoma,Geneva, sans-serif;"></span>
+            <div data-empty="true" style="text-align: center;">
+                <img src="{{ asset($results->documentPic1x1->path) }}" width="150px" height="150px">
             </div>
         </td>
         <td style="width: 84.1449%;">
@@ -179,7 +179,8 @@
                 <tbody>
                 <tr>
                     <td style="width: 100%; border: 1px solid rgb(0, 0, 0);">
-                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></td>
+                        <img src="{{ asset($results->documentPicFull->path) }}" width="100%" height="500px">
+                    </td>
                 </tr>
                 </tbody>
             </table>

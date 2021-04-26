@@ -295,7 +295,7 @@
 <div class="col-span-6 bg-blue-50 p-1">
     <span class="text-3xl">{{ __('Documents') }}</span>
 </div>
-<div class="col-span-6 sm:col-span-2">
+<div class="col-span-2 sm:col-span-2">
     @if(isset($doc[0]))
         <a target="_blank" href="/{{ $doc[0]->path }}"
            class="p-2 w-1/2 text-blue-600 hover:underline mt-1 rounded-md h-25">
@@ -314,6 +314,44 @@
     </div>
 </div>
 
+<div class="col-span-2 sm:col-span-2">
+    @if(isset($pic_1x1[0]))
+        <a target="_blank" href="/{{ $pic_1x1[0]->path }}"
+           class="p-2 w-1/2 text-blue-600 hover:underline mt-1 rounded-md h-25">
+            View 1x1 Picture</a>
+    @endif
+    <label class="block text-sm font-medium text-gray-700">{{ __('Upload Pic 1x1') }} (.jpg,.png)</label>
+    <label class="block text-sm font-medium text-gray-700"><i>{{ __('Path') }}:</i>
+        <strong>@{{ file_pic1x1 }}</strong></label>
+    <div
+        class="p-2 w-1/2 bg-red-200 mt-1 focus:ring-indigo-500 rounded-md h-25">
+        <label class="block text-sm font-medium text-gray-700 text-center">
+            {{ __('Choose a File') }}
+            <input type="file" name="pic1x1" v-on:change="filePic1x1"
+                   class="hidden"/>
+        </label>
+    </div>
+</div>
+
+
+<div class="col-span-2 sm:col-span-2">
+    @if(isset($pic_full[0]))
+        <a target="_blank" href="/{{ $pic_full[0]->path }}"
+           class="p-2 w-1/2 text-blue-600 hover:underline mt-1 rounded-md h-25">
+            View Full-body Picture</a>
+    @endif
+    <label class="block text-sm font-medium text-gray-700">{{ __('Upload Full-body Picture') }} (.jpg,.png)</label>
+    <label class="block text-sm font-medium text-gray-700"><i>{{ __('Path') }}:</i>
+        <strong>@{{ file_picfull }}</strong></label>
+    <div
+        class="p-2 w-1/2 bg-red-200 mt-1 focus:ring-indigo-500 rounded-md h-25">
+        <label class="block text-sm font-medium text-gray-700 text-center">
+            {{ __('Choose a File') }}
+            <input type="file" name="picfull" v-on:change="filePicFull"
+                   class="hidden"/>
+        </label>
+    </div>
+</div>
 
 <x-slot name="scripts">
     <script>
@@ -322,6 +360,8 @@
             data() {
                 return {
                     file_path: '',
+                    file_pic1x1: '',
+                    file_picfull: '',
                     filename: '',
                     select_box: {
                         gender: '{{ $results->gender ?? null }}',
@@ -342,6 +382,14 @@
                 fileUpload(e) {
                     console.log(e.target.files)
                     this.file_path = e.target.files[0].name
+                },
+                filePic1x1(e) {
+                    console.log(e.target.files)
+                    this.file_pic1x1 = e.target.files[0].name
+                },
+                filePicFull(e) {
+                    console.log(e.target.files)
+                    this.file_picfull = e.target.files[0].name
                 },
                 remove_emp(item) {
                     this.employment.splice(item);

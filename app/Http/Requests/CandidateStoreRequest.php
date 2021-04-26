@@ -48,6 +48,8 @@ class CandidateStoreRequest extends FormRequest
             "email"        => "max:255",
             "address"      => "required",
             "agreed"       => "required",
+            "picfull"      => "mimes:jpg,png",
+            "pic1x1"       => "mimes:jpg,png",
         ];
     }
 }

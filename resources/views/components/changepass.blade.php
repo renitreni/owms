@@ -6,7 +6,7 @@
     </x-slot>
 
     <div id="app" class="pb-12 pt-8">
-        <div class="w-4/12 mx-auto">
+        <div class="w-full md:w-4/12 mx-auto">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="mt-10 sm:mt-0">
                     <div class="md:grid md:grid-cols-1">
