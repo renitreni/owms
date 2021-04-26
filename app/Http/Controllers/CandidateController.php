@@ -379,7 +379,12 @@ class CandidateController extends Controller
             ['remarks' => $request->remarks]
         );
 
-        $results = Candidate::query()->where('id', $request->id)->with(['agency', 'employment', 'documentPic1x1', 'documentPicFull'])->first();
+        $results = Candidate::query()->where('id', $request->id)->with([
+            'agency',
+            'employment',
+            'documentPic1x1',
+            'documentPicFull',
+        ])->first();
 
         $pdf = PDF::loadView("printables.resume", compact('results'));
         $now = Carbon::now();
