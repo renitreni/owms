@@ -15,6 +15,7 @@
         <div class="col-12 col-md-8 p-4">
             <form action="{{ route('complains.submit') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <input name="agency_id" value="{{ $agency_id }}" hidden>
                 <div class="row">
                     <div class="col-12 rounded-3 shadow" style="background-color: rgb(243 243 243)">
                         <div class="row justify-content-md-center">
@@ -22,9 +23,8 @@
                                 <h2 style="font-family: 'Dela Gothic One', cursive;">General Complaint Form</h2>
                             </div>
                             <div class="col-12">
-
                             </div>
-                            <div class="col-6 text-center text-primary">
+                            <div class="col-md-6 text-center text-primary">
                                 <p>Kung isa kang OFW at kailangan mo ng tulong maari lamang lagdaan ang nararapat na impormasyon sa ibaba.</p>
                             </div>
                         </div>

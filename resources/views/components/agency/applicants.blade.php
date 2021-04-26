@@ -2,18 +2,18 @@
     <x-slot name="header">
         <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
             {{ __('Applicants') }}
-            <a href="{{ $candidate_new }}"
-               class="hover:bg-red-300 bg-red-200 hover p-2 rounded text-xs" target="_blank">
-                {{ __('Application Form') }}
-            </a>
         </h2>
     </x-slot>
     <div id="app" class="pb-12 pt-8">
         <div class="flex flex-col bg-white max-w-7xl mx-auto sm:px-6 lg:px-8 shadow-sm sm:rounded-lg p-5">
-            <div class="mb-5 mt-5">
+            <div class="flex flex-col md:flex-row  mb-5 mt-2">
                 <a href="{{ $candidate_create }}"
-                   class="text-white bg-green-400 hover:bg-green-500 p-2 rounded shadow">
+                   class="mt-2 text-white bg-green-400 hover:bg-green-500 p-2 rounded shadow sm:mr-2">
                     <i class="fas fa-user-plus"></i> {{ __('New Applicant') }}
+                </a>
+                <a href="{{ $candidate_new }}"
+                   class="mt-2 text-white bg-yellow-400 hover:bg-yellow-500 p-2 rounded shadow" target="_blank">
+                    <i class="fas fa-paperclip"></i>  {{ __('Application Form') }}
                 </a>
             </div>
             <div class="overflow-hidden">

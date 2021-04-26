@@ -33,6 +33,13 @@
     </div>
 </div>
 
+<div class="m-5 text-2xl font-bold">
+    Complaint Section
+</div>
+<div class="m-5">
+    <table id="complains-table" class="stripe hover" style="width:100%;"></table>
+</div>
+
 <transition name="slide-fade">
     <div class="fixed inset-0 overflow-y-auto" v-if="agency_mdl">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -70,3 +77,68 @@
         </div>
     </div>
 </transition>
+
+<x-slot name="scripts">
+    <script>
+        const e = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    agency_mdl: false,
+                }
+            },
+            mounted() {
+                var $this = this;
+                $this.dt = $('#complains-table').DataTable({
+                    responsive: true,
+                    serverSide: true,
+                    scrollX: true,
+                    order: [
+                        [0, "desc"]
+                    ],
+                    ajax: {
+                        url: '{{ route('complains.table') }}',
+                        type: 'POST',
+                        data: {agency_id: '{{ auth()->user()->agency_id }}'}
+                    },
+                    columns: [{
+                        data: 'id',
+                        name: 'id',
+                        title: 'ID'
+                    },
+                        {
+                            data: function(value) {
+                                return value.last_name + ', ' + value.first_name + ' ' +
+                                    value.middle_name;
+                            },
+                            name: 'last_name',
+                            title: 'Name'
+                        },
+                        {
+                            data: 'email_address',
+                            name: 'email_address',
+                            title: 'E-mail'
+                        },
+                        {
+                            data: 'created_at_display',
+                            name: 'created_at',
+                            title: 'Date Created'
+                        },
+                        {
+                            data: function(value) {
+                                if(value.remarks)
+                                    return '<a href="' + value.route_show + '" class="bg-green-500 hover:bg-green-600 p-1 rounded shadow text-white">Reviewed</a>';
+                                return '<a href="' + value.route_show + '" class="bg-red-500 hover:bg-red-600 p-1 rounded shadow text-white">Pending</a>';
+                            },
+                            name: 'id',
+                            title: 'Status'
+                        },
+                    ],
+                    drawCallback() {
+
+                    }
+                });
+            }
+        });
+    </script>
+</x-slot>

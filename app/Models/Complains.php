@@ -25,6 +25,7 @@ class Complains extends Model
         "employer_national_id",
         "saudi_agency",
         "agency",
+        "agency_id",
         "complain",
         "image1",
         "image2",

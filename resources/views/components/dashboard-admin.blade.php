@@ -74,3 +74,16 @@
         </div>
     </div>
 </transition>
+
+<x-slot name="scripts">
+    <script>
+        const e = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    agency_mdl: false,
+                }
+            }
+        });
+    </script>
+</x-slot>

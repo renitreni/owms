@@ -8,12 +8,15 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Crypt;
 
 class ComplainsController extends Controller
 {
-    public function form(Request $request)
+    public function form($agency_id)
     {
-        return view('complains');
+        $agency_id = Crypt::decrypt($agency_id);
+
+        return view('complains', compact('agency_id'));
     }
 
     public function submit(Request $request)
@@ -30,43 +33,49 @@ class ComplainsController extends Controller
         }
 
         Complains::create([
-            "first_name" => $request->first_name,
-            "middle_name" =>  $request->middle_name,
-            "last_name" =>  $request->last_name,
-            "gender" =>  $request->gender,
-            "passport" =>  $request->passport,
-            "location_ksa" =>  $request->location_ksa,
-            "email_address" =>  $request->email_address,
-            "contact_number" =>  $request->contact_number,
-            "contact_number2" =>  $request->contact_number2,
-            "occupation" =>  $request->occupation,
-            "employer_name" =>  $request->employer_name,
-            "employer_contact" =>  $request->employer_contact,
-            "agency" =>  $request->agency,
-            "complain" =>  $request->complain,
-            "actual_langitude" =>  $request->actual_langitude,
-            "actual_longitude" =>  $request->actual_longitude,
-            "national_id" =>  $request->national_id,
-            "contact_person" =>  $request->contact_person,
+            "first_name"           => $request->first_name,
+            "middle_name"          => $request->middle_name,
+            "last_name"            => $request->last_name,
+            "gender"               => $request->gender,
+            "passport"             => $request->passport,
+            "location_ksa"         => $request->location_ksa,
+            "email_address"        => $request->email_address,
+            "contact_number"       => $request->contact_number,
+            "contact_number2"      => $request->contact_number2,
+            "occupation"           => $request->occupation,
+            "employer_name"        => $request->employer_name,
+            "employer_contact"     => $request->employer_contact,
+            "agency"               => $request->agency,
+            "agency_id"            => $request->agency_id,
+            "complain"             => $request->complain,
+            "actual_langitude"     => $request->actual_langitude,
+            "actual_longitude"     => $request->actual_longitude,
+            "national_id"          => $request->national_id,
+            "contact_person"       => $request->contact_person,
             "employer_national_id" => $request->employer_national_id,
-            "host_agency" => $request->host_agency,
-            "image1" => !isset($images[0]) ?: $images[0],
-            "image2" => !isset($images[1]) ?: $images[1],
-            "image3" => !isset($images[2]) ?: $images[2],
+            "host_agency"          => $request->host_agency,
+            "image1"               => ! isset($images[0]) ?: $images[0],
+            "image2"               => ! isset($images[1]) ?: $images[1],
+            "image3"               => ! isset($images[2]) ?: $images[2],
         ]);
 
-        Mail::to(['Sab_princes@yahoo.com'])
-            ->bcc(['renier.trenuela@gmail.com'])
+        Mail::to(explode(',', env('COMPLAINT_RECEIVER')))
+            ->bcc(explode(',', env('COMPLAINT_BCC')))
             ->send(new NewComplain($request));
 
         return view('success');
     }
 
-    public function table()
+    public function table(Request $request)
     {
-        return DataTables::of(Complains::all())->setTransformer(function ($value) {
+        $complains = Complains::query()->when($request->agency_id, function ($q) use ($request) {
+            $q->where('agency_id', $request->agency_id);
+        });
+
+        return DataTables::of($complains)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
-            $value->route_show = route('complains.show', ['id' => $value->id]);
+            $value->route_show         = route('complains.show', ['id' => $value->id]);
+
             return collect($value)->toArray();
         })->make(true);
     }
@@ -94,7 +103,7 @@ class ComplainsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -105,7 +114,7 @@ class ComplainsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Complains  $complains
+     * @param \App\Models\Complains $complains
      * @return \Illuminate\Http\Response
      */
     public function show($id, Complains $complains)
@@ -118,7 +127,7 @@ class ComplainsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Complains  $complains
+     * @param \App\Models\Complains $complains
      * @return \Illuminate\Http\Response
      */
     public function edit(Complains $complains)
@@ -129,14 +138,14 @@ class ComplainsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Complains  $complains
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Complains $complains
      * @return \Illuminate\Http\Response
      */
     public function update($id, Request $request, Complains $complains)
     {
         $complains->where('id', $id)
-            ->update(['remarks' => $request->remarks]);
+                  ->update(['remarks' => $request->remarks]);
 
         return redirect()->route('complains.index');
     }
@@ -144,7 +153,7 @@ class ComplainsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Complains  $complains
+     * @param \App\Models\Complains $complains
      * @return \Illuminate\Http\Response
      */
     public function destroy(Complains $complains)

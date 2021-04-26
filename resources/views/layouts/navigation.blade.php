@@ -198,17 +198,13 @@
                     {{ __('OFWs') }}
                 </x-responsive-nav-link>
             @endcan
-            @can('admin')
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
-                        {{ __('Users') }}
-                    </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('settings')" :active="request()->routeIs('settings')">
-                        {{ __('Settings') }}
-                    </x-nav-link>
-                </div>
+            @canany(['admin'])
+                <x-responsive-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('settings')" :active="request()->routeIs('settings')">
+                    {{ __('Settings') }}
+                </x-responsive-nav-link>
             @endcan
         </div>
 

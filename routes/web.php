@@ -14,9 +14,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OtherDetailsController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AgencyController;
+use Illuminate\Support\Facades\Crypt;
 
 Route::get('/', function () {
-    return redirect()->route('complains.form');
+    $agency_id = Crypt::encrypt(env('AGENCY_ID'));
+    return redirect()->route('complains.form', ['agency_id' => $agency_id]);
 });
 
 Route::get('/candidate/new/{agency_id}', [CandidateController::class, 'create'])->name('candidate.new');
@@ -26,7 +28,7 @@ Route::get('/reporting', [ReportController::class, 'formEmployee'])->name('repor
 
 Route::post('/secretcode/validate', [ReportController::class, 'validateSecretCode'])->name('report.validate');
 
-Route::get('/form', [ComplainsController::class, 'form'])->name('complains.form');
+Route::get('/form/{agency_id}', [ComplainsController::class, 'form'])->name('complains.form');
 Route::post('/form/submit', [ComplainsController::class, 'submit'])->name('complains.submit');
 
 Route::group(['middleware' => ['auth']], function () {

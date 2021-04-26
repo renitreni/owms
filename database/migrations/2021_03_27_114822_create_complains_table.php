@@ -32,6 +32,7 @@ class CreateComplainsTable extends Migration
             $table->string('employer_contact', 200)->nullable();
             $table->string('host_agency', 200)->nullable();
             $table->string('agency', 200)->nullable();
+            $table->string('agency_id', 200)->nullable();
             $table->text('complain')->nullable();
             $table->string('actual_langitude', 200)->nullable();
             $table->string('actual_longitude', 200)->nullable();

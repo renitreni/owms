@@ -11,7 +11,7 @@
         </div>
         <div class="col-12"></div>
         <div class="col-auto">
-            <a href="https://formofw.com/" class="btn btn-primary">Return to Homepage</a>
+            <a href="/" class="btn btn-primary">Return to Homepage</a>
         </div>
 @endsection
 

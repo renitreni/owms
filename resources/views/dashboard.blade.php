@@ -20,16 +20,5 @@
             </div>
         </div>
     </div>
-    <x-slot name="scripts">
-        <script>
-            const e = new Vue({
-               el: '#app',
-               data() {
-                   return {
-                       agency_mdl: true,
-                   }
-               }
-            });
-        </script>
-    </x-slot>
+
 </x-app-layout>
