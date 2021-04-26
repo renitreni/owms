@@ -49,6 +49,17 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
                 <li class="nav-item">
+                    <a class="nav-link btn-link me-1" aria-current="page"
+                       href="{{ route('candidate.new', ['agency_id' => encrypt(env('AGENCY_ID'))]) }}"
+                       style="
+    background-color: #fbe9d1;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 6px;
+">
+                        Gusto mo ba maging aplikante?
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link btn-link" aria-current="page" href="{{ route('login') }}">LRA / برنامج</a>
                 </li>
             </ul>

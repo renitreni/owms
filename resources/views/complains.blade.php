@@ -5,7 +5,8 @@
         <div class="col-md-4 d-none d-sm-block mt-4">
             <div class="row">
                 <div class="col-12 text-center">
-                    <img src="{{ asset('tabang-logo/vector/default.png') }}" width="250px" height="250px" class="img-fluid">
+                    <img src="{{ asset('tabang-logo/vector/default.png') }}" width="250px" height="250px"
+                         class="img-fluid">
                 </div>
                 <div class="col-12">
                     <div id='map' style='width: 100%; height: 300px;'></div>
@@ -25,7 +26,8 @@
                             <div class="col-12">
                             </div>
                             <div class="col-md-6 text-center text-primary">
-                                <p>Kung isa kang OFW at kailangan mo ng tulong maari lamang lagdaan ang nararapat na impormasyon sa ibaba.</p>
+                                <p>Kung isa kang OFW at kailangan mo ng tulong maari lamang lagdaan ang nararapat na
+                                    impormasyon sa ibaba.</p>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -79,7 +81,8 @@
                                 <input type="text" class="form-control" name="contact_number2">
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label">Person in case of emergency contact / Tao kung sakaling magkaroon ng emergency contact</label>
+                                <label class="form-label">Person in case of emergency contact / Tao kung sakaling
+                                    magkaroon ng emergency contact</label>
                                 <input type="text" class="form-control" name="contact_person">
                             </div>
                             <div class="col-12">
@@ -88,13 +91,14 @@
                             <div class="col-md-12">
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="radio" name="occupation"
-                                        value="Household Service Workers" checked="">
+                                           value="Household Service Workers" checked="">
                                     <label class="form-check-label">
                                         House Service Workers (e.g. Domestic Worker, Driver, Gardener etc.)
                                     </label>
                                 </div>
                                 <div class="form-check mb-3">
-                                    <input class="form-check-input" type="radio" name="occupation" value="Highly Skilled">
+                                    <input class="form-check-input" type="radio" name="occupation"
+                                           value="Highly Skilled">
                                     <label class="form-check-label">
                                         Highly Skilled (e.g. Wielder, Plumber, Beautician, Office Worker, Assistant
                                         Nurse,
@@ -114,7 +118,8 @@
                                     </label>
                                 </div>
                                 <div class="form-check mb-3">
-                                    <input class="form-check-input" type="radio" name="occupation" value="Skilled Professional">
+                                    <input class="form-check-input" type="radio" name="occupation"
+                                           value="Skilled Professional">
                                     <label class="form-check-label">
                                         Skilled Professional (e.g. Engineer, Doctor, Dentist, Architects, Accountants
                                         etc.)
@@ -170,7 +175,7 @@
                                 <input class="form-control" type="file" name="image2">
                             </div>
                             <div class="col-auto">
-                                <label class="form-label">Image #3 /  Pangatlong Imahe</label>
+                                <label class="form-label">Image #3 / Pangatlong Imahe</label>
                                 <input class="form-control" type="file" name="image3">
                             </div>
                             <input class="form-control" name="actual_langitude" hidden>
@@ -194,7 +199,7 @@
 
 @section('scripts')
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet'/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         mapboxgl.accessToken =
@@ -204,7 +209,7 @@
             navigator.geolocation.getCurrentPosition(showPosition, showError);
         }
 
-        $('#cb-btn').on('click', function() {
+        $('#cb-btn').on('click', function () {
             $('.loading').removeAttr('hidden', 'hidden');
         });
 
