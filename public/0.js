@@ -246,6 +246,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -290,6 +309,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('name', $this.overview.name);
       formData.append('address', $this.overview.address);
       formData.append('poea', $this.overview.poea);
+      formData.append('status', $this.overview.status);
       axios.post($this.overview.update_link, formData).then(function () {
         $this.dt.draw();
         $this.agency_update_mdl = false;
@@ -306,6 +326,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('name', this.overview.name);
       formData.append('address', this.overview.address);
       formData.append('poea', this.overview.poea);
+      formData.append('status', $this.overview.status);
       axios.post(this.props_data.store_link, formData).then(function () {
         $this.dt.draw();
         $this.agency_mdl = false;
@@ -335,6 +356,16 @@ __webpack_require__.r(__webpack_exports__);
         data: "poea",
         name: "poea",
         title: "POEA No."
+      }, {
+        data: function data(value) {
+          if (value.status === 'active') {
+            return '<span class="bg-green-300 shadow-sm p-1 rounded text-white block text-center">Active</span>';
+          }
+
+          return '<span class="bg-red-500 shadow-sm p-1 rounded text-white block text-center">BLOCKED</span>';
+        },
+        name: "status",
+        title: "Status"
       }, {
         data: "created_at_display",
         name: "created_at",
@@ -585,6 +616,64 @@ var render = function() {
                                           }
                                         }
                                       })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mt-2" }, [
+                                      _c("label", [_vm._v("Status")]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.overview.status,
+                                              expression: "overview.status"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.$set(
+                                                _vm.overview,
+                                                "status",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "active" } },
+                                            [_vm._v("Active")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "not active" } },
+                                            [_vm._v("Not Active")]
+                                          )
+                                        ]
+                                      )
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [
@@ -841,6 +930,70 @@ var render = function() {
                                           }
                                         }
                                       })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mt-2" }, [
+                                      _c("label", [_vm._v("Status")]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.overview.status,
+                                              expression: "overview.status"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.$set(
+                                                _vm.overview,
+                                                "status",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "active" } },
+                                            [_vm._v("Active")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "not active" } },
+                                            [_vm._v("Not Active")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "Maltreated" } },
+                                            [_vm._v("Maltreated")]
+                                          )
+                                        ]
+                                      )
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [

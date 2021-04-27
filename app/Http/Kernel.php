@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\LangConfigMiddleware;
 use App\Http\Middleware\FilterTokenOnRequest;
+use App\Http\Middleware\AgencyIsBlockedMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -57,6 +58,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
+        'agency.isblocked' =>AgencyIsBlockedMiddleware::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,

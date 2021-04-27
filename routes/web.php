@@ -31,7 +31,9 @@ Route::post('/secretcode/validate', [ReportController::class, 'validateSecretCod
 Route::get('/form/{agency_id}', [ComplainsController::class, 'form'])->name('complains.form');
 Route::post('/form/submit', [ComplainsController::class, 'submit'])->name('complains.submit');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::get('/blocked', [DashboardController::class, 'blocked'])->middleware('auth')->name('blocked');
+
+Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/send/chat', [DashboardController::class, 'sendChat'])->name('send.chat');
 

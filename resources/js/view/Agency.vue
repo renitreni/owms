@@ -88,6 +88,15 @@
                                                 />
                                             </div>
                                             <div class="mt-2">
+                                                <label>Status</label>
+                                                <select
+                                                    v-model="overview.status"
+                                                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                    <option value="active">Active</option>
+                                                    <option value="not active">Not Active</option>
+                                                </select>
+                                            </div>
+                                            <div class="mt-2">
                                                 <label>Logo</label>
                                                 <input
                                                     type="file"
@@ -189,6 +198,16 @@
                                                 />
                                             </div>
                                             <div class="mt-2">
+                                                <label>Status</label>
+                                                <select
+                                                    v-model="overview.status"
+                                                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                    <option value="active">Active</option>
+                                                    <option value="not active">Not Active</option>
+                                                    <option value="Maltreated">Maltreated</option>
+                                                </select>
+                                            </div>
+                                            <div class="mt-2">
                                                 <img v-bind:src="overview.logo_path" class="h-36">
                                             </div>
                                             <div class="mt-2">
@@ -281,6 +300,7 @@
                 formData.append('name', $this.overview.name);
                 formData.append('address', $this.overview.address);
                 formData.append('poea', $this.overview.poea);
+                formData.append('status', $this.overview.status);
 
                 axios.post($this.overview.update_link, formData).then(function () {
                     $this.dt.draw();
@@ -298,6 +318,7 @@
                 formData.append('name', this.overview.name);
                 formData.append('address', this.overview.address);
                 formData.append('poea', this.overview.poea);
+                formData.append('status', $this.overview.status);
                 axios.post(this.props_data.store_link, formData).then(function () {
                     $this.dt.draw();
                     $this.agency_mdl = false
@@ -319,6 +340,14 @@
                     {data: "id", name: "id", title: "ID"},
                     {data: "name", name: "name", title: "Company Name"},
                     {data: "poea", name: "poea", title: "POEA No."},
+                    {
+                        data: function (value) {
+                            if (value.status === 'active') {
+                                return '<span class="bg-green-300 shadow-sm p-1 rounded text-white block text-center">Active</span>'
+                            }
+                            return '<span class="bg-red-500 shadow-sm p-1 rounded text-white block text-center">BLOCKED</span>'
+                        }, name: "status", title: "Status"
+                    },
                     {
                         data: "created_at_display",
                         name: "created_at",

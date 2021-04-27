@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agency;
 use App\Events\SendMessageEvent;
 use Illuminate\Http\Request;
 use DB;
@@ -58,5 +59,12 @@ class DashboardController extends Controller
         $employeeLateRpCnt = count($employeeLateRp);
 
         return view('dashboard', compact('employerLateRpCnt', 'employerLateRp', 'employeeLateRp', 'employeeLateRp'));
+    }
+
+    public function blocked()
+    {
+        $agency = Agency::query()->where('id', auth()->user()->agency_id)->first();
+
+        return view('blocked', compact('agency'));
     }
 }

@@ -44,7 +44,7 @@ class AgencyController extends Controller
             'address'    => $request->address,
             'logo_path'  => $path,
             'poea'       => $request->poea,
-            'status'     => 'active',
+            'status'     => $request->status,
             'created_by' => auth()->id(),
         ]);
 
@@ -63,7 +63,7 @@ class AgencyController extends Controller
             'name'       => $request->name,
             'address'    => $request->address,
             'poea'       => $request->poea,
-            'status'     => 'active',
+            'status'     => $request->status,
             'created_by' => auth()->id(),
         ]);
 
