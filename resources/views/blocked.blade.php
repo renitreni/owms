@@ -11,9 +11,10 @@
                 <img src="{{ $agency->logo_path }}" class="m-2" width="150px" height="150px">
                 <img src="{{ asset('tabang-logo/polo-logo-new.jpg') }}" class="m-2" width="150px" height="150px">
                 <img src="{{ asset('tabang-logo/3-star.png') }}" class="m-2" width="150px" height="150px">
+                <img src="{{ asset('tabang-logo/dfa.png') }}" class="m-2" width="150px" height="150px">
             </div>
-            <div class="flex max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <p>Your Account has been temporarily Suspended.</p>
+            <div class="flex flex-col max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <p class="text-3xl">Your Account has been temporarily Suspended.</p>
                 <p>Reason for suspension: <span class="font-bold bg-red-100 p-1">{{ $agency->status }}</span></p>
             </div>
         </div>
