@@ -8,7 +8,6 @@
     <div id="app" class="py-12">
         <div class="flex flex-col">
             <div class="flex flex-row mx-auto">
-                <img src="{{ $agency->logo_path }}" class="m-2" width="150px" height="150px">
                 <img src="{{ asset('tabang-logo/polo-logo-new.jpg') }}" class="m-2" width="150px" height="150px">
                 <img src="{{ asset('tabang-logo/3-star.png') }}" class="m-2" width="150px" height="150px">
                 <img src="{{ asset('tabang-logo/dfa.png') }}" class="m-2" width="150px" height="150px">
