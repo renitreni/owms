@@ -234,6 +234,7 @@
                                 }, name: 'gender', title: '{{ __("Gender") }}'
                             },
                             {data: 'age', name: 'birth_date', title: '{{ __("Age") }}'},
+                            {data: 'passport', name: 'passport', title: '{{ __("Passport No.") }}'},
                             {
                                 data: function (value) {
                                     if (value.deployed == 'yes') {
