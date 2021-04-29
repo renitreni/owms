@@ -295,7 +295,7 @@
 <div class="col-span-6 bg-blue-50 p-1">
     <span class="text-3xl">{{ __('Documents') }}</span>
 </div>
-<div class="col-span-2 sm:col-span-2">
+<div class="col-span-6 sm:col-span-2">
     @if(isset($doc[0]))
         <a target="_blank" href="/{{ $doc[0]->path }}"
            class="p-2 w-1/2 text-blue-600 hover:underline mt-1 rounded-md h-25">
@@ -314,7 +314,7 @@
     </div>
 </div>
 
-<div class="col-span-2 sm:col-span-2">
+<div class="col-span-6 sm:col-span-2">
     @if(isset($pic_1x1[0]))
         <a target="_blank" href="/{{ $pic_1x1[0]->path }}"
            class="p-2 w-1/2 text-blue-600 hover:underline mt-1 rounded-md h-25">
@@ -334,7 +334,7 @@
 </div>
 
 
-<div class="col-span-2 sm:col-span-2">
+<div class="col-span-6 sm:col-span-2">
     @if(isset($pic_full[0]))
         <a target="_blank" href="/{{ $pic_full[0]->path }}"
            class="p-2 w-1/2 text-blue-600 hover:underline mt-1 rounded-md h-25">
