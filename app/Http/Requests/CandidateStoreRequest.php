@@ -25,7 +25,6 @@ class CandidateStoreRequest extends FormRequest
     {
         return [
             "position_1"   => "required|max:255",
-            "cv"           => "required|mimes:doc,pdf,docx",
             "birth_date"   => "required|date|max:255",
             "passport"     => "max:255",
             "position_2"   => "max:255",
