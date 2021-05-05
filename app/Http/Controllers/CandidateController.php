@@ -11,7 +11,6 @@ use PDF;
 use App\Models\Candidate;
 use Illuminate\Http\Request;
 use App\Mail\SecretCodeMail;
-use Illuminate\Http\Response;
 use Yajra\DataTables\DataTables;
 use App\Models\EmploymentHistory;
 use App\Http\Requests\EmployRequest;
@@ -56,6 +55,7 @@ class CandidateController extends Controller
             $value->date_hired         = Carbon::parse($value->date_hired)->format('M j, Y');
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
             $value->id_e               = Crypt::encrypt($value->id);
+            $value->created_at_bind    = Carbon::parse($value->created_at)->format('Y-m-d');
 
             return collect($value)->toArray();
         })->make(true);
@@ -406,11 +406,22 @@ class CandidateController extends Controller
             'documentPic1x1',
             'documentPicFull',
         ])->first();
-        $now = Carbon::now();
+        $now     = Carbon::now();
 
         return response()
             ->view("printables.resume", compact('results'))
             ->header('Content-type', "text/html")
-            ->header("Content-Disposition", "attachment;Filename={$results->last_name}_{$results->first_name}_{$now}.doc");
+            ->header("Content-Disposition",
+                "attachment;Filename={$results->last_name}_{$results->first_name}_{$now}.doc");
+    }
+
+    public function updateCreatedAt(Request $request)
+    {
+        Candidate::updateOrCreate(
+            ['id' => $request->id],
+            ['created_at' => $request->created_at]
+        );
+
+        return redirect()->back();
     }
 }

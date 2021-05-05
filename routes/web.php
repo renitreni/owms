@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
         Route::get('/candidates/pdf/', [CandidateController::class, 'toPDF'])->name('candidate.pdf');
         Route::get('/candidates/word/', [CandidateController::class, 'toWord'])->name('candidate.word');
         Route::get('/candidates/{id}/show', [CandidateController::class, 'show'])->name('candidate.edit');
+        Route::post('/candidates/update/created_at', [CandidateController::class, 'updateCreatedAt'])->name('candidate.update.created_at');
 
         Route::get('/affiliates', [AffiliateController::class, 'index'])->name('affiliates')->middleware('can:agency');
         Route::post('/affiliates/table', [AffiliateController::class, 'table'])->name('affiliates.table');
