@@ -11,6 +11,7 @@ use PDF;
 use App\Models\Candidate;
 use Illuminate\Http\Request;
 use App\Mail\SecretCodeMail;
+use Illuminate\Http\Response;
 use Yajra\DataTables\DataTables;
 use App\Models\EmploymentHistory;
 use App\Http\Requests\EmployRequest;
@@ -390,5 +391,26 @@ class CandidateController extends Controller
         $now = Carbon::now();
 
         return $pdf->setPaper('a4')->download("{$results->last_name}_{$results->first_name}_{$now}.pdf");
+    }
+
+    public function toWord(Request $request)
+    {
+        Candidate::updateOrCreate(
+            ['id' => $request->id],
+            ['remarks' => $request->remarks]
+        );
+
+        $results = Candidate::query()->where('id', $request->id)->with([
+            'agency',
+            'employment',
+            'documentPic1x1',
+            'documentPicFull',
+        ])->first();
+        $now = Carbon::now();
+
+        return response()
+            ->view("printables.resume", compact('results'))
+            ->header('Content-type', "text/html")
+            ->header("Content-Disposition", "attachment;Filename={$results->last_name}_{$results->first_name}_{$now}.doc");
     }
 }

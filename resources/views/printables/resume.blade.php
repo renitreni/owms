@@ -20,7 +20,9 @@
     <tr>
         <td style="width: 15.7418%;">
             <div data-empty="true" style="text-align: center;">
-                <img src="{{ asset($results->documentPic1x1->path) }}" width="150px" height="150px">
+                @isset($results->documentPic1x1->path)
+                    <img src="{{ asset($results->documentPic1x1->path) }}" width="150px" height="150px">
+                @endisset
             </div>
         </td>
         <td style="width: 84.1449%;">
@@ -57,7 +59,8 @@
                                     style="color: rgb(239, 239, 239);">AGE</span>&nbsp;</span></div>
                     </td>
                     <td style="width: 61.4035%;"><span
-                            style="font-family: Tahoma,Geneva, sans-serif;">{{ Carbon\Carbon::parse($results->birth_date)->age }}</span></td>
+                            style="font-family: Tahoma,Geneva, sans-serif;">{{ Carbon\Carbon::parse($results->birth_date)->age }}</span>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -89,57 +92,66 @@
                             style="font-family: Tahoma, Geneva, sans-serif; color: rgb(239, 239, 239);">CONTACT NO.&nbsp;</span>
                     </td>
                     <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;"><span
-                                style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->contact_1 }}</span><br></span></td>
+                                style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->contact_1 }}</span><br></span>
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
                             style="color: rgb(255, 255, 255); font-family: Tahoma, Geneva, sans-serif;">E-MAIL</span>
                     </td>
-                    <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->email }}</span></td>
+                    <td style="width: 58.2542%;"><span
+                            style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->email }}</span></td>
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
                             style="color: rgb(255, 255, 255); font-family: Tahoma, Geneva, sans-serif;">FACEBOOK</span>
                     </td>
-                    <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->fb_account }}</span></td>
+                    <td style="width: 58.2542%;"><span
+                            style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->fb_account }}</span></td>
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
                             style="font-family: Tahoma, Geneva, sans-serif; color: rgb(239, 239, 239);">ADDRESS&nbsp;</span>
                     </td>
                     <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;"><span
-                                style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->address }}</span><br></span></td>
+                                style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->address }}</span><br></span>
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
                             style="color: rgb(255, 255, 255);"><span style="font-family: Tahoma,Geneva, sans-serif;">GENDER</span>&nbsp;</span>
                     </td>
-                    <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->gender }}</span></td>
+                    <td style="width: 58.2542%;"><span
+                            style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->gender }}</span></td>
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
                             style="color: rgb(255, 255, 255);"><span style="font-family: Tahoma,Geneva, sans-serif;">WEIGHT</span>&nbsp;</span>
                     </td>
-                    <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->weight }}</span></td>
+                    <td style="width: 58.2542%;"><span
+                            style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->weight }}</span></td>
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
                             style="color: rgb(255, 255, 255);"><span style="font-family: Tahoma,Geneva, sans-serif;">HEIGHT</span>&nbsp;</span>
                     </td>
-                    <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->height }}</span></td>
+                    <td style="width: 58.2542%;"><span
+                            style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->height }}</span></td>
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
                             style="font-family: Tahoma, Geneva, sans-serif; color: rgb(239, 239, 239);">PLACE OF BIRTH&nbsp;</span>
                     </td>
                     <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;"><span
-                                style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->birth_place }}</span><br></span></td>
+                                style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->birth_place }}</span><br></span>
+                    </td>
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
                             style="color: rgb(255, 255, 255); font-family: Tahoma, Geneva, sans-serif;">DATE OF BIRTH&nbsp;</span>
                     </td>
-                    <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->birth_date }}</span></td>
+                    <td style="width: 58.2542%;"><span
+                            style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->birth_date }}</span></td>
                 </tr>
                 <tr>
                     <td style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;"><span
@@ -178,8 +190,10 @@
             <table style="width: 100%; border-collapse: collapse; border: 1px solid rgb(0, 0, 0);">
                 <tbody>
                 <tr>
-                    <td style="width: 100%; border: 1px solid rgb(0, 0, 0);">
-                        <img src="{{ asset($results->documentPicFull->path) }}" width="100%" height="500px">
+                    <td style="width: 100%; height:500px; border: 1px solid rgb(0, 0, 0);">
+                        @isset($results->documentPicFull->path)
+                            <img src="{{ asset($results->documentPicFull->path) }}" width="100%" height="500px">
+                        @endisset
                     </td>
                 </tr>
                 </tbody>

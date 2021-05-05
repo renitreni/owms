@@ -103,6 +103,7 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
         Route::get('/employed', [CandidateController::class, 'employed'])->name('candidate.employed');
         Route::post('/send/code', [CandidateController::class, 'sendCode'])->name('send.code');
         Route::get('/candidates/pdf/', [CandidateController::class, 'toPDF'])->name('candidate.pdf');
+        Route::get('/candidates/word/', [CandidateController::class, 'toWord'])->name('candidate.word');
         Route::get('/candidates/{id}/show', [CandidateController::class, 'show'])->name('candidate.edit');
 
         Route::get('/affiliates', [AffiliateController::class, 'index'])->name('affiliates')->middleware('can:agency');

@@ -102,8 +102,7 @@
             </transition>
         </form>
 
-        <form action="{{ route('candidate.pdf') }}" method="GET">
-            @csrf
+
             <transition name="slide-fade">
                 <!-- Employee Assign -->
                 <div class="fixed inset-0 overflow-y-auto" v-if="employer_pdf_mdl">
@@ -127,7 +126,6 @@
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                                             Convert to PDF
                                             <span class="underline">@{{ overview.last_name }}, @{{ overview.first_name }} @{{ overview.middle_name }}</span>
-                                            <input class="hidden" name="id" v-bind:value="overview.id">
                                         </h3>
                                         <div class="mt-6">
                                             <div class="flex flex-row">
@@ -143,10 +141,28 @@
                                 </div>
                             </div>
                             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                <button type="submit"
-                                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                    Convert
-                                </button>
+                                <form action="{{ route('candidate.pdf') }}" method="GET">
+                                    @csrf
+                                    <input class="hidden" name="id" v-bind:value="overview.id">
+                                    <textarea hidden type="text" name="remarks" rows="6"
+                                              class="hidden mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                    >@{{ overview.remarks }}</textarea>
+                                    <button type="submit"
+                                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-3 py-3 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </button>
+                                </form>
+                                <form action="{{ route('candidate.word') }}" method="GET">
+                                    @csrf
+                                    <input class="hidden" name="id" v-bind:value="overview.id">
+                                    <textarea type="text" name="remarks" rows="6"
+                                              class="hidden mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                    >@{{ overview.remarks }}</textarea>
+                                    <button type="submit"
+                                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-3 py-3 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                        <i class="fas fa-file-word"></i>
+                                    </button>
+                                </form>
                                 <button type="button" v-on:click="employer_pdf_mdl = false"
                                         class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                     Cancel
@@ -156,7 +172,6 @@
                     </div>
                 </div>
             </transition>
-        </form>
     </div>
 
     <x-slot name="scripts">
@@ -169,6 +184,13 @@
                         employer_mdl: false,
                         employer_pdf_mdl: false,
                         agent_mdl: false,
+                    }
+                },
+                methods: {
+                    convertWord() {
+                        axios.get('{{ route('candidate.word') }}', {
+                            params: this.overview
+                        });
                     }
                 },
                 mounted() {
@@ -234,7 +256,7 @@
                                             '</div>\n' +
                                             '<div class="col-span-1">\n' +
                                             '<button class="btn-pdf bg-yellow-300 p-1 text-white w-full">' +
-                                            '<i class="fas fa-file-pdf"></i></button>\n' +
+                                            '<i class="fas fa-download"></i></button>\n' +
                                             '</div>\n' +
                                             '<div class="col-span-1">\n' +
                                             '<button class="btn-details bg-blue-400 hover:bg-blue-500 p-1 text-white w-full"><i class="fas fa-info-circle"></i></button>\n' +
