@@ -1,3 +1,4 @@
+Ø
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
@@ -29,6 +30,14 @@
                                         </div>
                                         <div class="grid grid-cols-6 gap-4">
                                             @include('components.agency.partials.candidate-form')
+                                            <div class="col-span-6 bg-blue-50 p-1">
+                                                <span class="text-3xl">{{ __('Remarks') }}</span>
+                                            </div>
+                                            <div class="col-span-6 p-1">
+                                                <textarea type="text" name="remarks" rows="6"
+                                                          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                >{{ $results->remarks ?? null }}</textarea>
+                                            </div>
                                             <input type="checkbox" name="agreed" value="yes" class="hidden" checked>
                                         </div>
                                     </div>
