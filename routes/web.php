@@ -41,13 +41,14 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
     Route::post('/change/password/update', [UsersController::class, 'changePass'])->name('change.pass.update');
 
     Route::group(['middleware' => ['can:admin_gov']], function () {
+        Route::resource('agencies', AgencyController::class);
+        Route::post('agencies/table', [AgencyController::class, 'table'])->name('agencies.table');
+
         Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates');
         Route::post('/candidates/c/c', [CandidateController::class, 'tableCandidates'])->name('candidate.table');
     });
 
     Route::group(['middleware' => ['can:admin']], function () {
-        Route::resource('agencies', AgencyController::class);
-        Route::post('agencies/table', [AgencyController::class, 'table'])->name('agencies.table');
 
         Route::get('/settings', [UsersController::class, 'indexSettings'])->name('settings');
         Route::post('/settings/submit', [UsersController::class, 'settingsSave'])->name('settings.submit');
