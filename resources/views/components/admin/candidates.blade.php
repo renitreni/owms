@@ -6,7 +6,7 @@
     </x-slot>
 
     <div id="app" class="pb-12 pt-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-full mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
                 <table id="tbl-candidates" class="stripe hover display" style="width:100% !important;"></table>
             </div>

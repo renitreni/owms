@@ -405,7 +405,7 @@ var render = function() {
     "div",
     { staticClass: "pb-12 pt-8" },
     [
-      _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
+      _c("div", { staticClass: "w-full mx-auto sm:px-6 lg:px-8" }, [
         _c(
           "div",
           { staticClass: "bg-white overflow-hidden shadow-sm sm:rounded-lg" },
