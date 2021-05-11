@@ -28,8 +28,7 @@ class CandidateController extends Controller
 
     public function tableCandidates(Candidate $candidate)
     {
-        $candidate = $candidate->newQuery()->where('agency_id', auth()->user()->agency_id)
-                               ->with(['agency', 'employer']);
+        $candidate = $candidate->newQuery()->with(['agency', 'employer']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
