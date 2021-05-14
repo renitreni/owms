@@ -219,7 +219,9 @@
                                                     v-model="overview.level"
                                                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
                                                     <option value="">-- No Alert --</option>
-                                                    <option v-for="item in alert_list"  v-bind:value="item.id">{{ item.name }}</option>
+                                                    <option v-for="item in alert_list" v-bind:value="item.id">{{
+                                                        item.name }}
+                                                    </option>
                                                 </select>
                                             </div>
                                             <div class="mt-2">
@@ -323,17 +325,23 @@
                                             <div v-for="item in alert_list" class="flex flex-col border p-2 mb-2">
                                                 <label v-bind:style="'color:' + item.color_level"
                                                        class="font-bold text-2xl">
-
                                                     <button
                                                         type="button"
                                                         @click="showDeleteMdl(item.id)"
-                                                        class="mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-1 py-1 bg-white text-base font-medium text-red-700 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                        class="p-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-sm"
                                                     >
                                                         <i class="fas fa-trash"></i>
                                                     </button>
+                                                    <button
+                                                        type="button"
+                                                        @click="showEdit(item)"
+                                                        class="p-2 text-sm text-white bg-indigo-500 hover:bg-indigo-600 rounded-sm"
+                                                    >
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
                                                     {{ item.name }}
                                                 </label>
-                                                <p>{{ item.description }}</p>
+                                                <p class="m-2">{{ item.description }}</p>
                                             </div>
                                         </div>
                                         <div class="flex flex-col" v-if="tab === 2">
@@ -419,12 +427,19 @@
                     name: null,
                     address: null,
                     logo: '',
-                    poea: null
+                    poea: null,
+                    level: '',
                 },
             };
         },
         watch: {},
         methods: {
+            showEdit(item) {
+                this.tab = 2;
+                this.alert_form.color_level = item.color_level;
+                this.alert_form.description = item.description;
+                this.alert_form.name = item.name;
+            },
             showDeleteMdl(id) {
                 var $this = this;
                 swal({
@@ -436,7 +451,7 @@
                 })
                     .then((willDelete) => {
                         if (willDelete) {
-                            axios.post($this.props_data.delete_alerts,{id:id}).then(function () {
+                            axios.post($this.props_data.delete_alerts, {id: id}).then(function () {
                                 swal("Poof! Your imaginary file has been deleted!", {
                                     icon: "success",
                                 });
@@ -477,7 +492,8 @@
                     name: null,
                     address: null,
                     logo: '',
-                    poea: null
+                    poea: null,
+                    level: '',
                 };
 
                 this.agency_mdl = true;
@@ -500,6 +516,7 @@
                 formData.append('address', $this.overview.address);
                 formData.append('poea', $this.overview.poea);
                 formData.append('status', $this.overview.status);
+                formData.append('level', $this.overview.level);
 
                 axios.post($this.overview.update_link, formData).then(function () {
                     $this.dt.draw();
@@ -542,11 +559,27 @@
                     {data: "poea", name: "poea", title: "POEA No."},
                     {
                         data: function (value) {
+                            if (value.alert) {
+                                return '<label class="font-bold animate-bounce relative" ' +
+                                    'style="color: ' + value.alert.color_level + '">' +
+                                    value.alert.name +
+                                    '<span class="animate-ping absolute inline-flex ml-1 mt-1 h-4 w-4 rounded-full opacity-75" ' +
+                                    'style="background-color: ' + value.alert.color_level + '"></span>\n' +
+                                    '<span class="relative inline-flex rounded-full h-3 w-3" ' +
+                                    'style="background-color: ' + value.alert.color_level + '"></span>\n' +
+                                    '</label>'
+
+                            }
+                            return 'No Alert'
+                        }, name: "id", title: "Alert Status"
+                    },
+                    {
+                        data: function (value) {
                             if (value.status === 'active') {
                                 return '<span class="bg-green-300 shadow-sm p-1 rounded text-white block text-center">Active</span>'
                             }
                             return '<span class="bg-red-500 shadow-sm p-1 rounded text-white block text-center">BLOCKED</span>'
-                        }, name: "status", title: "Status"
+                        }, name: "status", title: "Active Status"
                     },
                     {
                         data: "created_at_display",

@@ -403,6 +403,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -429,12 +437,19 @@ __webpack_require__.r(__webpack_exports__);
         name: null,
         address: null,
         logo: '',
-        poea: null
+        poea: null,
+        level: ''
       }
     };
   },
   watch: {},
   methods: {
+    showEdit: function showEdit(item) {
+      this.tab = 2;
+      this.alert_form.color_level = item.color_level;
+      this.alert_form.description = item.description;
+      this.alert_form.name = item.name;
+    },
     showDeleteMdl: function showDeleteMdl(id) {
       var $this = this;
       swal({
@@ -488,7 +503,8 @@ __webpack_require__.r(__webpack_exports__);
         name: null,
         address: null,
         logo: '',
-        poea: null
+        poea: null,
+        level: ''
       };
       this.agency_mdl = true;
     },
@@ -510,6 +526,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('address', $this.overview.address);
       formData.append('poea', $this.overview.poea);
       formData.append('status', $this.overview.status);
+      formData.append('level', $this.overview.level);
       axios.post($this.overview.update_link, formData).then(function () {
         $this.dt.draw();
         $this.agency_update_mdl = false;
@@ -559,6 +576,16 @@ __webpack_require__.r(__webpack_exports__);
         title: "POEA No."
       }, {
         data: function data(value) {
+          if (value.alert) {
+            return '<label class="font-bold animate-bounce relative" ' + 'style="color: ' + value.alert.color_level + '">' + value.alert.name + '<span class="animate-ping absolute inline-flex ml-1 mt-1 h-4 w-4 rounded-full opacity-75" ' + 'style="background-color: ' + value.alert.color_level + '"></span>\n' + '<span class="relative inline-flex rounded-full h-3 w-3" ' + 'style="background-color: ' + value.alert.color_level + '"></span>\n' + '</label>';
+          }
+
+          return 'No Alert';
+        },
+        name: "id",
+        title: "Alert Status"
+      }, {
+        data: function data(value) {
           if (value.status === 'active') {
             return '<span class="bg-green-300 shadow-sm p-1 rounded text-white block text-center">Active</span>';
           }
@@ -566,7 +593,7 @@ __webpack_require__.r(__webpack_exports__);
           return '<span class="bg-red-500 shadow-sm p-1 rounded text-white block text-center">BLOCKED</span>';
         },
         name: "status",
-        title: "Status"
+        title: "Active Status"
       }, {
         data: "created_at_display",
         name: "created_at",
@@ -1268,7 +1295,12 @@ var render = function() {
                                             return _c(
                                               "option",
                                               { domProps: { value: item.id } },
-                                              [_vm._v(_vm._s(item.name))]
+                                              [
+                                                _vm._v(
+                                                  _vm._s(item.name) +
+                                                    "\n                                                "
+                                                )
+                                              ]
                                             )
                                           })
                                         ],
@@ -1534,7 +1566,7 @@ var render = function() {
                                                     "button",
                                                     {
                                                       staticClass:
-                                                        "mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-1 py-1 bg-white text-base font-medium text-red-700 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                                        "p-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-sm",
                                                       attrs: { type: "button" },
                                                       on: {
                                                         click: function(
@@ -1553,6 +1585,30 @@ var render = function() {
                                                       })
                                                     ]
                                                   ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "button",
+                                                    {
+                                                      staticClass:
+                                                        "p-2 text-sm text-white bg-indigo-500 hover:bg-indigo-600 rounded-sm",
+                                                      attrs: { type: "button" },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.showEdit(
+                                                            item
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-edit"
+                                                      })
+                                                    ]
+                                                  ),
                                                   _vm._v(
                                                     "\n                                                " +
                                                       _vm._s(item.name) +
@@ -1561,7 +1617,7 @@ var render = function() {
                                                 ]
                                               ),
                                               _vm._v(" "),
-                                              _c("p", [
+                                              _c("p", { staticClass: "m-2" }, [
                                                 _vm._v(_vm._s(item.description))
                                               ])
                                             ]

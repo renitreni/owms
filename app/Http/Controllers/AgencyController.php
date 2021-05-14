@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Agency;
 use App\Models\AlertLevel;
+use App\Models\AgencyAlert;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Storage;
@@ -33,6 +34,8 @@ class AgencyController extends Controller
 
             $value->update_link = route('agencies.update', ['agency' => $value->id]);
             $value->delete_link = route('agencies.destroy', ['agency' => $value->id]);
+            $value->level       = AgencyAlert::query()->where('agency_id', $value->id)->first('alert_id')->alert_id ?? '';
+            $value->alert       = AlertLevel::query()->where('id', $value->level)->first();
 
             return collect($value)->toArray();
         })->make(true);
@@ -66,6 +69,11 @@ class AgencyController extends Controller
             'address'    => $request->address,
             'poea'       => $request->poea,
             'status'     => $request->status,
+            'created_by' => auth()->id(),
+        ]);
+
+        AgencyAlert::updateOrCreate(['agency_id' => $request->id], [
+            'alert_id'   => $request->level,
             'created_by' => auth()->id(),
         ]);
 
