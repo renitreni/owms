@@ -84,7 +84,8 @@
                                         class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
                                     >
                                         <div class="mt-6">
-                                            {{ $model->level->description }}
+                                            <label class="font-bold text-3xl">{{ $model->level->name }}</label>
+                                            <p>{{ $model->level->description }}</p>
                                         </div>
                                     </div>
                                 </div>
