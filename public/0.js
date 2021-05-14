@@ -265,14 +265,166 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
     return {
+      color: {
+        hue: 50,
+        saturation: 100,
+        luminosity: 50,
+        alpha: 1
+      },
+      tab: 1,
+      level_mdl: false,
       agency_mdl: false,
       agency_update_mdl: false,
       props_data: JSON.parse(this._props.data),
       dt: null,
+      alert_list: [],
+      alert_form: {
+        color_level: '#ff6161',
+        description: '',
+        name: ''
+      },
       overview: {
         name: null,
         address: null,
@@ -283,6 +435,54 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {},
   methods: {
+    showDeleteMdl: function showDeleteMdl(id) {
+      var $this = this;
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          axios.post($this.props_data.delete_alerts, {
+            id: id
+          }).then(function () {
+            swal("Poof! Your imaginary file has been deleted!", {
+              icon: "success"
+            });
+            $this.getAlertList();
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+    },
+    getAlertList: function getAlertList() {
+      var $this = this;
+      axios.post(this.props_data.get_alerts, this.alert_form).then(function (value) {
+        $this.alert_list = value.data;
+      });
+    },
+    saveNewAlert: function saveNewAlert() {
+      var $this = this;
+      axios.post(this.props_data.store_new_alert, this.alert_form).then(function () {
+        $this.dt.draw();
+        $this.getAlertList();
+        swal('Success!', 'New Alert has been Added!', 'success');
+        $this.alert_form = {
+          color_level: '#ff6161',
+          description: '',
+          name: ''
+        };
+      });
+    },
+    onColorSelect: function onColorSelect(hue) {
+      console.log(hue);
+    },
+    showLevelMdl: function showLevelMdl() {
+      this.level_mdl = true;
+    },
     showMdl: function showMdl() {
       this.overview = {
         name: null,
@@ -335,6 +535,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     var $this = this;
+    $this.getAlertList();
     $this.dt = $("#vouchers-table").DataTable({
       responsive: true,
       serverSide: true,
@@ -423,6 +624,22 @@ var render = function() {
                   _c("i", { staticClass: "fas fa-building" }),
                   _vm._v(
                     " " + _vm._s(_vm.__("New Agency")) + "\n\n                "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "text-white bg-indigo-500 hover:bg-indigo-600 p-2 rounded m-2 shadow",
+                  attrs: { href: "#" },
+                  on: { click: _vm.showLevelMdl }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-exclamation-triangle" }),
+                  _vm._v(
+                    " " + _vm._s(_vm.__("Alert Levels")) + "\n                "
                   )
                 ]
               )
@@ -750,7 +967,7 @@ var render = function() {
       _vm._v(" "),
       _c("transition", { attrs: { name: "slide-fade" } }, [
         _vm.agency_update_mdl
-          ? _c("div", { staticClass: "fixed inset-0 overflow-y-auto" }, [
+          ? _c("div", { staticClass: "fixed inset-0 overflow-y-100" }, [
               _c(
                 "div",
                 {
@@ -997,6 +1214,69 @@ var render = function() {
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [
+                                      _c("label", [_vm._v("Alert Levels")]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "select",
+                                        {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.overview.level,
+                                              expression: "overview.level"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                          on: {
+                                            change: function($event) {
+                                              var $$selectedVal = Array.prototype.filter
+                                                .call(
+                                                  $event.target.options,
+                                                  function(o) {
+                                                    return o.selected
+                                                  }
+                                                )
+                                                .map(function(o) {
+                                                  var val =
+                                                    "_value" in o
+                                                      ? o._value
+                                                      : o.value
+                                                  return val
+                                                })
+                                              _vm.$set(
+                                                _vm.overview,
+                                                "level",
+                                                $event.target.multiple
+                                                  ? $$selectedVal
+                                                  : $$selectedVal[0]
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "" } },
+                                            [_vm._v("-- No Alert --")]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm._l(_vm.alert_list, function(
+                                            item
+                                          ) {
+                                            return _c(
+                                              "option",
+                                              { domProps: { value: item.id } },
+                                              [_vm._v(_vm._s(item.name))]
+                                            )
+                                          })
+                                        ],
+                                        2
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "mt-2" }, [
                                       _c("img", {
                                         staticClass: "h-36",
                                         attrs: { src: _vm.overview.logo_path }
@@ -1067,6 +1347,403 @@ var render = function() {
                               on: {
                                 click: function($event) {
                                   _vm.agency_update_mdl = false
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Cancel\n                        "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "slide-fade" } }, [
+        _vm.level_mdl
+          ? _c("div", { staticClass: "fixed inset-0 overflow-y-auto" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "fixed inset-0 transition-opacity",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [
+                      _c("div", {
+                        staticClass: "absolute inset-0 bg-gray-500 opacity-75"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "hidden sm:inline-block sm:align-middle sm:h-screen",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [_vm._v("​")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                      attrs: {
+                        role: "dialog",
+                        "aria-modal": "true",
+                        "aria-labelledby": "modal-headline"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+                        },
+                        [
+                          _c("div", { staticClass: "sm:flex sm:items-start" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-exclamation-triangle"
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                              },
+                              [
+                                _c(
+                                  "h3",
+                                  {
+                                    staticClass:
+                                      "text-lg leading-6 font-medium text-gray-900"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Alert Levels\n                                "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "mt-4" }, [
+                                  _c("div", { staticClass: "bg-white" }, [
+                                    _c(
+                                      "nav",
+                                      {
+                                        staticClass: "flex flex-col sm:flex-row"
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none",
+                                            class: {
+                                              "text-blue-500 border-b-2 font-medium border-blue-500":
+                                                _vm.tab === 1
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.tab = 1
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                Levels\n                                            "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none",
+                                            class: {
+                                              "text-blue-500 border-b-2 font-medium border-blue-500":
+                                                _vm.tab === 2
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.tab = 2
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                Add Level\n                                            "
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm.tab === 1
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "flex flex-col mt-2 overflow-scroll h-75"
+                                        },
+                                        _vm._l(_vm.alert_list, function(item) {
+                                          return _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "flex flex-col border p-2 mb-2"
+                                            },
+                                            [
+                                              _c(
+                                                "label",
+                                                {
+                                                  staticClass:
+                                                    "font-bold text-2xl",
+                                                  style:
+                                                    "color:" + item.color_level
+                                                },
+                                                [
+                                                  _c(
+                                                    "button",
+                                                    {
+                                                      staticClass:
+                                                        "mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-1 py-1 bg-white text-base font-medium text-red-700 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                                                      attrs: { type: "button" },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.showDeleteMdl(
+                                                            item.id
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-trash"
+                                                      })
+                                                    ]
+                                                  ),
+                                                  _vm._v(
+                                                    "\n                                                " +
+                                                      _vm._s(item.name) +
+                                                      "\n                                            "
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c("p", [
+                                                _vm._v(_vm._s(item.description))
+                                              ])
+                                            ]
+                                          )
+                                        }),
+                                        0
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _vm.tab === 2
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "flex flex-col" },
+                                        [
+                                          _c("div", { staticClass: "mt-2" }, [
+                                            _c("label", [_vm._v("Color")]),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              { staticClass: "flex flex-row" },
+                                              [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value:
+                                                        _vm.alert_form
+                                                          .color_level,
+                                                      expression:
+                                                        "alert_form.color_level"
+                                                    }
+                                                  ],
+                                                  staticClass:
+                                                    "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                                  attrs: {
+                                                    type: "text",
+                                                    id: "colorPicker"
+                                                  },
+                                                  domProps: {
+                                                    value:
+                                                      _vm.alert_form.color_level
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        _vm.alert_form,
+                                                        "color_level",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("i", {
+                                                  staticClass:
+                                                    "fa fa-circle my-auto ml-2",
+                                                  style:
+                                                    "color:" +
+                                                    _vm.alert_form.color_level
+                                                })
+                                              ]
+                                            )
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("div", { staticClass: "mt-2" }, [
+                                            _c("label", [_vm._v("Name")]),
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.alert_form.name,
+                                                  expression: "alert_form.name"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                              attrs: { type: "text" },
+                                              domProps: {
+                                                value: _vm.alert_form.name
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.alert_form,
+                                                    "name",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("div", { staticClass: "mt-2" }, [
+                                            _c("label", [
+                                              _vm._v("Description")
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("textarea", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value:
+                                                    _vm.alert_form.description,
+                                                  expression:
+                                                    "alert_form.description"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                              attrs: { type: "text" },
+                                              domProps: {
+                                                value:
+                                                  _vm.alert_form.description
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.alert_form,
+                                                    "description",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]),
+                                          _vm._v(" "),
+                                          _c("div", { staticClass: "mt-4" }, [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass:
+                                                  "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500",
+                                                attrs: { type: "submit" },
+                                                on: { click: _vm.saveNewAlert }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                                Save New Alert\n                                            "
+                                                )
+                                              ]
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ])
+                              ]
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.level_mdl = false
                                 }
                               }
                             },

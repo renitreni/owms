@@ -11,6 +11,13 @@
                         <i class="fas fa-building"></i> {{ __('New Agency') }}
 
                     </a>
+                    <a
+                        href="#"
+                        @click="showLevelMdl"
+                        class="text-white bg-indigo-500 hover:bg-indigo-600 p-2 rounded m-2 shadow"
+                    >
+                        <i class="fas fa-exclamation-triangle"></i> {{ __('Alert Levels') }}
+                    </a>
                 </div>
                 <div class="p-5">
                     <table
@@ -21,7 +28,7 @@
                 </div>
             </div>
         </div>
-
+        <!--    New Agency-->
         <transition name="slide-fade">
             <!-- Agency add -->
             <div class="fixed inset-0 overflow-y-auto" v-if="agency_mdl">
@@ -131,11 +138,10 @@
                 </div>
             </div>
         </transition>
-
-
+        <!--    Update Agency-->
         <transition name="slide-fade">
             <!-- Agency add -->
-            <div class="fixed inset-0 overflow-y-auto" v-if="agency_update_mdl">
+            <div class="fixed inset-0 overflow-y-100" v-if="agency_update_mdl">
                 <div
                     class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
                 >
@@ -208,6 +214,15 @@
                                                 </select>
                                             </div>
                                             <div class="mt-2">
+                                                <label>Alert Levels</label>
+                                                <select
+                                                    v-model="overview.level"
+                                                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                    <option value="">-- No Alert --</option>
+                                                    <option v-for="item in alert_list"  v-bind:value="item.id">{{ item.name }}</option>
+                                                </select>
+                                            </div>
+                                            <div class="mt-2">
                                                 <img v-bind:src="overview.logo_path" class="h-36">
                                             </div>
                                             <div class="mt-2">
@@ -252,6 +267,129 @@
                 </div>
             </div>
         </transition>
+        <!--    Level Modal-->
+        <transition name="slide-fade">
+            <!-- Agency add -->
+            <div class="fixed inset-0 overflow-y-auto" v-if="level_mdl">
+                <div
+                    class="flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0"
+                >
+                    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <span
+                        class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                        aria-hidden="true"
+                    >&#8203;</span
+                    >
+                    <div
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-headline"
+                    >
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div class="sm:flex sm:items-start">
+                                <div
+                                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
+                                >
+                                    <!-- Heroicon name -->
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div
+                                    class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                                >
+                                    <h3
+                                        class="text-lg leading-6 font-medium text-gray-900"
+                                    >
+                                        Alert Levels
+                                    </h3>
+                                    <div class="mt-4">
+                                        <div class="bg-white">
+                                            <nav class="flex flex-col sm:flex-row">
+                                                <button @click="tab = 1"
+                                                        class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none"
+                                                        v-bind:class="{'text-blue-500 border-b-2 font-medium border-blue-500': (tab === 1)}">
+                                                    Levels
+                                                </button>
+                                                <button @click="tab = 2"
+                                                        class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none"
+                                                        v-bind:class="{'text-blue-500 border-b-2 font-medium border-blue-500': (tab === 2)}">
+                                                    Add Level
+                                                </button>
+                                            </nav>
+                                        </div>
+                                        <div class="flex flex-col mt-2 overflow-scroll h-75" v-if="tab === 1">
+                                            <div v-for="item in alert_list" class="flex flex-col border p-2 mb-2">
+                                                <label v-bind:style="'color:' + item.color_level"
+                                                       class="font-bold text-2xl">
+
+                                                    <button
+                                                        type="button"
+                                                        @click="showDeleteMdl(item.id)"
+                                                        class="mt-3 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-1 py-1 bg-white text-base font-medium text-red-700 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                    >
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                    {{ item.name }}
+                                                </label>
+                                                <p>{{ item.description }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col" v-if="tab === 2">
+                                            <div class="mt-2">
+                                                <label>Color</label>
+                                                <div class="flex flex-row">
+                                                    <input type="text" id="colorPicker" v-model="alert_form.color_level"
+                                                           class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                    <i class="fa fa-circle my-auto ml-2"
+                                                       v-bind:style="'color:' + alert_form.color_level"></i>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <label>Name</label><input
+                                                type="text"
+                                                v-model="alert_form.name"
+                                                class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                                            />
+                                            </div>
+                                            <div class="mt-2">
+                                                <label>Description</label>
+                                                <textarea
+                                                    type="text"
+                                                    v-model="alert_form.description"
+                                                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                                                ></textarea>
+                                            </div>
+                                            <div class="mt-4">
+                                                <button
+                                                    type="submit"
+                                                    @click="saveNewAlert"
+                                                    class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                                >
+                                                    Save New Alert
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                        >
+                            <button
+                                type="button"
+                                @click="level_mdl = false"
+                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -259,10 +397,24 @@
         props: ["data"],
         data() {
             return {
+                color: {
+                    hue: 50,
+                    saturation: 100,
+                    luminosity: 50,
+                    alpha: 1
+                },
+                tab: 1,
+                level_mdl: false,
                 agency_mdl: false,
                 agency_update_mdl: false,
                 props_data: JSON.parse(this._props.data),
                 dt: null,
+                alert_list: [],
+                alert_form: {
+                    color_level: '#ff6161',
+                    description: '',
+                    name: ''
+                },
                 overview: {
                     name: null,
                     address: null,
@@ -273,6 +425,53 @@
         },
         watch: {},
         methods: {
+            showDeleteMdl(id) {
+                var $this = this;
+                swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            axios.post($this.props_data.delete_alerts,{id:id}).then(function () {
+                                swal("Poof! Your imaginary file has been deleted!", {
+                                    icon: "success",
+                                });
+                                $this.getAlertList();
+                            });
+                        } else {
+                            swal("Your imaginary file is safe!");
+                        }
+                    });
+            },
+            getAlertList() {
+                var $this = this;
+                axios.post(this.props_data.get_alerts, this.alert_form).then(function (value) {
+                    $this.alert_list = value.data;
+                });
+            },
+            saveNewAlert() {
+                var $this = this;
+                axios.post(this.props_data.store_new_alert, this.alert_form).then(function () {
+                    $this.dt.draw();
+                    $this.getAlertList();
+                    swal('Success!', 'New Alert has been Added!', 'success');
+                    $this.alert_form = {
+                        color_level: '#ff6161',
+                        description: '',
+                        name: ''
+                    }
+                });
+            },
+            onColorSelect(hue) {
+                console.log(hue)
+            },
+            showLevelMdl() {
+                this.level_mdl = true;
+            },
             showMdl() {
                 this.overview = {
                     name: null,
@@ -327,6 +526,7 @@
         },
         mounted() {
             var $this = this;
+            $this.getAlertList();
             $this.dt = $("#vouchers-table").DataTable({
                 responsive: true,
                 serverSide: true,

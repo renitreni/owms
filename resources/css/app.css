@@ -2,7 +2,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
+@import "@claviska/jquery-minicolors/jquery.minicolors.css";
 @import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 
 .font-merriweather {

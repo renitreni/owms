@@ -24,10 +24,14 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@claviska/jquery-minicolors": "^2.3.5",
+        "@jaames/iro": "^5.5.1",
+        "@radial-color-picker/vue-color-picker": "^4.0.0",
         "jquery": "^3.5.1",
         "lang.js": "^1.1.14",
         "laravel-echo": "^1.10.0",
         "pusher-js": "^7.0.3",
-        "vue": "^2.6.12"
+        "vue": "^2.6.12",
+        "vue-accessible-color-picker": "^3.0.0"
     }
 }

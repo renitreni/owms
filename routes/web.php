@@ -43,13 +43,15 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
     Route::group(['middleware' => ['can:admin_gov']], function () {
         Route::resource('agencies', AgencyController::class);
         Route::post('agencies/table', [AgencyController::class, 'table'])->name('agencies.table');
+        Route::post('agencies/store/alert', [AgencyController::class, 'storeAlert'])->name('agencies.alert.store');
+        Route::post('agencies/alert/list', [AgencyController::class, 'alertList'])->name('agencies.alert.list');
+        Route::post('agencies/delete/alert', [AgencyController::class, 'deleteAlert'])->name('agencies.alert.delete');
 
         Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates');
         Route::post('/candidates/c/c', [CandidateController::class, 'tableCandidates'])->name('candidate.table');
     });
 
     Route::group(['middleware' => ['can:admin']], function () {
-
         Route::get('/settings', [UsersController::class, 'indexSettings'])->name('settings');
         Route::post('/settings/submit', [UsersController::class, 'settingsSave'])->name('settings.submit');
         Route::post('/users/table', [UsersController::class, 'table'])->name('users.table');
@@ -131,8 +133,6 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
 
         Route::post('/details/flight/store', [OtherDetailsController::class, 'storeFlight'])
              ->name('details.flight.store');
-        Route::post('/details/flight/table', [OtherDetailsController::class, 'tableFlights'])
-             ->name('details.flight.table');
 
         Route::post('/details/add/checklist', [OtherDetailsController::class, 'insertCheckList'])
              ->name('details.insert.checklist');
@@ -149,6 +149,9 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
         Route::get('voucher/export', [VoucherController::class, 'export'])->name('voucher.export');
         Route::resource('voucher', VoucherController::class)->middleware('can:agency');
     });
+
+    Route::post('/details/flight/table', [OtherDetailsController::class, 'tableFlights'])
+         ->name('details.flight.table');
 
     Route::get('/candidates/overview/{id}', [CandidateController::class, 'overview'])->name('candidate.overview');
 

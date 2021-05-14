@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Agency;
+use App\Models\AlertLevel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Storage;
@@ -16,8 +17,11 @@ class AgencyController extends Controller
             "header"    => 'Agencies',
             "component" => 'agency-page',
             "data"      => [
-                'datatable_link' => route('agencies.table'),
-                'store_link'     => route('agencies.store'),
+                'datatable_link'  => route('agencies.table'),
+                'store_link'      => route('agencies.store'),
+                'store_new_alert' => route('agencies.alert.store'),
+                'get_alerts'      => route('agencies.alert.list'),
+                'delete_alerts'   => route('agencies.alert.delete'),
             ],
         ]);
     }
@@ -74,5 +78,27 @@ class AgencyController extends Controller
         Agency::destroy($agency->id);
 
         return ['success' => true];
+    }
+
+    public function storeAlert(Request $request)
+    {
+        AlertLevel::create([
+            "color_level" => $request->color_level,
+            "description" => $request->description,
+            "name"        => $request->name,
+            "created_by"  => auth()->id(),
+        ]);
+
+        return ['success' => true];
+    }
+
+    public function alertList(Request $request)
+    {
+        return AlertLevel::all();
+    }
+
+    public function deleteAlert(Request $request)
+    {
+        return AlertLevel::destroy($request->id);
     }
 }

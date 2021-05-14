@@ -1,7 +1,6 @@
 require('./bootstrap');
-
 require('alpinejs');
-
+require('@claviska/jquery-minicolors/jquery.minicolors');
 Vue.component('chat-box', () =>
     import ('./view/ChatBox.vue')
 );
@@ -13,6 +12,7 @@ Vue.component('agency-page', () =>
 );
 
 Vue.mixin(require('./trans'));
+
 import Echo from 'laravel-echo';
 import { lowerFirst } from 'lodash';
 import Pusher from "pusher-js";
