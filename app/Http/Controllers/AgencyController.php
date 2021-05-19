@@ -34,7 +34,9 @@ class AgencyController extends Controller
 
             $value->update_link = route('agencies.update', ['agency' => $value->id]);
             $value->delete_link = route('agencies.destroy', ['agency' => $value->id]);
-            $value->level       = AgencyAlert::query()->where('agency_id', $value->id)->first('alert_id')->alert_id ?? '';
+            $value->level       = AgencyAlert::query()
+                                             ->where('agency_id', $value->id)
+                                             ->first('alert_id')->alert_id ?? '';
             $value->alert       = AlertLevel::query()->where('id', $value->level)->first();
 
             return collect($value)->toArray();
@@ -90,12 +92,14 @@ class AgencyController extends Controller
 
     public function storeAlert(Request $request)
     {
-        AlertLevel::create([
-            "color_level" => $request->color_level,
-            "description" => $request->description,
-            "name"        => $request->name,
-            "created_by"  => auth()->id(),
-        ]);
+        AlertLevel::updateOrCreate(
+            ['id' => $request->id],
+            [
+                "color_level" => $request->color_level,
+                "description" => $request->description,
+                "name"        => $request->name,
+                "created_by"  => auth()->id(),
+            ]);
 
         return ['success' => true];
     }

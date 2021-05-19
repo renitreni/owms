@@ -436,6 +436,7 @@
         methods: {
             showEdit(item) {
                 this.tab = 2;
+                this.alert_form.id = item.id;
                 this.alert_form.color_level = item.color_level;
                 this.alert_form.description = item.description;
                 this.alert_form.name = item.name;
