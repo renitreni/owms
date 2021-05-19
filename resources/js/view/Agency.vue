@@ -1,7 +1,7 @@
 <template>
     <div class="pb-12 pt-8">
         <div class="w-full mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-auto shadow-sm sm:rounded-lg">
                 <div class="p-2 mt-5">
                     <a
                         href="#"
@@ -44,7 +44,7 @@
                     >&#8203;</span
                     >
                     <div
-                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="modal-headline"
@@ -154,7 +154,7 @@
                     >&#8203;</span
                     >
                     <div
-                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="modal-headline"
@@ -285,7 +285,7 @@
                     >&#8203;</span
                     >
                     <div
-                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="modal-headline"

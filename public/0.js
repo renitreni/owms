@@ -636,7 +636,7 @@ var render = function() {
       _c("div", { staticClass: "w-full mx-auto sm:px-6 lg:px-8" }, [
         _c(
           "div",
-          { staticClass: "bg-white overflow-hidden shadow-sm sm:rounded-lg" },
+          { staticClass: "bg-white overflow-auto shadow-sm sm:rounded-lg" },
           [
             _c("div", { staticClass: "p-2 mt-5" }, [
               _c(
@@ -714,7 +714,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                        "inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
                       attrs: {
                         role: "dialog",
                         "aria-modal": "true",
@@ -1029,7 +1029,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                        "inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
                       attrs: {
                         role: "dialog",
                         "aria-modal": "true",
@@ -1435,7 +1435,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                        "inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
                       attrs: {
                         role: "dialog",
                         "aria-modal": "true",
