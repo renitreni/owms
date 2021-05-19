@@ -411,6 +411,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -1230,12 +1232,6 @@ var render = function() {
                                             "option",
                                             { attrs: { value: "not active" } },
                                             [_vm._v("Not Active")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "Maltreated" } },
-                                            [_vm._v("Maltreated")]
                                           )
                                         ]
                                       )
@@ -1640,43 +1636,79 @@ var render = function() {
                                               "div",
                                               { staticClass: "flex flex-row" },
                                               [
-                                                _c("input", {
-                                                  directives: [
-                                                    {
-                                                      name: "model",
-                                                      rawName: "v-model",
-                                                      value:
-                                                        _vm.alert_form
-                                                          .color_level,
-                                                      expression:
-                                                        "alert_form.color_level"
-                                                    }
-                                                  ],
-                                                  staticClass:
-                                                    "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
-                                                  attrs: {
-                                                    type: "text",
-                                                    id: "colorPicker"
-                                                  },
-                                                  domProps: {
-                                                    value:
-                                                      _vm.alert_form.color_level
-                                                  },
-                                                  on: {
-                                                    input: function($event) {
-                                                      if (
-                                                        $event.target.composing
-                                                      ) {
-                                                        return
+                                                _c(
+                                                  "select",
+                                                  {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.alert_form
+                                                            .color_level,
+                                                        expression:
+                                                          "alert_form.color_level"
                                                       }
-                                                      _vm.$set(
-                                                        _vm.alert_form,
-                                                        "color_level",
-                                                        $event.target.value
-                                                      )
+                                                    ],
+                                                    staticClass:
+                                                      "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                                    on: {
+                                                      change: function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          _vm.alert_form,
+                                                          "color_level",
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      }
                                                     }
-                                                  }
-                                                }),
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "option",
+                                                      {
+                                                        attrs: {
+                                                          value: "lightblue"
+                                                        }
+                                                      },
+                                                      [_vm._v("Level 1")]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "option",
+                                                      {
+                                                        attrs: {
+                                                          value: "black"
+                                                        }
+                                                      },
+                                                      [_vm._v("Level 2")]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "option",
+                                                      {
+                                                        attrs: { value: "red" }
+                                                      },
+                                                      [_vm._v("Level 3")]
+                                                    )
+                                                  ]
+                                                ),
                                                 _vm._v(" "),
                                                 _c("i", {
                                                   staticClass:

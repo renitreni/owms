@@ -210,7 +210,6 @@
                                                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
                                                     <option value="active">Active</option>
                                                     <option value="not active">Not Active</option>
-                                                    <option value="Maltreated">Maltreated</option>
                                                 </select>
                                             </div>
                                             <div class="mt-2">
@@ -348,8 +347,11 @@
                                             <div class="mt-2">
                                                 <label>Color</label>
                                                 <div class="flex flex-row">
-                                                    <input type="text" id="colorPicker" v-model="alert_form.color_level"
-                                                           class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                    <select v-model="alert_form.color_level" class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                        <option value="lightblue">Level 1</option>
+                                                        <option value="black">Level 2</option>
+                                                        <option value="red">Level 3</option>
+                                                    </select>
                                                     <i class="fa fa-circle my-auto ml-2"
                                                        v-bind:style="'color:' + alert_form.color_level"></i>
                                                 </div>
