@@ -679,12 +679,12 @@ var render = function() {
       _vm._v(" "),
       _c("transition", { attrs: { name: "slide-fade" } }, [
         _vm.agency_mdl
-          ? _c("div", { staticClass: "fixed inset-0 overflow-y-auto" }, [
+          ? _c("div", { staticClass: "fixed inset-0 overflow-auto" }, [
               _c(
                 "div",
                 {
                   staticClass:
-                    "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+                    "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0  overflow-auto"
                 },
                 [
                   _c(
@@ -994,12 +994,12 @@ var render = function() {
       _vm._v(" "),
       _c("transition", { attrs: { name: "slide-fade" } }, [
         _vm.agency_update_mdl
-          ? _c("div", { staticClass: "fixed inset-0 overflow-y-100" }, [
+          ? _c("div", { staticClass: "fixed inset-0 overflow-auto" }, [
               _c(
                 "div",
                 {
                   staticClass:
-                    "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+                    "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0  overflow-auto"
                 },
                 [
                   _c(
@@ -1400,12 +1400,12 @@ var render = function() {
       _vm._v(" "),
       _c("transition", { attrs: { name: "slide-fade" } }, [
         _vm.level_mdl
-          ? _c("div", { staticClass: "fixed inset-0 overflow-y-auto" }, [
+          ? _c("div", { staticClass: "fixed inset-0 overflow-auto" }, [
               _c(
                 "div",
                 {
                   staticClass:
-                    "flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0"
+                    "flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0  overflow-auto"
                 },
                 [
                   _c(
