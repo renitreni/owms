@@ -141,7 +141,7 @@
         <!--    Update Agency-->
         <transition name="slide-fade">
             <!-- Agency add -->
-            <div class="fixed inset-0 overflow-y-100" v-if="agency_update_mdl">
+            <div class="fixed inset-0 overflow-auto" v-if="agency_update_mdl">
                 <div
                     class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
                 >
@@ -272,7 +272,7 @@
         <!--    Level Modal-->
         <transition name="slide-fade">
             <!-- Agency add -->
-            <div class="fixed inset-0 overflow-y-auto" v-if="level_mdl">
+            <div class="fixed inset-0 overflow-auto" v-if="level_mdl">
                 <div
                     class="flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0"
                 >
