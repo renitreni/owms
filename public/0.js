@@ -413,6 +413,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -1178,6 +1182,25 @@ var render = function() {
                                         }
                                       })
                                     ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "mt-2 flex flex-col" },
+                                      [
+                                        _c("label", [_vm._v("Co-Host")]),
+                                        _vm._v(" "),
+                                        _vm._l(_vm.overview.co_host, function(
+                                          item
+                                        ) {
+                                          return _c(
+                                            "label",
+                                            { staticClass: "font-bold" },
+                                            [_vm._v(_vm._s(item.name))]
+                                          )
+                                        })
+                                      ],
+                                      2
+                                    ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [
                                       _c("label", [_vm._v("Status")]),

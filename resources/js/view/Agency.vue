@@ -203,6 +203,10 @@
                                                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
                                                 />
                                             </div>
+                                            <div class="mt-2 flex flex-col">
+                                                <label>Co-Host</label>
+                                                <label v-for="item in overview.co_host" class="font-bold">{{ item.name }}</label>
+                                            </div>
                                             <div class="mt-2">
                                                 <label>Status</label>
                                                 <select

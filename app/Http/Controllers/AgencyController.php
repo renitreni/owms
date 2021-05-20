@@ -29,7 +29,7 @@ class AgencyController extends Controller
 
     public function table()
     {
-        return DataTables::of(Agency::all())->setTransformer(function ($value) {
+        return DataTables::of(Agency::query()->with(['coHost']))->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
 
             $value->update_link = route('agencies.update', ['agency' => $value->id]);

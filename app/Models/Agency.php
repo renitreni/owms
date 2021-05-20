@@ -11,11 +11,18 @@ class Agency extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-      'name',
-      'address',
-      'logo_path',
-      'poea',
-      'status',
-      'created_by'
+        'name',
+        'address',
+        'logo_path',
+        'poea',
+        'status',
+        'created_by',
     ];
+
+    public function coHost()
+    {
+        return $this->hasMany(User::class, 'agency_id', 'id')
+                    ->where('role', 5)
+                    ->join('information as inf', 'inf.user_id', '=', 'users.id');
+    }
 }
