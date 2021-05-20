@@ -1726,7 +1726,7 @@ var render = function() {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          "Level 2 - 15 suspension"
+                                                          "Level 2 - 15 days suspension"
                                                         )
                                                       ]
                                                     ),
