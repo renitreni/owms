@@ -1710,7 +1710,11 @@ var render = function() {
                                                           value: "lightblue"
                                                         }
                                                       },
-                                                      [_vm._v("Level 1")]
+                                                      [
+                                                        _vm._v(
+                                                          "Level 1 - Warning"
+                                                        )
+                                                      ]
                                                     ),
                                                     _vm._v(" "),
                                                     _c(
@@ -1720,7 +1724,11 @@ var render = function() {
                                                           value: "black"
                                                         }
                                                       },
-                                                      [_vm._v("Level 2")]
+                                                      [
+                                                        _vm._v(
+                                                          "Level 2 - 15 suspension"
+                                                        )
+                                                      ]
                                                     ),
                                                     _vm._v(" "),
                                                     _c(
@@ -1728,7 +1736,11 @@ var render = function() {
                                                       {
                                                         attrs: { value: "red" }
                                                       },
-                                                      [_vm._v("Level 3")]
+                                                      [
+                                                        _vm._v(
+                                                          "Level 3 - Black List"
+                                                        )
+                                                      ]
                                                     )
                                                   ]
                                                 ),

@@ -352,9 +352,9 @@
                                                 <label>Color</label>
                                                 <div class="flex flex-row">
                                                     <select v-model="alert_form.color_level" class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
-                                                        <option value="lightblue">Level 1</option>
-                                                        <option value="black">Level 2</option>
-                                                        <option value="red">Level 3</option>
+                                                        <option value="lightblue">Level 1 - Warning</option>
+                                                        <option value="black">Level 2 - 15 suspension</option>
+                                                        <option value="red">Level 3 - Black List</option>
                                                     </select>
                                                     <i class="fa fa-circle my-auto ml-2"
                                                        v-bind:style="'color:' + alert_form.color_level"></i>
