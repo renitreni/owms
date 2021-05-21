@@ -9,6 +9,7 @@
 /public/storage
 /public/tabang-logo/vector/*.png
 /storage/*.key
+public/agency_logos/
 /vendor
 .env
 .env.backup
@@ -18,3 +19,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+composer.lock
