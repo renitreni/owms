@@ -414,9 +414,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -602,9 +599,9 @@ __webpack_require__.r(__webpack_exports__);
         name: "status",
         title: "Active Status"
       }, {
-        data: "created_at_display",
-        name: "created_at",
-        title: "Date Created"
+        data: "update_at_display",
+        name: "updated_at",
+        title: "Last Updated"
       }],
       drawCallback: function drawCallback() {
         $("table tr").click(function (e) {
@@ -1023,20 +1020,10 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c(
-                    "span",
-                    {
-                      staticClass:
-                        "hidden sm:inline-block sm:align-middle sm:h-screen",
-                      attrs: { "aria-hidden": "true" }
-                    },
-                    [_vm._v("​")]
-                  ),
-                  _vm._v(" "),
-                  _c(
                     "div",
                     {
                       staticClass:
-                        "inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                        "sm:w-1/2 w-full inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all",
                       attrs: {
                         role: "dialog",
                         "aria-modal": "true",
@@ -1088,6 +1075,42 @@ var render = function() {
                                 _vm._v(" "),
                                 _c("div", { staticClass: "mt-6" }, [
                                   _c("div", { staticClass: "flex flex-col" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "mt-2 flex flex-col" },
+                                      [
+                                        _c("label", [_vm._v("Co-Host")]),
+                                        _vm._v(" "),
+                                        _vm._l(_vm.overview.co_host, function(
+                                          item,
+                                          idx
+                                        ) {
+                                          return _c(
+                                            "label",
+                                            { staticClass: "font-bold" },
+                                            [
+                                              _vm._v(
+                                                _vm._s(idx + 1) +
+                                                  ". " +
+                                                  _vm._s(item.name) +
+                                                  " / " +
+                                                  _vm._s(item.email)
+                                              )
+                                            ]
+                                          )
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.overview.co_host.length === 0
+                                          ? _c(
+                                              "label",
+                                              { staticClass: "font-bold" },
+                                              [_vm._v("No Co-Host Available")]
+                                            )
+                                          : _vm._e()
+                                      ],
+                                      2
+                                    ),
+                                    _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [
                                       _c("label", [_vm._v("Name")]),
                                       _vm._v(" "),
@@ -1183,25 +1206,6 @@ var render = function() {
                                       })
                                     ]),
                                     _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "mt-2 flex flex-col" },
-                                      [
-                                        _c("label", [_vm._v("Co-Host")]),
-                                        _vm._v(" "),
-                                        _vm._l(_vm.overview.co_host, function(
-                                          item
-                                        ) {
-                                          return _c(
-                                            "label",
-                                            { staticClass: "font-bold" },
-                                            [_vm._v(_vm._s(item.name))]
-                                          )
-                                        })
-                                      ],
-                                      2
-                                    ),
-                                    _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [
                                       _c("label", [_vm._v("Status")]),
                                       _vm._v(" "),
@@ -1254,7 +1258,13 @@ var render = function() {
                                           _c(
                                             "option",
                                             { attrs: { value: "not active" } },
-                                            [_vm._v("Not Active")]
+                                            [_vm._v("Blocked")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "option",
+                                            { attrs: { value: "blocked" } },
+                                            [_vm._v("Blocked")]
                                           )
                                         ]
                                       )

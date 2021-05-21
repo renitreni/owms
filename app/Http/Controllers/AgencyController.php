@@ -31,6 +31,7 @@ class AgencyController extends Controller
     {
         return DataTables::of(Agency::query()->with(['coHost']))->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
+            $value->update_at_display = Carbon::parse($value->updated_at)->format('F j, Y');
 
             $value->update_link = route('agencies.update', ['agency' => $value->id]);
             $value->delete_link = route('agencies.destroy', ['agency' => $value->id]);

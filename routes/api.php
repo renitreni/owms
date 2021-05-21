@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\API\ComplainController;
-
+use \App\Http\Controllers\API\AgencyController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,3 +16,5 @@ use \App\Http\Controllers\API\ComplainController;
 */
 
 Route::get('/complaint/new', [ComplainController::class, 'newComplaint']);
+
+Route::get('/agencies', [AgencyController::class, 'getAgenciesAPI']);

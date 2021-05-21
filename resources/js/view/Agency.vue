@@ -148,13 +148,8 @@
                     <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
-                    <span
-                        class="hidden sm:inline-block sm:align-middle sm:h-screen"
-                        aria-hidden="true"
-                    >&#8203;</span
-                    >
                     <div
-                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                        class="sm:w-1/2 w-full inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all"
                         role="dialog"
                         aria-modal="true"
                         aria-labelledby="modal-headline"
@@ -179,6 +174,11 @@
                                     </h3>
                                     <div class="mt-6">
                                         <div class="flex flex-col">
+                                            <div class="mt-2 flex flex-col">
+                                                <label>Co-Host</label>
+                                                <label v-for="(item, idx) in overview.co_host" class="font-bold">{{ idx + 1 }}. {{ item.name }} / {{ item.email }}</label>
+                                                <label v-if="overview.co_host.length === 0" class="font-bold">No Co-Host Available</label>
+                                            </div>
                                             <div class="mt-2">
                                                 <label>Name</label>
                                                 <input
@@ -203,17 +203,14 @@
                                                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
                                                 />
                                             </div>
-                                            <div class="mt-2 flex flex-col">
-                                                <label>Co-Host</label>
-                                                <label v-for="item in overview.co_host" class="font-bold">{{ item.name }}</label>
-                                            </div>
                                             <div class="mt-2">
                                                 <label>Status</label>
                                                 <select
                                                     v-model="overview.status"
                                                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
                                                     <option value="active">Active</option>
-                                                    <option value="not active">Not Active</option>
+                                                    <option value="not active">Blocked</option>
+                                                    <option value="blocked">Blocked</option>
                                                 </select>
                                             </div>
                                             <div class="mt-2">
@@ -589,9 +586,9 @@
                         }, name: "status", title: "Active Status"
                     },
                     {
-                        data: "created_at_display",
-                        name: "created_at",
-                        title: "Date Created",
+                        data: "update_at_display",
+                        name: "updated_at",
+                        title: "Last Updated",
                     },
                 ],
                 drawCallback() {
