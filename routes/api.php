@@ -18,3 +18,4 @@ use \App\Http\Controllers\API\AgencyController;
 Route::get('/complaint/new', [ComplainController::class, 'newComplaint']);
 
 Route::get('/agencies', [AgencyController::class, 'getAgenciesAPI']);
+Route::get('/alerts/agencies', [AgencyController::class, 'getAgenciesAlertsAPI']);

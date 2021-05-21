@@ -24,4 +24,8 @@ class AgencyAlert extends Model
     {
         return $this->hasOne(AlertLevel::class, 'id', 'alert_id');
     }
+    public function agency()
+    {
+        return $this->hasOne(Agency::class, 'id', 'agency_id');
+    }
 }
