@@ -204,8 +204,15 @@
 </div>
 <div class="col-span-6 sm:col-span-2">
     <label class="block text-sm font-medium text-gray-700">{{ __('Religion') }}</label>
-    <input type="text" name="religion" value="{{ $results->religion ?? null }}"
-           class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    <select name="religion" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        @isset($results)
+        <option value="muslim" @if($results->religion == 'muslim') selected @endif>Muslim</option>
+        <option value="non-muslim" @if($results->religion == 'non-muslim') selected @endif>Non-Muslim</option>
+            @else
+            <option value="muslim" selected>Muslim</option>
+            <option value="non-muslim">Non-Muslim</option>
+        @endisset
+    </select>
 </div>
 <div class="col-span-6 sm:col-span-2">
     <label class="block text-sm font-medium text-gray-700">{{ __('Language') }}</label>
