@@ -1,3 +1,8 @@
+<style>
+    thead { display: table-header-group }
+    tfoot { display: table-row-group }
+    tr { page-break-inside: avoid }
+</style>
 <table style="width: 100%;">
     <tbody>
     <tr>
@@ -186,7 +191,7 @@
                 </tbody>
             </table>
         </td>
-        <td style="width: 40%;">
+        <td style="width: 30%;">
             <table style="width: 100%; border-collapse: collapse; border: 1px solid rgb(0, 0, 0);">
                 <tbody>
                 <tr>
