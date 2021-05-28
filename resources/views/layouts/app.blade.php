@@ -37,13 +37,11 @@
                     @php
                         $model =  \App\Models\AgencyAlert::hasAlert()
                     @endphp
-                    @if($model)
+                    @isset($model->level->color_level)
                         <i style="color: {{ $model->level->color_level }}"
                            class="fas fa-exclamation-triangle absolute text-4xl animate-ping"></i>
                         <i style="color: {{ $model->level->color_level }}" @click="alertMdl = true"
                            class="fas fa-exclamation-triangle absolute text-4xl"></i>
-
-
                     @endif
                 </div>
                 {{ $header }}
@@ -60,7 +58,8 @@
                 </{{ $component }}>
             @endisset
             <div>
-                @if($model)<div x-show="alertMdl" class="fixed inset-0 overflow-y-100">
+                @isset($model->level->color_level)
+                    <div x-show="alertMdl" class="fixed inset-0 overflow-y-100">
                     <div
                         class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
                     >
