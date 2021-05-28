@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Skill;
 use App\Models\Agency;
 use App\Models\Document;
 use App\Models\Employer;
@@ -83,8 +84,9 @@ class CandidateController extends Controller
         $agency_id   = Crypt::decrypt($agency_id);
         $agency      = $agency->newQuery()->select(['name', 'id'])->where('id', $agency_id)->first();
         $agency_name = $agency->name;
+        $skills      = DB::table('skills')->where('agency_id', auth()->user()->agency_id)->get();
 
-        return view('components.agency.applicant-create', compact('agency_name', 'agency_id'));
+        return view('components.agency.applicant-create', compact('agency_name', 'agency_id', 'skills'));
     }
 
     public function store(CandidateStoreRequest $request, Candidate $candidate)
@@ -93,15 +95,17 @@ class CandidateController extends Controller
 
         $employment = json_decode($request->employment);
 
-        $path = $request->file('cv')->store('cv');
+        if ($request->hasFile('cv')) {
+            $path = $request->file('cv')->store('cv');
 
-        $doc               = new Document();
-        $doc->candidate_id = $candidate->id;
-        $doc->filename     = $path;
-        $doc->path         = $path;
-        $doc->type         = 'CV';
-        $doc->created_by   = 'Public Form';
-        $doc->save();
+            $doc               = new Document();
+            $doc->candidate_id = $candidate->id;
+            $doc->filename     = $path;
+            $doc->path         = $path;
+            $doc->type         = 'CV';
+            $doc->created_by   = 'Public Form';
+            $doc->save();
+        }
 
         if ($request->hasFile('picfull')) {
             $path = $request->file('picfull')->store('picfull');
@@ -148,15 +152,17 @@ class CandidateController extends Controller
     {
         $model = $candidate->store($request);
 
-        $path = $request->file('cv')->store('cv');
+        if ($request->hasFile('cv')) {
+            $path = $request->file('cv')->store('cv');
 
-        $doc               = new Document();
-        $doc->candidate_id = $model->id;
-        $doc->filename     = $path;
-        $doc->path         = $path;
-        $doc->type         = 'CV';
-        $doc->created_by   = auth()->id();
-        $doc->save();
+            $doc               = new Document();
+            $doc->candidate_id = $candidate->id;
+            $doc->filename     = $path;
+            $doc->path         = $path;
+            $doc->type         = 'CV';
+            $doc->created_by   = 'Public Form';
+            $doc->save();
+        }
 
         if ($request->hasFile('picfull')) {
             $path = $request->file('picfull')->store('picfull');
@@ -210,8 +216,10 @@ class CandidateController extends Controller
         $doc        = DB::table('documents')->where('candidate_id', $id)->where('type', 'CV')->get();
         $pic_1x1    = DB::table('documents')->where('candidate_id', $id)->where('type', 'pic1x1')->get();
         $pic_full   = DB::table('documents')->where('candidate_id', $id)->where('type', 'picfull')->get();
+        $skills     = DB::table('skills')->where('agency_id', auth()->user()->agency_id)->get();
 
-        return view('components.agency.applicant-edit', compact('results', 'doc', 'employment', 'pic_1x1', 'pic_full'));
+        return view('components.agency.applicant-edit',
+            compact('skills', 'results', 'doc', 'employment', 'pic_1x1', 'pic_full'));
     }
 
     public function update(Request $request, Candidate $candidate)
@@ -405,10 +413,11 @@ class CandidateController extends Controller
             'documentPic1x1',
             'documentPicFull',
         ])->first();
-        $now     = Carbon::now();
+
+        $now = Carbon::now();
 
         return response()
-            ->view("printables.resume", compact('results'))
+            ->view("printables.resume-word", compact('results'))
             ->header('Content-type', "text/html")
             ->header("Content-Disposition",
                 "attachment;Filename={$results->last_name}_{$results->first_name}_{$now}.doc");
@@ -422,5 +431,27 @@ class CandidateController extends Controller
         );
 
         return redirect()->back();
+    }
+
+    public function deleteSkill(Request $request)
+    {
+        Skill::query()->where('id', $request->id)->delete();
+
+        return ['success' => true];
+    }
+
+    public function saveSkill(Request $request)
+    {
+        Skill::create([
+            'agency_id' => auth()->user()->agency_id,
+            'name'      => $request->skill,
+        ]);
+
+        return ['success' => true];
+    }
+
+    public function getSkill()
+    {
+        return Skill::query()->where('agency_id', auth()->user()->agency_id)->get();
     }
 }

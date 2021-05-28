@@ -65,6 +65,7 @@ class Candidate extends Model
         'deleted_at',
         'created_at',
         'updated_at',
+        'skills_other',
     ];
 
     public function employment()
@@ -166,9 +167,9 @@ class Candidate extends Model
         $candidate->kin_contact      = $request->kin_contact;
         $candidate->kin_address      = $request->kin_address;
         $candidate->fb_account       = $request->fb_account;
+        $candidate->skills_other     = json_encode($request->skills_other);
         $candidate->save();
 
         return $candidate;
     }
-
 }

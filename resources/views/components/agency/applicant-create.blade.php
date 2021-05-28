@@ -1,4 +1,3 @@
-Ø
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
@@ -31,12 +30,30 @@
                                         <div class="grid grid-cols-6 gap-4">
                                             @include('components.agency.partials.candidate-form')
                                             <div class="col-span-6 bg-blue-50 p-1">
-                                                <span class="text-3xl">{{ __('Remarks') }}</span>
+                                                <span class="text-3xl">{{ __('Details for Export Form') }}</span>
                                             </div>
-                                            <div class="col-span-6 p-1">
-                                                <textarea type="text" name="remarks" rows="6"
-                                                          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                                >{{ $results->remarks ?? null }}</textarea>
+                                            <div class="col-span-3 p-1">
+                                                <label>Remarks</label>
+                                                <textarea type="text" name="remarks" rows="5"
+                                                          class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block
+                                                          w-full h-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                ></textarea>
+                                            </div>
+                                            <div class="col-span-3 p-1 d-flex">
+                                                <label>Skills</label>
+                                                <div class="flex flex-wrap">
+                                                    @foreach($skills as $item)
+                                                        <div class="flex flex-col mr-4 w-48 mt-2">
+                                                            <label class="font-bold"><i class="fas fa-check text-green-400"></i> {{ $item->name }}</label>
+                                                            <select name="skills_other[{{ $item->name }}]" class="mt-1 focus:ring-indigo-500
+                                                            focus:border-indigo-500 block shadow-sm sm:text-sm
+                                                            border-gray-300 rounded-md">
+                                                                <option value="yes" selected>Yes</option>
+                                                                <option value="no">No</option>
+                                                            </select>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             </div>
                                             <input type="checkbox" name="agreed" value="yes" class="hidden" checked>
                                         </div>
