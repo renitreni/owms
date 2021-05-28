@@ -175,7 +175,8 @@
                     <td colspan="2" style="width: 41.556%; background-color: rgb(84, 172, 210); text-align: right;">
                         <span style="color: rgb(239, 239, 239); font-family: Tahoma, Geneva, sans-serif;">EDUCATION&nbsp;</span>
                     </td>
-                    <td style="width: 58.2542%;"><span style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->education }}</span>
+                    <td style="width: 58.2542%;"><span
+                            style="font-family: Tahoma,Geneva, sans-serif;">{{ $results->education }}</span>
                     </td>
                 </tr>
                 </tbody>
@@ -190,13 +191,15 @@
                         </div>
                     </td>
                 </tr>
-                @foreach(json_decode($results->skills_other) as $key => $value)
-                    <tr>
-                        <td style="width: 50%; text-align: center; border: 1px solid rgb(0, 0, 0);">{{ $key }}</td>
-                        <td style="width: 50%; text-align: center; border: 1px solid rgb(0, 0, 0);">{{ $value }}
-                        </td>
-                    </tr>
-                @endforeach
+                @if($results->skills_other != "")
+                    @foreach(json_decode($results->skills_other) as $key => $value)
+                        <tr>
+                            <td style="width: 50%; text-align: center; border: 1px solid rgb(0, 0, 0);">{{ $key }}</td>
+                            <td style="width: 50%; text-align: center; border: 1px solid rgb(0, 0, 0);">{{ $value }}
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
                 <tr>
                     <td colspan="2" style="width: 100%; text-align: center; background-color: rgb(84, 172, 210);">
                         <strong><span style="font-family: Tahoma, Geneva, sans-serif; color: rgb(239, 239, 239);">LANGUAGE SPOKEN</span></strong>
