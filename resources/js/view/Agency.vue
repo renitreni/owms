@@ -352,6 +352,7 @@
                                                         <option value="lightblue">Level 1 - Warning</option>
                                                         <option value="black">Level 2 - 15 days suspension</option>
                                                         <option value="red">Level 3 - Black List</option>
+                                                        <option value="green">Lifted Suspension</option>
                                                     </select>
                                                     <i class="fa fa-circle my-auto ml-2"
                                                        v-bind:style="'color:' + alert_form.color_level"></i>
