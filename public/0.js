@@ -414,6 +414,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -1749,6 +1750,20 @@ var render = function() {
                                                       [
                                                         _vm._v(
                                                           "Level 3 - Black List"
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "option",
+                                                      {
+                                                        attrs: {
+                                                          value: "green"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Lifted Suspension"
                                                         )
                                                       ]
                                                     )

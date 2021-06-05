@@ -46,7 +46,11 @@ class AgencyController extends Controller
 
     public function store(Request $request)
     {
-        $path = $request->file('logo')->store('agency_logos');
+        $path = '';
+        if ($request->hasFile('logo')) {
+            $path = $request->file('logo')->store('agency_logos');
+        }
+
         Agency::create([
             'name'       => $request->name,
             'address'    => $request->address,
