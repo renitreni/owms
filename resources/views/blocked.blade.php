@@ -14,7 +14,7 @@
             </div>
             <div class="flex flex-col max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <p class="text-3xl">Your Account has been temporarily Suspended.</p>
-                <p>Reason for suspension: <span class="font-bold bg-red-100 p-1">{{ $agency->status }}</span></p>
+                <p>Reason for suspension: <span class="font-bold bg-red-100 p-1">{{ $agency->status ?? 'Cannot Find Agency Assiged.' }}</span></p>
             </div>
         </div>
     </div>
