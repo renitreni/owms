@@ -24,19 +24,18 @@ Route::get('/', function () {
 
 Route::get('/candidate/new/{agency_id}', [CandidateController::class, 'create'])->name('candidate.new');
 Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
-
 Route::get('/reporting', [ReportController::class, 'formEmployee'])->name('report.from.employee');
-
 Route::post('/secretcode/validate', [ReportController::class, 'validateSecretCode'])->name('report.validate');
-
 Route::get('/form/{agency_id}', [ComplainsController::class, 'form'])->name('complains.form');
 Route::post('/form/submit', [ComplainsController::class, 'submit'])->name('complains.submit');
-
 Route::get('/blocked', [DashboardController::class, 'blocked'])->middleware('auth')->name('blocked');
 
 Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::post('/send/chat', [DashboardController::class, 'sendChat'])->name('send.chat');
+    Route::post('/store/hsw', [DashboardController::class, 'storeHSW'])->name('store.hsw');
+    Route::post('/store/sw', [DashboardController::class, 'storeSW'])->name('store.sw');
+    Route::post('/table/hsw', [DashboardController::class, 'tableHSW'])->name('table.hsw');
+    Route::post('/table/sw', [DashboardController::class, 'tableSW'])->name('table.sw');
 
     Route::get('/change/pass', [UsersController::class, 'indexChangePass'])->name('change.pass');
     Route::post('/change/password/update', [UsersController::class, 'changePass'])->name('change.pass.update');
