@@ -415,6 +415,67 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -429,6 +490,7 @@ __webpack_require__.r(__webpack_exports__);
       level_mdl: false,
       agency_mdl: false,
       agency_update_mdl: false,
+      alert_detail_mdl: false,
       props_data: JSON.parse(this._props.data),
       dt: null,
       alert_list: [],
@@ -558,7 +620,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var $this = this;
     $this.getAlertList();
-    $this.dt = $("#vouchers-table").DataTable({
+    $this.dt = $("#agencies-table").DataTable({
       responsive: true,
       serverSide: true,
       scrollX: true,
@@ -568,13 +630,15 @@ __webpack_require__.r(__webpack_exports__);
         type: "POST"
       },
       columns: [{
-        data: "id",
+        data: 'id',
         name: "id",
-        title: "ID"
+        title: "Agency ID"
       }, {
-        data: "name",
+        data: function data(value) {
+          return '<a class="agency-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' + value.name + '</a>';
+        },
         name: "name",
-        title: "Company Name"
+        title: "Agency Name"
       }, {
         data: "poea",
         name: "poea",
@@ -582,7 +646,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         data: function data(value) {
           if (value.alert) {
-            return '<label class="font-bold animate-bounce relative" ' + 'style="color: ' + value.alert.color_level + '">' + value.alert.name + '<span class="animate-ping absolute inline-flex ml-1 mt-1 h-4 w-4 rounded-full opacity-75" ' + 'style="background-color: ' + value.alert.color_level + '"></span>\n' + '<span class="relative inline-flex rounded-full h-3 w-3" ' + 'style="background-color: ' + value.alert.color_level + '"></span>\n' + '</label>';
+            return '<label class="show-details font-bold animate-bounce relative" ' + 'style="color: ' + value.alert.color_level + '">' + '<span class="animate-ping absolute inline-flex ml-0 mt-1 h-4 w-4 rounded-full opacity-75" ' + 'style="background-color: ' + value.alert.color_level + '"></span>\n' + '<span class="relative inline-flex rounded-full h-3 w-3" ' + 'style="background-color: ' + value.alert.color_level + '"></span>\n' + value.alert.name + '</label>';
           }
 
           return 'No Alert';
@@ -605,12 +669,19 @@ __webpack_require__.r(__webpack_exports__);
         title: "Last Updated"
       }],
       drawCallback: function drawCallback() {
-        $("table tr").click(function (e) {
-          var data = $(this);
+        $(".agency-show").click(function (e) {
+          var data = $(this).parent();
           var hold = $this.dt.row(data).data();
           console.log(hold);
           $this.overview = hold;
           $this.agency_update_mdl = true;
+        });
+        $(".show-details").click(function (e) {
+          var data = $(this).parent();
+          var hold = $this.dt.row(data).data();
+          console.log(hold);
+          $this.overview = hold;
+          $this.alert_detail_mdl = true;
         });
       }
     });
@@ -1105,7 +1176,11 @@ var render = function() {
                                           ? _c(
                                               "label",
                                               { staticClass: "font-bold" },
-                                              [_vm._v("No Co-Host Available")]
+                                              [
+                                                _vm._v(
+                                                  "No Co-Host\n                                                Available"
+                                                )
+                                              ]
                                             )
                                           : _vm._e()
                                       ],
@@ -1910,6 +1985,139 @@ var render = function() {
               )
             ])
           : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "slide-fade" } }, [
+        _vm.alert_detail_mdl
+          ? _c("div", { staticClass: "fixed inset-0 overflow-auto" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0  overflow-auto"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "fixed inset-0 transition-opacity",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [
+                      _c("div", {
+                        staticClass: "absolute inset-0 bg-gray-500 opacity-75"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "hidden sm:inline-block sm:align-middle sm:h-screen",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [_vm._v("​")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                      attrs: {
+                        role: "dialog",
+                        "aria-modal": "true",
+                        "aria-labelledby": "modal-headline"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+                        },
+                        [
+                          _c("div", { staticClass: "sm:flex sm:items-start" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-exclamation-triangle"
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                              },
+                              [
+                                _c(
+                                  "h3",
+                                  {
+                                    staticClass:
+                                      "text-lg leading-6 font-medium text-gray-900"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Alert Description\n                                "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "mt-4" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.overview.alert.description) +
+                                      "\n                                "
+                                  )
+                                ])
+                              ]
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.alert_detail_mdl = false
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Cancel\n                        "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
+          : _vm._e()
       ])
     ],
     1
@@ -1924,7 +2132,7 @@ var staticRenderFns = [
       _c("table", {
         staticClass: "stripe hover",
         staticStyle: { width: "100%" },
-        attrs: { id: "vouchers-table" }
+        attrs: { id: "agencies-table" }
       })
     ])
   }

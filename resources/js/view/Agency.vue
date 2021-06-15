@@ -21,7 +21,7 @@
                 </div>
                 <div class="p-5">
                     <table
-                        id="vouchers-table"
+                        id="agencies-table"
                         class="stripe hover"
                         style="width: 100%"
                     ></table>
@@ -176,8 +176,10 @@
                                         <div class="flex flex-col">
                                             <div class="mt-2 flex flex-col">
                                                 <label>Co-Host</label>
-                                                <label v-for="(item, idx) in overview.co_host" class="font-bold">{{ idx + 1 }}. {{ item.name }} / {{ item.email }}</label>
-                                                <label v-if="overview.co_host.length === 0" class="font-bold">No Co-Host Available</label>
+                                                <label v-for="(item, idx) in overview.co_host" class="font-bold">{{ idx
+                                                    + 1 }}. {{ item.name }} / {{ item.email }}</label>
+                                                <label v-if="overview.co_host.length === 0" class="font-bold">No Co-Host
+                                                    Available</label>
                                             </div>
                                             <div class="mt-2">
                                                 <label>Name</label>
@@ -348,7 +350,8 @@
                                             <div class="mt-2">
                                                 <label>Color</label>
                                                 <div class="flex flex-row">
-                                                    <select v-model="alert_form.color_level" class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                    <select v-model="alert_form.color_level"
+                                                            class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
                                                         <option value="lightblue">Level 1 - Warning</option>
                                                         <option value="black">Level 2 - 15 days suspension</option>
                                                         <option value="red">Level 3 - Black List</option>
@@ -402,6 +405,64 @@
                 </div>
             </div>
         </transition>
+        <!--    Alert Detials Modal-->
+        <transition name="slide-fade">
+            <!-- Agency add -->
+            <div class="fixed inset-0 overflow-auto" v-if="alert_detail_mdl">
+                <div
+                    class="flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0  overflow-auto"
+                >
+                    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <span
+                        class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                        aria-hidden="true"
+                    >&#8203;</span
+                    >
+                    <div
+                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-headline"
+                    >
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div class="sm:flex sm:items-start">
+                                <div
+                                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
+                                >
+                                    <!-- Heroicon name -->
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div
+                                    class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                                >
+                                    <h3
+                                        class="text-lg leading-6 font-medium text-gray-900"
+                                    >
+                                        Alert Description
+                                    </h3>
+                                    <div class="mt-4">
+                                        {{ overview.alert.description }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                        >
+                            <button
+                                type="button"
+                                @click="alert_detail_mdl = false"
+                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -419,6 +480,7 @@
                 level_mdl: false,
                 agency_mdl: false,
                 agency_update_mdl: false,
+                alert_detail_mdl: false,
                 props_data: JSON.parse(this._props.data),
                 dt: null,
                 alert_list: [],
@@ -549,7 +611,7 @@
         mounted() {
             var $this = this;
             $this.getAlertList();
-            $this.dt = $("#vouchers-table").DataTable({
+            $this.dt = $("#agencies-table").DataTable({
                 responsive: true,
                 serverSide: true,
                 scrollX: true,
@@ -559,19 +621,23 @@
                     type: "POST",
                 },
                 columns: [
-                    {data: "id", name: "id", title: "ID"},
-                    {data: "name", name: "name", title: "Company Name"},
+                    {data: 'id', name: "id", title: "Agency ID"},
+                    {
+                        data: function (value) {
+                            return '<a class="agency-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' + value.name + '</a>'
+                        }, name: "name", title: "Agency Name"
+                    },
                     {data: "poea", name: "poea", title: "POEA No."},
                     {
                         data: function (value) {
                             if (value.alert) {
-                                return '<label class="font-bold animate-bounce relative" ' +
+                                return '<label class="show-details font-bold animate-bounce relative" ' +
                                     'style="color: ' + value.alert.color_level + '">' +
-                                    value.alert.name +
-                                    '<span class="animate-ping absolute inline-flex ml-1 mt-1 h-4 w-4 rounded-full opacity-75" ' +
+                                    '<span class="animate-ping absolute inline-flex ml-0 mt-1 h-4 w-4 rounded-full opacity-75" ' +
                                     'style="background-color: ' + value.alert.color_level + '"></span>\n' +
                                     '<span class="relative inline-flex rounded-full h-3 w-3" ' +
                                     'style="background-color: ' + value.alert.color_level + '"></span>\n' +
+                                    value.alert.name +
                                     '</label>'
 
                             }
@@ -593,13 +659,21 @@
                     },
                 ],
                 drawCallback() {
-                    $("table tr").click(function (e) {
-                        let data = $(this);
+                    $(".agency-show").click(function (e) {
+                        let data = $(this).parent();
                         let hold = $this.dt.row(data).data();
                         console.log(hold);
                         $this.overview = hold;
                         $this.agency_update_mdl = true;
                     });
+
+                    $(".show-details").click(function (e) {
+                        let data = $(this).parent();
+                        let hold = $this.dt.row(data).data();
+                        console.log(hold);
+                        $this.overview = hold;
+                        $this.alert_detail_mdl = true;
+                    })
                 },
             });
         },
