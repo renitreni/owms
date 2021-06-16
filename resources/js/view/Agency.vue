@@ -86,13 +86,23 @@
                                                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
                                                 />
                                             </div>
-                                            <div class="mt-2">
-                                                <label>POEA No.</label>
-                                                <input
-                                                    type="text"
-                                                    v-model="overview.poea"
-                                                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
-                                                />
+                                            <div class="flex flex-row">
+                                                <div class="mt-2 mr-2">
+                                                    <label>POEA No.</label>
+                                                    <input
+                                                        type="text"
+                                                        v-model="overview.poea"
+                                                        class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                                                    />
+                                                </div>
+                                                <div class="mt-2 ml-1">
+                                                    <label>CR No.</label>
+                                                    <input
+                                                        type="text"
+                                                        v-model="overview.poea"
+                                                        class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                                                    />
+                                                </div>
                                             </div>
                                             <div class="mt-2">
                                                 <label>Status</label>
@@ -197,13 +207,23 @@
                                                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
                                                 />
                                             </div>
-                                            <div class="mt-2">
-                                                <label>POEA No.</label>
-                                                <input
-                                                    type="text"
-                                                    v-model="overview.poea"
-                                                    class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
-                                                />
+                                            <div class="flex flex-row">
+                                                <div class="mt-2 mr-2 flex-grow">
+                                                    <label>POEA No.</label>
+                                                    <input
+                                                        type="text"
+                                                        v-model="overview.poea"
+                                                        class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                                                    />
+                                                </div>
+                                                <div class="mt-2 mr-1 flex-grow">
+                                                    <label>CR No.</label>
+                                                    <input
+                                                        type="text"
+                                                        v-model="overview.cr_no"
+                                                        class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                                                    />
+                                                </div>
                                             </div>
                                             <div class="mt-2">
                                                 <label>Status</label>
@@ -443,7 +463,10 @@
                                         Alert Description
                                     </h3>
                                     <div class="mt-4">
-                                        {{ overview.alert.description }}
+                                        <div class="flex flex-col">
+                                            <div class="font-bold mb-2">{{ overview.alert.name }}</div>
+                                            <div>{{ overview.alert.description }}</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -494,6 +517,7 @@
                     address: null,
                     logo: '',
                     poea: null,
+                    cr_no: null,
                     level: '',
                 },
             };
@@ -584,6 +608,7 @@
                 formData.append('poea', $this.overview.poea);
                 formData.append('status', $this.overview.status);
                 formData.append('level', $this.overview.level);
+                formData.append('cr_no', this.overview.cr_no);
 
                 axios.post($this.overview.update_link, formData).then(function () {
                     $this.dt.draw();
@@ -601,6 +626,7 @@
                 formData.append('name', this.overview.name);
                 formData.append('address', this.overview.address);
                 formData.append('poea', this.overview.poea);
+                formData.append('cr_no', this.overview.cr_no);
                 formData.append('status', $this.overview.status);
                 axios.post(this.props_data.store_link, formData).then(function () {
                     $this.dt.draw();
@@ -628,6 +654,7 @@
                         }, name: "name", title: "Agency Name"
                     },
                     {data: "poea", name: "poea", title: "POEA No."},
+                    {data: "cr_no", name: "cr_no", title: "CR No."},
                     {
                         data: function (value) {
                             if (value.alert) {

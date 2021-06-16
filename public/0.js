@@ -476,6 +476,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -504,6 +527,7 @@ __webpack_require__.r(__webpack_exports__);
         address: null,
         logo: '',
         poea: null,
+        cr_no: null,
         level: ''
       }
     };
@@ -594,6 +618,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('poea', $this.overview.poea);
       formData.append('status', $this.overview.status);
       formData.append('level', $this.overview.level);
+      formData.append('cr_no', this.overview.cr_no);
       axios.post($this.overview.update_link, formData).then(function () {
         $this.dt.draw();
         $this.agency_update_mdl = false;
@@ -610,6 +635,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('name', this.overview.name);
       formData.append('address', this.overview.address);
       formData.append('poea', this.overview.poea);
+      formData.append('cr_no', this.overview.cr_no);
       formData.append('status', $this.overview.status);
       axios.post(this.props_data.store_link, formData).then(function () {
         $this.dt.draw();
@@ -643,6 +669,10 @@ __webpack_require__.r(__webpack_exports__);
         data: "poea",
         name: "poea",
         title: "POEA No."
+      }, {
+        data: "cr_no",
+        name: "cr_no",
+        title: "CR No."
       }, {
         data: function data(value) {
           if (value.alert) {
@@ -907,36 +937,85 @@ var render = function() {
                                       })
                                     ]),
                                     _vm._v(" "),
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("POEA No.")]),
-                                      _vm._v(" "),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.overview.poea,
-                                            expression: "overview.poea"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
-                                        attrs: { type: "text" },
-                                        domProps: { value: _vm.overview.poea },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.overview,
-                                              "poea",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ]),
+                                    _c(
+                                      "div",
+                                      { staticClass: "flex flex-row" },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "mt-2 mr-2" },
+                                          [
+                                            _c("label", [_vm._v("POEA No.")]),
+                                            _vm._v(" "),
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.overview.poea,
+                                                  expression: "overview.poea"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                              attrs: { type: "text" },
+                                              domProps: {
+                                                value: _vm.overview.poea
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.overview,
+                                                    "poea",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "mt-2 ml-1" },
+                                          [
+                                            _c("label", [_vm._v("CR No.")]),
+                                            _vm._v(" "),
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.overview.poea,
+                                                  expression: "overview.poea"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                              attrs: { type: "text" },
+                                              domProps: {
+                                                value: _vm.overview.poea
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.overview,
+                                                    "poea",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [
                                       _c("label", [_vm._v("Status")]),
@@ -1251,36 +1330,89 @@ var render = function() {
                                       })
                                     ]),
                                     _vm._v(" "),
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("POEA No.")]),
-                                      _vm._v(" "),
-                                      _c("input", {
-                                        directives: [
+                                    _c(
+                                      "div",
+                                      { staticClass: "flex flex-row" },
+                                      [
+                                        _c(
+                                          "div",
                                           {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.overview.poea,
-                                            expression: "overview.poea"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
-                                        attrs: { type: "text" },
-                                        domProps: { value: _vm.overview.poea },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.overview,
-                                              "poea",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ]),
+                                            staticClass: "mt-2 mr-2 flex-grow"
+                                          },
+                                          [
+                                            _c("label", [_vm._v("POEA No.")]),
+                                            _vm._v(" "),
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.overview.poea,
+                                                  expression: "overview.poea"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                              attrs: { type: "text" },
+                                              domProps: {
+                                                value: _vm.overview.poea
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.overview,
+                                                    "poea",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "mt-2 mr-1 flex-grow"
+                                          },
+                                          [
+                                            _c("label", [_vm._v("CR No.")]),
+                                            _vm._v(" "),
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.overview.cr_no,
+                                                  expression: "overview.cr_no"
+                                                }
+                                              ],
+                                              staticClass:
+                                                "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                              attrs: { type: "text" },
+                                              domProps: {
+                                                value: _vm.overview.cr_no
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.overview,
+                                                    "cr_no",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      ]
+                                    ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "mt-2" }, [
                                       _c("label", [_vm._v("Status")]),
@@ -2073,11 +2205,19 @@ var render = function() {
                                 ),
                                 _vm._v(" "),
                                 _c("div", { staticClass: "mt-4" }, [
-                                  _vm._v(
-                                    "\n                                    " +
-                                      _vm._s(_vm.overview.alert.description) +
-                                      "\n                                "
-                                  )
+                                  _c("div", { staticClass: "flex flex-col" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "font-bold mb-2" },
+                                      [_vm._v(_vm._s(_vm.overview.alert.name))]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", [
+                                      _vm._v(
+                                        _vm._s(_vm.overview.alert.description)
+                                      )
+                                    ])
+                                  ])
                                 ])
                               ]
                             )

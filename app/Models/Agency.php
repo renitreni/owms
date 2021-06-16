@@ -15,6 +15,7 @@ class Agency extends Model
         'address',
         'logo_path',
         'poea',
+        'cr_no',
         'status',
         'created_by',
     ];
