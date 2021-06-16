@@ -989,15 +989,15 @@ var render = function() {
                                                 {
                                                   name: "model",
                                                   rawName: "v-model",
-                                                  value: _vm.overview.poea,
-                                                  expression: "overview.poea"
+                                                  value: _vm.overview.cr_no,
+                                                  expression: "overview.cr_no"
                                                 }
                                               ],
                                               staticClass:
                                                 "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
                                               attrs: { type: "text" },
                                               domProps: {
-                                                value: _vm.overview.poea
+                                                value: _vm.overview.cr_no
                                               },
                                               on: {
                                                 input: function($event) {
@@ -1006,7 +1006,7 @@ var render = function() {
                                                   }
                                                   _vm.$set(
                                                     _vm.overview,
-                                                    "poea",
+                                                    "cr_no",
                                                     $event.target.value
                                                   )
                                                 }

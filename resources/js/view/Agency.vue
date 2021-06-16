@@ -99,7 +99,7 @@
                                                     <label>CR No.</label>
                                                     <input
                                                         type="text"
-                                                        v-model="overview.poea"
+                                                        v-model="overview.cr_no"
                                                         class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
                                                     />
                                                 </div>
