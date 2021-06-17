@@ -231,7 +231,6 @@
                                                     v-model="overview.status"
                                                     class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
                                                     <option value="active">Active</option>
-                                                    <option value="not active">Blocked</option>
                                                     <option value="blocked">Blocked</option>
                                                 </select>
                                             </div>
