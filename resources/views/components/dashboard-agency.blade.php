@@ -1,5 +1,3 @@
-
-
 <div class="grid grid-cols-4 gap-4 p-5">
     <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-yellow-300">
         <div class="font-merriweather mb-1 text-center md:text-5xl">
@@ -35,11 +33,11 @@
     </div>
 </div>
 <div class="flex flex-col md:flex-row  mb-5 mt-2 ml-4">
-    <a href="#" @click="hsw_mdl = true"
+    <a href="#" @click="openHSWMdl"
        class="mt-2 text-white bg-indigo-400 hover:bg-indigo-500 p-2 rounded shadow sm:mr-2">
         <i class="fas fa-house-user"></i> {{ __('Request Contract HSW') }}
     </a>
-    <a href="#" @click="sw_mdl = true"
+    <a href="#" @click="openSWMdl"
        class="mt-2 text-white bg-blue-400 hover:bg-blue-500 p-2 rounded shadow sm:mr-2">
         <i class="fas fa-user-graduate"></i> {{ __('Request Contract SW') }}
     </a>
@@ -375,16 +373,16 @@
                             </div>
                         </div>
                     </form>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="submit" @click="saveHSW"
-                                class="w-full inline-flex justify-center rounded-md border-gray-300 border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
-                            Submit & Confirm
-                        </button>
-                        <button type="button" v-on:click="hsw_mdl = false"
-                                class="mt-3 w-full inline-flex justify-center rounded-md border-gray-300 border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                            Cancel
-                        </button>
-                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="submit" @click="saveHSW" v-if="edit_mode === 0"
+                            class="w-full inline-flex justify-center rounded-md border-gray-300 border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                        Submit & Confirm
+                    </button>
+                    <button type="button" v-on:click="hsw_mdl = false"
+                            class="mt-3 w-full inline-flex justify-center rounded-md border-gray-300 border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>
@@ -607,7 +605,7 @@
                     </div>
                 </form>
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="submit" @click="saveSW"
+                    <button type="submit" @click="saveSW" v-if="edit_mode === 0"
                             class="w-full inline-flex justify-center rounded-md border-gray-300 border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
                         Submit & Confirm
                     </button>
@@ -634,6 +632,7 @@
                     agency_mdl: false,
                     hsw_mdl: false,
                     sw_mdl: false,
+                    edit_mode: 0,
                     hsw: {
                         'id': '',
                         'employer_name': '',
@@ -695,38 +694,77 @@
                 }
             },
             methods: {
+                resetHSW() {
+                    this.hsw = {
+                        'id': '',
+                        'employer_name': '',
+                        'visa_no': '',
+                        'address': '',
+                        'street': '',
+                        'district': '',
+                        'city': '',
+                        'cs_employer': '',
+                        'no_family_members': '',
+                        'telephone': '',
+                        'mobile': '',
+                        'email': '',
+                        'worker_name': '',
+                        'position': '',
+                        'address_ph': '',
+                        'cs_worker': '',
+                        'contact_no': '',
+                        'passport_no': '',
+                        'date_issued': '',
+                        'place_issued': '',
+                        'kin_name': '',
+                        'kin_address': '',
+                        'employment_site': '',
+                        'salary': '',
+                        'agency_id': '',
+                    };
+                },
+                resetSW() {
+                    this.sw = {
+                        'employer_name': '',
+                        'employer_address': '',
+                        'po_box_no': '',
+                        'telephone': '',
+                        'fax': '',
+                        'employee_name': '',
+                        'cs_status': '',
+                        'passport_no': '',
+                        'date_issued': '',
+                        'place_issued': '',
+                        'employee_address': '',
+                        'site_of_employment': '',
+                        'employee_position': '',
+                        'salary': '',
+                        'witness_day': '',
+                        'witness_month': '',
+                        'witness_year': '',
+                        'witness_place': '',
+                        'agency_id': '',
+                        'approved_by': '',
+                        'approved_date': '',
+                        'status': '',
+                    };
+                },
+                openHSWMdl() {
+                    this.edit_mode = 0;
+                    this.hsw_mdl = true;
+                    this.resetHSW();
+                },
+                openSWMdl() {
+                    this.edit_mode = 0;
+                    this.sw_mdl = true;
+                    this.resetSW();
+                },
                 saveHSW() {
                     var $this = this;
                     axios.post('{{ route('store.hsw') }}', this.hsw).then(function () {
                         $this.hsw_mdl = false;
-                        $this.hsw = {
-                            'id': '',
-                            'employer_name': '',
-                            'visa_no': '',
-                            'address': '',
-                            'street': '',
-                            'district': '',
-                            'city': '',
-                            'cs_employer': '',
-                            'no_family_members': '',
-                            'telephone': '',
-                            'mobile': '',
-                            'email': '',
-                            'worker_name': '',
-                            'position': '',
-                            'address_ph': '',
-                            'cs_worker': '',
-                            'contact_no': '',
-                            'passport_no': '',
-                            'date_issued': '',
-                            'place_issued': '',
-                            'kin_name': '',
-                            'kin_address': '',
-                            'employment_site': '',
-                            'salary': '',
-                            'agency_id': '',
-                        },
-                            swal('Success!', 'Request for contract has been sent.', 'success');
+                        $this.resetHSW();
+                        swal('Success!', 'Request for contract has been sent.', 'success');
                     }).catch(function (value) {
                         swal('Error!', 'Please fill up all fields', 'error')
                     });
@@ -735,30 +773,7 @@
                     var $this = this;
                     $this.sw_mdl = false;
                     axios.post('{{ route('store.sw') }}', this.sw).then(function () {
-                        $this.sw = {
-                            'employer_name': '',
-                            'employer_address': '',
-                            'po_box_no': '',
-                            'telephone': '',
-                            'fax': '',
-                            'employee_name': '',
-                            'cs_status': '',
-                            'passport_no': '',
-                            'date_issued': '',
-                            'place_issued': '',
-                            'employee_address': '',
-                            'site_of_employment': '',
-                            'employee_position': '',
-                            'salary': '',
-                            'witness_day': '',
-                            'witness_month': '',
-                            'witness_year': '',
-                            'witness_place': '',
-                            'agency_id': '',
-                            'approved_by': '',
-                            'approved_date': '',
-                            'status': '',
-                        }
+                        $this.resetSW();
                         swal('Success!', 'Request for contract has been sent.', 'success');
                     }).catch(function (value) {
                         swal('Error!', 'Please fill up all fields', 'error')
@@ -843,10 +858,10 @@
                         },
                         {
                             data: function (value) {
-                                if(value.approved_by) {
-                                    return value.approved_by;
+                                if (value.approved_by) {
+                                    return '<div class="bg-green-500 p-1 rounded text-white shadow w-100 text-center">' + value.approved_by + '</div>';
                                 }
-                                return 'Pending Approval'
+                                return '<div class="bg-blue-500 p-1 rounded text-white shadow w-100 text-center">Pending Approval</div>'
                             },
                             name: 'employer_name',
                             title: 'Contract Status'
@@ -858,7 +873,14 @@
                         },
                     ],
                     drawCallback() {
-
+                        $("#hsw-table tr").click(function (e) {
+                            let data = $(this);
+                            let hold = $this.dt_hsw.row(data).data();
+                            console.log(hold);
+                            $this.hsw = hold;
+                            $this.hsw_mdl = true;
+                            $this.edit_mode = 1;
+                        });
                     }
                 });
                 $this.dt_sw = $('#sw-table').DataTable({
@@ -888,10 +910,10 @@
                         },
                         {
                             data: function (value) {
-                                if(value.approved_by) {
-                                    return value.approved_by;
+                                if (value.approved_by) {
+                                    return '<div class="bg-green-500 p-1 rounded text-white shadow w-100 text-center">' + value.approved_by + '</div>';
                                 }
-                                return 'Pending Approval'
+                                return '<div class="bg-blue-500 p-1 rounded text-white shadow w-100 text-center">Pending Approval</div>'
                             },
                             name: 'employer_name',
                             title: 'Contract Status'
@@ -903,7 +925,14 @@
                         },
                     ],
                     drawCallback() {
-
+                        $("#sw-table tr").click(function (e) {
+                            let data = $(this);
+                            let hold = $this.dt_sw.row(data).data();
+                            console.log(hold);
+                            $this.sw = hold;
+                            $this.sw_mdl = true;
+                            $this.edit_mode = 1;
+                        });
                     }
                 });
             }
