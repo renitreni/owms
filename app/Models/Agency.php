@@ -26,4 +26,14 @@ class Agency extends Model
                     ->where('role', 5)
                     ->join('information as inf', 'inf.user_id', '=', 'users.id');
     }
+
+    public function contractSW()
+    {
+        return $this->hasMany(ContractSW::class, 'agency_id', 'id');
+    }
+
+    public function contractHSW()
+    {
+        return $this->hasMany(ContractSW::class, 'agency_id', 'id');
+    }
 }

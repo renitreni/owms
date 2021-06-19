@@ -654,6 +654,8 @@
                     },
                     {data: "poea", name: "poea", title: "POEA No."},
                     {data: "cr_no", name: "cr_no", title: "CR No."},
+                    {data: "contract_h_s_w_count", name: "contract_h_s_w_count", title: "HSW contracts"},
+                    {data: "contract_s_w_count", name: "contract_s_w_count", title: "SW contracts"},
                     {
                         data: function (value) {
                             if (value.alert) {

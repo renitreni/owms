@@ -498,7 +498,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -673,6 +672,14 @@ __webpack_require__.r(__webpack_exports__);
         data: "cr_no",
         name: "cr_no",
         title: "CR No."
+      }, {
+        data: "contract_h_s_w_count",
+        name: "contract_h_s_w_count",
+        title: "HSW contracts"
+      }, {
+        data: "contract_s_w_count",
+        name: "contract_s_w_count",
+        title: "SW contracts"
       }, {
         data: function data(value) {
           if (value.alert) {
@@ -1461,12 +1468,6 @@ var render = function() {
                                             "option",
                                             { attrs: { value: "active" } },
                                             [_vm._v("Active")]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "not active" } },
-                                            [_vm._v("Blocked")]
                                           ),
                                           _vm._v(" "),
                                           _c(
