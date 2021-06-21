@@ -1927,9 +1927,7 @@ var render = function() {
                                                     _c(
                                                       "option",
                                                       {
-                                                        attrs: {
-                                                          value: "lightblue"
-                                                        }
+                                                        attrs: { value: "blue" }
                                                       },
                                                       [
                                                         _vm._v(

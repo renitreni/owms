@@ -371,7 +371,7 @@
                                                 <div class="flex flex-row">
                                                     <select v-model="alert_form.color_level"
                                                             class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
-                                                        <option value="lightblue">Level 1 - Warning</option>
+                                                        <option value="blue">Level 1 - Warning</option>
                                                         <option value="black">Level 2 - 15 days suspension</option>
                                                         <option value="red">Level 3 - Black List</option>
                                                         <option value="green">Lifted Suspension</option>
