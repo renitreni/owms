@@ -36,4 +36,9 @@ class Complains extends Model
         "national_id",
         "host_agency",
     ];
+
+    public function agencies()
+    {
+        return $this->hasOne(Agency::class, 'id', 'agency_id');
+    }
 }

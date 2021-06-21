@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Heinous;
 use App\Mail\NewComplain;
 use App\Models\Complains;
 use Carbon\Carbon;
@@ -68,7 +69,7 @@ class ComplainsController extends Controller
 
     public function table(Request $request)
     {
-        $complains = Complains::query()->when($request->agency_id, function ($q) use ($request) {
+        $complains = Complains::query()->with(['agencies'])->when($request->agency_id, function ($q) use ($request) {
             $q->where('agency_id', $request->agency_id);
         });
 
@@ -83,7 +84,7 @@ class ComplainsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -91,31 +92,10 @@ class ComplainsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param \App\Models\Complains $complains
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show($id, Complains $complains)
     {
@@ -125,22 +105,11 @@ class ComplainsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Complains $complains
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Complains $complains)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Complains $complains
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update($id, Request $request, Complains $complains)
     {
@@ -150,14 +119,26 @@ class ComplainsController extends Controller
         return redirect()->route('complains.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Complains $complains
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Complains $complains)
+    public function getHeinousList(Request $request)
     {
-        //
+        return Heinous::all();
+    }
+
+    public function storeHeinous(Request $request)
+    {
+        Heinous::create([
+           'name' => $request->name,
+           'priority' => $request->priority,
+           'created_by' => auth()->user()->email,
+        ]);
+
+        return ['succes' => true];
+    }
+
+    public function deleteHeinous(Request $request)
+    {
+        Heinous::destroy($request->id);
+
+        return ['succes' => true];
     }
 }

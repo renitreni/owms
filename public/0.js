@@ -675,11 +675,13 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         data: "contract_h_s_w_count",
         name: "contract_h_s_w_count",
-        title: "HSW contracts"
+        title: "HSW contracts",
+        "searchable": false
       }, {
         data: "contract_s_w_count",
         name: "contract_s_w_count",
-        title: "SW contracts"
+        title: "SW contracts",
+        "searchable": false
       }, {
         data: function data(value) {
           if (value.alert) {
