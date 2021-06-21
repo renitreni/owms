@@ -16,11 +16,11 @@ use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AgencyController;
 use Illuminate\Support\Facades\Crypt;
 
-Route::get('/', function () {
-    $agency_id = Crypt::encrypt(env('AGENCY_ID'));
-
-    return redirect()->route('complains.form', ['agency_id' => $agency_id]);
-});
+//Route::get('/', function () {
+//    $agency_id = Crypt::encrypt(env('AGENCY_ID'));
+//
+//    return redirect()->route('complains.form', ['agency_id' => $agency_id]);
+//});
 
 Route::get('/candidate/new/{agency_id}', [CandidateController::class, 'create'])->name('candidate.new');
 Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
@@ -31,7 +31,7 @@ Route::post('/form/submit', [ComplainsController::class, 'submit'])->name('compl
 Route::get('/blocked', [DashboardController::class, 'blocked'])->middleware('auth')->name('blocked');
 
 Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('/store/hsw', [DashboardController::class, 'storeHSW'])->name('store.hsw');
     Route::post('/store/sw', [DashboardController::class, 'storeSW'])->name('store.sw');
     Route::post('/table/hsw', [DashboardController::class, 'tableHSW'])->name('table.hsw');
