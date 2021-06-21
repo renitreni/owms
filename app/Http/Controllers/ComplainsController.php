@@ -7,6 +7,7 @@ use App\Mail\NewComplain;
 use App\Models\Complains;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\ComplainEmail;
 use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Crypt;
@@ -127,9 +128,9 @@ class ComplainsController extends Controller
     public function storeHeinous(Request $request)
     {
         Heinous::create([
-           'name' => $request->name,
-           'priority' => $request->priority,
-           'created_by' => auth()->user()->email,
+            'name'       => $request->name,
+            'priority'   => $request->priority,
+            'created_by' => auth()->user()->email,
         ]);
 
         return ['succes' => true];
@@ -140,5 +141,30 @@ class ComplainsController extends Controller
         Heinous::destroy($request->id);
 
         return ['succes' => true];
+    }
+
+    public function storeComplaintEmail(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+        ]);
+        ComplainEmail::create([
+            'email'      => $request->email,
+            'created_by' => auth()->user()->email,
+        ]);
+
+        return ['success' => true];
+    }
+
+    public function getComplaintEmailList()
+    {
+        return ComplainEmail::all();
+    }
+
+    public function deleteComplaint(Request $request)
+    {
+        ComplainEmail::destroy($request->id);
+
+        return ['success' => true];
     }
 }

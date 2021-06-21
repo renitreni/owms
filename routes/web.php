@@ -75,6 +75,10 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
         Route::post('store/heinous', [ComplainsController::class, 'storeHeinous'])->name('store.heinous');
         Route::post('delete/heinous', [ComplainsController::class, 'deleteHeinous'])->name('delete.heinous');
 
+        Route::post('get/ptn/email', [ComplainsController::class, 'getComplaintEmailList'])->name('get.ptn.email');
+        Route::post('store/ptn/email', [ComplainsController::class, 'storeComplaintEmail'])->name('store.ptn.email');
+        Route::post('delete/ptn/email', [ComplainsController::class, 'deleteComplaint'])->name('delete.ptn.emails');
+
         Route::post('/reports/table', [ReportController::class, 'table'])->name('reports.table');
         Route::post('/reports/candidate/table', [ReportController::class, 'tableByCandidateId'])
              ->name('reports.candidate');

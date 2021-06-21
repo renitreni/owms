@@ -1,6 +1,9 @@
 require('./bootstrap');
 require('alpinejs');
 require('@claviska/jquery-minicolors/jquery.minicolors');
+
+window.Swal = require('sweetalert2');
+
 Vue.component('chat-box', () =>
     import ('./view/ChatBox.vue')
 );
