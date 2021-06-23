@@ -27,13 +27,13 @@ class Agency extends Model
                     ->join('information as inf', 'inf.user_id', '=', 'users.id');
     }
 
-    public function contractSW()
+    public function contracts()
     {
-        return $this->hasMany(ContractSW::class, 'agency_id', 'id');
+        return $this->hasMany(Contract::class, 'agency_id', 'id');
     }
 
-    public function contractHSW()
+    public function contractsPending()
     {
-        return $this->hasMany(ContractSW::class, 'agency_id', 'id');
+        return $this->hasMany(Contract::class, 'agency_id', 'id')->where('status', 'Pending');
     }
 }

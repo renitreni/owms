@@ -29,17 +29,18 @@ class AgencyController extends Controller
 
     public function table()
     {
-        return DataTables::of(Agency::query()->withCount(['contractSW', 'contractHSW'])->with(['coHost']))
+        return DataTables::of(Agency::query()->withCount(['contracts', 'contractsPending'])->with(['coHost']))
                          ->setTransformer(function ($value) {
                              $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
                              $value->update_at_display  = Carbon::parse($value->updated_at)->format('F j, Y');
 
-                             $value->update_link = route('agencies.update', ['agency' => $value->id]);
-                             $value->delete_link = route('agencies.destroy', ['agency' => $value->id]);
-                             $value->level       = AgencyAlert::query()
-                                                              ->where('agency_id', $value->id)
-                                                              ->first('alert_id')->alert_id ?? '';
-                             $value->alert       = AlertLevel::query()->where('id', $value->level)->first();
+                             $value->contracts_link     = route('contracts', ['id' => encrypt($value->id)]);
+                             $value->update_link        = route('agencies.update', ['agency' => $value->id]);
+                             $value->delete_link        = route('agencies.destroy', ['agency' => $value->id]);
+                             $value->level              = AgencyAlert::query()
+                                                                     ->where('agency_id', $value->id)
+                                                                     ->first('alert_id')->alert_id ?? '';
+                             $value->alert              = AlertLevel::query()->where('id', $value->level)->first();
 
                              return collect($value)->toArray();
                          })

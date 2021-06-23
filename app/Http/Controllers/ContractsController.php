@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Agency;
+use App\Models\Contract;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+
+class ContractsController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function index(Request $request)
+    {
+        $agency = Agency::query()->where('id', decrypt($request->id))->first();
+
+        return view('layouts.app', [
+            "header"    => 'Submitted Contracts of ' . $agency->name,
+            "component" => 'contracts-page',
+            "data"      => [
+                'datatable_link' => route('contracts.table', ['id' => $request->id]),
+            ],
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     * @throws \Exception
+     */
+    public function table(Request $request)
+    {
+        return DataTables::of(Contract::query()->where('agency_id', decrypt($request->id)))
+                         ->setTransformer(function ($value) {
+                             $value->details = json_decode($value->details);
+
+                             return collect($value)->toArray();
+                         })->make(true);
+    }
+}

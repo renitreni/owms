@@ -54940,6 +54940,9 @@ Vue.component('vouchers-page', function () {
 Vue.component('agency-page', function () {
   return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./view/Agency.vue */ "./resources/js/view/Agency.vue"));
 });
+Vue.component('contracts-page', function () {
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./view/Contracts.vue */ "./resources/js/view/Contracts.vue"));
+});
 Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/trans.js"));
 
 

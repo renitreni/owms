@@ -14,6 +14,10 @@ Vue.component('agency-page', () =>
     import ('./view/Agency.vue')
 );
 
+Vue.component('contracts-page', () =>
+    import ('./view/Contracts.vue')
+);
+
 Vue.mixin(require('./trans'));
 
 import Echo from 'laravel-echo';

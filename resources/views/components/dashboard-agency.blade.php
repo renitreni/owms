@@ -47,9 +47,6 @@
         <li class='py-2 px-6 bg-white rounded-t-lg' v-bind:class="{'text-gray-500 bg-gray-200': (panel != 2) }"
             @click="panel = 2">HSW Contracts
         </li>
-        <li class='py-2 px-6 bg-white rounded-t-lg' v-bind:class="{'text-gray-500 bg-gray-200': (panel != 3) }"
-            @click="panel = 3">SW Contracts
-        </li>
         <li class='py-2 px-6 bg-white rounded-t-lg' v-bind:class="{'text-gray-500 bg-gray-200': (panel != 1) }"
             @click="panel = 1">Complaints
         </li>
@@ -60,10 +57,7 @@
         <table id="complains-table" class="stripe hover" style="width:100%;"></table>
     </div>
     <div class="m-5" v-show="panel == 2">
-        <table id="sw-table" class="stripe hover" style="width:100%;"></table>
-    </div>
-    <div class="m-5" v-show="panel == 3">
-        <table id="hsw-table" class="stripe hover" style="width:100%;"></table>
+        <table id="contract-table" class="stripe hover" style="width:100%;"></table>
     </div>
 </div>
 
@@ -438,7 +432,7 @@
                                 {{ __('Address') }}
                             </label>
                             <input v-model="sw.employer_address"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.employer_address, 'border-gray-300 ': sw.employer_address}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -449,7 +443,7 @@
                                 {{ __('PO Box No.') }}
                             </label>
                             <input v-model="sw.po_box_no"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.po_box_no, 'border-gray-300 ': sw.po_box_no}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -458,7 +452,7 @@
                                 {{ __('Telephone') }}
                             </label>
                             <input v-model="sw.telephone"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.telephone, 'border-gray-300 ': sw.telephone}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -467,7 +461,7 @@
                                 {{ __('Fax') }}
                             </label>
                             <input v-model="sw.fax"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.fax, 'border-gray-300 ': sw.fax}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -479,7 +473,7 @@
                                 {{ __('Full Name') }}
                             </label>
                             <input v-model="sw.employee_name"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.employee_name, 'border-gray-300 ': sw.employee_name}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -488,7 +482,7 @@
                                 {{ __('Civil Status') }}
                             </label>
                             <input v-model="sw.cs_status"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.cs_status, 'border-gray-300 ': sw.cs_status}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -499,7 +493,7 @@
                                 {{ __('Employee Address') }}
                             </label>
                             <input v-model="sw.employee_address"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.employee_address, 'border-gray-300 ': sw.employee_address}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -510,7 +504,7 @@
                                 {{ __('Passport No.') }}
                             </label>
                             <input v-model="sw.passport_no"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.passport_no, 'border-gray-300 ': sw.passport_no}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -519,7 +513,7 @@
                                 {{ __('Date Issued') }}
                             </label>
                             <input v-model="sw.date_issued"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.date_issued, 'border-gray-300 ': sw.date_issued}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="date">
                         </div>
@@ -528,7 +522,7 @@
                                 {{ __('Place Issued') }}
                             </label>
                             <input v-model="sw.place_issued"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.place_issued, 'border-gray-300 ': sw.place_issued}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -540,7 +534,7 @@
                                 {{ __('Site Of Employment') }}
                             </label>
                             <input v-model="sw.site_of_employment"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.site_of_employment, 'border-gray-300 ': sw.site_of_employment}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -551,7 +545,7 @@
                                 {{ __('Position') }}
                             </label>
                             <input v-model="sw.employee_position"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.employee_position, 'border-gray-300 ': sw.employee_position}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -560,7 +554,7 @@
                                 {{ __('Salary') }}
                             </label>
                             <input v-model="sw.salary"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.salary, 'border-gray-300 ': sw.salary}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="number">
                         </div>
@@ -571,7 +565,7 @@
                                 {{ __('Witness Day') }}
                             </label>
                             <input v-model="sw.witness_day"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.witness_day, 'border-gray-300 ': sw.witness_day}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -580,7 +574,7 @@
                                 {{ __('Witness Month') }}
                             </label>
                             <input v-model="sw.witness_month"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.witness_month, 'border-gray-300 ': sw.witness_month}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="number">
                         </div>
@@ -589,7 +583,7 @@
                                 {{ __('Witness Year') }}
                             </label>
                             <input v-model="sw.witness_year"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.witness_year, 'border-gray-300 ': sw.witness_year}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="number">
                         </div>
@@ -598,7 +592,7 @@
                                 {{ __('Witness Place') }}
                             </label>
                             <input v-model="sw.witness_place"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                   v-bind:class="{ 'border-red-500': !sw.witness_place, 'border-gray-300 ': sw.witness_place}"
                                    class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                    type="text">
                         </div>
@@ -627,8 +621,7 @@
                 return {
                     panel: 2,
                     dt: null,
-                    dt_sw: null,
-                    dt_hsw: null,
+                    dt_contract: null,
                     agency_mdl: false,
                     hsw_mdl: false,
                     sw_mdl: false,
@@ -689,8 +682,7 @@
             watch: {
                 panel: function (value) {
                     this.dt.draw();
-                    this.dt_hsw.draw();
-                    this.dt_sw.draw();
+                    this.dt_contract.draw();
                 }
             },
             methods: {
@@ -724,6 +716,7 @@
                     };
                 },
                 resetSW() {
+
                     this.sw = {
                         'employer_name': '',
                         'employer_address': '',
@@ -753,11 +746,13 @@
                     this.edit_mode = 0;
                     this.hsw_mdl = true;
                     this.resetHSW();
+                    this.dt_contract.draw()
                 },
                 openSWMdl() {
                     this.edit_mode = 0;
                     this.sw_mdl = true;
                     this.resetSW();
+                    this.dt_contract.draw()
                 },
                 saveHSW() {
                     var $this = this;
@@ -831,7 +826,7 @@
 
                     }
                 });
-                $this.dt_hsw = $('#hsw-table').DataTable({
+                $this.dt_contract = $('#contract-table').DataTable({
                     responsive: true,
                     serverSide: true,
                     scrollX: true,
@@ -839,22 +834,24 @@
                         [0, "desc"]
                     ],
                     ajax: {
-                        url: '{{ route('table.hsw') }}',
+                        url: '{{ route('table.contract') }}',
                         type: 'POST',
                         data: {agency_id: '{{ auth()->user()->agency_id }}'}
                     },
                     columns: [
                         {
                             data: function (value) {
-                                return value.id;
+                                return value.serial_no;
                             },
-                            name: 'id',
-                            title: 'Contract ID'
+                            name: 'serial_no',
+                            title: 'Serial No'
                         },
                         {
-                            data: 'employer_name',
-                            name: 'employer_name',
-                            title: 'Employer Name'
+                            data: function (value) {
+                                return value.name;
+                            },
+                            name: 'name',
+                            title: 'Contract'
                         },
                         {
                             data: function (value) {
@@ -873,64 +870,13 @@
                         },
                     ],
                     drawCallback() {
-                        $("#hsw-table tr").click(function (e) {
+                        $("#contract-table tr").click(function (e) {
                             let data = $(this);
-                            let hold = $this.dt_hsw.row(data).data();
-                            console.log(hold);
-                            $this.hsw = hold;
+                            let hold = $this.dt_contract.row(data).data();
+                            $this.hsw = JSON.parse(hold.details);
+                            delete hold.details;
+                            Object.assign($this.hsw, hold);
                             $this.hsw_mdl = true;
-                            $this.edit_mode = 1;
-                        });
-                    }
-                });
-                $this.dt_sw = $('#sw-table').DataTable({
-                    responsive: true,
-                    serverSide: true,
-                    scrollX: true,
-                    order: [
-                        [0, "desc"]
-                    ],
-                    ajax: {
-                        url: '{{ route('table.sw') }}',
-                        type: 'POST',
-                        data: {agency_id: '{{ auth()->user()->agency_id }}'}
-                    },
-                    columns: [
-                        {
-                            data: function (value) {
-                                return value.id;
-                            },
-                            name: 'id',
-                            title: 'Contract ID'
-                        },
-                        {
-                            data: 'employer_name',
-                            name: 'employer_name',
-                            title: 'Employer Name'
-                        },
-                        {
-                            data: function (value) {
-                                if (value.approved_by) {
-                                    return '<div class="bg-green-500 p-1 rounded text-white shadow w-100 text-center">' + value.approved_by + '</div>';
-                                }
-                                return '<div class="bg-blue-500 p-1 rounded text-white shadow w-100 text-center">Pending Approval</div>'
-                            },
-                            name: 'employer_name',
-                            title: 'Contract Status'
-                        },
-                        {
-                            data: 'created_at_display',
-                            name: 'created_at_display',
-                            title: 'Date Requested'
-                        },
-                    ],
-                    drawCallback() {
-                        $("#sw-table tr").click(function (e) {
-                            let data = $(this);
-                            let hold = $this.dt_sw.row(data).data();
-                            console.log(hold);
-                            $this.sw = hold;
-                            $this.sw_mdl = true;
                             $this.edit_mode = 1;
                         });
                     }

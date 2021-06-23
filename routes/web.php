@@ -14,7 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OtherDetailsController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Controllers\AgencyController;
-use Illuminate\Support\Facades\Crypt;
+use \App\Http\Controllers\ContractsController;
 
 //Route::get('/', function () {
 //    $agency_id = Crypt::encrypt(env('AGENCY_ID'));
@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
     Route::post('/store/sw', [DashboardController::class, 'storeSW'])->name('store.sw');
     Route::post('/table/hsw', [DashboardController::class, 'tableHSW'])->name('table.hsw');
     Route::post('/table/sw', [DashboardController::class, 'tableSW'])->name('table.sw');
+    Route::post('/table/contract', [DashboardController::class, 'tableContract'])->name('table.contract');
 
     Route::get('/change/pass', [UsersController::class, 'indexChangePass'])->name('change.pass');
     Route::post('/change/password/update', [UsersController::class, 'changePass'])->name('change.pass.update');
@@ -46,6 +47,9 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
         Route::post('agencies/store/alert', [AgencyController::class, 'storeAlert'])->name('agencies.alert.store');
         Route::post('agencies/alert/list', [AgencyController::class, 'alertList'])->name('agencies.alert.list');
         Route::post('agencies/delete/alert', [AgencyController::class, 'deleteAlert'])->name('agencies.alert.delete');
+
+        Route::get('contracts/{id}', [ContractsController::class, 'index'])->name('contracts');
+        Route::post('contracts/table/{id}', [ContractsController::class, 'table'])->name('contracts.table');
 
         Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates');
         Route::post('/candidates/c/c', [CandidateController::class, 'tableCandidates'])->name('candidate.table');

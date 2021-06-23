@@ -673,14 +673,11 @@ __webpack_require__.r(__webpack_exports__);
         name: "cr_no",
         title: "CR No."
       }, {
-        data: "contract_h_s_w_count",
-        name: "contract_h_s_w_count",
-        title: "HSW contracts",
-        "searchable": false
-      }, {
-        data: "contract_s_w_count",
-        name: "contract_s_w_count",
-        title: "SW contracts",
+        data: function data(value) {
+          return '<a href="' + value.contracts_link + '" ' + 'class="text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' + value.contracts_pending_count + '/' + value.contracts_count + '</a>';
+        },
+        name: "id",
+        title: "contracts",
         "searchable": false
       }, {
         data: function data(value) {
