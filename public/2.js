@@ -1,14 +1,351 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Vouchers.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/view/Vouchers.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Contracts.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/view/Contracts.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -259,72 +596,25 @@ __webpack_require__.r(__webpack_exports__);
   props: ["data"],
   data: function data() {
     return {
-      voucher_mdl: false,
-      voucher_update_mdl: false,
-      props_data: JSON.parse(this._props.data),
+      sw: {},
+      hsw: {},
+      sw_mdl: false,
+      hsw_mdl: false,
+      approval_mdl: false,
       dt: null,
-      overview: {
-        date: null,
-        paid_to: null,
-        particulars: null,
-        amount: null
-      }
+      props_data: JSON.parse(this._props.data),
+      details: {},
+      serial_no: ''
     };
   },
-  watch: {
-    voucher_update_mdl: function voucher_update_mdl(value) {
-      if (!value) {
-        this.overview = {
-          date: null,
-          paid_to: null,
-          particulars: null,
-          amount: null
-        };
-      }
-    },
-    voucher_mdl: function voucher_mdl(value) {
-      if (!value) {
-        this.overview = {
-          date: null,
-          paid_to: null,
-          particulars: null,
-          amount: null
-        };
-      }
-    }
-  },
   methods: {
-    add: function add() {
-      var $this = this;
-      axios.post(this.props_data.store_link, this.overview).then(function (e) {
-        $this.voucher_mdl = false;
-        swal("Success!", "Operation Successful!", "success");
-        $this.dt.draw();
-      });
-    },
-    update: function update() {
-      var $this = this;
-      axios.put(this.overview.update_link, this.overview).then(function (e) {
-        $this.voucher_update_mdl = false;
-        swal("Success!", "Operation Successful!", "success");
-        $this.dt.draw();
-      });
-    },
-    invalid: function invalid() {
-      var $this = this;
-      axios.post(this.overview.invalid_link, this.overview).then(function (e) {
-        $this.voucher_update_mdl = false;
-        swal("Success!", "Operation Successful!", "success");
-        $this.dt.draw();
-      });
-    },
-    getCopy: function getCopy() {
-      window.open(this.overview.cash_voucherlink, '_blank');
+    showContractsMdl: function showContractsMdl() {
+      this.contracts_mdl = true;
     }
   },
   mounted: function mounted() {
     var $this = this;
-    $this.dt = $("#vouchers-table").DataTable({
+    $this.dt = $("#contracts-table").DataTable({
       responsive: true,
       serverSide: true,
       scrollX: true,
@@ -334,39 +624,42 @@ __webpack_require__.r(__webpack_exports__);
         type: "POST"
       },
       columns: [{
-        data: "id",
-        name: "id",
-        title: "ID"
-      }, {
-        data: "paid_to",
-        name: "paid_to",
-        title: "Paid To"
-      }, {
-        data: "amount",
-        name: "amount",
-        title: "Amount"
-      }, {
-        data: "change",
-        name: "change",
-        title: "Change"
+        data: function data(value) {
+          return '<a class="contract-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' + value.serial_no + '</a>';
+        },
+        name: "serial_no",
+        title: "Serial No"
       }, {
         data: function data(value) {
-          if (value.status == "cancelled") return '<span class="text-red-500 block text-center"><i class="fas fa-ban"></i></span>';else return '<span class="text-green-500 block text-center"><i class="fas fa-check"></i></span>';
+          return '<a class="approval-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' + value.status + '</a>';
         },
         name: "status",
         title: "Status"
       }, {
-        data: "created_at_display",
-        name: "created_at",
-        title: "Date Created"
+        data: 'name',
+        name: "name",
+        title: "Contract"
       }],
       drawCallback: function drawCallback() {
-        $("table tr").click(function (e) {
-          var data = $(this);
+        $(".contract-show").click(function (e) {
+          var data = $(this).parent().parent();
+          var hold = $this.dt.row(data).data();
+          console.log(hold.details);
+
+          if (hold.name === 'Skilled Workers') {
+            $this.sw = hold.details;
+            $this.sw_mdl = true;
+          } else if (hold.name === 'Household Service Workers') {
+            $this.hsw = hold.details;
+            $this.hsw_mdl = true;
+          }
+        });
+        $(".approval-show").click(function (e) {
+          var data = $(this).parent().parent();
           var hold = $this.dt.row(data).data();
           console.log(hold);
-          $this.overview = hold;
-          $this.voucher_update_mdl = true;
+          $this.serial_no = hold.serial_no;
+          $this.approval_mdl = true;
         });
       }
     });
@@ -375,10 +668,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e&":
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e& ***!
-  \*****************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Contracts.vue?vue&type=template&id=eb150dd6&":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/view/Contracts.vue?vue&type=template&id=eb150dd6& ***!
+  \******************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -394,53 +687,10 @@ var render = function() {
     "div",
     { staticClass: "pb-12 pt-8" },
     [
-      _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
-        _c(
-          "div",
-          { staticClass: "bg-white overflow-hidden shadow-sm sm:rounded-lg" },
-          [
-            _c("div", { staticClass: "p-2 mt-5" }, [
-              _c(
-                "a",
-                {
-                  staticClass:
-                    "text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      _vm.voucher_mdl = true
-                    }
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
-                  _vm._v(" " + _vm._s(_vm.__("New Voucher")) + "\n\n        ")
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass:
-                    "text-white bg-indigo-400 hover:bg-indigo-500 p-2 rounded m-2 shadow",
-                  attrs: { href: _vm.props_data.export_link, target: "_blank" }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-file-excel" }),
-                  _vm._v(
-                    " " + _vm._s(_vm.__("Export to Excel")) + "\n\n        "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(0)
-          ]
-        )
-      ]),
+      _vm._m(0),
       _vm._v(" "),
       _c("transition", { attrs: { name: "slide-fade" } }, [
-        _vm.voucher_mdl
+        _vm.hsw_mdl
           ? _c("div", { staticClass: "fixed inset-0 overflow-y-auto" }, [
               _c(
                 "div",
@@ -476,7 +726,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                        "inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 align-middle",
                       attrs: {
                         role: "dialog",
                         "aria-modal": "true",
@@ -484,203 +734,1324 @@ var render = function() {
                       }
                     },
                     [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
-                        },
-                        [
-                          _c("div", { staticClass: "sm:flex sm:items-start" }, [
+                      _c("div", { staticClass: "bg-gray-100 p-3" }, [
+                        _c("div", { staticClass: "flex flex-col" }, [
+                          _c("div", { staticClass: "flex flex-row" }, [
                             _c(
                               "div",
                               {
-                                staticClass:
-                                  "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fas fa-file-invoice-dollar"
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                                staticClass: "flex-grow font-bold flex-column"
                               },
                               [
                                 _c(
-                                  "h3",
-                                  {
-                                    staticClass:
-                                      "text-lg leading-6 font-medium text-gray-900",
-                                    attrs: { id: "modal-headline" }
-                                  },
+                                  "div",
+                                  { staticClass: "fw-bolder text-xl" },
                                   [
                                     _vm._v(
-                                      "\n                  New Voucher\n                  "
-                                    ),
-                                    _c("span", { staticClass: "underline" }),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "hidden",
-                                      attrs: { name: "id" }
-                                    })
+                                      "\n                                        " +
+                                        _vm._s(
+                                          _vm.__(
+                                            "STANDARD EMPLOYMENT CONTRACT FOR FILIPINO HOUSEHOLD SERVICE WORKERS"
+                                          )
+                                        ) +
+                                        "\n                                    "
+                                    )
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "mt-6" }, [
-                                  _c("div", { staticClass: "flex flex-col" }, [
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("Date")]),
-                                      _vm._v(" "),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.overview.date,
-                                            expression: "overview.date"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
-                                        attrs: {
-                                          type: "date",
-                                          name: "salary_date"
-                                        },
-                                        domProps: { value: _vm.overview.date },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.overview,
-                                              "date",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("Amount")]),
-                                      _vm._v(" "),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.overview.amount,
-                                            expression: "overview.amount"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
-                                        attrs: {
-                                          type: "number",
-                                          name: "salary_date"
-                                        },
-                                        domProps: {
-                                          value: _vm.overview.amount
-                                        },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.overview,
-                                              "amount",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("Paid To")]),
-                                      _vm._v(" "),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.overview.paid_to,
-                                            expression: "overview.paid_to"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
-                                        attrs: {
-                                          type: "text",
-                                          name: "salary_date"
-                                        },
-                                        domProps: {
-                                          value: _vm.overview.paid_to
-                                        },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.overview,
-                                              "paid_to",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("Particulars")]),
-                                      _vm._v(" "),
-                                      _c("textarea", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.overview.particulars,
-                                            expression: "overview.particulars"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
-                                        attrs: {
-                                          type: "text",
-                                          name: "salary_date"
-                                        },
-                                        domProps: {
-                                          value: _vm.overview.particulars
-                                        },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.overview,
-                                              "particulars",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ])
-                                  ])
+                                _c("div", { staticClass: "text-gray-500" }, [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(
+                                        _vm.__(
+                                          "(HSWs) BOUND FOR THE KINGDOM OF SAUDI ARABIA"
+                                        )
+                                      ) +
+                                      "\n                                    "
+                                  )
                                 ])
                               ]
-                            )
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex-shrink" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "text-gray-700 hover:text-white hover:bg-red-500 pl-1 pr-1 rounded",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.hsw_mdl = false
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fas fa-times" })]
+                              )
+                            ])
                           ])
-                        ]
-                      ),
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "bg-white p-2" }, [
+                        _c(
+                          "form",
+                          { staticClass: "bg-white px-4 pt-4 pb-4 mb-4" },
+                          [
+                            _c("label", { staticClass: "text-lg font-bold" }, [
+                              _vm._v(_vm._s(_vm.__("Employer Details")))
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Full Name")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.employer_name,
+                                        expression: "hsw.employer_name"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.employer_name,
+                                      "border-gray-300 ": _vm.hsw.employer_name
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.employer_name },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "employer_name",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            _vm.__(
+                                              "Visa Number issued by the Saudi Ministry of Labor"
+                                            )
+                                          ) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.visa_no,
+                                        expression: "hsw.visa_no"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.visa_no,
+                                      "border-gray-300 ": _vm.hsw.visa_no
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.visa_no },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "visa_no",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-col" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Address")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.address,
+                                        expression: "hsw.address"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.address,
+                                      "border-gray-300 ": _vm.hsw.address
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.address },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "address",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Street")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.street,
+                                        expression: "hsw.street"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.street,
+                                      "border-gray-300 ": _vm.hsw.street
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.street },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "street",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("District")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.district,
+                                        expression: "hsw.district"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.district,
+                                      "border-gray-300 ": _vm.hsw.district
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.district },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "district",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("City")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.city,
+                                        expression: "hsw.city"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.city,
+                                      "border-gray-300 ": _vm.hsw.city
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.city },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "city",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Civil Status")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.cs_employer,
+                                        expression: "hsw.cs_employer"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.cs_employer,
+                                      "border-gray-300 ": _vm.hsw.cs_employer
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.cs_employer },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "cs_employer",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            _vm.__("Number of Family Members")
+                                          ) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.no_family_members,
+                                        expression: "hsw.no_family_members"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw
+                                        .no_family_members,
+                                      "border-gray-300 ":
+                                        _vm.hsw.no_family_members
+                                    },
+                                    attrs: { type: "number" },
+                                    domProps: {
+                                      value: _vm.hsw.no_family_members
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "no_family_members",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Telephone No.")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.telephone,
+                                        expression: "hsw.telephone"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.telephone,
+                                      "border-gray-300 ": _vm.hsw.telephone
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.telephone },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "telephone",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Mobile No.")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.mobile,
+                                        expression: "hsw.mobile"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.mobile,
+                                      "border-gray-300 ": _vm.hsw.mobile
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.mobile },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "mobile",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("E-mail")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.email,
+                                        expression: "hsw.email"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.email,
+                                      "border-gray-300 ": _vm.hsw.email
+                                    },
+                                    attrs: { type: "email" },
+                                    domProps: { value: _vm.hsw.email },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "email",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("label", { staticClass: "text-lg font-bold" }, [
+                              _vm._v(_vm._s(_vm.__("Worker Details")))
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Full Name")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.worker_name,
+                                        expression: "hsw.worker_name"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.worker_name,
+                                      "border-gray-300 ": _vm.hsw.worker_name
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.worker_name },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "worker_name",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Position")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.position,
+                                        expression: "hsw.position"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.position,
+                                      "border-gray-300 ": _vm.hsw.position
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.position },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "position",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            _vm.__("Address in the Philippines")
+                                          ) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.address_ph,
+                                        expression: "hsw.address_ph"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.address_ph,
+                                      "border-gray-300 ": _vm.hsw.address_ph
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.address_ph },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "address_ph",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Civil Status")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.cs_worker,
+                                        expression: "hsw.cs_worker"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.cs_worker,
+                                      "border-gray-300 ": _vm.hsw.cs_worker
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.cs_worker },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "cs_worker",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Contact No.")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.contact_no,
+                                        expression: "hsw.contact_no"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.contact_no,
+                                      "border-gray-300 ": _vm.hsw.contact_no
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.contact_no },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "contact_no",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Passport No.")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.passport_no,
+                                        expression: "hsw.passport_no"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.passport_no,
+                                      "border-gray-300 ": _vm.hsw.passport_no
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.passport_no },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "passport_no",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Date of Issue")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.date_issued,
+                                        expression: "hsw.date_issued"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.date_issued,
+                                      "border-gray-300 ": _vm.hsw.date_issued
+                                    },
+                                    attrs: { type: "date" },
+                                    domProps: { value: _vm.hsw.date_issued },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "date_issued",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Place of Issue")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.place_issued,
+                                        expression: "hsw.place_issued"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.place_issued,
+                                      "border-gray-300 ": _vm.hsw.place_issued
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.place_issued },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "place_issued",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            _vm.__("Name of Next of Kin")
+                                          ) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.kin_name,
+                                        expression: "hsw.kin_name"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.kin_name,
+                                      "border-gray-300 ": _vm.hsw.kin_name
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.kin_name },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "kin_name",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(
+                                            _vm.__(
+                                              "Address and Contact Numbers of Next of Kin"
+                                            )
+                                          ) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.kin_address,
+                                        expression: "hsw.kin_address"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.kin_address,
+                                      "border-gray-300 ": _vm.hsw.kin_address
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.kin_address },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "kin_address",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("label", { staticClass: "text-lg font-bold" }, [
+                              _vm._v(_vm._s(_vm.__("Other Details")))
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex flex-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Site of Employment")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.employment_site,
+                                        expression: "hsw.employment_site"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw
+                                        .employment_site,
+                                      "border-gray-300 ":
+                                        _vm.hsw.employment_site
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value: _vm.hsw.employment_site
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "employment_site",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: " my-2 flex-grow mx-2" },
+                                [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass:
+                                        "block text-gray-700 text-sm font-bold mb-2"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(_vm.__("Salary")) +
+                                          "\n                                    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.hsw.salary,
+                                        expression: "hsw.salary"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                    class: {
+                                      "border-red-500": !_vm.hsw.salary,
+                                      "border-gray-300 ": _vm.hsw.salary
+                                    },
+                                    attrs: { type: "text" },
+                                    domProps: { value: _vm.hsw.salary },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.hsw,
+                                          "salary",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -689,34 +2060,40 @@ var render = function() {
                             "bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
                         },
                         [
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
-                              attrs: { type: "submit" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.add()
-                                }
-                              }
-                            },
-                            [_vm._v("\n              Add\n            ")]
-                          ),
+                          _vm.edit_mode === 0
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "w-full inline-flex justify-center rounded-md border-gray-300 border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
+                                  attrs: { type: "submit" },
+                                  on: { click: _vm.saveHSW }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            Submit & Confirm\n                        "
+                                  )
+                                ]
+                              )
+                            : _vm._e(),
                           _vm._v(" "),
                           _c(
                             "button",
                             {
                               staticClass:
-                                "mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
+                                "mt-3 w-full inline-flex justify-center rounded-md border-gray-300 border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
-                                  _vm.voucher_mdl = false
+                                  _vm.hsw_mdl = false
                                 }
                               }
                             },
-                            [_vm._v("\n              Cancel\n            ")]
+                            [
+                              _vm._v(
+                                "\n                            Cancel\n                        "
+                              )
+                            ]
                           )
                         ]
                       )
@@ -729,7 +2106,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("transition", { attrs: { name: "slide-fade" } }, [
-        _vm.voucher_update_mdl
+        _vm.sw_mdl
           ? _c("div", { staticClass: "fixed inset-0 overflow-y-auto" }, [
               _c(
                 "div",
@@ -765,7 +2142,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full",
+                        "inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 align-middle",
                       attrs: {
                         role: "dialog",
                         "aria-modal": "true",
@@ -773,123 +2150,1135 @@ var render = function() {
                       }
                     },
                     [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
-                        },
-                        [
-                          _c("div", { staticClass: "sm:flex sm:items-start" }, [
+                      _c("div", { staticClass: "bg-gray-100 p-3" }, [
+                        _c("div", { staticClass: "flex flex-col" }, [
+                          _c("div", { staticClass: "flex flex-row" }, [
                             _c(
                               "div",
                               {
-                                staticClass:
-                                  "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fas fa-file-invoice-dollar"
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                                staticClass: "flex-grow font-bold flex-column"
                               },
                               [
                                 _c(
-                                  "h3",
-                                  {
-                                    staticClass:
-                                      "text-lg leading-6 font-medium text-gray-900",
-                                    attrs: { id: "modal-headline" }
-                                  },
+                                  "div",
+                                  { staticClass: "fw-bolder text-xl" },
                                   [
                                     _vm._v(
-                                      "\n                  New Voucher\n                  "
-                                    ),
-                                    _c("span", { staticClass: "underline" }),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "hidden",
-                                      attrs: { name: "id" }
-                                    })
+                                      "\n                                        " +
+                                        _vm._s(
+                                          _vm.__(
+                                            "STANDARD EMPLOYMENT CONTRACT FOR VARIOUS SKILLS"
+                                          )
+                                        ) +
+                                        "\n                                    "
+                                    )
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "mt-6" }, [
-                                  _c("div", { staticClass: "flex flex-col" }, [
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("Date")]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "font-bold" }, [
-                                        _vm._v(_vm._s(_vm.overview.date))
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("Amount")]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "font-bold" }, [
-                                        _vm._v(_vm._s(_vm.overview.amount))
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("Paid To")]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "font-bold" }, [
-                                        _vm._v(_vm._s(_vm.overview.paid_to))
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("Particulars")]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "font-bold" }, [
-                                        _vm._v(_vm._s(_vm.overview.particulars))
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "mt-2" }, [
-                                      _c("label", [_vm._v("Change")]),
-                                      _vm._v(" "),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.overview.change,
-                                            expression: "overview.change"
-                                          }
-                                        ],
-                                        staticClass:
-                                          "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
-                                        attrs: { type: "number" },
-                                        domProps: {
-                                          value: _vm.overview.change
-                                        },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.overview,
-                                              "change",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ])
-                                  ])
+                                _c("div", { staticClass: "text-gray-500" }, [
+                                  _vm._v(
+                                    "\n                                        Department of Labor and Employment Philippine Overseas Employment\n                                        Administration\n                                    "
+                                  )
                                 ])
                               ]
-                            )
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex-shrink" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "text-gray-700 hover:text-white hover:bg-red-500 pl-1 pr-1 rounded",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.sw_mdl = false
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fas fa-times" })]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "form",
+                        { staticClass: "bg-white px-4 pt-4 pb-4 mb-4" },
+                        [
+                          _c("label", { staticClass: "text-lg font-bold" }, [
+                            _vm._v(_vm._s(_vm.__("Employer Details")))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex flex-col" }, [
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Full Name")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.employer_name,
+                                    expression: "sw.employer_name"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.employer_name,
+                                  "border-gray-300 ": _vm.sw.employer_name
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.employer_name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "employer_name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Address")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.employer_address,
+                                    expression: "sw.employer_address"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.employer_address,
+                                  "border-gray-300 ": _vm.sw.employer_address
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.employer_address },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "employer_address",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex flex-row" }, [
+                            _c("div", { staticClass: "my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("PO Box No.")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.po_box_no,
+                                    expression: "sw.po_box_no"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.po_box_no,
+                                  "border-gray-300 ": _vm.sw.po_box_no
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.po_box_no },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "po_box_no",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Telephone")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.telephone,
+                                    expression: "sw.telephone"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.telephone,
+                                  "border-gray-300 ": _vm.sw.telephone
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.telephone },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "telephone",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Fax")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.fax,
+                                    expression: "sw.fax"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.fax,
+                                  "border-gray-300 ": _vm.sw.fax
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.fax },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(_vm.sw, "fax", $event.target.value)
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "text-lg font-bold" }, [
+                            _vm._v(_vm._s(_vm.__("Employee Details")))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex flex-row" }, [
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Full Name")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.employee_name,
+                                    expression: "sw.employee_name"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.employee_name,
+                                  "border-gray-300 ": _vm.sw.employee_name
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.employee_name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "employee_name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Civil Status")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.cs_status,
+                                    expression: "sw.cs_status"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.cs_status,
+                                  "border-gray-300 ": _vm.sw.cs_status
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.cs_status },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "cs_status",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex flex-row" }, [
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Employee Address")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.employee_address,
+                                    expression: "sw.employee_address"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.employee_address,
+                                  "border-gray-300 ": _vm.sw.employee_address
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.employee_address },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "employee_address",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex flex-row" }, [
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Passport No.")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.passport_no,
+                                    expression: "sw.passport_no"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.passport_no,
+                                  "border-gray-300 ": _vm.sw.passport_no
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.passport_no },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "passport_no",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Date Issued")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.date_issued,
+                                    expression: "sw.date_issued"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.date_issued,
+                                  "border-gray-300 ": _vm.sw.date_issued
+                                },
+                                attrs: { type: "date" },
+                                domProps: { value: _vm.sw.date_issued },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "date_issued",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Place Issued")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.place_issued,
+                                    expression: "sw.place_issued"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.place_issued,
+                                  "border-gray-300 ": _vm.sw.place_issued
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.place_issued },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "place_issued",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("label", { staticClass: "text-lg font-bold" }, [
+                            _vm._v(_vm._s(_vm.__("Other Details")))
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex flex-row" }, [
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Site Of Employment")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.site_of_employment,
+                                    expression: "sw.site_of_employment"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.site_of_employment,
+                                  "border-gray-300 ": _vm.sw.site_of_employment
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.site_of_employment },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "site_of_employment",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex flex-row" }, [
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Position")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.employee_position,
+                                    expression: "sw.employee_position"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.employee_position,
+                                  "border-gray-300 ": _vm.sw.employee_position
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.employee_position },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "employee_position",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Salary")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.salary,
+                                    expression: "sw.salary"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.salary,
+                                  "border-gray-300 ": _vm.sw.salary
+                                },
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.sw.salary },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "salary",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex flex-row" }, [
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Witness Day")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.witness_day,
+                                    expression: "sw.witness_day"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.witness_day,
+                                  "border-gray-300 ": _vm.sw.witness_day
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.witness_day },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "witness_day",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Witness Month")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.witness_month,
+                                    expression: "sw.witness_month"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.witness_month,
+                                  "border-gray-300 ": _vm.sw.witness_month
+                                },
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.sw.witness_month },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "witness_month",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Witness Year")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.witness_year,
+                                    expression: "sw.witness_year"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.witness_year,
+                                  "border-gray-300 ": _vm.sw.witness_year
+                                },
+                                attrs: { type: "number" },
+                                domProps: { value: _vm.sw.witness_year },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "witness_year",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: " my-2 flex-grow mx-2" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass:
+                                    "block text-gray-700 text-sm font-bold mb-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.__("Witness Place")) +
+                                      "\n                                "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.sw.witness_place,
+                                    expression: "sw.witness_place"
+                                  }
+                                ],
+                                staticClass:
+                                  "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
+                                class: {
+                                  "border-red-500": !_vm.sw.witness_place,
+                                  "border-gray-300 ": _vm.sw.witness_place
+                                },
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.sw.witness_place },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.sw,
+                                      "witness_place",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                        },
+                        [
+                          _vm.edit_mode === 0
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "w-full inline-flex justify-center rounded-md border-gray-300 border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
+                                  attrs: { type: "submit" },
+                                  on: { click: _vm.saveSW }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            Submit & Confirm\n                        "
+                                  )
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "mt-3 w-full inline-flex justify-center rounded-md border-gray-300 border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.sw_mdl = false
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Cancel\n                        "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "slide-fade" } }, [
+        _vm.approval_mdl
+          ? _c("div", { staticClass: "fixed inset-0 overflow-y-auto" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "fixed inset-0 transition-opacity",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [
+                      _c("div", {
+                        staticClass: "absolute inset-0 bg-gray-500 opacity-75"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "hidden sm:inline-block sm:align-middle sm:h-screen",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [_vm._v("​")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "w-2/4 inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 align-middle",
+                      attrs: {
+                        role: "dialog",
+                        "aria-modal": "true",
+                        "aria-labelledby": "modal-headline"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "bg-gray-100 p-3" }, [
+                        _c("div", { staticClass: "flex flex-col" }, [
+                          _c("div", { staticClass: "flex flex-row" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "flex-grow font-bold flex-column"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "fw-bolder text-xl" },
+                                  [
+                                    _vm._v(
+                                      "\n                                        Contract "
+                                    ),
+                                    _c(
+                                      "label",
+                                      { staticClass: "text-indigo-500" },
+                                      [_vm._v(_vm._s(_vm.serial_no))]
+                                    ),
+                                    _vm._v(
+                                      " Approval\n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "text-gray-500" })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex-shrink" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "text-gray-700 hover:text-white hover:bg-red-500 pl-1 pr-1 rounded",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.approval_mdl = false
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fas fa-times" })]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "form",
+                        { staticClass: "bg-white px-4 pt-4 pb-4 mb-4" },
+                        [
+                          _c("div", { staticClass: "flex flex-col" }, [
+                            _c("div", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-green-400 hover:bg-green-600"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    I will Approve this contract\n                                "
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-red-400 hover:bg-red-600"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    I will Decline this contract\n                                "
+                                  )
+                                ]
+                              )
+                            ])
                           ])
                         ]
                       ),
@@ -905,64 +3294,19 @@ var render = function() {
                             "button",
                             {
                               staticClass:
-                                "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
+                                "mt-3 w-full inline-flex justify-center rounded-md border-gray-300 border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
-                                  return _vm.update()
-                                }
-                              }
-                            },
-                            [_vm._v("\n              Update\n            ")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.getCopy()
+                                  _vm.approval_mdl = false
                                 }
                               }
                             },
                             [
                               _vm._v(
-                                "\n              Cash Voucher\n            "
+                                "\n                            Cancel\n                        "
                               )
                             ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.invalid()
-                                }
-                              }
-                            },
-                            [_vm._v("\n              Invalid\n            ")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  _vm.voucher_update_mdl = false
-                                }
-                              }
-                            },
-                            [_vm._v("\n              Cancel\n            ")]
                           )
                         ]
                       )
@@ -982,12 +3326,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-5" }, [
-      _c("table", {
-        staticClass: "stripe hover",
-        staticStyle: { width: "100%" },
-        attrs: { id: "vouchers-table" }
-      })
+    return _c("div", { staticClass: "w-full mx-auto sm:px-6 lg:px-8" }, [
+      _c(
+        "div",
+        { staticClass: "bg-white overflow-auto shadow-sm sm:rounded-lg" },
+        [
+          _c("div", { staticClass: "p-2 mt-5" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "p-5" }, [
+            _c("table", {
+              staticClass: "stripe hover",
+              staticStyle: { width: "100%" },
+              attrs: { id: "contracts-table" }
+            })
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -1109,17 +3463,17 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/view/Vouchers.vue":
-/*!****************************************!*\
-  !*** ./resources/js/view/Vouchers.vue ***!
-  \****************************************/
+/***/ "./resources/js/view/Contracts.vue":
+/*!*****************************************!*\
+  !*** ./resources/js/view/Contracts.vue ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Vouchers.vue?vue&type=template&id=20ffb27e& */ "./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e&");
-/* harmony import */ var _Vouchers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Vouchers.vue?vue&type=script&lang=js& */ "./resources/js/view/Vouchers.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Contracts_vue_vue_type_template_id_eb150dd6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Contracts.vue?vue&type=template&id=eb150dd6& */ "./resources/js/view/Contracts.vue?vue&type=template&id=eb150dd6&");
+/* harmony import */ var _Contracts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Contracts.vue?vue&type=script&lang=js& */ "./resources/js/view/Contracts.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1129,9 +3483,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Vouchers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Contracts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Contracts_vue_vue_type_template_id_eb150dd6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Contracts_vue_vue_type_template_id_eb150dd6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1141,38 +3495,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/view/Vouchers.vue"
+component.options.__file = "resources/js/view/Contracts.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/view/Vouchers.vue?vue&type=script&lang=js&":
-/*!*****************************************************************!*\
-  !*** ./resources/js/view/Vouchers.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************/
+/***/ "./resources/js/view/Contracts.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./resources/js/view/Contracts.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Vouchers.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Vouchers.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contracts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Contracts.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Contracts.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Contracts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e&":
-/*!***********************************************************************!*\
-  !*** ./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e& ***!
-  \***********************************************************************/
+/***/ "./resources/js/view/Contracts.vue?vue&type=template&id=eb150dd6&":
+/*!************************************************************************!*\
+  !*** ./resources/js/view/Contracts.vue?vue&type=template&id=eb150dd6& ***!
+  \************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Vouchers.vue?vue&type=template&id=20ffb27e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Vouchers.vue?vue&type=template&id=20ffb27e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Contracts_vue_vue_type_template_id_eb150dd6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Contracts.vue?vue&type=template&id=eb150dd6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/view/Contracts.vue?vue&type=template&id=eb150dd6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Contracts_vue_vue_type_template_id_eb150dd6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Vouchers_vue_vue_type_template_id_20ffb27e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Contracts_vue_vue_type_template_id_eb150dd6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

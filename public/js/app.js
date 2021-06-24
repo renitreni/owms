@@ -54935,13 +54935,13 @@ Vue.component('chat-box', function () {
   return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./view/ChatBox.vue */ "./resources/js/view/ChatBox.vue"));
 });
 Vue.component('vouchers-page', function () {
-  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./view/Vouchers.vue */ "./resources/js/view/Vouchers.vue"));
+  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./view/Vouchers.vue */ "./resources/js/view/Vouchers.vue"));
 });
 Vue.component('agency-page', function () {
-  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./view/Agency.vue */ "./resources/js/view/Agency.vue"));
+  return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4)]).then(__webpack_require__.bind(null, /*! ./view/Agency.vue */ "./resources/js/view/Agency.vue"));
 });
 Vue.component('contracts-page', function () {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./view/Contracts.vue */ "./resources/js/view/Contracts.vue"));
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./view/Contracts.vue */ "./resources/js/view/Contracts.vue"));
 });
 Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/trans.js"));
 

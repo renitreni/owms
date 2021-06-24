@@ -22,7 +22,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </head>
 
 <body class="font-sans antialiased">

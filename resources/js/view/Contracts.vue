@@ -14,7 +14,7 @@
             </div>
         </div>
 
-<!--        {{&#45;&#45;HSW&#45;&#45;}}-->
+        <!--        {{&#45;&#45;HSW &#45;&#45;}}-->
         <transition name="slide-fade">
             <div class="fixed inset-0 overflow-y-auto" v-if="hsw_mdl">
                 <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -30,7 +30,8 @@
                                 <div class="flex flex-row">
                                     <div class="flex-grow font-bold flex-column">
                                         <div class="fw-bolder text-xl">
-                                            {{ __('STANDARD EMPLOYMENT CONTRACT FOR FILIPINO HOUSEHOLD SERVICE WORKERS') }}
+                                            {{ __('STANDARD EMPLOYMENT CONTRACT FOR FILIPINO HOUSEHOLD SERVICE WORKERS')
+                                            }}
                                         </div>
                                         <div class="text-gray-500">
                                             {{ __('(HSWs) BOUND FOR THE KINGDOM OF SAUDI ARABIA') }}
@@ -295,7 +296,7 @@
                 </div>
             </div>
         </transition>
-<!--        {{&#45;&#45;SW&#45;&#45;}}-->
+        <!--        {{&#45;&#45;SW &#45;&#45;}}-->
         <transition name="slide-fade">
             <div class="fixed inset-0 overflow-y-auto" v-if="sw_mdl">
                 <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -314,7 +315,8 @@
                                             {{ __('STANDARD EMPLOYMENT CONTRACT FOR VARIOUS SKILLS') }}
                                         </div>
                                         <div class="text-gray-500">
-                                            {{ __('Department of Labor and Employment Philippine Overseas Employment Administration') }}
+                                            Department of Labor and Employment Philippine Overseas Employment
+                                            Administration
                                         </div>
                                     </div>
                                     <div class="flex-shrink">
@@ -523,6 +525,60 @@
                 </div>
             </div>
         </transition>
+        <!--        Approval Modal-->
+        <transition name="slide-fade">
+            <div class="fixed inset-0 overflow-y-auto" v-if="approval_mdl">
+                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                    <div
+                        class="w-2/4 inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 align-middle"
+                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                        <div class="bg-gray-100 p-3">
+                            <div class="flex flex-col">
+                                <div class="flex flex-row">
+                                    <div class="flex-grow font-bold flex-column">
+                                        <div class="fw-bolder text-xl">
+                                            Contract <label class="text-indigo-500">{{ serial_no }}</label> Approval
+                                        </div>
+                                        <div class="text-gray-500">
+                                        </div>
+                                    </div>
+                                    <div class="flex-shrink">
+                                        <button type="button" v-on:click="approval_mdl = false"
+                                                class="text-gray-700 hover:text-white hover:bg-red-500 pl-1 pr-1 rounded">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="bg-white px-4 pt-4 pb-4 mb-4">
+                            <div class="flex flex-col">
+                                <div>
+                                    <button class="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-green-400 hover:bg-green-600">
+                                        I will Approve this contract
+                                    </button>
+                                </div>
+                                <div>
+                                    <button class="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-red-400 hover:bg-red-600">
+                                        I will Decline this contract
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                            <button type="button" v-on:click="approval_mdl = false"
+                                    class="mt-3 w-full inline-flex justify-center rounded-md border-gray-300 border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -534,9 +590,11 @@
                 hsw: {},
                 sw_mdl: false,
                 hsw_mdl: false,
+                approval_mdl: false,
                 dt: null,
                 props_data: JSON.parse(this._props.data),
                 details: {},
+                serial_no: '',
             }
         },
         methods: {
@@ -558,25 +616,37 @@
                 columns: [
                     {
                         data: function (value) {
-                            return '<a class="text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' +
+                            return '<a class="contract-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' +
                                 value.serial_no + '</a>'
                         }, name: "serial_no", title: "Serial No"
                     },
+                    {
+                        data: function (value) {
+                            return '<a class="approval-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' +
+                                value.status + '</a>';
+                        }, name: "status", title: "Status"
+                    },
                     {data: 'name', name: "name", title: "Contract"},
-                    {data: 'status', name: "status", title: "Status"},
                 ],
                 drawCallback() {
-                    $("table tr").click(function (e) {
-                        let data = $(this);
+                    $(".contract-show").click(function (e) {
+                        let data = $(this).parent().parent();
                         let hold = $this.dt.row(data).data();
                         console.log(hold.details);
-                        if(hold.name === 'Skilled Workers') {
+                        if (hold.name === 'Skilled Workers') {
                             $this.sw = hold.details;
                             $this.sw_mdl = true;
-                        } else if(hold.name === 'Household Service Workers') {
+                        } else if (hold.name === 'Household Service Workers') {
                             $this.hsw = hold.details;
                             $this.hsw_mdl = true;
                         }
+                    });
+                    $(".approval-show").click(function (e) {
+                        let data = $(this).parent().parent();
+                        let hold = $this.dt.row(data).data();
+                        console.log(hold);
+                        $this.serial_no = hold.serial_no;
+                        $this.approval_mdl = true;
                     });
                 }
             });

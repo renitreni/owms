@@ -18,6 +18,13 @@
                     >
                         <i class="fas fa-exclamation-triangle"></i> {{ __('Alert Levels') }}
                     </a>
+                    <a
+                        href="#"
+                        @click="showReqMdl"
+                        class="text-white bg-yellow-500 hover:bg-yellow-600 p-2 rounded m-2 shadow"
+                    >
+                        <i class="fas fa-award"></i> {{ __('Terms & Conditions') }}
+                    </a>
                 </div>
                 <div class="p-5">
                     <table
@@ -485,13 +492,97 @@
                 </div>
             </div>
         </transition>
+        <!-- Requisition Modal -->
+        <transition name="slide-fade">
+            <!-- Agency add -->
+            <div class="fixed inset-0 overflow-auto" v-if="req_mdl">
+                <div
+                    class="flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0  overflow-auto"
+                >
+                    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <span
+                        class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                        aria-hidden="true"
+                    >&#8203;</span
+                    >
+                    <div
+                        class="inline-block align-middle bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all w-full sm:w-9/12"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-headline"
+                    >
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div class="sm:flex sm:items-start">
+                                <div
+                                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
+                                >
+                                    <!-- Heroicon name -->
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <div
+                                    class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                                >
+                                    <h3
+                                        class="text-lg leading-6 font-medium text-gray-900"
+                                    >
+                                        Requisition
+                                    </h3>
+                                    <div class="mt-4">
+                                        <div class="flex flex-col">
+                                            <div>
+                                                <label>Contracts</label>
+                                                <select v-model="contract"
+                                                        class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0">
+                                                    <option v-for="item in props_data.contract_list"
+                                                            v-bind:value="item">{{ item }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="mt-3" v-show="contract!=''">
+                                                <vue-editor v-model="content"></vue-editor>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                        >
+                            <button
+                                type="button" v-if="contract !=''" @click="storeRequisite()"
+                                class="mt-3 w-full inline-flex justify-center rounded-md border shadow-sm px-4 py-2 bg-white text-base font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            >
+                                Save & Confirm
+                            </button>
+                            <button
+                                type="button"
+                                @click="req_mdl = false"
+                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
+    import {VueEditor, Quill} from "vue2-editor";
+
     export default {
         props: ["data"],
+        components: {
+            VueEditor
+        },
         data() {
             return {
+                props_data: JSON.parse(this._props.data),
+                content: "",
                 color: {
                     hue: 50,
                     saturation: 100,
@@ -503,8 +594,9 @@
                 agency_mdl: false,
                 agency_update_mdl: false,
                 alert_detail_mdl: false,
-                props_data: JSON.parse(this._props.data),
+                req_mdl: false,
                 dt: null,
+                contract: '',
                 alert_list: [],
                 alert_form: {
                     color_level: '#ff6161',
@@ -521,8 +613,30 @@
                 },
             };
         },
-        watch: {},
+        watch: {
+            'contract': function () {
+                this.getContract();
+            }
+        },
         methods: {
+            storeRequisite() {
+                var $this = this;
+                axios.post(this.props_data.requisition_store_link, {
+                    contract: this.contract,
+                    content: this.content,
+                }).then(function () {
+                    $this.getContract()
+                });
+            },
+            getContract() {
+                var $this = this;
+                axios.post(this.props_data.requisition_get_link, {
+                    contract: this.contract,
+                    content: this.content,
+                }).then(function (value) {
+                    $this.content = value.data;
+                });
+            },
             showEdit(item) {
                 this.tab = 2;
                 this.alert_form.id = item.id;
@@ -588,6 +702,9 @@
 
                 this.agency_mdl = true;
             },
+            showReqMdl() {
+                this.req_mdl = true;
+            },
             deletion() {
                 var $this = this;
                 axios.delete(this.overview.delete_link).then(function () {
@@ -636,6 +753,7 @@
         mounted() {
             var $this = this;
             $this.getAlertList();
+
             $this.dt = $("#agencies-table").DataTable({
                 responsive: true,
                 serverSide: true,
