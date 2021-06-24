@@ -558,12 +558,14 @@
                         <form class="bg-white px-4 pt-4 pb-4 mb-4">
                             <div class="flex flex-col">
                                 <div>
-                                    <button class="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-green-400 hover:bg-green-600">
+                                    <button type="button" @click="updateContract('Approved')"
+                                        class="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-green-400 hover:bg-green-600">
                                         I will Approve this contract
                                     </button>
                                 </div>
                                 <div>
-                                    <button class="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-red-400 hover:bg-red-600">
+                                    <button type="button" @click="updateContract('Declined')"
+                                        class="mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-red-400 hover:bg-red-600">
                                         I will Decline this contract
                                     </button>
                                 </div>
@@ -600,6 +602,21 @@
         methods: {
             showContractsMdl() {
                 this.contracts_mdl = true;
+            },
+            updateContract(status) {
+                var $this = this;
+                axios.post(this.props_data.contract_us_link, {
+                    'serial_no': this.serial_no,
+                    'status': status,
+                }).then(function (value) {
+                    $this.approval_mdl = false;
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Contract Status has been updated!',
+                        html: 'Update success!',
+                    });
+                    $this.dt.draw();
+                });
             }
         },
         mounted() {
@@ -622,8 +639,11 @@
                     },
                     {
                         data: function (value) {
-                            return '<a class="approval-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' +
-                                value.status + '</a>';
+                            if(value.status === 'Pending')
+                                return '<a class="approval-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' +
+                                    value.status + '</a>';
+
+                            return value.status;
                         }, name: "status", title: "Status"
                     },
                     {data: 'name', name: "name", title: "Contract"},

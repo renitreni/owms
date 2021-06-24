@@ -45,7 +45,7 @@
 <div style='border-bottom: 2px solid #eaeaea'>
     <ul class='flex cursor-pointer'>
         <li class='py-2 px-6 bg-white rounded-t-lg' v-bind:class="{'text-gray-500 bg-gray-200': (panel != 2) }"
-            @click="panel = 2">HSW Contracts
+            @click="panel = 2">Contracts
         </li>
         <li class='py-2 px-6 bg-white rounded-t-lg' v-bind:class="{'text-gray-500 bg-gray-200': (panel != 1) }"
             @click="panel = 1">Complaints
@@ -826,6 +826,7 @@
 
                     }
                 });
+
                 $this.dt_contract = $('#contract-table').DataTable({
                     responsive: true,
                     serverSide: true,
@@ -855,10 +856,18 @@
                         },
                         {
                             data: function (value) {
-                                if (value.approved_by) {
-                                    return '<div class="bg-green-500 p-1 rounded text-white shadow w-100 text-center">' + value.approved_by + '</div>';
+                                if (value.status === 'Declined') {
+                                    return '<a class="approval-show text-red-500 hover:text-red-400 hover:underline font-bold">' +
+                                        value.status + ' by ' + value.approved_by +
+                                        '</a>';
                                 }
-                                return '<div class="bg-blue-500 p-1 rounded text-white shadow w-100 text-center">Pending Approval</div>'
+                                if (value.status === 'Approved') {
+                                    return '<a class="approval-show text-green-400 hover:text-green-500 hover:underline font-bold">' +
+                                        value.status + ' by ' + value.approved_by +
+                                        '</a>';
+                                }
+                                return '<a class="approval-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' +
+                                    value.status + '</a>';
                             },
                             name: 'employer_name',
                             title: 'Contract Status'
@@ -870,13 +879,25 @@
                         },
                     ],
                     drawCallback() {
-                        $("#contract-table tr").click(function (e) {
-                            let data = $(this);
+                        $(".approval-show").click(function (e) {
+                            let data = $(this).parent();
                             let hold = $this.dt_contract.row(data).data();
-                            $this.hsw = JSON.parse(hold.details);
-                            delete hold.details;
-                            Object.assign($this.hsw, hold);
-                            $this.hsw_mdl = true;
+
+                            if(hold.name === "Household Service Workers") {
+                                $this.hsw = JSON.parse(hold.details.toString());
+                                delete hold.details;
+                                Object.assign($this.hsw, hold);
+                                $this.hsw_mdl = true;
+                            }
+
+                            if(hold.name === "Skilled Workers") {
+                                $this.sw = JSON.parse(hold.details.toString());
+                                delete hold.details;
+                                Object.assign($this.sw, hold);
+                                $this.sw_mdl = true;
+                            }
+
+                            $this.dt_contract.draw();
                             $this.edit_mode = 1;
                         });
                     }

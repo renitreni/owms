@@ -592,6 +592,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -610,6 +612,21 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showContractsMdl: function showContractsMdl() {
       this.contracts_mdl = true;
+    },
+    updateContract: function updateContract(status) {
+      var $this = this;
+      axios.post(this.props_data.contract_us_link, {
+        'serial_no': this.serial_no,
+        'status': status
+      }).then(function (value) {
+        $this.approval_mdl = false;
+        Swal.fire({
+          icon: 'success',
+          title: 'Contract Status has been updated!',
+          html: 'Update success!'
+        });
+        $this.dt.draw();
+      });
     }
   },
   mounted: function mounted() {
@@ -631,7 +648,8 @@ __webpack_require__.r(__webpack_exports__);
         title: "Serial No"
       }, {
         data: function data(value) {
-          return '<a class="approval-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' + value.status + '</a>';
+          if (value.status === 'Pending') return '<a class="approval-show text-indigo-500 hover:text-indigo-400 hover:underline font-bold">' + value.status + '</a>';
+          return value.status;
         },
         name: "status",
         title: "Status"
@@ -3255,7 +3273,13 @@ var render = function() {
                                 "button",
                                 {
                                   staticClass:
-                                    "mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-green-400 hover:bg-green-600"
+                                    "mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-green-400 hover:bg-green-600",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.updateContract("Approved")
+                                    }
+                                  }
                                 },
                                 [
                                   _vm._v(
@@ -3270,7 +3294,13 @@ var render = function() {
                                 "button",
                                 {
                                   staticClass:
-                                    "mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-red-400 hover:bg-red-600"
+                                    "mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-red-400 hover:bg-red-600",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.updateContract("Declined")
+                                    }
+                                  }
                                 },
                                 [
                                   _vm._v(

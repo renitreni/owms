@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Agency;
 use App\Models\Contract;
+use App\Models\Information;
+use App\Models\Requisition;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -23,7 +25,8 @@ class ContractsController extends Controller
             "header"    => 'Submitted Contracts of ' . $agency->name,
             "component" => 'contracts-page',
             "data"      => [
-                'datatable_link' => route('contracts.table', ['id' => $request->id]),
+                'datatable_link'   => route('contracts.table', ['id' => $request->id]),
+                'contract_us_link' => route('status.contract.update'),
             ],
         ]);
     }
@@ -43,5 +46,19 @@ class ContractsController extends Controller
 
                              return collect($value)->toArray();
                          })->make(true);
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $contract_name  = Contract::query()->where('serial_no', $request->serial_no)->first()['name'];
+        $requisition_id = Requisition::query()->where('name', $contract_name)->first()['id'];
+        Contract::query()->where('serial_no', $request->serial_no)
+                ->update([
+                    'status'       => $request->status,
+                    'approved_by'  => Information::getNameById(auth()->id()),
+                    'requisite_id' => $requisition_id,
+                ]);
+
+        return ['success' => true];
     }
 }

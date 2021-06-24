@@ -55,6 +55,8 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
 
         Route::get('contracts/{id}', [ContractsController::class, 'index'])->name('contracts');
         Route::post('contracts/table/{id}', [ContractsController::class, 'table'])->name('contracts.table');
+        Route::post('contracts/update/status', [ContractsController::class, 'updateStatus'])
+             ->name('status.contract.update');
 
         Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates');
         Route::post('/candidates/c/c', [CandidateController::class, 'tableCandidates'])->name('candidate.table');
