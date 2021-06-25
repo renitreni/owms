@@ -625,7 +625,12 @@
                     contract: this.contract,
                     content: this.content,
                 }).then(function () {
-                    $this.getContract()
+                    $this.getContract();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Terms and Condition has been updated!',
+                        html: 'Update success!',
+                    });
                 });
             },
             getContract() {
