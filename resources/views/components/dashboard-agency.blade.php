@@ -630,7 +630,7 @@
                         'id': '',
                         'employer_name': '',
                         'visa_no': '',
-                        'address': '',
+                        'employer_address': '',
                         'street': '',
                         'district': '',
                         'city': '',
@@ -857,12 +857,22 @@
                         {
                             data: function (value) {
                                 if (value.status === 'Declined') {
-                                    return '<a class="approval-show text-red-500 hover:text-red-400 hover:underline font-bold">' +
+
+                                    return '<a href="' + value.contract_link + '" ' +
+                                        'class="text-white bg-indigo-400 hover:bg-indigo-500 pl-1 pr-1 rounded mr-2">' +
+                                        '<i class="fas fa-download"></i>' +
+                                        '</a>' +
+                                        '<a class="approval-show text-red-500 hover:text-red-400 hover:underline font-bold">' +
                                         value.status + ' by ' + value.approved_by +
                                         '</a>';
                                 }
                                 if (value.status === 'Approved') {
-                                    return '<a class="approval-show text-green-400 hover:text-green-500 hover:underline font-bold">' +
+
+                                    return '<a href="' + value.contract_link + '" ' +
+                                        'class="text-white bg-indigo-400 hover:bg-indigo-500 pl-1 pr-1 rounded mr-2">' +
+                                        '<i class="fas fa-download"></i>' +
+                                        '</a>' +
+                                        '<a href="' + value.contract_link + '" class="approval-show text-green-400 hover:text-green-500 hover:underline font-bold">' +
                                         value.status + ' by ' + value.approved_by +
                                         '</a>';
                                 }
@@ -883,14 +893,14 @@
                             let data = $(this).parent();
                             let hold = $this.dt_contract.row(data).data();
 
-                            if(hold.name === "Household Service Workers") {
+                            if (hold.name === "Household Service Workers") {
                                 $this.hsw = JSON.parse(hold.details.toString());
                                 delete hold.details;
                                 Object.assign($this.hsw, hold);
                                 $this.hsw_mdl = true;
                             }
 
-                            if(hold.name === "Skilled Workers") {
+                            if (hold.name === "Skilled Workers") {
                                 $this.sw = JSON.parse(hold.details.toString());
                                 delete hold.details;
                                 Object.assign($this.sw, hold);

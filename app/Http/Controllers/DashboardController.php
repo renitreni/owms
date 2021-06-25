@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Agency;
 use App\Models\Contract;
+use Barryvdh\DomPDF\PDF;
 use App\Models\ContractSW;
 use App\Models\ContractHSW;
 use App\Events\SendMessageEvent;
@@ -174,9 +175,19 @@ class DashboardController extends Controller
         return DataTables::of(Contract::query()->where('agency_id', auth()->user()->agency_id))
                          ->setTransformer(function ($value) {
                              $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
+                             $value->contract_link      = route('contract.layout', ['id' => encrypt($value->id)]);
 
                              return collect($value)->toArray();
                          })
                          ->make(true);
+    }
+
+    public function printContract(Request $request, PDF $pdf)
+    {
+        $contract = Contract::query()->where('id', decrypt($request->id))->with(['agency', 'requisition'])->first();
+        $details  = json_decode($contract['details']);
+        //dd($details);
+        return $pdf->loadView('printables.contract-layout', ['contract' => $contract, 'details' => $details])
+                   ->download("{$contract->name}_" . now() . ".pdf");
     }
 }

@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
     Route::post('/table/hsw', [DashboardController::class, 'tableHSW'])->name('table.hsw');
     Route::post('/table/sw', [DashboardController::class, 'tableSW'])->name('table.sw');
     Route::post('/table/contract', [DashboardController::class, 'tableContract'])->name('table.contract');
+    Route::get('/print/contract/{id}', [DashboardController::class, 'printContract'])->name('contract.layout');
 
     Route::get('/change/pass', [UsersController::class, 'indexChangePass'])->name('change.pass');
     Route::post('/change/password/update', [UsersController::class, 'changePass'])->name('change.pass.update');
