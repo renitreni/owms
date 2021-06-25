@@ -714,9 +714,9 @@
                         'salary': '',
                         'agency_id': '',
                     };
+                    this.dt_contract.draw();
                 },
                 resetSW() {
-
                     this.sw = {
                         'employer_name': '',
                         'employer_address': '',
@@ -741,6 +741,7 @@
                         'approved_date': '',
                         'status': '',
                     };
+                    this.dt_contract.draw();
                 },
                 openHSWMdl() {
                     this.edit_mode = 0;
