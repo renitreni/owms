@@ -873,7 +873,7 @@
                                         'class="text-white bg-indigo-400 hover:bg-indigo-500 pl-1 pr-1 rounded mr-2">' +
                                         '<i class="fas fa-download"></i>' +
                                         '</a>' +
-                                        '<a href="' + value.contract_link + '" class="approval-show text-green-400 hover:text-green-500 hover:underline font-bold">' +
+                                        '<a href="#" class="approval-show text-green-400 hover:text-green-500 hover:underline font-bold">' +
                                         value.status + ' by ' + value.approved_by +
                                         '</a>';
                                 }

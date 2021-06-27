@@ -636,6 +636,11 @@ __webpack_require__.r(__webpack_exports__);
         content: this.content
       }).then(function () {
         $this.getContract();
+        Swal.fire({
+          icon: 'success',
+          title: 'Terms and Condition has been updated!',
+          html: 'Update success!'
+        });
       });
     },
     getContract: function getContract() {
