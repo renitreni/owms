@@ -8,6 +8,8 @@ use App\Models\Information;
 use App\Models\Requisition;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifyOfContractStatus;
 
 class ContractsController extends Controller
 {
@@ -50,14 +52,21 @@ class ContractsController extends Controller
 
     public function updateStatus(Request $request)
     {
-        $contract_name  = Contract::query()->where('serial_no', $request->serial_no)->first()['name'];
-        $requisition_id = Requisition::query()->where('name', $contract_name)->first()['id'];
+        $contract         = Contract::query()->where('serial_no', $request->serial_no)->first();
+        $details          = json_decode($contract['details']);
+        $details->remarks = $request->remarks;
+
+        $requisition_id = Requisition::query()->where('name', $contract['name'])->first()['id'];
         Contract::query()->where('serial_no', $request->serial_no)
                 ->update([
                     'status'       => $request->status,
                     'approved_by'  => Information::getNameById(auth()->id()),
                     'requisite_id' => $requisition_id,
+                    'details'      => json_encode($details),
                 ]);
+
+        Mail::to(['yaramayservices@gmail.com', 'sab_prince@yahoo.com'])
+            ->send(new NotifyOfContractStatus($request->serial_no, $request->remarks, $request->status));
 
         return ['success' => true];
     }

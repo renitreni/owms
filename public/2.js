@@ -594,6 +594,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -606,7 +607,8 @@ __webpack_require__.r(__webpack_exports__);
       dt: null,
       props_data: JSON.parse(this._props.data),
       details: {},
-      serial_no: ''
+      serial_no: '',
+      remarks: ''
     };
   },
   methods: {
@@ -617,9 +619,11 @@ __webpack_require__.r(__webpack_exports__);
       var $this = this;
       axios.post(this.props_data.contract_us_link, {
         'serial_no': this.serial_no,
-        'status': status
+        'status': status,
+        'remarks': this.remarks
       }).then(function (value) {
         $this.approval_mdl = false;
+        $this.remarks = '';
         Swal.fire({
           icon: 'success',
           title: 'Contract Status has been updated!',
@@ -3269,45 +3273,29 @@ var render = function() {
                         [
                           _c("div", { staticClass: "flex flex-col" }, [
                             _c("div", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-green-400 hover:bg-green-600",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.updateContract("Approved")
-                                    }
+                              _c("label", [_vm._v("Remarks:")]),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.remarks,
+                                    expression: "remarks"
                                   }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    I will Approve this contract\n                                "
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "mt-3 w-full inline-flex justify-center rounded-md shadow-sm px-4 py-2 font-bold text-white bg-red-400 hover:bg-red-600",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.updateContract("Declined")
+                                ],
+                                staticClass:
+                                  "w-full border-0 bg-gray-100 focus:bg-white rounded text-black outline-none focus:ring-opacity-0",
+                                domProps: { value: _vm.remarks },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
                                     }
+                                    _vm.remarks = $event.target.value
                                   }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                    I will Decline this contract\n                                "
-                                  )
-                                ]
-                              )
+                                }
+                              })
                             ])
                           ])
                         ]
@@ -3324,7 +3312,45 @@ var render = function() {
                             "button",
                             {
                               staticClass:
-                                "mt-3 w-full inline-flex justify-center rounded-md border-gray-300 border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
+                                "mx-2 mt-3 w-auto inline-flex justify-center rounded-md shadow-sm px-2 py-2 font-bold text-white bg-green-400 hover:bg-green-600",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.updateContract("Approved")
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            I will Approve this contract\n                        "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "mx-2 mt-3 w-auto inline-flex justify-center rounded-md shadow-sm px-2 py-2 font-bold text-white bg-red-400 hover:bg-red-600",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.updateContract("Declined")
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            I will Decline this contract\n                        "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "mx-2 mt-3 w-auto inline-flex justify-center rounded-md shadow-sm px-2 py-2 font-bold text-white bg-gray-400 hover:bg-gray-600",
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {

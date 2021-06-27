@@ -169,7 +169,7 @@ Philippine Overseas Employment Administration</span></strong></span></p>
     <div style="page-break-before:always">
         <p>Tabang System Serial No. {{ $contract->serial_no }}</p>
 
-        <table align="center" border="1" cellpadding="1" cellspacing="1" style="border:0; width:500px">
+        <table align="center" border="0" cellpadding="1" cellspacing="1" style="border:0; width:500px">
             <tbody>
             <tr>
                 <td>IN WITNESS WHEREOF,&nbsp;</td>
@@ -177,6 +177,14 @@ Philippine Overseas Employment Administration</span></strong></span></p>
             <tr>
                 <td>we hereby sign this Contract this {{ $details->witness_day }} day of {{ $details->witness_month }}
                     , {{ $details->witness_year }} at {{ $details->witness_place }}
+                </td>
+            </tr>
+            <tr>
+                <td>REMARKS&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    {{ $details->remarks }}
                 </td>
             </tr>
             </tbody>
