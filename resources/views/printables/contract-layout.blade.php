@@ -30,6 +30,24 @@
         <td style="text-align:right; width:200px">Full name:&nbsp;</td>
         <td style="width:331px">&nbsp;{{ $details->employer_name }}</td>
     </tr>
+    @isset($details->no_family_members)
+        <tr>
+            <td style="text-align:right; width:200px">National ID:&nbsp;</td>
+            <td style="width:331px">&nbsp;{{ $details->employer_national_id }}</td>
+        </tr>
+    @endisset
+    @isset($details->no_family_members)
+        <tr>
+            <td style="text-align:right; width:200px">Number of Family Members:&nbsp;</td>
+            <td style="width:331px">&nbsp;{{ $details->no_family_members }}</td>
+        </tr>
+    @endisset
+    @isset($details->cs_status)
+        <tr>
+            <td style="text-align:right; width:200px">Civil Status:&nbsp;</td>
+            <td style="width:331px">&nbsp;{{ $details->cs_status }}</td>
+        </tr>
+    @endisset
     @isset($details->visa_no)
         <tr>
             <td style="text-align:right; width:200px">Visa No:&nbsp;</td>
@@ -39,7 +57,25 @@
     @isset($details->address)
         <tr>
             <td style="text-align:right; width:200px">Address:&nbsp;</td>
-            <td style="width:331px">&nbsp;{{ $details->address_ph }}</td>
+            <td style="width:331px">&nbsp;{{ $details->address }}</td>
+        </tr>
+    @endisset
+    @isset($details->street)
+        <tr>
+            <td style="text-align:right; width:200px">Street:&nbsp;</td>
+            <td style="width:331px">&nbsp;{{ $details->street }}</td>
+        </tr>
+    @endisset
+    @isset($details->city)
+        <tr>
+            <td style="text-align:right; width:200px">City:&nbsp;</td>
+            <td style="width:331px">&nbsp;{{ $details->city }}</td>
+        </tr>
+    @endisset
+    @isset($details->district)
+        <tr>
+            <td style="text-align:right; width:200px">District:&nbsp;</td>
+            <td style="width:331px">&nbsp;{{ $details->district }}</td>
         </tr>
     @endisset
     @isset($details->employer_address)

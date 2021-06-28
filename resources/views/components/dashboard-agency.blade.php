@@ -145,6 +145,15 @@
                                        class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                        type="text">
                             </div>
+                            <div class=" my-2 flex-grow mx-2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">
+                                    {{ __('National ID') }}
+                                </label>
+                                <input v-model="hsw.employer_national_id"
+                                       v-bind:class="{ 'border-red-500': !hsw.employer_national_id, 'border-gray-300 ': hsw.employer_national_id}"
+                                       class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       type="text">
+                            </div>
                             <div class="my-2 flex-grow mx-2">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">
                                     {{ __('Visa Number issued by the Saudi Ministry of Labor') }}
@@ -418,14 +427,25 @@
                 <form class="bg-white px-4 pt-4 pb-4 mb-4">
                     <label class="text-lg font-bold">{{ __('Employer Details') }}</label>
                     <div class="flex flex-col">
-                        <div class=" my-2 flex-grow mx-2">
-                            <label class="block text-gray-700 text-sm font-bold mb-2">
-                                {{ __('Full Name') }}
-                            </label>
-                            <input v-model="sw.employer_name"
-                                   v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
-                                   class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                   type="text">
+                        <div class="flex flex-row">
+                            <div class=" my-2 flex-grow mx-2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">
+                                    {{ __('Full Name') }}
+                                </label>
+                                <input v-model="sw.employer_name"
+                                       v-bind:class="{ 'border-red-500': !sw.employer_name, 'border-gray-300 ': sw.employer_name}"
+                                       class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       type="text">
+                            </div>
+                            <div class="my-2 flex-grow mx-2">
+                                <label class="block text-gray-700 text-sm font-bold mb-2">
+                                    {{ __('National ID') }}
+                                </label>
+                                <input v-model="sw.employer_national_id"
+                                       v-bind:class="{ 'border-red-500': !sw.employer_national_id, 'border-gray-300 ': sw.employer_national_id}"
+                                       class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       type="text">
+                            </div>
                         </div>
                         <div class="my-2 flex-grow mx-2">
                             <label class="block text-gray-700 text-sm font-bold mb-2">
