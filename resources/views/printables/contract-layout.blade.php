@@ -1,8 +1,15 @@
 <p>Tabang System Serial No. {{ $contract->serial_no }}</p>
 
-<p style="text-align:center"><span style="font-size:22px"><strong><span
-                style="font-family:Arial,Helvetica,sans-serif">Department of Labor and Employment<br/>
-Philippine Overseas Employment Administration</span></strong></span></p>
+<p style="text-align:center;"><img src="{{ asset('tabang-logo/vector/default.png') }}" width="100px"></p>
+<p style="text-align:center">
+    <span style="font-size:22px">
+        <strong>
+            <span style="font-family:Arial,Helvetica,sans-serif">Department of Labor and Employment<br/>
+                Philippine Overseas Employment Administration
+            </span>
+        </strong>
+    </span>
+</p>
 
 <h3 style="text-align:center"><u><strong>STANDARD EMPLOYMENT CONTRACT FOR {{ $contract->name }}</strong></u></h3>
 <h3 style="text-align:center"><strong>Contract Status is {{ strtoupper($contract->status) }}</strong></h3>
