@@ -30,7 +30,7 @@
         <td style="text-align:right; width:200px">Full name:&nbsp;</td>
         <td style="width:331px">&nbsp;{{ $details->employer_name }}</td>
     </tr>
-    @isset($details->no_family_members)
+    @isset($details->employer_national_id)
         <tr>
             <td style="text-align:right; width:200px">National ID:&nbsp;</td>
             <td style="width:331px">&nbsp;{{ $details->employer_national_id }}</td>
