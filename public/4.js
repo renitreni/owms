@@ -583,6 +583,89 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
@@ -599,12 +682,14 @@ __webpack_require__.r(__webpack_exports__);
         luminosity: 50,
         alpha: 1
       },
+      ts_no: '',
       tab: 1,
       level_mdl: false,
       agency_mdl: false,
       agency_update_mdl: false,
       alert_detail_mdl: false,
       req_mdl: false,
+      show_check_mdl: false,
       dt: null,
       contract: '',
       alert_list: [],
@@ -629,6 +714,25 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    checkContractStatus: function checkContractStatus() {
+      axios.post(this.props_data.contract_check_link, {
+        ts_no: this.ts_no
+      }).then(function (value) {
+        if (value.data.message == "success") {
+          Swal.fire({
+            icon: 'info',
+            title: value.data.details.status,
+            html: 'Contract Type: ' + value.data.details.name
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: value.data.message,
+            html: 'Not a valid Serial No.'
+          });
+        }
+      });
+    },
     storeRequisite: function storeRequisite() {
       var $this = this;
       axios.post(this.props_data.requisition_store_link, {
@@ -719,6 +823,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     showReqMdl: function showReqMdl() {
       this.req_mdl = true;
+    },
+    showCheckMdl: function showCheckMdl() {
+      this.show_check_mdl = true;
     },
     deletion: function deletion() {
       var $this = this;
@@ -918,6 +1025,24 @@ var render = function() {
                   _vm._v(
                     " " +
                       _vm._s(_vm.__("Terms & Conditions")) +
+                      "\n                "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass:
+                    "text-white bg-pink-500 hover:bg-pink-600 p-2 rounded m-2 shadow",
+                  attrs: { href: "#" },
+                  on: { click: _vm.showCheckMdl }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-check-double" }),
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.__("Contract Checker")) +
                       "\n                "
                   )
                 ]
@@ -2610,6 +2735,177 @@ var render = function() {
                               on: {
                                 click: function($event) {
                                   _vm.req_mdl = false
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Cancel\n                        "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ])
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "slide-fade" } }, [
+        _vm.show_check_mdl
+          ? _c("div", { staticClass: "fixed inset-0 overflow-auto" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex items-end justify-center min-h-screen px-4 pb-20 text-center sm:block sm:p-0  overflow-auto"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "fixed inset-0 transition-opacity",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [
+                      _c("div", {
+                        staticClass: "absolute inset-0 bg-gray-500 opacity-75"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass:
+                        "hidden sm:inline-block sm:align-middle sm:h-screen",
+                      attrs: { "aria-hidden": "true" }
+                    },
+                    [_vm._v("​")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "inline-block align-middle bg-white rounded-lg text-left overflow-auto shadow-xl transform transition-all w-full sm:w-1/2",
+                      attrs: {
+                        role: "dialog",
+                        "aria-modal": "true",
+                        "aria-labelledby": "modal-headline"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4"
+                        },
+                        [
+                          _c("div", { staticClass: "sm:flex sm:items-start" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-pink-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
+                              },
+                              [_c("i", { staticClass: "fas fa-check-double" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                              },
+                              [
+                                _c(
+                                  "h3",
+                                  {
+                                    staticClass:
+                                      "text-lg leading-6 font-medium text-gray-900"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Contract Checker\n                                "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "mt-4" }, [
+                                  _c("div", { staticClass: "flex flex-row" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "flex flex-grow" },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.ts_no,
+                                              expression: "ts_no"
+                                            }
+                                          ],
+                                          staticClass:
+                                            "w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0",
+                                          attrs: { type: "text" },
+                                          domProps: { value: _vm.ts_no },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.ts_no = $event.target.value
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm",
+                                          attrs: { type: "submit" },
+                                          on: { click: _vm.checkContractStatus }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                Check Status\n                                            "
+                                          )
+                                        ]
+                                      )
+                                    ])
+                                  ])
+                                ])
+                              ]
+                            )
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.show_check_mdl = false
                                 }
                               }
                             },

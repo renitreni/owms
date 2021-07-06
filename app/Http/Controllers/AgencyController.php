@@ -10,6 +10,7 @@ use App\Models\AgencyAlert;
 use App\Models\Requisition;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class AgencyController extends Controller
@@ -30,6 +31,7 @@ class AgencyController extends Controller
                 'contract_list'          => $contracts,
                 'requisition_store_link' => route('agencies.requisition.store'),
                 'requisition_get_link'   => route('agencies.requisition.get'),
+                'contract_check_link'    => route('agencies.check.contract'),
             ],
         ]);
     }
@@ -150,5 +152,12 @@ class AgencyController extends Controller
         $requisition = Requisition::query()->where('name', $request->contract)->first();
 
         return $requisition->content ?? '';
+    }
+
+    public function contractStatus(Request $request)
+    {
+        $contract = Contract::query()->where('serial_no', $request->ts_no)->first();
+
+        return ['message' => $contract ? 'success': 'Serial No. Not Found.', 'details' => $contract];
     }
 }

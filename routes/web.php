@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
         Route::post('agencies/store/alert', [AgencyController::class, 'storeAlert'])->name('agencies.alert.store');
         Route::post('agencies/alert/list', [AgencyController::class, 'alertList'])->name('agencies.alert.list');
         Route::post('agencies/delete/alert', [AgencyController::class, 'deleteAlert'])->name('agencies.alert.delete');
+        Route::post('agencies/check/contract', [AgencyController::class, 'contractStatus'])->name('agencies.check.contract');
 
         Route::post('agencie/requisition/store', [AgencyController::class, 'storeRequisition'])
              ->name('agencies.requisition.store');
