@@ -718,12 +718,22 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(this.props_data.contract_check_link, {
         ts_no: this.ts_no
       }).then(function (value) {
-        if (value.data.message == "success") {
-          Swal.fire({
-            icon: 'info',
-            title: value.data.details.status,
-            html: 'Contract Type: ' + value.data.details.name
-          });
+        if (value.data.message === "success") {
+          var msg = '<table style="width: 100%;">\n' + '    <tbody>\n' + '        <tr>\n' + '            <td style="width: 30.0000%;">\n' + '                <div style="text-align: right;">Contract Type:</div>\n' + '            </td>\n' + '            <td style="width: 50.0000%;">' + value.data.details.name + '</td>\n' + '        </tr>\n' + '        <tr>\n' + '            <td style="width: 30.0000%;">\n' + '                <div style="text-align: right;">Agency:</div>\n' + '            </td>\n' + '            <td style="width: 50.0000%;">' + value.data.details.agency.name + '</td>\n' + '        </tr>\n' + '        <tr>\n' + '            <td style="width: 30.0000%;">\n' + '                <div style="text-align: right;">Verified By:</div>\n' + '            </td>\n' + '            <td style="width: 50.0000%;">' + value.data.details.approved_by + '</td>\n' + '        </tr>\n' + '        <tr>\n' + '            <td style="width: 30.0000%;">\n' + '                <div style="text-align: right;">Date Issued:</div>\n' + '            </td>\n' + '            <td style="width: 50.0000%;">' + value.data.details.updated_at + '</td>\n' + '        </tr>\n' + '    </tbody>\n' + '</table>';
+
+          if (value.data.details.status === 'Approved') {
+            Swal.fire({
+              icon: 'success',
+              title: value.data.details.status,
+              html: msg
+            });
+          } else {
+            Swal.fire({
+              icon: 'info',
+              title: value.data.details.status,
+              html: msg
+            });
+          }
         } else {
           Swal.fire({
             icon: 'error',
@@ -826,6 +836,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     showCheckMdl: function showCheckMdl() {
       this.show_check_mdl = true;
+      this.ts_no = '';
     },
     deletion: function deletion() {
       var $this = this;

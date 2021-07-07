@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Contract extends Model
 {
@@ -27,5 +28,10 @@ class Contract extends Model
     public function requisition()
     {
         return $this->hasOne(Requisition::class, 'id', 'requisite_id');
+    }
+
+    public function getUpdatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('F j, Y H:iA');
     }
 }

@@ -156,8 +156,12 @@ class AgencyController extends Controller
 
     public function contractStatus(Request $request)
     {
-        $contract = Contract::query()->where('serial_no', $request->ts_no)->first();
+        $contract = Contract::query()
+                            ->select(['updated_at', 'status', 'name', 'approved_by', 'agency_id'])
+                            ->where('serial_no', $request->ts_no)
+                            ->with(['agency'])
+                            ->first();
 
-        return ['message' => $contract ? 'success': 'Serial No. Not Found.', 'details' => $contract];
+        return ['message' => $contract ? 'success' : 'Serial No. Not Found.', 'details' => $contract];
     }
 }
