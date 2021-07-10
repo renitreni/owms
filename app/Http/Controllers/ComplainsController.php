@@ -133,14 +133,14 @@ class ComplainsController extends Controller
             'created_by' => auth()->user()->email,
         ]);
 
-        return ['succes' => true];
+        return ['success' => true];
     }
 
     public function deleteHeinous(Request $request)
     {
         Heinous::destroy($request->id);
 
-        return ['succes' => true];
+        return ['success' => true];
     }
 
     public function storeComplaintEmail(Request $request)

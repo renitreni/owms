@@ -80,6 +80,8 @@ Route::group(['middleware' => ['auth', 'agency.isblocked']], function () {
     Route::group(['middleware' => ['can:admin_agency_gov']], function () {
         Route::get('/reports', [ReportController::class, 'index'])->name('reports');
 
+        Route::get('get/complains', [ComplainsController::class, 'index'])->name('complains');
+
         Route::resource('complains', ComplainsController::class)
              ->parameters(['complains' => 'id']);
         Route::post('complains/update/{id}', [ComplainsController::class, 'update'])->name('complains.updater');
