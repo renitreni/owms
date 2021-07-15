@@ -1,37 +1,29 @@
 @if($employerLateRpCnt != 0 )
 @endif
-<div class="grid grid-cols-4 gap-4 p-5">
-    <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-yellow-300">
-        <div class="font-merriweather mb-1 text-center md:text-5xl">
-                <span class="bg-gray-200 text-center rounded-full p-5">
-                    {{ \App\Models\Agency::query()->count() }}
-                </span>
+<div class="grid grid-cols-4 gap-4 p-5 h-32">
+    <div class="flex flex-col  bg-blue-500 shadow-lg rounded-sm">
+        <div class="text-2xl mx-auto text-white mt-auto font-bold">
+            {{ \App\Models\Agency::query()->count() }}
         </div>
-        <div class="md:text-2xl font-semibold mt-6">{{ __('Agencies') }}</div>
+        <div class="mx-auto text-white mb-auto">{{ __('Agencies') }}</div>
     </div>
-    <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-green-300">
-        <div class="font-merriweather mb-1 text-center md:text-5xl">
-                <span class="bg-gray-200 text-center rounded-full p-5">
-                {{ \App\Models\User::query()->where('role','3')->count() }}
-                </span>
+    <div class="flex flex-col  bg-blue-500 shadow-lg rounded-sm">
+        <div class="text-2xl mx-auto text-white mt-auto font-bold">
+            {{ \App\Models\User::query()->where('role','3')->count() }}
         </div>
-        <div class="md:text-2xl font-semibold mt-6">{{ __('Employers') }}</div>
+        <div class="mx-auto text-white mb-auto">{{ __('Employers') }}</div>
     </div>
-    <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-pink-300">
-        <div class="font-merriweather mb-1 text-center md:text-5xl">
-                <span class="bg-gray-200 text-center rounded-full p-5">
-                {{ \App\Models\Candidate::query()->count() }}
-                </span>
+    <div class="flex flex-col  bg-blue-500 shadow-lg rounded-sm">
+        <div class="text-2xl mx-auto text-white mt-auto font-bold">
+            {{ \App\Models\Candidate::query()->count() }}
         </div>
-        <div class="md:text-2xl font-semibold mt-6">{{ __('OFW') }}</div>
+        <div class="mx-auto text-white mb-auto">{{ __('OFW') }}</div>
     </div>
-    <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-purple-300">
-        <div class="font-merriweather mb-1 text-center md:text-5xl">
-                <span class="bg-gray-200 text-center rounded-full p-5">
-                {{ \App\Models\Candidate::query()->where('deployed', 'yes')->count() }}
-                </span>
+    <div class="flex flex-col  bg-blue-500 shadow-lg rounded-sm">
+        <div class="text-2xl mx-auto text-white mt-auto font-bold">
+            {{ \App\Models\Candidate::query()->where('deployed', 'yes')->count() }}
         </div>
-        <div class="md:text-2xl font-semibold mt-6">{{ __('Deployed') }}</div>
+        <div class="mx-auto text-white mb-auto">{{ __('Deployed') }}</div>
     </div>
 </div>
 

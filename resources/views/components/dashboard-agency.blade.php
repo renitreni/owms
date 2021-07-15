@@ -1,35 +1,31 @@
-<div class="grid grid-cols-4 gap-4 p-5">
-    <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-yellow-300">
-        <div class="font-merriweather mb-1 text-center md:text-5xl">
-                <span class="bg-gray-200 text-center rounded-full p-5">
-                    {{ \App\Models\Candidate::query()->where('agency_id',auth()->id())->where('status', 'applicant')->count() }}
-                </span>
+<div class="grid grid-cols-4 gap-4 p-5 h-32">
+    <div class="flex flex-col  bg-blue-500 shadow-lg rounded-sm">
+        <div class="text-2xl mx-auto text-white mt-auto font-bold">
+            {{ \App\Models\Candidate::query()->where('agency_id',auth()->id())->where('status', 'applicant')->count() }}
         </div>
-        <div class="md:text-2xl font-semibold mt-6">{{ __('My Applicants') }}</div>
+        <div class="mx-auto text-white mb-auto">
+            {{ __('My Applicants') }}
+        </div>
     </div>
-    <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-green-300">
-        <div class="font-merriweather mb-1 text-center md:text-5xl">
-                <span class="bg-gray-200 text-center rounded-full p-5">
-                {{ \App\Models\User::query()->where('role','3')->where('agency_id',auth()->id())->count() }}
-                </span>
+    <div class="flex flex-col  bg-blue-500 shadow-lg rounded-sm">
+        <div class="text-2xl mx-auto text-white mt-auto font-bold">
+            {{ \App\Models\User::query()->where('role','3')->where('agency_id',auth()->id())->count() }}
         </div>
-        <div class="md:text-2xl font-semibold mt-6">{{ __('My Employers') }}</div>
+        <div class="mx-auto text-white mb-auto">{{ __('My Employers') }}</div>
     </div>
-    <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-pink-300">
-        <div class="font-merriweather mb-1 text-center md:text-5xl">
-                <span class="bg-gray-200 text-center rounded-full p-5">
-                {{ \App\Models\User::query()->where('role','5')->where('agency_id',auth()->id())->count() }}
-                </span>
+    <div class="flex flex-col  bg-blue-500 shadow-lg rounded-sm">
+        <div class="text-2xl mx-auto text-white mt-auto font-bold">
+            {{ \App\Models\User::query()->where('role','5')->where('agency_id',auth()->id())->count() }}
         </div>
-        <div class="md:text-2xl font-semibold mt-6">{{ __('My Affiliates') }}</div>
+        <div class="mx-auto text-white mb-auto">{{ __('My Affiliates') }}</div>
     </div>
-    <div class="col-span-2 md:col-span-1 p-2 rounded shadow text-gray-600 bg-purple-300">
-        <div class="font-merriweather mb-1 text-center md:text-5xl">
-                <span class="bg-gray-200 text-center rounded-full p-5">
-                {{ \App\Models\Candidate::query()->where('agency_id',auth()->id())->where('deployed', 'yes')->where('status', 'employed')->count() }}
-                </span>
+    <div class="flex flex-col  bg-blue-500 shadow-lg rounded-sm">
+        <div class="text-2xl mx-auto text-white mt-auto font-bold">
+            {{ \App\Models\Candidate::query()->where('agency_id',auth()->id())->where('deployed', 'yes')->where('status', 'employed')->count() }}
         </div>
-        <div class="md:text-xl font-semibold mt-6">{{ __('Deployed and Employed') }}</div>
+        <div class="mx-auto text-white mb-auto">
+            {{ __('Deployed and Employed') }}
+        </div>
     </div>
 </div>
 <div class="flex flex-col md:flex-row  mb-5 mt-2 ml-4">
