@@ -100,6 +100,11 @@ class OtherDetailsController extends Controller
 
     public function insertCheckList(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+        ], [
+            'name.required' => 'Please provide input before submitting.',
+        ]);
         $checkList               = new CheckList();
         $checkList->name         = $request->name;
         $checkList->candidate_id = $request->candidate_id;
