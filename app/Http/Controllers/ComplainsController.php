@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ComplainsRequest;
 use App\Models\Heinous;
 use App\Mail\NewComplain;
 use App\Models\Complains;
@@ -21,7 +22,7 @@ class ComplainsController extends Controller
         return view('complains', compact('agency_id'));
     }
 
-    public function submit(Request $request)
+    public function submit(ComplainsRequest $request)
     {
         $images = [];
         if ($request->file('image1')) {
