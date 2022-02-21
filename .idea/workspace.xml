@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1fea960-971e-470e-8233-c5dd7149cc1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_06_21_013203_create_new_column_heinous_in_complains.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_06_21_013203_create_new_column_heinous_in_complains.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +211,7 @@
       <updated>1642663234451</updated>
       <workItem from="1642663241511" duration="684000" />
       <workItem from="1643862532591" duration="5000" />
-      <workItem from="1645407718190" duration="285000" />
+      <workItem from="1645407718190" duration="387000" />
     </task>
     <servers />
   </component>
