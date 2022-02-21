@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1fea960-971e-470e-8233-c5dd7149cc1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/owms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/owms.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_24_023848_add_new_columns_to_documents.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_24_023848_add_new_columns_to_documents.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_06_21_013203_create_new_column_heinous_in_complains.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_06_21_013203_create_new_column_heinous_in_complains.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +211,7 @@
       <updated>1642663234451</updated>
       <workItem from="1642663241511" duration="684000" />
       <workItem from="1643862532591" duration="5000" />
-      <workItem from="1645407718190" duration="235000" />
+      <workItem from="1645407718190" duration="285000" />
     </task>
     <servers />
   </component>

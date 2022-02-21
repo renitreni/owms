@@ -14,7 +14,7 @@ class CreateNewColumnHeinousInComplains extends Migration
     public function up()
     {
         Schema::table('complains', function (Blueprint $table) {
-            $table->string('heinous');
+            $table->string('heinous')->nullable();
         });
     }
 
