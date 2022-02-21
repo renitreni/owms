@@ -41,8 +41,7 @@ class DashboardController extends Controller
             and c.deployed = 'yes'
             group by reports.candidate_id, reports.created_by
             order by reports.candidate_id
-                     ) as cildrcb
-            where TIMESTAMPDIFF(MONTH, cildrcb.latest_dated_report, NOW()) > 2")
+                     ) as cildrcb")
         );
 
         $employerLateRpCnt = count($employerLateRp);
@@ -59,8 +58,7 @@ class DashboardController extends Controller
             and c.deployed = 'yes'
             group by reports.candidate_id, reports.created_by
             order by reports.candidate_id
-                     ) as cildrcb
-            where TIMESTAMPDIFF(MONTH, cildrcb.latest_dated_report, NOW()) > 2")
+                     ) as cildrcb")
         );
 
         $employeeLateRpCnt = count($employeeLateRp);
