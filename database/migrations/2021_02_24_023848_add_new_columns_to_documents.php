@@ -14,7 +14,7 @@ class AddNewColumnsToDocuments extends Migration
     public function up()
     {
         Schema::table('documents', function (Blueprint $table) {
-            $table->string('filename', '');
+            $table->string('filename')->nullable();
         });
     }
 
