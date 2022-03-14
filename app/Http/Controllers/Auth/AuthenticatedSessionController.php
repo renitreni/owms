@@ -20,10 +20,9 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(Request $request)
     {
-       $id = decrypt($request->id);
-
        try {
-        $logo_path =  Agency::query()->where('id', $id)->first()->logo_path;
+            $id = decrypt($request->id);
+             $logo_path =  Agency::query()->where('id', $id)->first()->logo_path;
         } catch (Throwable $e) {
             report($e);
     
