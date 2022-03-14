@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ComplainsRequest;
 use App\Models\Heinous;
 use App\Mail\NewComplain;
+use App\Models\Agency;
 use App\Models\Complains;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,8 +18,8 @@ class ComplainsController extends Controller
 {
     public function form($agency_id)
     {
-        $agency_id = Crypt::decrypt($agency_id);
-
+        //$agency_id = Crypt::decrypt($agency_id);
+        $agency_id = Agency::query()->first()->id;
         return view('complains', compact('agency_id'));
     }
 

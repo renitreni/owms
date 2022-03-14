@@ -46,6 +46,7 @@ class CreateCandidatesTable extends Migration
 
             $table->string('applied_using', 200)->nullable();
             $table->string('agency_branch', 200)->nullable();
+            $table->text('picfull')->nullable();
             $table->string('code', 200)->nullable();
             $table->string('iqama', 200)->nullable();
             $table->string('photo_url', 200)->nullable();

@@ -14,23 +14,24 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.css') }}">
+    @livewireStyles
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
 <div class="bg-gray-100">
-    <div class="font-sans text-gray-900 antialiased text-center">
-        {{ $header }}
-    </div>
-    <div class="font-sans text-gray-900 antialiased">
+    <div class="font-sans antialiased text-gray-900">
         {{ $slot }}
     </div>
 </div>
 <!-- Scripts -->
+
+
+    @livewireScripts
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @include('layouts.alerts')
-{{ $scripts }}
+{{ $scripts ?? '' }}
 </body>
 </html>

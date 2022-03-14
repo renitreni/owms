@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="icon" href="{{ asset('tabang-logo/vector/default.png') }}">
+    {{-- <link rel="icon" href="{{ asset(session()->get('path_logo')) }}"> --}}
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -22,25 +22,27 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
-    <div class="flex flex-col h-screen bg-gray-100 relative"   x-data="{alertMdl : false}">
+    <div class="relative flex flex-col h-screen bg-gray-100"   x-data="{alertMdl : false}">
 
         @include('layouts.navigation')
 
         <!-- Page Heading -->
-        <header class="flex flex-row bg-white shadow bg-white shadow bg-indigo-50">
-            <div class="flex flex-row max-w-7xl ml-20 py-6 px-4 sm:px-5 lg:px-7">
+        <header class="flex flex-row bg-white shadow bg-indigo-50">
+            <div class="flex flex-row px-4 py-6 ml-20 max-w-7xl sm:px-5 lg:px-7">
                 <div class="relative w-12">
                     @php
                         $model =  \App\Models\AgencyAlert::hasAlert()
                     @endphp
                     @isset($model->level->color_level)
                         <i style="color: {{ $model->level->color_level }}"
-                           class="fas fa-exclamation-triangle absolute text-4xl animate-ping"></i>
+                           class="absolute text-4xl fas fa-exclamation-triangle animate-ping"></i>
                         <i style="color: {{ $model->level->color_level }}" @click="alertMdl = true"
-                           class="fas fa-exclamation-triangle absolute text-4xl"></i>
+                           class="absolute text-4xl fas fa-exclamation-triangle"></i>
                     @endif
                 </div>
                 {{ $header }}
@@ -60,7 +62,7 @@
                 @isset($model->level->color_level)
                     <div x-show="alertMdl" class="fixed inset-0 overflow-y-100">
                     <div
-                        class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+                        class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
                     >
                         <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -71,30 +73,30 @@
                         >&#8203;</span
                         >
                         <div
-                            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                            class="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                             role="dialog"
                             aria-modal="true"
                             aria-labelledby="modal-headline"
                         >
-                            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
                                 <div class="sm:flex sm:items-start">
                                     <div
                                         class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
                                     >
                                         <div class="mt-6">
-                                            <label class="font-bold text-3xl">{{ $model->level->name }}</label>
+                                            <label class="text-3xl font-bold">{{ $model->level->name }}</label>
                                             <p>{{ $model->level->description }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div
-                                class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+                                class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse"
                             >
                                 <button
                                     @click="alertMdl = false"
                                     type="button"
-                                    class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                    class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                 >
                                     Cancel
                                 </button>
@@ -107,7 +109,7 @@
 
         <!-- Footer -->
         <footer class="flex-none bg-white">
-            <div class="inset-y-10 flex flex-row p-8">
+            <div class="flex flex-row p-8 inset-y-10">
                 <div class="mr-2">
                     {{ __('Languages') }}:
                 </div>
@@ -123,6 +125,8 @@
         </footer>
     </div>
     @include('layouts.alerts')
+
+    @livewireScripts
     <script>
         $.ajaxSetup({
             headers: {

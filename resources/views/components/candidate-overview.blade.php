@@ -37,7 +37,7 @@
                                             <i class="fas fa-circle text-xs text-green-300"></i> {{ __('Agency') }}
                                         </label>
                                         <label class="text-xl font-bold">
-                                            {{ $candidate->agency->name }}
+                                            {{ $candidate->agency->name ?? '' }}
                                         </label>
                                     </div>
                                     <div class="flex flex-grow flex-col p-2 border-l">

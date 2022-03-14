@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Agency;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Throwable;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -15,9 +18,21 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('auth.login');
+       $id = decrypt($request->id);
+
+       try {
+        $logo_path =  Agency::query()->where('id', $id)->first()->logo_path;
+        } catch (Throwable $e) {
+            report($e);
+    
+            return redirect()->route('list-of-agencies');
+        }
+        
+       session('agency_id', $id);
+
+        return view('auth.login', compact('logo_path'));
     }
 
     /**
@@ -43,12 +58,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        $id =auth()->user()->agency_id;
         Auth::logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('login-view', ['id' => encrypt($id)]);
     }
 }

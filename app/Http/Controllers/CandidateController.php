@@ -35,7 +35,7 @@ class CandidateController extends Controller
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
             $value->date_hired         = $value->date_hired ? Carbon::parse($value->date_hired)->format('M j, Y') : '';
             $value->date_deployed      = $value->date_deployed ? Carbon::parse($value->date_deployed)
-                                                                       ->format('M j, Y') : '';
+                ->format('M j, Y') : '';
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
             $value->id_e               = Crypt::encrypt($value->id);
 
@@ -46,9 +46,9 @@ class CandidateController extends Controller
     public function tableApplicants(Candidate $candidate)
     {
         $candidate = $candidate->newQuery()
-                               ->where('agency_id', auth()->user()->agency_id)
-                               ->whereIn('status', [null, 'applicant'])
-                               ->with(['agency', 'employer']);
+            ->where('agency_id', auth()->user()->agency_id)
+            ->whereIn('status', [null, 'applicant'])
+            ->with(['agency', 'employer']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
@@ -218,8 +218,10 @@ class CandidateController extends Controller
         $pic_full   = DB::table('documents')->where('candidate_id', $id)->where('type', 'picfull')->get();
         $skills     = DB::table('skills')->where('agency_id', auth()->user()->agency_id)->get();
 
-        return view('components.agency.applicant-edit',
-            compact('skills', 'results', 'doc', 'employment', 'pic_1x1', 'pic_full'));
+        return view(
+            'components.agency.applicant-edit',
+            compact('skills', 'results', 'doc', 'employment', 'pic_1x1', 'pic_full')
+        );
     }
 
     public function update(Request $request, Candidate $candidate)
@@ -255,14 +257,14 @@ class CandidateController extends Controller
             $doc->save();
         }
 
-        if ($request->hasFile('pic_full')) {
-            $doc = Document::query()->where('type', 'pic_full')->where('candidate_id', $request->id);
+        if ($request->hasFile('picfull')) {
+            $doc = Document::query()->where('type', 'picfull')->where('candidate_id', $request->id);
             if ($doc->count() > 0) {
                 \Storage::delete($doc->get()[0]->path);
             }
-            $path = $request->file('pic_full')->store('pic_full');
+            $path = $request->file('picfull')->store('picfull');
 
-            Document::query()->where('type', 'pic_full')->where('candidate_id', $request->id)->delete();
+            Document::query()->where('type', 'picfull')->where('candidate_id', $request->id)->delete();
 
             $doc               = new Document();
             $doc->candidate_id = $request->id;
@@ -314,15 +316,15 @@ class CandidateController extends Controller
     public function tableEmployed(Candidate $candidate)
     {
         $candidate = $candidate->newQuery()
-                               ->where('agency_id', auth()->user()->agency_id)
-                               ->where('candidates.status', 'employed')
-                               ->with(['agency', 'employer', 'affiliates']);
+            ->where('agency_id', auth()->user()->agency_id)
+            ->where('candidates.status', 'employed')
+            ->with(['agency', 'employer', 'affiliates']);
 
         return DataTables::of($candidate)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('M j, Y');
-            $value->date_hired         = ! $value->date_hired ?: Carbon::parse($value->date_hired)->format('M j, Y');
-            $value->date_deployed      = ! $value->date_deployed ?: Carbon::parse($value->date_deployed)
-                                                                          ->format('M j, Y');
+            $value->date_hired         = !$value->date_hired ?: Carbon::parse($value->date_hired)->format('M j, Y');
+            $value->date_deployed      = !$value->date_deployed ?: Carbon::parse($value->date_deployed)
+                ->format('M j, Y');
             $value->age                = Carbon::parse($value->birth_date)->diffInYears(Carbon::now());
             $value->id_e               = Crypt::encrypt($value->id);
 
@@ -347,7 +349,7 @@ class CandidateController extends Controller
         }
 
         return redirect()->back()
-                         ->with('success', "Employee has been deployed.");
+            ->with('success', "Employee has been deployed.");
     }
 
     public function employ(EmployRequest $request)
@@ -361,7 +363,7 @@ class CandidateController extends Controller
         $candidate->save();
 
         return redirect()->back()
-                         ->with('success', "Employer has been assigned.");
+            ->with('success', "Employer has been assigned.");
     }
 
     public function overview($id)
@@ -419,8 +421,10 @@ class CandidateController extends Controller
         return response()
             ->view("printables.resume-word", compact('results'))
             ->header('Content-type', "text/html")
-            ->header("Content-Disposition",
-                "attachment;Filename={$results->last_name}_{$results->first_name}_{$now}.doc");
+            ->header(
+                "Content-Disposition",
+                "attachment;Filename={$results->last_name}_{$results->first_name}_{$now}.doc"
+            );
     }
 
     public function updateCreatedAt(Request $request)
