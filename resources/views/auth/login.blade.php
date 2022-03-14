@@ -5,7 +5,7 @@
 
         <x-slot name="logo">
             <a href="/">
-                <img src="{{ asset($logo_path) }}" class="w-32 h-32 text-gray-500 fill-current w-60"/>
+                <img src="{{ asset($logo_path) }}" class="w-32 fill-current w-32text-gray-500"/>
             </a>
         </x-slot>
 
