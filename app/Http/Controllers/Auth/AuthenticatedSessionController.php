@@ -25,8 +25,7 @@ class AuthenticatedSessionController extends Controller
              $logo_path =  Agency::query()->where('id', $id)->first()->logo_path;
         } catch (Throwable $e) {
             report($e);
-    
-            return redirect()->route('list-of-agencies');
+            $id = 0;
         }
         
        session('agency_id', $id);
