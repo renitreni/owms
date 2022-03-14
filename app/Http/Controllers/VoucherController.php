@@ -64,10 +64,7 @@ class VoucherController extends Controller
 
     public function invalid(Request $request)
     {
-        Voucher::updateOrCreate(
-            ['id' => $request->id],
-            ['status' => 'cancelled']
-        );
+        Voucher::destroy($request->id);
 
         return ['success' => true];
     }

@@ -1,12 +1,12 @@
 <template>
-  <div class="pb-12 pt-8">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+  <div class="pt-8 pb-12">
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
         <div class="p-2 mt-5">
           <a
             href="#"
             @click="voucher_mdl = true"
-            class="text-white bg-green-400 hover:bg-green-500 p-2 rounded m-2 shadow"
+            class="p-2 m-2 text-white bg-green-400 rounded shadow hover:bg-green-500"
           >
             <i class="fas fa-file-invoice-dollar"></i> {{ __('New Voucher') }}
 
@@ -14,7 +14,7 @@
           <a
             v-bind:href="props_data.export_link"
             target="_blank"
-            class="text-white bg-indigo-400 hover:bg-indigo-500 p-2 rounded m-2 shadow"
+            class="p-2 m-2 text-white bg-indigo-400 rounded shadow hover:bg-indigo-500"
           >
             <i class="fas fa-file-excel"></i> {{ __('Export to Excel') }}
 
@@ -34,7 +34,7 @@
       <!-- Voucher add -->
       <div class="fixed inset-0 overflow-y-auto" v-if="voucher_mdl">
         <div
-          class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+          class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
         >
           <div class="fixed inset-0 transition-opacity" aria-hidden="true">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -45,15 +45,15 @@
             >&#8203;</span
           >
           <div
-            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            class="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"
           >
-            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
                 <div
-                  class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
+                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto text-gray-600 bg-blue-100 rounded-full sm:mx-0 sm:h-10 sm:w-10"
                 >
                   <!-- Heroicon name -->
                   <i class="fas fa-file-invoice-dollar"></i>
@@ -62,7 +62,7 @@
                   class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
                 >
                   <h3
-                    class="text-lg leading-6 font-medium text-gray-900"
+                    class="text-lg font-medium leading-6 text-gray-900"
                     id="modal-headline"
                   >
                     New Voucher
@@ -77,7 +77,7 @@
                           type="date"
                           name="salary_date"
                           v-model="overview.date"
-                          class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                          class="w-full text-black bg-gray-100 border-0 rounded outline-none focus:ring-opacity-0"
                         />
                       </div>
                       <div class="mt-2">
@@ -86,7 +86,7 @@
                           type="number"
                           name="salary_date"
                           v-model="overview.amount"
-                          class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                          class="w-full text-black bg-gray-100 border-0 rounded outline-none focus:ring-opacity-0"
                         />
                       </div>
                       <div class="mt-2">
@@ -95,7 +95,7 @@
                           type="text"
                           name="salary_date"
                           v-model="overview.paid_to"
-                          class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                          class="w-full text-black bg-gray-100 border-0 rounded outline-none focus:ring-opacity-0"
                         />
                       </div>
                       <div class="mt-2">
@@ -104,7 +104,7 @@
                           type="text"
                           name="salary_date"
                           v-model="overview.particulars"
-                          class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                          class="w-full text-black bg-gray-100 border-0 rounded outline-none focus:ring-opacity-0"
                         >
                         </textarea>
                       </div>
@@ -114,19 +114,19 @@
               </div>
             </div>
             <div
-              class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+              class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse"
             >
               <button
                 type="submit"
                 @click="add()"
-                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 Add
               </button>
               <button
                 type="button"
                 @click="voucher_mdl = false"
-                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 Cancel
               </button>
@@ -140,7 +140,7 @@
       <!-- Voucher Update -->
       <div class="fixed inset-0 overflow-y-auto" v-if="voucher_update_mdl">
         <div
-          class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+          class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
         >
           <div class="fixed inset-0 transition-opacity" aria-hidden="true">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -151,15 +151,15 @@
             >&#8203;</span
           >
           <div
-            class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            class="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"
           >
-            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
                 <div
-                  class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10 text-gray-600"
+                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto text-gray-600 bg-blue-100 rounded-full sm:mx-0 sm:h-10 sm:w-10"
                 >
                   <!-- Heroicon name -->
                   <i class="fas fa-file-invoice-dollar"></i>
@@ -168,7 +168,7 @@
                   class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
                 >
                   <h3
-                    class="text-lg leading-6 font-medium text-gray-900"
+                    class="text-lg font-medium leading-6 text-gray-900"
                     id="modal-headline"
                   >
                     New Voucher
@@ -194,11 +194,18 @@
                         <p class="font-bold">{{ overview.particulars }}</p>
                       </div>
                       <div class="mt-2">
+                        <label>Status</label>
+                        <select v-model="overview.status" class="w-full text-black bg-gray-100 border-0 rounded outline-none focus:ring-opacity-0">
+                          <option value="active">active</option>
+                          <option value="cancelled">cancelled</option>
+                        </select>
+                      </div>
+                      <div class="mt-2">
                         <label>Change</label>
                         <input
                           type="number"
                           v-model="overview.change"
-                          class="w-full border-0 bg-gray-100 rounded text-black outline-none focus:ring-opacity-0"
+                          class="w-full text-black bg-gray-100 border-0 rounded outline-none focus:ring-opacity-0"
                         />
                       </div>
                     </div>
@@ -207,33 +214,33 @@
               </div>
             </div>
             <div
-              class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+              class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse"
             >
               <button
                 type="button"
                 @click="update()"
-                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 Update
               </button>
               <button
                 type="button"
                 @click="getCopy()"
-                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
               >
-                Cash Voucher
+                Print Cash Voucher
               </button>
               <button
-                type="button"
+                type="submit"
                 @click="invalid()"
-                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
               >
-                Invalid
+                Delete
               </button>
               <button
                 type="button"
                 @click="voucher_update_mdl = false"
-                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 Cancel
               </button>
@@ -331,9 +338,9 @@ export default {
         {
           data: function (value) {
             if (value.status == "cancelled")
-              return '<span class="text-red-500 block text-center"><i class="fas fa-ban"></i></span>';
+              return '<span class="block text-center text-red-500"><i class="fas fa-ban"></i></span>';
             else
-              return '<span class="text-green-500 block text-center"><i class="fas fa-check"></i></span>';
+              return '<span class="block text-center text-green-500"><i class="fas fa-check"></i></span>';
           },
           name: "status",
           title: "Status",

@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Agency::factory()->count(10)->create();
+        // Agency::factory()->count(10)->create();
 
         // admin@tabang.com agency@tabang.com employer@tabang.com gov@tabang.com
         User::query()->insert([
@@ -51,6 +51,6 @@ class DatabaseSeeder extends Seeder
             Information::factory()->state(['user_id' => $id])->create();
         }
 
-        Candidate::factory()->count(10)->create();
+        // Candidate::factory()->count(10)->create();
     }
 }
