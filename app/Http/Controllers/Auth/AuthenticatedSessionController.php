@@ -25,6 +25,7 @@ class AuthenticatedSessionController extends Controller
              $logo_path =  Agency::query()->where('id', $id)->first()->logo_path;
         } catch (Throwable $e) {
             report($e);
+            $logo_path = '';
             $id = 0;
         }
         
