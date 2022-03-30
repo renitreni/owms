@@ -25,7 +25,7 @@
                                             </select>
                                         </div>
                                         {{--                                        Roles--}}
-                                        <div class="md:col-span-4 col-span-12" v-if="overview.role == 2">
+                                        <div class="md:col-span-4 col-span-12">
                                             <label class="block text-sm font-medium text-gray-700">Agency</label>
                                             <select id="role" name="role" autocomplete="role" v-model="overview.agency_id"
                                                     class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
