@@ -110,6 +110,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -119,10 +174,18 @@ __webpack_require__.r(__webpack_exports__);
       props_data: JSON.parse(this._props.data),
       dt: null,
       overview: {
-        date: null,
-        paid_to: null,
-        particulars: null,
-        amount: null
+        agency_id: null,
+        applicant_name: null,
+        status: null,
+        req_id_fare: null,
+        passporting_allowance: null,
+        info_sheet: null,
+        ticket: null,
+        testda_allowance: null,
+        nbi_renewal_fare: null,
+        medical_allowance: null,
+        owwa_allowance: null,
+        office_allowance: null
       }
     };
   },
@@ -193,23 +256,49 @@ __webpack_require__.r(__webpack_exports__);
         name: "id",
         title: "ID"
       }, {
-        data: "paid_to",
-        name: "paid_to",
-        title: "Paid To"
+        data: "applicant_name",
+        name: "applicant_name",
+        title: "Applicant Name"
       }, {
-        data: "amount",
-        name: "amount",
-        title: "Amount"
-      }, {
-        data: "change",
-        name: "change",
-        title: "Change"
-      }, {
-        data: function data(value) {
-          if (value.status == "cancelled") return '<span class="block text-center text-red-500"><i class="fas fa-ban"></i></span>';else return '<span class="block text-center text-green-500"><i class="fas fa-check"></i></span>';
-        },
+        data: "status",
         name: "status",
         title: "Status"
+      }, {
+        data: "req_id_fare",
+        name: "req_id_fare",
+        title: "Requirements/ID/Fare"
+      }, {
+        data: "passporting_allowance",
+        name: "passporting_allowance",
+        title: "Passporting Allowance"
+      }, {
+        data: "info_sheet",
+        name: "info_sheet",
+        title: "Info/Sheet"
+      }, {
+        data: "ticket",
+        name: "ticket",
+        title: "Ticket"
+      }, {
+        data: "testda_allowance",
+        name: "testda_allowance",
+        title: "TESDA Allowance"
+      }, {
+        data: "nbi_renewal_fare",
+        name: "nbi_renewal_fare",
+        title: "NBI/Renewal/Fare"
+      }, {
+        data: "medical_allowance",
+        name: "medical_allowance",
+        title: "Medical Allowance"
+      }, {
+        data: "owwa_allowance",
+        name: "owwa_allowance",
+        title: "OWWA Allowance"
+      }, {
+        data: "office_allowance",
+        name: "office_allowance",
+        title: "Office Allowance"
       }, {
         data: "created_at_display",
         name: "created_at",
@@ -269,7 +358,9 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
-                  _vm._v(" " + _vm._s(_vm.__("New Voucher")) + "\n\n        ")
+                  _vm._v(
+                    " " + _vm._s(_vm.__("New Voucher")) + "\n\n                "
+                  )
                 ]
               ),
               _vm._v(" "),
@@ -283,7 +374,9 @@ var render = function() {
                 [
                   _c("i", { staticClass: "fas fa-file-excel" }),
                   _vm._v(
-                    " " + _vm._s(_vm.__("Export to Excel")) + "\n\n        "
+                    " " +
+                      _vm._s(_vm.__("Export to Excel")) +
+                      "\n\n                "
                   )
                 ]
               )
@@ -375,7 +468,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                  New Voucher\n                  "
+                                      "\n                                    Voucher\n                                    "
                                     ),
                                     _c("span", { staticClass: "underline" }),
                                     _vm._v(" "),
@@ -386,7 +479,568 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c("div", { staticClass: "mt-6" })
+                                _c("div", { staticClass: "mt-6" }, [
+                                  _c(
+                                    "form",
+                                    {
+                                      staticClass: "grid grid-cols-12 gap-2 p-4"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [_vm._v("Applicant Name")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.overview.applicant_name,
+                                                expression:
+                                                  "overview.applicant_name"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.overview.applicant_name
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "applicant_name",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [_vm._v("Status")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.overview.status,
+                                                expression: "overview.status"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.overview.status
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "status",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Requirements / ID / Additional Fare"
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.overview.req_id_fare,
+                                                expression:
+                                                  "overview.req_id_fare"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.overview.req_id_fare
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "req_id_fare",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [_vm._v("Passporting Allowance")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.overview
+                                                    .passporting_allowance,
+                                                expression:
+                                                  "overview.passporting_allowance"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value:
+                                                _vm.overview
+                                                  .passporting_allowance
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "passporting_allowance",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [_vm._v("Info / Sheet")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.overview.info_sheet,
+                                                expression:
+                                                  "overview.info_sheet"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.overview.info_sheet
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "info_sheet",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [_vm._v("Ticket")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.overview.ticket,
+                                                expression: "overview.ticket"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.overview.ticket
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "ticket",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "TESDA / Allowance / Assessment"
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.overview.testda_allowance,
+                                                expression:
+                                                  "overview.testda_allowance"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value:
+                                                _vm.overview.testda_allowance
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "testda_allowance",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [_vm._v("NBI / Renewal / Fare")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.overview.nbi_renewal_fare,
+                                                expression:
+                                                  "overview.nbi_renewal_fare"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value:
+                                                _vm.overview.nbi_renewal_fare
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "nbi_renewal_fare",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [
+                                              _vm._v(
+                                                "Medical Follow-up and Fare"
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.overview
+                                                    .medical_allowance,
+                                                expression:
+                                                  "overview.medical_allowance"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value:
+                                                _vm.overview.medical_allowance
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "medical_allowance",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [_vm._v("Owwa Allowance")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.overview.owwa_allowance,
+                                                expression:
+                                                  "overview.owwa_allowance"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.overview.owwa_allowance
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "owwa_allowance",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [_vm._v("Office Allowance")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.overview.office_allowance,
+                                                expression:
+                                                  "overview.office_allowance"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value:
+                                                _vm.overview.office_allowance
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "office_allowance",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ])
                               ]
                             )
                           ])
@@ -412,7 +1066,11 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("\n              Add\n            ")]
+                            [
+                              _vm._v(
+                                "\n                            Add\n                        "
+                              )
+                            ]
                           ),
                           _vm._v(" "),
                           _c(
@@ -427,7 +1085,11 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("\n              Cancel\n            ")]
+                            [
+                              _vm._v(
+                                "\n                            Cancel\n                        "
+                              )
+                            ]
                           )
                         ]
                       )
@@ -447,10 +1109,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-5" }, [
+    return _c("div", { staticClass: "p-5 overflow-auto" }, [
       _c("table", {
-        staticClass: "stripe hover",
-        staticStyle: { width: "100%" },
+        staticClass: "stripe hover display w-full",
         attrs: { id: "vouchers-table" }
       })
     ])

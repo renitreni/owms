@@ -43,7 +43,6 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         $request               = $request->input();
-        $request['status']     = 'active';
         $request['agency_id']  = auth()->user()->agency_id;
         $request['created_by'] = auth()->id();
 
