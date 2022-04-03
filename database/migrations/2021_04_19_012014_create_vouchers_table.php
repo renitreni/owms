@@ -16,18 +16,24 @@ class CreateVouchersTable extends Migration
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
             $table->string('agency_id', 200)->nullable();
-            $table->text('applicant_name')->nullable();
+            $table->text('name')->nullable();
             $table->string('status', 200)->nullable();
-            $table->text('req_id_fare')->nullable();
+            $table->text('source')->nullable();
+            $table->text('requirements')->nullable();
             $table->text('passporting_allowance')->nullable();
-            $table->text('info_sheet')->nullable();
             $table->string('ticket')->nullable();
-            $table->text('testda_allowance')->nullable();
-            $table->text('nbi_renewal_fare')->nullable();
+            $table->text('tesda_allowance')->nullable();
+            $table->text('nbi_renewal')->nullable();
+            $table->text('pdos')->nullable();
+            $table->text('info_sheet')->nullable();
             $table->string('medical_allowance')->nullable();
             $table->string('owwa_allowance')->nullable();
             $table->string('office_allowance')->nullable();
+            $table->string('travel_allowance')->nullable();
+            $table->string('weekly_allowance')->nullable();
+            $table->string('medical_follow_up')->nullable();
             $table->string('created_by', 200)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

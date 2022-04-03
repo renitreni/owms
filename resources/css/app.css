@@ -21,3 +21,7 @@
     transform: translateX(10px);
     opacity: 0;
 }
+
+td {
+    white-space: nowrap !important;
+}

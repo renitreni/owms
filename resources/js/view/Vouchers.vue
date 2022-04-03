@@ -5,7 +5,7 @@
                 <div class="p-2 mt-5">
                     <a
                         href="#"
-                        @click="voucher_mdl = true"
+                        @click="opedModalAdd()"
                         class="p-2 m-2 text-white bg-green-400 rounded shadow hover:bg-green-500"
                     >
                         <i class="fas fa-file-invoice-dollar"></i> {{ __('New Voucher') }}
@@ -20,10 +20,10 @@
 
                     </a>
                 </div>
-                <div class="p-5 overflow-auto">
+                <div class="p-5 overflow-x-auto flex">
                     <table
                         id="vouchers-table"
-                        class="stripe hover display w-full"
+                        class="stripe hover display w-full wrap"
                     ></table>
                 </div>
             </div>
@@ -71,28 +71,25 @@
                                     <div class="mt-6">
                                         <form class="grid grid-cols-12 gap-2 p-4">
                                             <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Applicant Name</label>
-                                                <input type="text" v-model="overview.applicant_name"
+                                                <label class="block text-sm font-medium text-gray-700">Name</label>
+                                                <input type="text" v-model="overview.name"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Status</label>
-                                                <input type="text" v-model="overview.status"
+                                                <label class="block text-sm font-medium text-gray-700">Source</label>
+                                                <input type="text" v-model="overview.source"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Requirements / ID / Additional Fare</label>
-                                                <input type="text" v-model="overview.req_id_fare"
+                                                <label
+                                                    class="block text-sm font-medium text-gray-700">Requirements</label>
+                                                <input type="text" v-model="overview.requirements"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Passporting Allowance</label>
+                                                <label class="block text-sm font-medium text-gray-700">Passporting
+                                                    Allowance</label>
                                                 <input type="text" v-model="overview.passporting_allowance"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Info / Sheet</label>
-                                                <input type="text" v-model="overview.info_sheet"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="md:col-span-4 col-span-12">
@@ -101,28 +98,62 @@
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">TESDA / Allowance / Assessment</label>
-                                                <input type="text" v-model="overview.testda_allowance"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">NBI / Renewal / Fare</label>
-                                                <input type="text" v-model="overview.nbi_renewal_fare"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Medical Follow-up and Fare</label>
+                                                <label class="block text-sm font-medium text-gray-700">Medical
+                                                    Allowance</label>
                                                 <input type="text" v-model="overview.medical_allowance"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Owwa Allowance</label>
+                                                <label class="block text-sm font-medium text-gray-700">TESDA Allowance
+                                                    and Assessment</label>
+                                                <input type="text" v-model="overview.tesda_allowance"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Owwa
+                                                    Allowance</label>
                                                 <input type="text" v-model="overview.owwa_allowance"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Office Allowance</label>
+                                                <label class="block text-sm font-medium text-gray-700">PDOS</label>
+                                                <input type="text" v-model="overview.pdos"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">NBI /
+                                                    Renewal</label>
+                                                <input type="text" v-model="overview.nbi_renewal"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Info
+                                                    Sheet</label>
+                                                <input type="text" v-model="overview.info_sheet"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Travel
+                                                    Allowance</label>
+                                                <input type="text" v-model="overview.travel_allowance"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Weekly
+                                                    Allowance</label>
+                                                <input type="text" v-model="overview.weekly_allowance"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">FARE To
+                                                    Office</label>
                                                 <input type="text" v-model="overview.office_allowance"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Medical
+                                                    Follow-up</label>
+                                                <input type="text" v-model="overview.medical_follow_up"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                         </form>
@@ -134,11 +165,28 @@
                             class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse"
                         >
                             <button
+                                v-if="!overview.id"
                                 type="submit"
                                 @click="add()"
                                 class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                             >
                                 Add
+                            </button>
+                            <button
+                                v-if="overview.id"
+                                type="submit"
+                                @click="add()"
+                                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                            >
+                                Update
+                            </button>
+                            <button
+                                v-if="overview.id"
+                                type="submit"
+                                @click="invalid()"
+                                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                            >
+                                Invalid
                             </button>
                             <button
                                 type="button"
@@ -163,51 +211,45 @@ export default {
             voucher_update_mdl: false,
             props_data: JSON.parse(this._props.data),
             dt: null,
-            overview: {
-                agency_id: null,
-                applicant_name: null,
-                status: null,
-                req_id_fare: null,
-                passporting_allowance: null,
-                info_sheet: null,
-                ticket: null,
-                testda_allowance: null,
-                nbi_renewal_fare: null,
-                medical_allowance: null,
-                owwa_allowance: null,
-                office_allowance: null,
-            },
+            overview: this.columnDefault(),
         };
     },
-    watch: {
-        voucher_update_mdl: function (value) {
-            if (!value) {
-                this.overview = {
-                    date: null,
-                    paid_to: null,
-                    particulars: null,
-                    amount: null,
-                };
-            }
-        },
-        voucher_mdl: function (value) {
-            if (!value) {
-                this.overview = {
-                    date: null,
-                    paid_to: null,
-                    particulars: null,
-                    amount: null,
-                };
-            }
-        },
-    },
+    watch: {},
     methods: {
+        columnDefault() {
+            return {
+                "id": null,
+                "agency_id": null,
+                "name": null,
+                "status": null,
+                "source": null,
+                "requirements": null,
+                "passporting_allowance": null,
+                "ticket": null,
+                "tesda_allowance": null,
+                "nbi_renewal": null,
+                "medical_allowance": null,
+                "pdos": null,
+                "info_sheet": null,
+                "owwa_allowance": null,
+                "office_allowance": null,
+                "travel_allowance": null,
+                "weekly_allowance": null,
+                "medical_follow_up": null,
+                "created_by": null,
+            };
+        },
+        opedModalAdd() {
+            this.voucher_mdl = true
+            this.overview = this.columnDefault();
+        },
         add() {
             var $this = this;
             axios.post(this.props_data.store_link, this.overview).then((e) => {
                 $this.voucher_mdl = false;
                 swal("Success!", "Operation Successful!", "success");
                 $this.dt.draw();
+                $this.overview = $this.columnDefault();
             });
         },
         update() {
@@ -242,23 +284,26 @@ export default {
                 type: "POST",
             },
             columns: [
-                {data: "id", name: "id", title: "ID"},
-                {data: "applicant_name", name: "applicant_name", title: "Applicant Name"},
-                {data: "status", name: "status", title: "Status"},
-                {data: "req_id_fare", name: "req_id_fare", title: "Requirements/ID/Fare"},
-                {data: "passporting_allowance", name: "passporting_allowance", title: "Passporting Allowance"},
-                {data: "info_sheet", name: "info_sheet", title: "Info/Sheet"},
-                {data: "ticket", name: "ticket", title: "Ticket"},
-                {data: "testda_allowance", name: "testda_allowance", title: "TESDA Allowance"},
-                {data: "nbi_renewal_fare", name: "nbi_renewal_fare", title: "NBI/Renewal/Fare"},
-                {data: "medical_allowance", name: "medical_allowance", title: "Medical Allowance"},
-                {data: "owwa_allowance", name: "owwa_allowance", title: "OWWA Allowance"},
-                {data: "office_allowance", name: "office_allowance", title: "Office Allowance"},
                 {
                     data: "created_at_display",
                     name: "created_at",
                     title: "Date Created",
                 },
+                {data: "name", title: "Name"},
+                {data: "source", title: "Source"},
+                {data: "requirements", title: "Requirements"},
+                {data: "passporting_allowance", title: "Passporting Allowance"},
+                {data: "ticket", title: "TICKET"},
+                {data: "tesda_allowance", title: "TESDA Allowance"},
+                {data: "nbi_renewal", title: "NBI/Renewal"},
+                {data: "medical_allowance", title: "Medical Allowance"},
+                {data: "pdos", title: "PDOS"},
+                {data: "info_sheet", title: "Info Sheer"},
+                {data: "owwa_allowance", title: "OWWA Allowance"},
+                {data: "office_allowance", title: "Office Allowance"},
+                {data: "travel_allowance", title: "Travel Allowance"},
+                {data: "weekly_allowance", title: "Weekly Allowance"},
+                {data: "medical_follow_up", title: "Medical Follow Up"},
             ],
             drawCallback() {
                 $("table tr").click(function (e) {
@@ -266,7 +311,7 @@ export default {
                     let hold = $this.dt.row(data).data();
                     console.log(hold);
                     $this.overview = hold;
-                    $this.voucher_update_mdl = true;
+                    $this.voucher_mdl = true;
                 });
             },
         });

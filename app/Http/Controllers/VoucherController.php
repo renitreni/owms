@@ -25,9 +25,9 @@ class VoucherController extends Controller
         ]);
     }
 
-    public function table(Voucher $voucher)
+    public function table()
     {
-        $vouchers = $voucher->newQuery()->where('agency_id', auth()->user()->agency_id);
+        $vouchers = Voucher::query()->where('agency_id', auth()->user()->agency_id);
 
         return DataTables::of($vouchers)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
@@ -42,11 +42,14 @@ class VoucherController extends Controller
 
     public function store(Request $request)
     {
-        $request               = $request->input();
-        $request['agency_id']  = auth()->user()->agency_id;
-        $request['created_by'] = auth()->id();
+        $attr               = $request->input();
+        $attr['agency_id']  = auth()->user()->agency_id;
+        $attr['created_by'] = auth()->id();
 
-        Voucher::create($request);
+        Voucher::updateOrCreate(
+            ['id' => $request->get('id')],
+            $attr
+        );
 
         return ['success' => true];
     }

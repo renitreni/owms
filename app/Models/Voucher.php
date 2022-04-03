@@ -4,24 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Voucher extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         "agency_id",
-        "applicant_name",
+        "name",
         "status",
-        "req_id_fare",
+        "source",
+        "requirements",
         "passporting_allowance",
-        "info_sheet",
         "ticket",
-        "testda_allowance",
-        "nbi_renewal_fare",
+        "tesda_allowance",
+        "nbi_renewal",
         "medical_allowance",
+        "pdos",
+        "info_sheet",
         "owwa_allowance",
         "office_allowance",
+        "travel_allowance",
+        "weekly_allowance",
+        "medical_follow_up",
         "created_by",
     ];
 
