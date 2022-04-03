@@ -255,8 +255,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     add: function add() {
       var $this = this;
+      $this.voucher_mdl = false;
       axios.post(this.props_data.store_link, this.overview).then(function (e) {
-        $this.voucher_mdl = false;
         swal("Success!", "Operation Successful!", "success");
         $this.dt.draw();
         $this.overview = $this.columnDefault();
@@ -264,16 +264,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     update: function update() {
       var $this = this;
+      $this.voucher_mdl = false;
       axios.put(this.overview.update_link, this.overview).then(function (e) {
-        $this.voucher_update_mdl = false;
         swal("Success!", "Operation Successful!", "success");
         $this.dt.draw();
       });
     },
     invalid: function invalid() {
       var $this = this;
+      $this.voucher_mdl = false;
       axios.post(this.overview.invalid_link, this.overview).then(function (e) {
-        $this.voucher_update_mdl = false;
         swal("Success!", "Operation Successful!", "success");
         $this.dt.draw();
       });

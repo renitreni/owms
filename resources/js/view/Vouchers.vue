@@ -245,8 +245,8 @@ export default {
         },
         add() {
             var $this = this;
+            $this.voucher_mdl = false;
             axios.post(this.props_data.store_link, this.overview).then((e) => {
-                $this.voucher_mdl = false;
                 swal("Success!", "Operation Successful!", "success");
                 $this.dt.draw();
                 $this.overview = $this.columnDefault();
@@ -254,16 +254,16 @@ export default {
         },
         update() {
             var $this = this;
+            $this.voucher_mdl = false;
             axios.put(this.overview.update_link, this.overview).then((e) => {
-                $this.voucher_update_mdl = false;
                 swal("Success!", "Operation Successful!", "success");
                 $this.dt.draw();
             });
         },
         invalid() {
             var $this = this;
+            $this.voucher_mdl = false;
             axios.post(this.overview.invalid_link, this.overview).then((e) => {
-                $this.voucher_update_mdl = false;
                 swal("Success!", "Operation Successful!", "success");
                 $this.dt.draw();
             });

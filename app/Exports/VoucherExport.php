@@ -21,26 +21,45 @@ class VoucherExport implements FromCollection, WithHeadings, WithMapping
     public function map($voucher): array
     {
         return [
-            $voucher->paid_to,
-            $voucher->amount,
-            $voucher->particulars,
-            $voucher->change,
+            Carbon::parse($voucher->created_at)->format('F j, Y'),
+            $voucher->name,
             $voucher->status,
-            $voucher->information->name,
-            Carbon::parse($voucher->date)->format('F j, Y'),
+            $voucher->source,
+            $voucher->requirements,
+            $voucher->passporting_allowance,
+            $voucher->ticket,
+            $voucher->tesda_allowance,
+            $voucher->nbi_renewal,
+            $voucher->medical_allowance,
+            $voucher->pdos,
+            $voucher->info_sheet,
+            $voucher->owwa_allowance,
+            $voucher->office_allowance,
+            $voucher->travel_allowance,
+            $voucher->weekly_allowance,
+            $voucher->medical_follow_up,
         ];
     }
 
     public function headings(): array
     {
         return [
-            'Paid To',
-            'Amount',
-            'Particulars',
-            'Change',
-            'Status',
-            'Created by',
-            'Date',
+            "Date Created",
+            "Name",
+            "Source",
+            "Requirements",
+            "Passporting Allowance",
+            "TICKET",
+            "TESDA Allowance",
+            "NBI/Renewal",
+            "Medical Allowance",
+            "PDOS",
+            "Info Sheer",
+            "OWWA Allowance",
+            "Office Allowance",
+            "Travel Allowance",
+            "Weekly Allowance",
+            "Medical Follow Up",
         ];
     }
 }
