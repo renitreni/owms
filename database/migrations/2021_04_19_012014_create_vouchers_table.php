@@ -32,6 +32,14 @@ class CreateVouchersTable extends Migration
             $table->string('travel_allowance')->nullable();
             $table->string('weekly_allowance')->nullable();
             $table->string('medical_follow_up')->nullable();
+            $table->string('nbi_refund')->nullable();
+            $table->string('psa_refund')->nullable();
+            $table->string('passport_refund')->nullable();
+            $table->string('fare_refund')->nullable();
+            $table->string('red_rebon_nbi')->nullable();
+            $table->string('fit_to_work')->nullable();
+            $table->string('repat')->nullable();
+            $table->string('stamping')->nullable();
             $table->string('created_by', 200)->nullable();
             $table->softDeletes();
             $table->timestamps();

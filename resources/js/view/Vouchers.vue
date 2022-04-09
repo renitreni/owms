@@ -156,6 +156,53 @@
                                                 <input type="text" v-model="overview.medical_follow_up"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">NBI Refund</label>
+                                                <input type="text" v-model="overview.nbi_refund"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">PSA Refund</label>
+                                                <input type="text" v-model="overview.psa_refund"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Passport Refund</label>
+                                                <input type="text" v-model="overview.passport_refund"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Fare Refund</label>
+                                                <input type="text" v-model="overview.fare_refund"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Red Rebon NBI</label>
+                                                <input type="text" v-model="overview.red_rebon_nbi"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Fit To Work</label>
+                                                <input type="text" v-model="overview.fit_to_work"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Medical
+                                                    Follow-up</label>
+                                                <input type="text" v-model="overview.medical_follow_up"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Repat</label>
+                                                <input type="text" v-model="overview.repat"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="md:col-span-4 col-span-12">
+                                                <label class="block text-sm font-medium text-gray-700">Stamping
+                                                    Follow-up</label>
+                                                <input type="text" v-model="overview.stamping"
+                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -304,6 +351,14 @@ export default {
                 {data: "travel_allowance", title: "Travel Allowance"},
                 {data: "weekly_allowance", title: "Weekly Allowance"},
                 {data: "medical_follow_up", title: "Medical Follow Up"},
+                {data: "nbi_refund", title: "NBI Refund"},
+                {data: "psa_refund", title: "PSA Refund"},
+                {data: "passport_refund", title: "Passport Refund"},
+                {data: "fare_refund", title: "Fare Refund"},
+                {data: "red_rebon_nbi", title: "Red Rebon NBI"},
+                {data: "fit_to_work", title: "Fit To Work"},
+                {data: "repat", title: "Repat"},
+                {data: "stamping", title: "Stamping"},
             ],
             drawCallback() {
                 $("table tr").click(function (e) {

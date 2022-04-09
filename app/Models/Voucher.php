@@ -30,6 +30,14 @@ class Voucher extends Model
         "weekly_allowance",
         "medical_follow_up",
         "created_by",
+        "nbi_refund",
+        "psa_refund",
+        "passport_refund",
+        "fare_refund",
+        "red_rebon_nbi",
+        "fit_to_work",
+        "repat",
+        "stamping",
     ];
 
     public function information()
