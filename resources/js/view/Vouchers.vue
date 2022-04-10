@@ -187,12 +187,6 @@
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                             </div>
                                             <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Medical
-                                                    Follow-up</label>
-                                                <input type="text" v-model="overview.medical_follow_up"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
                                                 <label class="block text-sm font-medium text-gray-700">Repat</label>
                                                 <input type="text" v-model="overview.repat"
                                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
