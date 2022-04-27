@@ -23,7 +23,7 @@
                 <div class="p-5 overflow-x-auto flex">
                     <table
                         id="vouchers-table"
-                        class="stripe hover display w-full wrap"
+                        class="stripe hover display w-full wrap cell-border"
                     ></table>
                 </div>
             </div>
