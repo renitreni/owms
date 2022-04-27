@@ -20,10 +20,10 @@
 
                     </a>
                 </div>
-                <div class="p-5 overflow-x-auto flex">
+                <div class="p-5 relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table
                         id="vouchers-table"
-                        class="stripe hover display w-full wrap cell-border"
+                        class="display mx-3 stripe hover display w-full wrap cell-border w-full text-sm text-left text-gray-500 dark:text-gray-400"
                     ></table>
                 </div>
             </div>
@@ -319,6 +319,10 @@ export default {
             responsive: true,
             serverSide: true,
             scrollX: true,
+            scrollY: '250px',
+            fixedHeader: {
+                header: true,
+            },
             order: [[0, "desc"]],
             ajax: {
                 url: $this.props_data.datatable_link,

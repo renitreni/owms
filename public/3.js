@@ -329,6 +329,10 @@ __webpack_require__.r(__webpack_exports__);
       responsive: true,
       serverSide: true,
       scrollX: true,
+      scrollY: '250px',
+      fixedHeader: {
+        header: true
+      },
       order: [[0, "desc"]],
       ajax: {
         url: $this.props_data.datatable_link,
@@ -1869,12 +1873,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-5 overflow-x-auto flex" }, [
-      _c("table", {
-        staticClass: "stripe hover display w-full wrap cell-border",
-        attrs: { id: "vouchers-table" }
-      })
-    ])
+    return _c(
+      "div",
+      { staticClass: "p-5 relative overflow-x-auto shadow-md sm:rounded-lg" },
+      [
+        _c("table", {
+          staticClass:
+            "display mx-3 stripe hover display w-full wrap cell-border w-full text-sm text-left text-gray-500 dark:text-gray-400",
+          attrs: { id: "vouchers-table" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true

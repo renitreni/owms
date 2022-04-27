@@ -14,7 +14,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/fixedheader/3.2.2/css/fixedHeader.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('css/tailwind-datatables.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.css') }}">
 
@@ -22,7 +23,6 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
     @livewireStyles
 </head>
 
