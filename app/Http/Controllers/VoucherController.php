@@ -27,7 +27,7 @@ class VoucherController extends Controller
 
     public function table()
     {
-        $vouchers = Voucher::query()->where('agency_id', auth()->user()->agency_id);
+        $vouchers = Voucher::query()->with(['user'])->where('agency_id', auth()->user()->agency_id);
 
         return DataTables::of($vouchers)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');

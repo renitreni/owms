@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f1fea960-971e-470e-8233-c5dd7149cc1d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VoucherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VoucherController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Voucher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Voucher.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/3.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/3.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/view/Vouchers.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/view/Vouchers.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +234,8 @@
       <workItem from="1648796906273" duration="2753000" />
       <workItem from="1648957022379" duration="5731000" />
       <workItem from="1649488223244" duration="2110000" />
-      <workItem from="1651042779499" duration="3267000" />
+      <workItem from="1651042779499" duration="3538000" />
+      <workItem from="1651843864370" duration="869000" />
     </task>
     <servers />
   </component>

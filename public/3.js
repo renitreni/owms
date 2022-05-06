@@ -254,6 +254,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -287,7 +294,8 @@ __webpack_require__.r(__webpack_exports__);
         "travel_allowance": null,
         "weekly_allowance": null,
         "medical_follow_up": null,
-        "created_by": null
+        "created_by": null,
+        "vaccine_fare": null
       };
     },
     opedModalAdd: function opedModalAdd() {
@@ -342,6 +350,9 @@ __webpack_require__.r(__webpack_exports__);
         data: "created_at_display",
         name: "created_at",
         title: "Date Created"
+      }, {
+        data: "user.email",
+        title: "Created By"
       }, {
         data: "name",
         title: "Name"
@@ -411,6 +422,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         data: "stamping",
         title: "Stamping"
+      }, {
+        data: "vaccine_fare",
+        title: "Vaccine/Fare"
       }],
       drawCallback: function drawCallback() {
         $("table tr").click(function (e) {
@@ -1751,6 +1765,55 @@ var render = function() {
                                                 _vm.$set(
                                                   _vm.overview,
                                                   "stamping",
+                                                  $event.target.value
+                                                )
+                                              }
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "md:col-span-4 col-span-12"
+                                        },
+                                        [
+                                          _c(
+                                            "label",
+                                            {
+                                              staticClass:
+                                                "block text-sm font-medium text-gray-700"
+                                            },
+                                            [_vm._v("Vaccine / Fare")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.overview.vaccine_fare,
+                                                expression:
+                                                  "overview.vaccine_fare"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md",
+                                            attrs: { type: "text" },
+                                            domProps: {
+                                              value: _vm.overview.vaccine_fare
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.$set(
+                                                  _vm.overview,
+                                                  "vaccine_fare",
                                                   $event.target.value
                                                 )
                                               }

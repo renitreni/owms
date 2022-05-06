@@ -38,10 +38,16 @@ class Voucher extends Model
         "fit_to_work",
         "repat",
         "stamping",
+        "vaccine_fare",
     ];
 
     public function information()
     {
         return $this->hasOne(Information::class, 'user_id', 'created_by');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'created_by');
     }
 }
