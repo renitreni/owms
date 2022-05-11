@@ -261,6 +261,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["data"],
   data: function data() {
@@ -272,7 +282,11 @@ __webpack_require__.r(__webpack_exports__);
       overview: this.columnDefault()
     };
   },
-  watch: {},
+  watch: {
+    'props_data.group_selected': function props_dataGroup_selected() {
+      this.dt.draw();
+    }
+  },
   methods: {
     columnDefault: function columnDefault() {
       return {
@@ -344,7 +358,10 @@ __webpack_require__.r(__webpack_exports__);
       order: [[0, "desc"]],
       ajax: {
         url: $this.props_data.datatable_link,
-        type: "POST"
+        type: "POST",
+        data: function data(_data) {
+          _data.user = $this.props_data.group_selected;
+        }
       },
       columns: [{
         data: "created_at_display",
@@ -465,7 +482,7 @@ var render = function() {
           "div",
           { staticClass: "overflow-hidden bg-white shadow-sm sm:rounded-lg" },
           [
-            _c("div", { staticClass: "p-2 mt-5" }, [
+            _c("div", { staticClass: "p-2 mt-5 flex" }, [
               _c(
                 "a",
                 {
@@ -502,6 +519,59 @@ var render = function() {
                   )
                 ]
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "p-2 flex" }, [
+              _c("div", { staticClass: "my-auto" }, [
+                _c("label", { staticClass: "py-auto" }, [_vm._v("Viewed By")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.props_data.group_selected,
+                        expression: "props_data.group_selected"
+                      }
+                    ],
+                    staticClass:
+                      "mt-1 block w-full py-2 px-6 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.props_data,
+                          "group_selected",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("-- All --")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.props_data.group, function(item) {
+                      return _c("option", { domProps: { value: item.email } }, [
+                        _vm._v(_vm._s(item.email))
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
             ]),
             _vm._v(" "),
             _vm._m(0)

@@ -1,8 +1,9 @@
 <template>
     <div class="pt-8 pb-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                <div class="p-2 mt-5">
+                <div class="p-2 mt-5 flex">
                     <a
                         href="#"
                         @click="opedModalAdd()"
@@ -19,6 +20,15 @@
                         <i class="fas fa-file-excel"></i> {{ __('Export to Excel') }}
 
                     </a>
+                </div>
+                <div class="p-2 flex">
+                    <div class="my-auto">
+                        <label class="py-auto">Viewed By</label>
+                        <select v-model="props_data.group_selected" class="mt-1 block w-full py-2 px-6 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="">-- All --</option>
+                            <option v-for="item in props_data.group"  v-bind:value="item.email">{{ item.email }}</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="p-5 relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table
@@ -262,7 +272,11 @@ export default {
             overview: this.columnDefault(),
         };
     },
-    watch: {},
+    watch: {
+        'props_data.group_selected': function () {
+            this.dt.draw();
+        }
+    },
     methods: {
         columnDefault() {
             return {
@@ -335,6 +349,9 @@ export default {
             ajax: {
                 url: $this.props_data.datatable_link,
                 type: "POST",
+                data: function(data){
+                    data.user = $this.props_data.group_selected;
+                }
             },
             columns: [
                 {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agency;
 use App\Exports\VoucherExport;
+use App\Models\User;
 use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ class VoucherController extends Controller
 {
     public function index()
     {
+        $group = User::query()->where('agency_id', auth()->user()->agency_id)->get();
+
         return view('layouts.app', [
             "header"    => 'Vouchers',
             "component" => 'vouchers-page',
@@ -21,13 +24,19 @@ class VoucherController extends Controller
                 'datatable_link' => route('voucher.table'),
                 'store_link'     => route('voucher.store'),
                 'export_link'    => route('voucher.export'),
+                'group'          => $group,
+                'group_selected' => auth()->user()->email
             ],
         ]);
     }
 
-    public function table()
+    public function table(Request $request)
     {
-        $vouchers = Voucher::query()->with(['user'])->where('agency_id', auth()->user()->agency_id);
+        $vouchers = Voucher::query()->with(['user'])
+            ->where('vouchers.agency_id', auth()->user()->agency_id)
+            ->when($request->get('user'), function ($q) use ($request){
+                $q->where('created_by', User::query()->where('email', $request->get('user'))->first()['id'] );
+            });
 
         return DataTables::of($vouchers)->setTransformer(function ($value) {
             $value->created_at_display = Carbon::parse($value->created_at)->format('F j, Y');
