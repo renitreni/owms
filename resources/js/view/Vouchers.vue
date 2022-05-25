@@ -24,9 +24,10 @@
                 <div class="p-2 flex">
                     <div class="my-auto">
                         <label class="py-auto">Viewed By</label>
-                        <select v-model="props_data.group_selected" class="mt-1 block w-full py-2 px-6 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <select v-model="props_data.group_selected"
+                                class="mt-1 block w-full py-2 px-6 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                             <option value="">-- All --</option>
-                            <option v-for="item in props_data.group"  v-bind:value="item.email">{{ item.email }}</option>
+                            <option v-for="item in props_data.group" v-bind:value="item.email">{{ item.email }}</option>
                         </select>
                     </div>
                 </div>
@@ -39,225 +40,225 @@
             </div>
         </div>
 
-        <transition name="slide-fade">
-            <!-- Voucher add -->
-            <div class="fixed inset-0 overflow-y-auto" v-if="voucher_mdl">
-                <div
-                    class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
+        <!-- Voucher add -->
+        <div class="fixed inset-0 overflow-y-auto" v-if="voucher_mdl">
+            <div
+                class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
+            >
+                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                    <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                </div>
+                <span
+                    class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                    aria-hidden="true"
+                >&#8203;</span
                 >
-                    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                    </div>
-                    <span
-                        class="hidden sm:inline-block sm:align-middle sm:h-screen"
-                        aria-hidden="true"
-                    >&#8203;</span
-                    >
-                    <div
-                        class="inline-block overflow-hidden text-left align-middle transition-all transform bg-white rounded-lg shadow-xl w-5/6"
-                        role="dialog"
-                        aria-modal="true"
-                        aria-labelledby="modal-headline"
-                    >
-                        <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
-                            <div class="sm:flex sm:items-start">
-                                <div
-                                    class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto text-gray-600 bg-blue-100 rounded-full sm:mx-0 sm:h-10 sm:w-10"
+                <div
+                    class="inline-block overflow-hidden text-left align-middle transition-all transform bg-white rounded-lg shadow-xl w-5/6"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="modal-headline"
+                >
+                    <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto text-gray-600 bg-blue-100 rounded-full sm:mx-0 sm:h-10 sm:w-10"
+                            >
+                                <!-- Heroicon name -->
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <div
+                                class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
+                            >
+                                <h3
+                                    class="text-lg font-medium leading-6 text-gray-900"
+                                    id="modal-headline"
                                 >
-                                    <!-- Heroicon name -->
-                                    <i class="fas fa-file-invoice-dollar"></i>
-                                </div>
-                                <div
-                                    class="flex-1 mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left"
-                                >
-                                    <h3
-                                        class="text-lg font-medium leading-6 text-gray-900"
-                                        id="modal-headline"
-                                    >
-                                        Voucher
-                                        <span class="underline"></span>
-                                        <input class="hidden" name="id"/>
-                                    </h3>
-                                    <div class="mt-6">
-                                        <form class="grid grid-cols-12 gap-2 p-4">
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Name</label>
-                                                <input type="text" v-model="overview.name"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Source</label>
-                                                <input type="text" v-model="overview.source"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label
-                                                    class="block text-sm font-medium text-gray-700">Requirements</label>
-                                                <input type="text" v-model="overview.requirements"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Passporting
-                                                    Allowance</label>
-                                                <input type="text" v-model="overview.passporting_allowance"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Ticket</label>
-                                                <input type="text" v-model="overview.ticket"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Medical
-                                                    Allowance</label>
-                                                <input type="text" v-model="overview.medical_allowance"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">TESDA Allowance
-                                                    and Assessment</label>
-                                                <input type="text" v-model="overview.tesda_allowance"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Owwa
-                                                    Allowance</label>
-                                                <input type="text" v-model="overview.owwa_allowance"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">PDOS</label>
-                                                <input type="text" v-model="overview.pdos"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">NBI /
-                                                    Renewal</label>
-                                                <input type="text" v-model="overview.nbi_renewal"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Info
-                                                    Sheet</label>
-                                                <input type="text" v-model="overview.info_sheet"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Travel
-                                                    Allowance</label>
-                                                <input type="text" v-model="overview.travel_allowance"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Weekly
-                                                    Allowance</label>
-                                                <input type="text" v-model="overview.weekly_allowance"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">FARE To
-                                                    Office</label>
-                                                <input type="text" v-model="overview.office_allowance"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Medical
-                                                    Follow-up</label>
-                                                <input type="text" v-model="overview.medical_follow_up"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">NBI Refund</label>
-                                                <input type="text" v-model="overview.nbi_refund"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">PSA Refund</label>
-                                                <input type="text" v-model="overview.psa_refund"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Passport Refund</label>
-                                                <input type="text" v-model="overview.passport_refund"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Fare Refund</label>
-                                                <input type="text" v-model="overview.fare_refund"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Red Rebon NBI</label>
-                                                <input type="text" v-model="overview.red_rebon_nbi"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Fit To Work</label>
-                                                <input type="text" v-model="overview.fit_to_work"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Repat</label>
-                                                <input type="text" v-model="overview.repat"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Stamping
-                                                    Follow-up</label>
-                                                <input type="text" v-model="overview.stamping"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
+                                    Voucher
+                                    <span class="underline"></span>
+                                    <input class="hidden" name="id"/>
+                                </h3>
+                                <div class="mt-6">
+                                    <form class="grid grid-cols-12 gap-2 p-4">
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Name</label>
+                                            <input type="text" v-model="overview.name"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Source</label>
+                                            <input type="text" v-model="overview.source"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label
+                                                class="block text-sm font-medium text-gray-700">Requirements</label>
+                                            <input type="text" v-model="overview.requirements"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Passporting
+                                                Allowance</label>
+                                            <input type="text" v-model="overview.passporting_allowance"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Ticket</label>
+                                            <input type="text" v-model="overview.ticket"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Medical
+                                                Allowance</label>
+                                            <input type="text" v-model="overview.medical_allowance"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">TESDA Allowance
+                                                and Assessment</label>
+                                            <input type="text" v-model="overview.tesda_allowance"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Owwa
+                                                Allowance</label>
+                                            <input type="text" v-model="overview.owwa_allowance"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">PDOS</label>
+                                            <input type="text" v-model="overview.pdos"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">NBI /
+                                                Renewal</label>
+                                            <input type="text" v-model="overview.nbi_renewal"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Info
+                                                Sheet</label>
+                                            <input type="text" v-model="overview.info_sheet"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Travel
+                                                Allowance</label>
+                                            <input type="text" v-model="overview.travel_allowance"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Weekly
+                                                Allowance</label>
+                                            <input type="text" v-model="overview.weekly_allowance"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">FARE To
+                                                Office</label>
+                                            <input type="text" v-model="overview.office_allowance"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Medical
+                                                Follow-up</label>
+                                            <input type="text" v-model="overview.medical_follow_up"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">NBI Refund</label>
+                                            <input type="text" v-model="overview.nbi_refund"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">PSA Refund</label>
+                                            <input type="text" v-model="overview.psa_refund"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Passport
+                                                Refund</label>
+                                            <input type="text" v-model="overview.passport_refund"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Fare Refund</label>
+                                            <input type="text" v-model="overview.fare_refund"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Red Rebon NBI</label>
+                                            <input type="text" v-model="overview.red_rebon_nbi"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Fit To Work</label>
+                                            <input type="text" v-model="overview.fit_to_work"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Repat</label>
+                                            <input type="text" v-model="overview.repat"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Stamping
+                                                Follow-up</label>
+                                            <input type="text" v-model="overview.stamping"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
 
-                                            <div class="md:col-span-4 col-span-12">
-                                                <label class="block text-sm font-medium text-gray-700">Vaccine / Fare</label>
-                                                <input type="text" v-model="overview.vaccine_fare"
-                                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            </div>
+                                        <div class="md:col-span-4 col-span-12">
+                                            <label class="block text-sm font-medium text-gray-700">Vaccine /
+                                                Fare</label>
+                                            <input type="text" v-model="overview.vaccine_fare"
+                                                   class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        </div>
 
-                                        </form>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse"
+                    </div>
+                    <div
+                        class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse"
+                    >
+                        <button
+                            v-if="!overview.id"
+                            type="submit"
+                            @click="add()"
+                            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                         >
-                            <button
-                                v-if="!overview.id"
-                                type="submit"
-                                @click="add()"
-                                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
-                            >
-                                Add
-                            </button>
-                            <button
-                                v-if="overview.id"
-                                type="submit"
-                                @click="add()"
-                                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
-                            >
-                                Update
-                            </button>
-                            <button
-                                v-if="overview.id"
-                                type="submit"
-                                @click="invalid()"
-                                class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
-                            >
-                                Invalid
-                            </button>
-                            <button
-                                type="button"
-                                @click="voucher_mdl = false"
-                                class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                            >
-                                Cancel
-                            </button>
-                        </div>
+                            Add
+                        </button>
+                        <button
+                            v-if="overview.id"
+                            type="submit"
+                            @click="add()"
+                            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                        >
+                            Update
+                        </button>
+                        <button
+                            v-if="overview.id"
+                            type="submit"
+                            @click="invalid()"
+                            class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                        >
+                            Invalid
+                        </button>
+                        <button
+                            type="button"
+                            @click="voucher_mdl = false"
+                            class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                        >
+                            Cancel
+                        </button>
                     </div>
                 </div>
             </div>
-        </transition>
+        </div>
     </div>
 </template>
 <script>
@@ -349,7 +350,7 @@ export default {
             ajax: {
                 url: $this.props_data.datatable_link,
                 type: "POST",
-                data: function(data){
+                data: function (data) {
                     data.user = $this.props_data.group_selected;
                 }
             },
