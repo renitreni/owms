@@ -23,6 +23,13 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <style>
+        table.display th {
+            padding: 3px 10px;
+            white-space:nowrap;
+        }
+    </style>
     @livewireStyles
 </head>
 
