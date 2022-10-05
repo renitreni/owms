@@ -22,6 +22,7 @@ Route::get('/', function (RequestAlias $request) {
      return redirect()->route('dashboard');
 })->name('home');
 
+Route::get('/details', [ReportController::class, 'index'])->name('details');
 Route::get('/candidate/new/{agency_id}', [CandidateController::class, 'create'])->name('candidate.new');
 Route::post('/candidates/store', [CandidateController::class, 'store'])->name('candidate.store');
 Route::get('/reporting', [ReportController::class, 'formEmployee'])->name('report.from.employee');
